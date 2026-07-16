@@ -54,6 +54,13 @@
         }
 
         /* --- Header & Sticky Controls --- */
+        .sticky-top {
+            position: sticky;
+            top: 0;
+            z-index: 2000;
+            box-shadow: var(--shadow-md);
+        }
+
         header {
             background-color: var(--primary-blue);
             color: #ffffff;
@@ -105,17 +112,21 @@
             min-width: 260px;
             padding: 0.6rem 1rem;
             font-size: 0.9rem;
-            border: 1px solid #334155;
+            border: 1px solid #cbd5e1;
             border-radius: 8px;
-            background-color: #1e293b;
-            color: #ffffff;
+            background-color: #ffffff;
+            color: var(--text-dark);
             outline: none;
             transition: var(--transition);
         }
 
+        .search-input::placeholder {
+            color: #64748b;
+        }
+
         .search-input:focus {
             border-color: #38bdf8;
-            background-color: #0f172a;
+            background-color: #ffffff;
             box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.25);
         }
 
@@ -140,10 +151,6 @@
         .tab-nav-bg {
             background-color: var(--secondary-blue);
             border-bottom: 1px solid #1e293b;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: var(--shadow-md);
         }
 
         .tab-nav {
@@ -369,6 +376,7 @@
             display: grid;
             grid-template-columns: 1fr;
             gap: 1rem;
+            align-items: start;
         }
 
         @media (min-width: 768px) {
@@ -425,7 +433,7 @@
         }
 
         .playbook-card.open .toggle-icon, .tree-node.open .toggle-icon {
-            transform: rotate(45deg);
+            transform: none;
         }
 
         /* Weiche Höhen-Animation für Akkordeons */
@@ -578,7 +586,7 @@
         }
 
         .tree-node.open .toggle-icon {
-            transform: rotate(45deg);
+            transform: none;
             color: #ffffff;
         }
 
@@ -662,6 +670,7 @@
 </head>
 <body>
 
+    <div class="sticky-top">
     <header>
         <div class="header-container">
             <div class="header-title">
@@ -685,6 +694,7 @@
             <button class="tab-btn" onclick="switchTab(event, 'tab-kpi-landkarte')">3. KPI-Landkarte</button>
             <button class="tab-btn" onclick="switchTab(event, 'tab-unternehmensziele')">4. Unternehmensziele</button>
         </div>
+    </div>
     </div>
 
     <main>
@@ -802,11 +812,12 @@
                                 <td colspan="4">
                                     <div class="detail-box">
                                         <h4>ROAS (Return on Ad Spend)</h4>
-                                        <p><strong>Bedeutung:</strong> Umsatz / Werbekosten. ROAS 5 entspricht 500 %.</p>
+                                        <p><strong>Bedeutung:</strong> Umsatz im Verhältnis zu den Werbekosten.</p>
+                                        <p><strong>Faktor:</strong> 500% = 5 &nbsp;|&nbsp; 300% = 3 &nbsp;|&nbsp; 80% = 0,8</p>
                                         <div class="detail-grid">
-                                            <div class="detail-item badge-green"><strong>Sehr gut:</strong> &gt; 4</div>
-                                            <div class="detail-item badge-yellow"><strong>Gut:</strong> 2 - 4</div>
-                                            <div class="detail-item badge-red"><strong>Schlecht:</strong> &lt; 2</div>
+                                            <div class="detail-item badge-green"><strong>Sehr gut:</strong> &gt; 400% (Faktor &gt; 4)</div>
+                                            <div class="detail-item badge-yellow"><strong>Gut:</strong> 200 - 400% (Faktor 2 - 4)</div>
+                                            <div class="detail-item badge-red"><strong>Schlecht:</strong> &lt; 200% (Faktor &lt; 2)</div>
                                         </div>
                                     </div>
                                 </td>
@@ -861,7 +872,9 @@
                             <tr><td><strong>Conversions</strong></td><td><span class="badge badge-green">480</span></td><td><span class="badge badge-yellow">105</span></td><td><span class="badge badge-red">8</span></td></tr>
                             <tr><td><strong>Conversion Rate</strong></td><td><span class="badge badge-green">6%</span></td><td><span class="badge badge-yellow">3%</span></td><td><span class="badge badge-red">1%</span></td></tr>
                             <tr><td><strong>Conversion-Wert</strong></td><td><span class="badge badge-green">48.000 €</span></td><td><span class="badge badge-yellow">14.000 €</span></td><td><span class="badge badge-red">800 €</span></td></tr>
-                            <tr><td><strong>ROAS</strong> (Darstellung als Faktor)</td><td><span class="badge badge-green">5</span></td><td><span class="badge badge-yellow">3</span></td><td><span class="badge badge-red">0,8</span></td></tr>
+                            <tr><td><strong>Werbekosten</strong></td><td>9.600 €</td><td>4.666,67 €</td><td>1.000 €</td></tr>
+                            <tr><td><strong>ROAS</strong> (Prozent)</td><td><span class="badge badge-green">500%</span></td><td><span class="badge badge-yellow">300%</span></td><td><span class="badge badge-red">80%</span></td></tr>
+                            <tr><td><strong>ROAS</strong> (Faktor)</td><td><span class="badge badge-green">5</span></td><td><span class="badge badge-yellow">3</span></td><td><span class="badge badge-red">0,8</span></td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -1082,11 +1095,11 @@
                         </div>
                         <div class="example-block">
                             <div class="formula-title">Beispiel</div>
-                            <div class="example-text">48.000 € ÷ 800 € = 60</div>
+                            <div class="example-text">48.000 € ÷ 9.600 € = 5</div>
                         </div>
                         <div class="meaning-block">
                             <div class="formula-title">Bedeutung</div>
-                            <p>1 € Werbung bringt 60 € Umsatz. ROAS 5 entspricht 500 %.</p>
+                            <p>1 € Werbung bringt 5 € Umsatz. ROAS 5 entspricht 500 %.</p>
                         </div>
                     </div>
                 </div>
@@ -1406,7 +1419,7 @@
                     <div class="tree-node-header" onclick="toggleTreeNode(this)">
                         <div class="tree-node-title">
                             <span class="goal-badge">Mehr Leads</span>
-                            
+                           
                         </div>
                         <span class="toggle-icon">+</span>
                     </div>
@@ -1616,26 +1629,46 @@
         // Toggle für Cards in Tab 2 & Tab 3
         function toggleCard(headerElement) {
             const card = headerElement.closest('.playbook-card');
-            card.classList.toggle('open');
+            const isOpen = card.classList.toggle('open');
+            const icon = headerElement.querySelector('.toggle-icon');
+            if (icon) icon.textContent = isOpen ? '−' : '+';
         }
 
         // Toggle für Unternehmensziel-Zweige (Tab 4)
         function toggleTreeNode(headerElement) {
             const node = headerElement.closest('.tree-node');
-            node.classList.toggle('open');
+            const isOpen = node.classList.toggle('open');
+            const icon = headerElement.querySelector('.toggle-icon');
+            if (icon) icon.textContent = isOpen ? '−' : '+';
         }
 
         // Globales Öffnen aller ausklappbaren Bereiche
         function expandAll() {
-            document.querySelectorAll('.playbook-card').forEach(card => card.classList.add('open'));
-            document.querySelectorAll('.tree-node').forEach(node => node.classList.add('open'));
+            document.querySelectorAll('.playbook-card').forEach(card => {
+                card.classList.add('open');
+                const icon = card.querySelector('.toggle-icon');
+                if (icon) icon.textContent = '−';
+            });
+            document.querySelectorAll('.tree-node').forEach(node => {
+                node.classList.add('open');
+                const icon = node.querySelector('.toggle-icon');
+                if (icon) icon.textContent = '−';
+            });
             document.querySelectorAll('.detail-row').forEach(row => row.classList.add('active'));
         }
 
         // Globales Schließen aller ausklappbaren Bereiche
         function collapseAll() {
-            document.querySelectorAll('.playbook-card').forEach(card => card.classList.remove('open'));
-            document.querySelectorAll('.tree-node').forEach(node => node.classList.remove('open'));
+            document.querySelectorAll('.playbook-card').forEach(card => {
+                card.classList.remove('open');
+                const icon = card.querySelector('.toggle-icon');
+                if (icon) icon.textContent = '+';
+            });
+            document.querySelectorAll('.tree-node').forEach(node => {
+                node.classList.remove('open');
+                const icon = node.querySelector('.toggle-icon');
+                if (icon) icon.textContent = '+';
+            });
             document.querySelectorAll('.detail-row').forEach(row => row.classList.remove('active'));
         }
 
@@ -1660,9 +1693,13 @@
                     if (query.length > 0) {
                         if (item.classList.contains('playbook-card')) {
                             item.classList.add('open');
+                            const icon = item.querySelector('.toggle-icon');
+                            if (icon) icon.textContent = '−';
                         }
                         if (item.classList.contains('tree-node')) {
                             item.classList.add('open');
+                            const icon = item.querySelector('.toggle-icon');
+                            if (icon) icon.textContent = '−';
                         }
                         if (item.classList.contains('clickable-row')) {
                             const nextRow = item.nextElementSibling;
