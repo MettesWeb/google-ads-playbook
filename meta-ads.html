@@ -236,28 +236,70 @@
       .back-link-header{margin-top:1rem}
       th,td{padding:.75rem .8rem}
     }
-  </style>
+  
+
+    /* --- Anpassung: Header wie Google Ads --- */
+    .header-grid{
+      align-items:center;
+    }
+    .header-title{
+      min-width:280px;
+      flex:1 1 420px;
+    }
+    .header-actions{
+      display:flex;
+      align-items:center;
+      justify-content:flex-end;
+      gap:1rem;
+      flex:1 1 620px;
+    }
+    .header-search{
+      flex:1;
+      min-width:280px;
+      max-width:620px;
+      margin:0;
+      background:rgba(255,255,255,.96);
+      border-color:rgba(255,255,255,.55);
+      box-shadow:0 8px 22px rgba(0,0,0,.10);
+    }
+    .tabs{
+      margin:1.2rem 0 1rem;
+    }
+    @media(max-width:900px){
+      .header-actions{
+        width:100%;
+        flex-direction:column;
+        align-items:stretch;
+        margin-top:1rem;
+      }
+      .header-search{
+        max-width:none;
+        width:100%;
+        min-width:0;
+      }
+      .back-link-header{
+        width:100%;
+      }
+    }
+
+</style>
 </head>
 <body>
 <header>
   <div class="header-inner header-grid">
-    <div>
+    <div class="header-title">
       <div class="header-kicker">Talentspring · Spezialisierung 1</div>
       <h1>Meta Ads Playbook</h1>
       <p>Facebook- und Instagram-Anzeigen kompakt: Plattformlogik, Kampagnenziele, Formate, Tracking, KPIs, Reporting und rechtliche Basics.</p>
     </div>
-    <a class="back-link-header" href="index.html">← Zurück zur Übersicht</a>
+    <div class="header-actions">
+      <input id="searchInput" class="search header-search" type="search" placeholder="Im Meta Ads Playbook suchen ...">
+      <a class="back-link-header" href="index.html">← Zurück zur Übersicht</a>
+    </div>
   </div>
 </header>
 
 <main>
-  <section class="intro searchable-item">
-    <strong>Merksatz:</strong> Meta Ads funktionieren nicht nur über schöne Anzeigen. Entscheidend ist die Verbindung aus Ziel, Zielgruppe, Creative, Tracking und Auswertung.
-  </section>
-
-  <div class="toolbar">
-    <input id="searchInput" class="search" type="search" placeholder="Im Playbook suchen: z. B. Pixel, CAPI, CTR, Carousel, Impressum ...">
-  </div>
 
   <nav class="tabs" aria-label="Playbook-Reiter">
     <button class="tab-btn active" data-tab="overview">Überblick</button>
