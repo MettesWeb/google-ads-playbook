@@ -1,0 +1,143 @@
+
+:root {
+  --primary-blue: #0b1f38;
+  --secondary-blue: #16365d;
+  --accent-blue: #1e4976;
+  --light-bg: #f4f7f9;
+  --card-bg: #ffffff;
+  --border-color: #e2e8f0;
+  --text-dark: #1e293b;
+  --text-muted: #64748b;
+  --sky: #38bdf8;
+  --gold: #c8a84e;
+  --green-bg: #d1fae5;
+  --green-text: #065f46;
+  --yellow-bg: #fef3c7;
+  --yellow-text: #92400e;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.1);
+  --shadow-md: 0 8px 24px rgba(11,31,56,.12);
+  --radius: 14px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  min-height: 100vh;
+  background: var(--light-bg);
+  color: var(--text-dark);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.55;
+}
+header {
+  background: var(--primary-blue);
+  color: white;
+  padding: 2rem 1.5rem;
+  border-bottom: 4px solid var(--gold);
+}
+.header-inner, main {
+  width: min(1180px, calc(100% - 2rem));
+  margin: 0 auto;
+}
+.header-kicker {
+  color: #cbd5e1;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  font-size: .75rem;
+  margin-bottom: .5rem;
+}
+h1 { font-size: clamp(1.8rem, 4vw, 2.8rem); line-height: 1.15; }
+header p { color: #cbd5e1; margin-top: .65rem; max-width: 760px; }
+main { padding: 2rem 0 4rem; }
+.intro {
+  background: white;
+  border: 1px solid var(--border-color);
+  border-left: 5px solid var(--sky);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  padding: 1.25rem 1.4rem;
+  margin-bottom: 1.5rem;
+}
+.section-title { margin: 1.8rem 0 1rem; color: var(--primary-blue); }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(235px, 1fr));
+  gap: 1rem;
+}
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  padding: 1.35rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 210px;
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: #cbd5e1; }
+.card h2, .card h3 { color: var(--primary-blue); margin-bottom: .45rem; }
+.card p { color: var(--text-muted); flex: 1; }
+.card-icon {
+  width: 48px; height: 48px; border-radius: 12px;
+  display: grid; place-items: center;
+  background: #eaf6fd; color: var(--primary-blue);
+  font-weight: 800; margin-bottom: 1rem;
+}
+.status {
+  display: inline-flex;
+  align-self: flex-start;
+  padding: .25rem .6rem;
+  border-radius: 999px;
+  font-size: .76rem;
+  font-weight: 700;
+  margin-bottom: .8rem;
+}
+.status.ready { background: var(--green-bg); color: var(--green-text); }
+.status.build { background: var(--yellow-bg); color: var(--yellow-text); }
+.card-link, .back-link, .quiz-button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  border-radius: 9px;
+  padding: .72rem 1rem;
+  font-weight: 700;
+  margin-top: 1rem;
+  transition: .2s ease;
+}
+.card-link, .quiz-button { background: var(--secondary-blue); color: white; }
+.card-link:hover, .quiz-button:hover { background: var(--accent-blue); }
+.back-link { color: var(--primary-blue); border: 1px solid #cbd5e1; background: white; }
+.back-link:hover { background: #f8fafc; }
+.placeholder {
+  max-width: 760px;
+  margin: 1rem auto 0;
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  padding: 2rem;
+  text-align: center;
+}
+.placeholder h2 { color: var(--primary-blue); margin-bottom: .6rem; }
+.placeholder p { color: var(--text-muted); }
+.quiz-list { display: grid; gap: 1rem; margin-top: 1rem; }
+.quiz-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1rem;
+  align-items: center;
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1rem 1.1rem;
+  box-shadow: var(--shadow-sm);
+}
+.quiz-row h3 { color: var(--primary-blue); }
+.quiz-row p { color: var(--text-muted); font-size: .92rem; margin-top: .2rem; }
+.quiz-button { margin: 0; white-space: nowrap; }
+footer { text-align: center; color: var(--text-muted); font-size: .84rem; padding: 1.5rem; }
+@media (max-width: 620px) {
+  .quiz-row { grid-template-columns: 1fr; }
+  .quiz-button { width: 100%; }
+}
