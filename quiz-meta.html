@@ -1,26 +1,455 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Meta Ads Quiz</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Performance Marketing - Interaktives Quiz</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        .quiz-container {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            width: 100%;
+            max-width: 800px;
+            padding: 40px;
+            box-sizing: border-box;
+        }
+        h1 {
+            text-align: center;
+            color: #1A365D;
+            font-size: 26px;
+            margin-bottom: 10px;
+        }
+        .progress {
+            text-align: center;
+            color: #718096;
+            font-size: 15px;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+        .question {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            color: #2D3748;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .option {
+            background-color: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 16px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+            font-weight: 500;
+            color: #4a5568;
+        }
+        .option:hover:not(:disabled) {
+            background-color: #edf2f7;
+            border-color: #cbd5e0;
+        }
+        .option.correct {
+            background-color: #c6f6d5 !important;
+            border-color: #48bb78 !important;
+            color: #22543d !important;
+        }
+        .option.incorrect {
+            background-color: #fed7d7 !important;
+            border-color: #f56565 !important;
+            color: #742a2a !important;
+        }
+        .option:disabled {
+            cursor: default;
+        }
+        .feedback {
+            margin-top: 25px;
+            font-size: 16px;
+            text-align: left;
+            min-height: 24px;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+            line-height: 1.5;
+        }
+        .feedback.success {
+            background-color: #c6f6d5;
+            color: #22543d;
+            border-left: 5px solid #48bb78;
+        }
+        .feedback.error {
+            background-color: #fed7d7;
+            color: #742a2a;
+            border-left: 5px solid #f56565;
+        }
+        .btn-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 30px;
+        }
+        button.next-btn {
+            background-color: #2B6CB0;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 14px 28px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            display: none;
+        }
+        button.next-btn:hover {
+            background-color: #1A365D;
+        }
+        .result-container {
+            text-align: center;
+            display: none;
+        }
+        .result-container h2 {
+            color: #1A365D;
+            font-size: 30px;
+            margin-bottom: 20px;
+        }
+        .result-container p {
+            font-size: 20px;
+            color: #4a5568;
+            margin-bottom: 30px;
+        }
+        .restart-btn {
+            background-color: #48bb78;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 14px 28px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .restart-btn:hover {
+            background-color: #2f855a;
+        }
+    </style>
 </head>
 <body>
-<header>
-  <div class="header-inner">
-    <div class="header-kicker">Interaktives Prüfungstraining</div>
-    <h1>Meta Ads Quiz</h1>
-    <p>Facebook &amp; Instagram Ads</p>
-  </div>
-</header>
-<main>
-  <a class="back-link" href="quiz.html">← Zurück zum Quiz-Center</a>
-  <section class="placeholder">
-    <span class="status build">Noch keine Fragen hinterlegt</span>
-    <h2>Dieses Quiz ist vorbereitet.</h2>
-    <p>Sobald die Vorlesungsdatei und das Transkript ausgewertet sind, werden hier anklickbare Multiple-Choice-Fragen mit direktem Feedback und Auswertung eingefügt.</p>
-  </section>
-</main>
+
+<div class="quiz-container">
+    <div id="quiz-ui">
+        <h1>Performance Marketing Quiz</h1>
+        <div class="progress" id="progress">Frage 1 von 30</div>
+        
+        <div class="question" id="question">Lade Frage...</div>
+        <div class="options" id="options"></div>
+        
+        <div class="feedback" id="feedback"></div>
+        
+        <div class="btn-container">
+            <button class="next-btn" id="next-btn" onclick="nextQuestion()">Nächste Frage</button>
+        </div>
+    </div>
+
+    <div class="result-container" id="result-ui">
+        <h2>Prüfung abgeschlossen! 🎉</h2>
+        <p>Du hast <strong id="score" style="color: #2B6CB0; font-size: 24px;">0</strong> von 30 Fragen richtig beantwortet.</p>
+        <button class="restart-btn" onclick="restartQuiz()">Quiz neu starten</button>
+    </div>
+</div>
+
+<script>
+    const questions = [
+        {
+            q: "1. Welches Facebook-Anzeigenformat eignet sich laut Vorlesung am besten für die Präsentation von Sortimenten, verschiedenen Farbvarianten oder Schritt-für-Schritt-Anleitungen?",
+            options: ["A) Facebook Stories", "B) Single Image Ad", "C) Carousel", "D) In-Stream-Video"],
+            answer: 2,
+            explanation: "Carousel-Ads ermöglichen es, mehrere Produkte, Features oder Storyabschnitte in einer Anzeige (zum Durchwischen) zu platzieren."
+        },
+        {
+            q: "2. Wodurch zeichnen sich 'Collection'-Anzeigen auf Facebook besonders aus?",
+            options: ["A) Sie verschwinden automatisch nach 24 Stunden.", "B) Sie kombinieren einen Produktkatalog mit einem Highlight-Video oder Bild und sind sehr conversionstark.", "C) Sie lassen sich ohne angebundenen Meta Commerce Manager erstellen.", "D) Sie sind ausschließlich im Facebook Marketplace sichtbar."],
+            answer: 1,
+            explanation: "Collection-Ads kombinieren Katalog und visuelles Highlight für mobiles Shopping, erfordern aber den Meta Commerce Manager."
+        },
+        {
+            q: "3. Für welche Produkte ist der Facebook Marketplace aus E-Commerce-Sicht am besten geeignet?",
+            options: ["A) Für direkt vergleichbare Produkte (z. B. Möbel, Deko, Technik) und Abverkäufe unter 100 €.", "B) Für komplexe, extrem erklärungsbedürftige B2B-Softwarelösungen.", "C) Für reines Marken-Branding ohne direkte Kaufabsicht.", "D) Für teure Luxusgüter und Premium-Dienstleistungen."],
+            answer: 0,
+            explanation: "Nutzer auf dem Marketplace sind bereits im Shopping-Modus, was ideal für Angebote und vergleichbare Produkte im niedrigen bis mittleren Preissegment ist."
+        },
+        {
+            q: "4. Was ist eine 'Post-Loop-Ad' in Facebook Reels?",
+            options: ["A) Ein Textbanner, das permanent über dem Reel schwebt.", "B) Eine Endlosschleife eines Werbevideos auf der Landingpage.", "C) Eine Video-Ad von mind. 4 Sekunden, die angezeigt wird, nachdem ein Facebook-Reel vollständig abgespielt wurde.", "D) Eine Anzeige, die zwingend vor dem Start eines Reels angesehen werden muss."],
+            answer: 2,
+            explanation: "Post-Loop-Ads erscheinen als eigenständige Werbevideos erst, nachdem das eigentliche Facebook-Reel zu Ende abgespielt wurde."
+        },
+        {
+            q: "5. Was passiert bei Video-Ads in Facebook Stories, wenn diese länger als 10 Sekunden sind?",
+            options: ["A) Sie werden vom Algorithmus automatisch blockiert.", "B) Sie werden in einzelne Stories-Karten unterteilt.", "C) Sie werden mit doppelter Geschwindigkeit abgespielt.", "D) Sie werden nur noch im normalen Facebook-Feed angezeigt."],
+            answer: 1,
+            explanation: "Video-Ads in Facebook Stories dauern maximal 10 Sekunden; längere Videos werden automatisch in mehrere aufeinanderfolgende Karten gesplittet."
+        },
+        {
+            q: "6. Warum sind In-Stream-Videos auf Facebook für komplexe Produktinfos oft ungeeignet?",
+            options: ["A) Da sie keinen Ton abspielen dürfen.", "B) Weil sie mitten in anderen Inhalten platziert werden und sich eher für emotionales Storytelling oder Branding eignen.", "C) Weil sie maximal 3 Sekunden lang sein dürfen.", "D) Weil sie ausschließlich auf dem Smartphone funktionieren."],
+            answer: 1,
+            explanation: "In-Stream-Videos unterbrechen bekannte Videos von Publishern. Sie sind aufmerksamkeitsstark, aber ungeeignet für tiefgreifende, komplexe Erklärungen."
+        },
+        {
+            q: "7. Wie ist die Kennzahl 'ROAS' (Return on Ad Spend) definiert?",
+            options: ["A) Das Verhältnis von generiertem Umsatz zu den eingesetzten Werbekosten.", "B) Das Verhältnis von erzielten Klicks zu den Impressionen.", "C) Die absoluten Kosten für eine bestimmte gewünschte Aktion (CPA).", "D) Die Absprungrate von Nutzern im Checkout."],
+            answer: 0,
+            explanation: "Der ROAS misst, wie viel Umsatz pro eingesetztem Euro für Werbung generiert wird (z. B. ROAS = 4 bedeutet 4€ Umsatz pro 1€ Ad Spend)."
+        },
+        {
+            q: "8. Was ist der technische Hauptunterschied zwischen dem Meta Pixel und der Conversions API (CAPI)?",
+            options: ["A) Der Pixel misst serverseitig, CAPI misst im Browser.", "B) Der Pixel sendet Daten vom Client (Browser), während die CAPI eine Server-zu-Server-Schnittstelle ist.", "C) Die CAPI umgeht DSGVO-Richtlinien legal.", "D) Der Pixel funktioniert nur auf Instagram."],
+            answer: 1,
+            explanation: "Die CAPI überträgt Events direkt vom Server an Meta und ist dadurch unabhängiger von Adblockern als der rein browserbasierte Pixel."
+        },
+        {
+            q: "9. Welches der folgenden Meta-Events sollte ausgelöst werden, wenn ein Nutzer den Bezahlvorgang in einem Online-Shop startet?",
+            options: ["A) ViewContent", "B) AddToCart", "C) InitiateCheckout", "D) Purchase"],
+            answer: 2,
+            explanation: "'InitiateCheckout' signalisiert den Start des Check-out- bzw. Bezahlvorgangs, noch bevor der Kauf (Purchase) final abgeschlossen ist."
+        },
+        {
+            q: "10. Was unterscheidet laut Vorlesung eine allgemeine 'Kennzahl' von einem 'KPI' (Key Performance Indicator)?",
+            options: ["A) Kennzahlen sind immer prozentual, KPIs sind absolute Zahlen.", "B) Eine Kennzahl ist lediglich eine interpretierte Metrik, während ein KPI direkt strategisch relevant für das Unternehmensziel ist.", "C) KPIs gibt es nur im B2B-Marketing.", "D) Kennzahlen messen Umsatz, KPIs messen Reichweite."],
+            answer: 1,
+            explanation: "Nicht jede Kennzahl ist ein KPI. Ein KPI (wie z. B. ROAS) hat immer einen unmittelbaren Bezug zum strategischen Kernziel des Unternehmens."
+        },
+        {
+            q: "11. Was ist laut Vorlesung unter 'Dual Setup' beim Meta-Tracking zu verstehen?",
+            options: ["A) Die gleichzeitige Schaltung von Facebook- und Google-Ads.", "B) Das gleichzeitige Tracken per Meta Pixel (Browser) und Conversions API (Server) für maximale Datenqualität.", "C) Die Verwendung von zwei separaten Werbekonten.", "D) Das A/B-Testing von zwei unterschiedlichen Ad-Motiven."],
+            answer: 1,
+            explanation: "In der Praxis nutzt man Pixel und CAPI stets gemeinsam (Dual Setup), um blockierte Browser-Daten sicher serverseitig abzufangen."
+        },
+        {
+            q: "12. Warum ist die Einbindung eines Consent Management Tools (CMP) für das Meta-Tracking essenziell?",
+            options: ["A) Um Nutzer automatisch zu einem Newsletter anzumelden.", "B) Weil der Meta Pixel laut DSGVO erst auslösen darf, wenn die aktive Zustimmung (Consent) der Nutzer*innen vorliegt.", "C) Um die Werbekosten (CPC) künstlich zu senken.", "D) Weil Meta sonst keine Reels im Profil anzeigt."],
+            answer: 1,
+            explanation: "Tracking in der EU erfordert die aktive Zustimmung; ohne CMP und Consent ist das Tracking von personenbezogenen Daten illegal und führt zu Datenlücken."
+        },
+        {
+            q: "13. Welches interne Tool von Meta ist primär für technisch versierte Marketer gedacht, um Conversion-Events zu analysieren und zu verwalten?",
+            options: ["A) Meta Business Suite", "B) Professional Dashboard", "C) Meta Events Manager", "D) Instagram Insights"],
+            answer: 2,
+            explanation: "Der Meta Events Manager ist die zentrale Anlaufstelle für Tracking-Spezialisten zur Verwaltung und Fehleranalyse von Pixel- und CAPI-Datenquellen."
+        },
+        {
+            q: "14. Welche wesentliche technische Einschränkung gilt für die Nutzung von 'Instagram Insights'?",
+            options: ["A) Sie sind kostenpflichtig.", "B) Sie sind ausschließlich über die Instagram-App abrufbar und haben keine Desktop-Version.", "C) Sie stehen nur Accounts mit über 10.000 Followern zur Verfügung.", "D) Sie werten keine Story-Views aus."],
+            answer: 1,
+            explanation: "Instagram Insights sind strikt auf die mobile App beschränkt und bieten vor allem schnelle Einblicke für Creator und kleinere Marken."
+        },
+        {
+            q: "15. Welches Meta-Tool empfiehlt sich am besten für KMUs und Social-Media-Teams zum Verwalten, Planen und Auswerten von organischen Inhalten über beide Plattformen hinweg?",
+            options: ["A) Meta Business Suite", "B) Werbeanzeigenmanager", "C) Meta Events Manager", "D) Google Analytics 4"],
+            answer: 0,
+            explanation: "Die Meta Business Suite bündelt die organische Content-Planung, Nachrichtenverwaltung und grundlegende Insights für Facebook und Instagram an einem Ort."
+        },
+        {
+            q: "16. Wofür ist der Meta Werbeanzeigenmanager die primäre Wahl?",
+            options: ["A) Für die ausschließliche Pflege von Facebook-Gruppen.", "B) Für das Erstellen, Verwalten und Auswerten vollständiger, bezahlter Kampagnen und detailliertes Funnel-Targeting.", "C) Nur für die Bewerbung von 'Boost-Posts' mit eingeschränkten Zielen.", "D) Für die Web-Analyse von Website-Traffic unabhängig von Meta."],
+            answer: 1,
+            explanation: "Der Werbeanzeigenmanager bietet den vollen Profi-Zugriff auf Kampagnenstrukturen, ROAS-Messung, A/B-Tests und komplexes Zielgruppen-Targeting."
+        },
+        {
+            q: "17. Welches der folgenden Tools ist ein Beispiel für ein externes Reporting- und Social-Media-Management-Tool?",
+            options: ["A) Meta Business Suite", "B) Hootsuite", "C) Instagram Insights", "D) Professional Dashboard"],
+            answer: 1,
+            explanation: "Hootsuite (sowie SocialHub) sind populäre externe Drittanbieter-Tools zur markenübergreifenden Verwaltung und Auswertung von Social Media."
+        },
+        {
+            q: "18. Was ist die primäre Aufgabe des Professional Dashboards auf Facebook/Instagram?",
+            options: ["A) Server-Side-Tracking einzurichten.", "B) Einen schnellen Überblick über Performance, Monetarisierung und Creator-Tools auf Profil-Ebene zu bieten.", "C) Externe Web-Analytics (wie GA4) zu ersetzen.", "D) Das Impressum der Facebook-Seite automatisch zu generieren."],
+            answer: 1,
+            explanation: "Es dient in erster Linie Creatorn und Seitenbetreibern als direkte mobile oder Desktop-Übersicht für Kanalpflege, Interaktionsdaten und Monetarisierung."
+        },
+        {
+            q: "19. Was versteht man unter dem 'F-Shape Pattern' bei der visuellen Hierarchie von Designs?",
+            options: ["A) Alle Bilder müssen in einem quadratischen 'F-Format' zugeschnitten werden.", "B) Menschen lesen Social Posts nicht linear, sondern scannen sie von links oben in F-Form; deshalb gehören wichtige Infos nach links oben.", "C) Das Logo muss immer wie ein 'F' in der Mitte platziert werden.", "D) Eine spezielle Farbpalette von Facebook."],
+            answer: 1,
+            explanation: "Das F-Shape Pattern nach der Nielsen Norman Group beschreibt das Leseverhalten digitaler Nutzer, die Inhalte primär scannen, anstatt sie komplett zu lesen."
+        },
+        {
+            q: "20. Wann ist der Einsatz eines detaillierten 'Storyboards' im Gegensatz zu einem einfachen Skript unerlässlich?",
+            options: ["A) Wenn das Video viele komplexe visuelle Elemente, Animationen oder Effekte enthält und man im Team arbeitet.", "B) Wenn es sich nur um ein einfaches Talking-Head-Video für YouTube Shorts handelt.", "C) Bei der Erstellung von reinem Text-Content für LinkedIn.", "D) Wenn das Video weniger als 3 Sekunden dauert."],
+            answer: 0,
+            explanation: "Storyboards helfen bei der präzisen visuellen Planung von komplexen Szenenwechseln, Kameraeinstellungen und im Team-Workflow."
+        },
+        {
+            q: "21. Welche Farbwirkung wird laut Farbpsychologie der Farbe 'Rot' im Social Media Marketing häufig zugeschrieben?",
+            options: ["A) Vertrauen und Seriosität.", "B) Minimalismus und Premium-Look.", "C) Energie und Dringlichkeit (daher oft als Call-to-Action-Farbe genutzt).", "D) Optimismus und Freundlichkeit."],
+            answer: 2,
+            explanation: "Rot weckt Aufmerksamkeit und Dringlichkeit und ist daher eine klassische, hochperformante Farbe für Handlungsaufforderungen (CTAs)."
+        },
+        {
+            q: "22. Welche Regel gilt für ein gutes Social-Media-Storytelling bezüglich des 'Hooks'?",
+            options: ["A) Der Hook sollte in den ersten 3 Sekunden visuell oder emotional die Aufmerksamkeit des Nutzers einfangen.", "B) Der Hook sollte erst am Ende des Videos platziert werden, um Spannung aufzubauen.", "C) Der Hook ist nur für statische Bildposts relevant.", "D) Ein Hook muss immer aus einem animierten Rabattcode bestehen."],
+            answer: 0,
+            explanation: "Da Nutzer in weniger als 3 Sekunden entscheiden, ob sie weiterscrollen, muss der visuelle und inhaltliche Einstieg (Hook) sofort fesseln."
+        },
+        {
+            q: "23. Warum sind 'Whitespaces' (Weißräume) in einem Design so wichtig?",
+            options: ["A) Sie sparen Speicherplatz beim Upload der Datei in Canva.", "B) Sie geben dem Auge Ruhe und lenken den Fokus auf die Kernbotschaft, statt den Nutzer zu überladen.", "C) Sie sind gesetzliche Vorgabe für die Erstellung von Facebook Carousel-Ads.", "D) Sie ersetzen den Call-to-Action auf mobilen Geräten."],
+            answer: 1,
+            explanation: "Whitespaces verhindern ein überladenes Layout (Clutter) und steuern die visuelle Hierarchie gezielt in Richtung Textgewichtung."
+        },
+        {
+            q: "24. Wie viele Schriftarten sollten in einem Social Media Post laut Design-Prinzipien maximal kombiniert werden?",
+            options: ["A) Mindestens 4.", "B) Es gibt keine Begrenzung, solange es gut aussieht.", "C) Maximal 2 Schriften (z.B. Headline und Body), um Klarheit zu bewahren.", "D) Nur eine einzige Schrift für das gesamte Profil."],
+            answer: 2,
+            explanation: "Weniger ist mehr. Die bewusste Beschränkung auf maximal 2 Schriften vermeidet Typo-Chaos und erhöht die digitale Lesbarkeit massiv."
+        },
+        {
+            q: "25. Was besagt die Preisangabenverordnung (PAngV) für E-Commerce-Werbeanzeigen auf Social Media?",
+            options: ["A) Preise dürfen in Videos grundsätzlich nicht eingeblendet werden.", "B) Wenn Preise in der Werbung genannt werden, müssen diese inklusive Mehrwertsteuer und anderer anfallender Nebenkosten ausgewiesen werden.", "C) Es dürfen im B2C-Bereich nur Netto-Preise beworben werden.", "D) Rabatte müssen immer zwingend in roten Zahlen geschrieben werden."],
+            answer: 1,
+            explanation: "Die PAngV schützt Verbraucher vor versteckten Kosten und verlangt bei Preisnennungen zwingend die Angabe von Endpreisen (inkl. MwSt.)."
+        },
+        {
+            q: "26. Welche rechtliche Regel gilt bei Influencer-Kooperationen und gesponserten Inhalten in der EU?",
+            options: ["A) Es reicht, den Werbepartner tief unten in den Kommentaren zu erwähnen.", "B) Die Kennzeichnungspflicht entfällt bei Accounts unter 10.000 Followern.", "C) Werbeanzeigen oder gesponserte Beiträge müssen von Beginn an deutlich als 'Werbung' oder 'Anzeige' gekennzeichnet sein.", "D) Eine Kennzeichnung ist nur bei physischen E-Commerce-Produkten nötig."],
+            answer: 2,
+            explanation: "Fehlende oder verschleierte Werbekennzeichnung gilt als Irreführung und stellt einen klaren Verstoß gegen das Wettbewerbsrecht dar."
+        },
+        {
+            q: "27. Dürfen Unternehmen nutzergenerierte Inhalte (User-Generated Content, z. B. Kundenbilder) einfach so für eigene Facebook-Ads verwenden?",
+            options: ["A) Ja, alles was öffentlich auf Instagram gepostet wird, darf für Ads genutzt werden.", "B) Ja, solange der abgebildete Kunde im Nachhinein nicht aktiv widerspricht.", "C) Nein, Inhalte dürfen nicht ohne die ausdrückliche Einwilligung und Lizenzierung der Nutzer*innen als Werbung verwendet werden (Urheberrecht).", "D) Ja, aber nur wenn der originale Beitrag weniger als 100 Likes hat."],
+            answer: 2,
+            explanation: "Das Urheberrecht liegt beim jeweiligen Ersteller des Fotos/Videos. Ohne explizites Nutzungsrecht (Buyout) darf Fremdmaterial rechtlich nicht in Ads verwendet werden."
+        },
+        {
+            q: "28. Was bedeutet das 'Opt-in'-Verfahren bei der Kontaktaufnahme über den Messenger zu Werbezwecken?",
+            options: ["A) Unternehmen dürfen jeden anschreiben, solange der Nutzer sich später abmelden kann (Opt-out).", "B) Nutzer müssen der werblichen Kontaktaufnahme im Vorfeld ausdrücklich zugestimmt haben.", "C) Dass Nutzer automatisierte Nachrichten von Marken nicht blockieren können.", "D) Dass das Unternehmen seine Identität in der Direktnachricht verbergen darf."],
+            answer: 1,
+            explanation: "Unerwünschte Kontaktaufnahme gilt als Spam. Eine werbliche Ansprache erfordert im Vorfeld immer ein aktives, nachweisbares Opt-in des Empfängers."
+        },
+        {
+            q: "29. Welcher Nachteil wird der Plattform Facebook bezüglich ihrer Nutzerdemografie aus Marketing-Sicht zugeschrieben?",
+            options: ["A) Es gibt dort keine relevanten Gruppen-Funktionen mehr für Marketer.", "B) Die Kernzielgruppe ist stark 35+, jüngere Generationen (Gen Z) sind dort kaum noch erreichbar.", "C) Es können keine Werbevideos über 1 Minute hochgeladen werden.", "D) Die Plattform wird ausschließlich im B2B-Sektor genutzt."],
+            answer: 1,
+            explanation: "Während Plattformen wie Instagram und TikTok ein sehr junges Publikum aufweisen, ist Facebook mittlerweile stark durch eine ältere demografische Nutzerschaft geprägt."
+        },
+        {
+            q: "30. Wie unterstützt Künstliche Intelligenz laut der Vorlesungs-Checkliste bei der automatisierten Anzeigenplatzierung (z.B. Meta Advantage+)?",
+            options: ["A) Sie umgeht automatisch die DSGVO-Vorgaben für das Tracking ohne Consent-Banner.", "B) Sie nutzt Machine Learning zur dynamischen Ausspielung passender Produkte und testet/optimiert Motive in Echtzeit auf Conversions.", "C) Sie generiert eigenständig komplett neue Produkte im verknüpften Online-Shop.", "D) Sie löscht automatisch negative Kommentare unter Werbeanzeigen."],
+            answer: 1,
+            explanation: "KI-Kampagnen (wie Advantage+ Shopping) testen Anzeigenmotive, Zielgruppen und Produktkataloge in Echtzeit dynamisch gegeneinander und optimieren die Budgets effizient."
+        }
+    ];
+
+    let currentQuestionIndex = 0;
+    let score = 0;
+    let answered = false;
+
+    const questionEl = document.getElementById('question');
+    const optionsEl = document.getElementById('options');
+    const feedbackEl = document.getElementById('feedback');
+    const nextBtn = document.getElementById('next-btn');
+    const progressEl = document.getElementById('progress');
+    const quizUi = document.getElementById('quiz-ui');
+    const resultUi = document.getElementById('result-ui');
+    const scoreEl = document.getElementById('score');
+
+    function loadQuestion() {
+        answered = false;
+        feedbackEl.style.display = "none";
+        feedbackEl.className = "feedback";
+        nextBtn.style.display = "none";
+        
+        const q = questions[currentQuestionIndex];
+        progressEl.innerText = `Frage ${currentQuestionIndex + 1} von ${questions.length}`;
+        questionEl.innerText = q.q;
+        
+        optionsEl.innerHTML = "";
+        q.options.forEach((opt, index) => {
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.innerText = opt;
+            btn.onclick = () => selectOption(index, btn);
+            optionsEl.appendChild(btn);
+        });
+    }
+
+    function selectOption(selectedIndex, selectedBtn) {
+        if (answered) return;
+        answered = true;
+
+        const q = questions[currentQuestionIndex];
+        const allOptions = optionsEl.children;
+
+        // Disable all buttons and show correct answer
+        for (let i = 0; i < allOptions.length; i++) {
+            allOptions[i].disabled = true;
+            if (i === q.answer) {
+                allOptions[i].classList.add('correct');
+            }
+        }
+
+        if (selectedIndex === q.answer) {
+            score++;
+            feedbackEl.innerHTML = `<strong>✅ Richtig!</strong><br><br>${q.explanation}`;
+            feedbackEl.classList.add('success');
+        } else {
+            selectedBtn.classList.add('incorrect');
+            feedbackEl.innerHTML = `<strong>❌ Falsch!</strong><br><br>${q.explanation}`;
+            feedbackEl.classList.add('error');
+        }
+
+        feedbackEl.style.display = "block";
+
+        if (currentQuestionIndex < questions.length - 1) {
+            nextBtn.innerText = "Nächste Frage";
+        } else {
+            nextBtn.innerText = "Ergebnis anzeigen";
+        }
+        nextBtn.style.display = "inline-block";
+    }
+
+    function nextQuestion() {
+        currentQuestionIndex++;
+        if (currentQuestionIndex < questions.length) {
+            loadQuestion();
+        } else {
+            showResult();
+        }
+    }
+
+    function showResult() {
+        quizUi.style.display = "none";
+        resultUi.style.display = "block";
+        scoreEl.innerText = score;
+    }
+
+    function restartQuiz() {
+        currentQuestionIndex = 0;
+        score = 0;
+        quizUi.style.display = "block";
+        resultUi.style.display = "none";
+        loadQuestion();
+    }
+
+    // Start quiz
+    loadQuestion();
+</script>
+
 </body>
 </html>
