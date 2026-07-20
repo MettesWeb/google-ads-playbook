@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Google Ads Playbook - Interaktive KPI-Übersicht</title>
-    <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Google Ads Playbook - Interaktive KPI-Übersicht</title>
+<style>
         /* --- CSS Reset & Custom Properties --- */
         *, *::before, *::after {
             box-sizing: border-box;
@@ -16,6 +17,7 @@
             --primary-blue: #0b1f38;
             --secondary-blue: #16365d;
             --accent-blue: #1e4976;
+            --gold: #c8a84e;
             --light-bg: #f4f7f9;
             --card-bg: #ffffff;
             --border-color: #e2e8f0;
@@ -64,8 +66,9 @@
         header {
             background-color: var(--primary-blue);
             color: #ffffff;
-            padding: 1.5rem 2rem;
+            padding: 2rem 1.5rem;
             box-shadow: var(--shadow-md);
+            border-bottom: 4px solid var(--gold);
         }
 
         .header-container {
@@ -84,10 +87,20 @@
             }
         }
 
+        .header-kicker {
+            color: #cbd5e1;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            font-size: 0.75rem;
+            margin-bottom: 0.45rem;
+        }
+
         .header-title h1 {
-            font-size: 1.6rem;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
             font-weight: 700;
             letter-spacing: -0.5px;
+            line-height: 1.15;
         }
 
         .header-title p {
@@ -145,6 +158,27 @@
         .btn:hover {
             background-color: var(--accent-blue);
             border-color: rgba(255,255,255,0.3);
+        }
+
+        .back-link-header {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: #ffffff;
+            background-color: rgba(255,255,255,0.10);
+            border: 1px solid rgba(255,255,255,0.28);
+            padding: 0.6rem 1rem;
+            font-size: 0.85rem;
+            font-weight: 700;
+            border-radius: 8px;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+
+        .back-link-header:hover {
+            background-color: rgba(255,255,255,0.18);
+            border-color: rgba(255,255,255,0.45);
         }
 
         /* --- STICKY Tab-Navigation --- */
@@ -666,924 +700,908 @@
             font-size: 1.1rem;
             box-shadow: var(--shadow-sm);
         }
-    </style>
+
+        footer {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.84rem;
+            padding: 1.5rem;
+        }
+    
+
+        /* --- Layout-Optimierungen nach Feedback --- */
+        .info-col,
+        .info-cell {
+            width: 84px;
+            text-align: center;
+        }
+
+        .info-toggle {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            border: 1px solid #bfdbfe;
+            background-color: #eff6ff;
+            color: var(--primary-blue);
+            font-size: 1.2rem;
+            font-weight: 800;
+            line-height: 1;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .info-toggle:hover {
+            background-color: var(--primary-blue);
+            color: #ffffff;
+            border-color: var(--primary-blue);
+            transform: scale(1.05);
+        }
+
+        .detail-content-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin-top: 0.9rem;
+        }
+
+        @media (min-width: 760px) {
+            .detail-content-grid {
+                grid-template-columns: 1.25fr 1fr;
+            }
+        }
+
+        .detail-copy {
+            background-color: #f8fafc;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        .detail-copy.detail-example {
+            background-color: #f0fdf4;
+            border-color: #bbf7d0;
+        }
+
+        .detail-copy-title {
+            color: var(--primary-blue);
+            font-size: 0.78rem;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.4rem;
+            text-transform: uppercase;
+        }
+
+        .single-column-grid {
+            grid-template-columns: 1fr !important;
+        }
+
+        .formula-grid .playbook-card.open .card-body,
+        .map-grid .playbook-card.open .card-body {
+            max-height: 1200px;
+        }
+
+        .problem-layout {
+            display: grid;
+            grid-template-columns: minmax(230px, 0.8fr) minmax(0, 1.4fr);
+            gap: 1rem;
+            align-items: stretch;
+        }
+
+        .problem-layout .problem-alert {
+            height: 100%;
+            margin-bottom: 0;
+        }
+
+        .check-panel {
+            background-color: #f8fafc;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        .check-panel .formula-title {
+            color: var(--primary-blue);
+            margin-bottom: 0.7rem;
+        }
+
+        @media (max-width: 760px) {
+            .problem-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .tree-node-header,
+        .tree-node.open .tree-node-header {
+            background-color: var(--primary-blue) !important;
+            color: #ffffff !important;
+            border-bottom-color: rgba(255,255,255,0.16) !important;
+        }
+
+        .tree-node-title,
+        .tree-node-header .toggle-icon,
+        .tree-node.open .toggle-icon {
+            color: #ffffff !important;
+        }
+
+        .goal-sentence {
+            color: #ffffff;
+            font-size: 1.02rem;
+            font-weight: 750;
+        }
+</style>
 </head>
 <body>
+<div class="sticky-top">
+<header>
+<div class="header-container">
+<div class="header-title">
+<div class="header-kicker">Talentspring · Spezialisierung 1</div>
+<h1>Google Ads Playbook</h1>
+<p>Interaktives Nachschlagewerk &amp; Analyse-Workflow</p>
+</div>
+<div class="controls">
+<a class="back-link-header" href="index.html">← Zurück zur Übersicht</a>
+<div class="search-wrapper">
+<input class="search-input" id="playbookSearch" onkeyup="handleSearch()" placeholder="Suchen..." type="text"/>
+</div>
 
-    <div class="sticky-top">
-    <header>
-        <div class="header-container">
-            <div class="header-title">
-                <h1>Google Ads Playbook</h1>
-                <p>Interaktives Nachschlagewerk &amp; Analyse-Workflow</p>
-            </div>
-            <div class="controls">
-                <div class="search-wrapper">
-                    <input type="text" id="playbookSearch" class="search-input" placeholder="Suchen..." onkeyup="handleSearch()">
-                </div>
-                <button class="btn" onclick="expandAll()">Alles öffnen</button>
-                <button class="btn" onclick="collapseAll()">Alles schließen</button>
-            </div>
-        </div>
-    </header>
 
-    <div class="tab-nav-bg">
-        <div class="tab-nav">
-            <button class="tab-btn active" onclick="switchTab(event, 'tab-kpi-uebersicht')">1. KPI-Übersicht</button>
-            <button class="tab-btn" onclick="switchTab(event, 'tab-kpi-formeln')">2. KPI-Formeln</button>
-            <button class="tab-btn" onclick="switchTab(event, 'tab-kpi-landkarte')">3. KPI-Landkarte</button>
-            <button class="tab-btn" onclick="switchTab(event, 'tab-unternehmensziele')">4. Unternehmensziele</button>
-        </div>
-    </div>
-    </div>
-
-    <main>
-        
-        <div id="search-no-results" class="no-results">
-            <p>Keine Einträge gefunden, die Ihrer Suche entsprechen.</p>
-        </div>
-
-        <div id="tab-kpi-uebersicht" class="tab-content active">
-            
-            <div class="section-header">
-                <h2>KPI-Klassifizierung</h2>
-                <p>Durch Klicken auf eine Zeile öffnen sich die Details zur jeweiligen Metrik.</p>
-            </div>
-
-            <div class="table-card searchable-item">
-                <div class="table-responsive">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>KPI</th>
-                                <th>Sehr gut</th>
-                                <th>Gut</th>
-                                <th>Schlecht</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="clickable-row" onclick="toggleRowDetail('row-ctr')">
-                                <td><strong>CTR</strong> (Click-Through-Rate)</td>
-                                <td><span class="badge badge-green">&gt; 5%</span></td>
-                                <td><span class="badge badge-yellow">2 - 5%</span></td>
-                                <td><span class="badge badge-red">&lt; 2%</span></td>
-                            </tr>
-                            <tr id="row-ctr" class="detail-row">
-                                <td colspan="4">
-                                    <div class="detail-box">
-                                        <h4>CTR (Click-Through-Rate)</h4>
-                                        <p><strong>Bedeutung:</strong> Klicks nach Impressionen</p>
-                                        <div class="detail-grid">
-                                            <div class="detail-item badge-green"><strong>Sehr gut:</strong> &gt; 5%</div>
-                                            <div class="detail-item badge-yellow"><strong>Gut:</strong> 2-5%</div>
-                                            <div class="detail-item badge-red"><strong>Schlecht:</strong> &lt; 2%</div>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr class="clickable-row" onclick="toggleRowDetail('row-cpc')">
-                                <td><strong>CPC</strong> (Cost per Click)</td>
-                                <td><span class="badge badge-green">&lt; 1 €</span></td>
-                                <td><span class="badge badge-yellow">1 - 3 €</span></td>
-                                <td><span class="badge badge-red">&gt; 3 €</span></td>
-                            </tr>
-                            <tr id="row-cpc" class="detail-row">
-                                <td colspan="4">
-                                    <div class="detail-box">
-                                        <h4>CPC (Cost per Click)</h4>
-                                        <p><strong>Bedeutung:</strong> Kosten pro Klick</p>
-                                        <div class="detail-grid">
-                                            <div class="detail-item badge-green"><strong>Sehr gut:</strong> &lt; 1 €</div>
-                                            <div class="detail-item badge-yellow"><strong>Gut:</strong> 1-3 €</div>
-                                            <div class="detail-item badge-red"><strong>Schlecht:</strong> &gt; 3 €</div>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr class="clickable-row" onclick="toggleRowDetail('row-cpm')">
-                                <td><strong>CPM</strong> (Cost per Mille)</td>
-                                <td><span class="badge badge-green">&lt; 5 €</span></td>
-                                <td><span class="badge badge-yellow">5 - 15 €</span></td>
-                                <td><span class="badge badge-red">&gt; 15 €</span></td>
-                            </tr>
-                            <tr id="row-cpm" class="detail-row">
-                                <td colspan="4">
-                                    <div class="detail-box">
-                                        <h4>CPM (Cost per Mille)</h4>
-                                        <p><strong>Bedeutung:</strong> Kosten pro 1.000 Impressionen</p>
-                                        <div class="detail-grid">
-                                            <div class="detail-item badge-green"><strong>Sehr gut:</strong> &lt; 5 €</div>
-                                            <div class="detail-item badge-yellow"><strong>Gut:</strong> 5-15 €</div>
-                                            <div class="detail-item badge-red"><strong>Schlecht:</strong> &gt; 15 €</div>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr class="clickable-row" onclick="toggleRowDetail('row-cr')">
-                                <td><strong>Conversion Rate</strong></td>
-                                <td><span class="badge badge-green">&gt; 5%</span></td>
-                                <td><span class="badge badge-yellow">2 - 5%</span></td>
-                                <td><span class="badge badge-red">&lt; 2%</span></td>
-                            </tr>
-                            <tr id="row-cr" class="detail-row">
-                                <td colspan="4">
-                                    <div class="detail-box">
-                                        <h4>Conversion Rate</h4>
-                                        <p><strong>Bedeutung:</strong> Anteil der Conversions</p>
-                                        <div class="detail-grid">
-                                            <div class="detail-item badge-green"><strong>Sehr gut:</strong> &gt; 5%</div>
-                                            <div class="detail-item badge-yellow"><strong>Gut:</strong> 2-5%</div>
-                                            <div class="detail-item badge-red"><strong>Schlecht:</strong> &lt; 2%</div>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr class="clickable-row" onclick="toggleRowDetail('row-roas')">
-                                <td><strong>ROAS</strong> (Return on Ad Spend)</td>
-                                <td><span class="badge badge-green">&gt; 4</span></td>
-                                <td><span class="badge badge-yellow">2 - 4</span></td>
-                                <td><span class="badge badge-red">&lt; 2</span></td>
-                            </tr>
-                            <tr id="row-roas" class="detail-row">
-                                <td colspan="4">
-                                    <div class="detail-box">
-                                        <h4>ROAS (Return on Ad Spend)</h4>
-                                        <p><strong>Bedeutung:</strong> Umsatz im Verhältnis zu den Werbekosten.</p>
-                                        <p><strong>Faktor:</strong> 500% = 5 &nbsp;|&nbsp; 300% = 3 &nbsp;|&nbsp; 80% = 0,8</p>
-                                        <div class="detail-grid">
-                                            <div class="detail-item badge-green"><strong>Sehr gut:</strong> &gt; 400% (Faktor &gt; 4)</div>
-                                            <div class="detail-item badge-yellow"><strong>Gut:</strong> 200 - 400% (Faktor 2 - 4)</div>
-                                            <div class="detail-item badge-red"><strong>Schlecht:</strong> &lt; 200% (Faktor &lt; 2)</div>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr class="clickable-row" onclick="toggleRowDetail('row-roi')">
-                                <td><strong>ROI</strong> (Return on Investment)</td>
-                                <td><span class="badge badge-green">&gt; 100%</span></td>
-                                <td><span class="badge badge-yellow">20 - 100%</span></td>
-                                <td><span class="badge badge-red">&lt; 20%</span></td>
-                            </tr>
-                            <tr id="row-roi" class="detail-row">
-                                <td colspan="4">
-                                    <div class="detail-box">
-                                        <h4>ROI (Return on Investment)</h4>
-                                        <p><strong>Bedeutung:</strong> Gewinn / Investition</p>
-                                        <div class="detail-grid">
-                                            <div class="detail-item badge-green"><strong>Sehr gut:</strong> &gt; 100%</div>
-                                            <div class="detail-item badge-yellow"><strong>Gut:</strong> 20-100%</div>
-                                            <div class="detail-item badge-red"><strong>Schlecht:</strong> &lt; 20%</div>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div class="section-header">
-                <h2>Praxisbeispiel einer Kampagne</h2>
-                <p>Simuliertes Szenario zur Veranschaulichung der Bewertungsstufen</p>
-            </div>
-
-            <div class="table-card searchable-item">
-                <div class="table-responsive">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>KPI</th>
-                                <th>Sehr gut</th>
-                                <th>Gut</th>
-                                <th>Schlecht</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr><td><strong>Impressionen</strong></td><td>100.000</td><td>100.000</td><td>100.000</td></tr>
-                            <tr><td><strong>Reichweite</strong></td><td>50.000</td><td>50.000</td><td>50.000</td></tr>
-                            <tr><td><strong>Frequenz</strong></td><td>2</td><td>2</td><td>2</td></tr>
-                            <tr><td><strong>Klicks</strong></td><td><span class="badge badge-green">8.000</span></td><td><span class="badge badge-yellow">3.500</span></td><td><span class="badge badge-red">800</span></td></tr>
-                            <tr><td><strong>CTR</strong></td><td><span class="badge badge-green">8%</span></td><td><span class="badge badge-yellow">3,5%</span></td><td><span class="badge badge-red">0,8%</span></td></tr>
-                            <tr><td><strong>Conversions</strong></td><td><span class="badge badge-green">480</span></td><td><span class="badge badge-yellow">105</span></td><td><span class="badge badge-red">8</span></td></tr>
-                            <tr><td><strong>Conversion Rate</strong></td><td><span class="badge badge-green">6%</span></td><td><span class="badge badge-yellow">3%</span></td><td><span class="badge badge-red">1%</span></td></tr>
-                            <tr><td><strong>Conversion-Wert</strong></td><td><span class="badge badge-green">48.000 €</span></td><td><span class="badge badge-yellow">14.000 €</span></td><td><span class="badge badge-red">800 €</span></td></tr>
-                            <tr><td><strong>Werbekosten</strong></td><td>9.600 €</td><td>4.666,67 €</td><td>1.000 €</td></tr>
-                            <tr><td><strong>ROAS</strong> (Prozent)</td><td><span class="badge badge-green">500%</span></td><td><span class="badge badge-yellow">300%</span></td><td><span class="badge badge-red">80%</span></td></tr>
-                            <tr><td><strong>ROAS</strong> (Faktor)</td><td><span class="badge badge-green">5</span></td><td><span class="badge badge-yellow">3</span></td><td><span class="badge badge-red">0,8</span></td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div class="section-header">
-                <h2>CPA (Orientierung auch für CPO/CPL)</h2>
-                <p>Richtwerte basierend auf dem Produktwert</p>
-            </div>
-
-            <div class="table-card searchable-item">
-                <div class="table-responsive">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Produktwert</th>
-                                <th>Sehr gut</th>
-                                <th>Gut</th>
-                                <th>Schlecht</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr><td><strong>5 €</strong></td><td><span class="badge badge-green">&lt; 0,50 €</span></td><td><span class="badge badge-yellow">0,50 - 1,00 €</span></td><td><span class="badge badge-red">&gt; 1,00 €</span></td></tr>
-                            <tr><td><strong>50 €</strong></td><td><span class="badge badge-green">&lt; 10 €</span></td><td><span class="badge badge-yellow">10 - 20 €</span></td><td><span class="badge badge-red">&gt; 20 €</span></td></tr>
-                            <tr><td><strong>100 €</strong></td><td><span class="badge badge-green">&lt; 20 €</span></td><td><span class="badge badge-yellow">20 - 40 €</span></td><td><span class="badge badge-red">&gt; 40 €</span></td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-        </div>
-
-        <div id="tab-kpi-formeln" class="tab-content">
-            <div class="section-header">
-                <h2>KPI-Formeln &amp; Rechenbeispiele</h2>
-                <p>Mathematische Grundlagen zur exakten Berechnung der Performance-Metriken</p>
-            </div>
-
-            <div class="cards-grid">
-                
-                <div class="playbook-card searchable-item">
-                    <div class="card-header" onclick="toggleCard(this)">
-                        <div class="card-title">CTR (Click-Through-Rate)</div>
-                        <span class="toggle-icon">+</span>
-                    </div>
-                    <div class="card-body">
-                        <div class="formula-block">
-                            <div class="formula-title">Formel</div>
-                            <div class="formula-text">Klicks ÷ Impressionen x 100</div>
-                        </div>
-                        <div class="example-block">
-                            <div class="formula-title">Beispiel</div>
-                            <div class="example-text">8.000 ÷ 100.000 x 100 = 8%</div>
-                        </div>
-                        <div class="meaning-block">
-                            <div class="formula-title">Bedeutung</div>
-                            <p>Von 100 Personen klicken 8 auf die Anzeige.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="playbook-card searchable-item">
-                    <div class="card-header" onclick="toggleCard(this)">
-                        <div class="card-title">CPC (Cost per Click)</div>
-                        <span class="toggle-icon">+</span>
-                    </div>
-                    <div class="card-body">
-                        <div class="formula-block">
-                            <div class="formula-title">Formel</div>
-                            <div class="formula-text">Werbekosten ÷ Klicks</div>
-                        </div>
-                        <div class="example-block">
-                            <div class="formula-title">Beispiel</div>
-                            <div class="example-text">800 € ÷ 8.000 = 0,10 €</div>
-                        </div>
-                        <div class="meaning-block">
-                            <div class="formula-title">Bedeutung</div>
-                            <p>Ein Klick kostet durchschnittlich 0,10 €.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="playbook-card searchable-item">
-                    <div class="card-header" onclick="toggleCard(this)">
-                        <div class="card-title">CPM (Cost per Mille)</div>
-                        <span class="toggle-icon">+</span>
-                    </div>
-                    <div class="card-body">
-                        <div class="formula-block">
-                            <div class="formula-title">Formel</div>
-                            <div class="formula-text">Werbekosten ÷ Impressionen x 1.000</div>
-                        </div>
-                        <div class="example-block">
-                            <div class="formula-title">Beispiel</div>
-                            <div class="example-text">800 € ÷ 100.000 x 1.000 = 8 €</div>
-                        </div>
-                        <div class="meaning-block">
-                            <div class="formula-title">Bedeutung</div>
-                            <p>1.000 Impressionen kosten 8 €.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="playbook-card searchable-item">
-                    <div class="card-header" onclick="toggleCard(this)">
-                        <div class="card-title">Conversion Rate</div>
-                        <span class="toggle-icon">+</span>
-                    </div>
-                    <div class="card-body">
-                        <div class="formula-block">
-                            <div class="formula-title">Formel</div>
-                            <div class="formula-text">Conversions ÷ Klicks x 100</div>
-                        </div>
-                        <div class="example-block">
-                            <div class="formula-title">Beispiel</div>
-                            <div class="example-text">480 ÷ 8.000 x 100 = 6%</div>
-                        </div>
-                        <div class="meaning-block">
-                            <div class="formula-title">Bedeutung</div>
-                            <p>6 von 100 Besuchern konvertieren.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="playbook-card searchable-item">
-                    <div class="card-header" onclick="toggleCard(this)">
-                        <div class="card-title">CPA (Cost per Action)</div>
-                        <span class="toggle-icon">+</span>
-                    </div>
-                    <div class="card-body">
-                        <div class="formula-block">
-                            <div class="formula-title">Formel</div>
-                            <div class="formula-text">Werbekosten ÷ Conversions</div>
-                        </div>
-                        <div class="example-block">
-                            <div class="formula-title">Beispiel</div>
-                            <div class="example-text">800 € ÷ 480 = 1,67 €</div>
-                        </div>
-                        <div class="meaning-block">
-                            <div class="formula-title">Bedeutung</div>
-                            <p>Ein Kunde kostet 1,67 €.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="playbook-card searchable-item">
-                    <div class="card-header" onclick="toggleCard(this)">
-                        <div class="card-title">CPO (Cost per Order)</div>
-                        <span class="toggle-icon">+</span>
-                    </div>
-                    <div class="card-body">
-                        <div class="formula-block">
-                            <div class="formula-title">Formel</div>
-                            <div class="formula-text">Werbekosten ÷ Bestellungen</div>
-                        </div>
-                        <div class="example-block">
-                            <div class="formula-title">Beispiel</div>
-                            <div class="example-text">800 € ÷ 480 = 1,67 €</div>
-                        </div>
-                        <div class="meaning-block">
-                            <div class="formula-title">Bedeutung</div>
-                            <p>Eine Bestellung kostet 1,67 €.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="playbook-card searchable-item">
-                    <div class="card-header" onclick="toggleCard(this)">
-                        <div class="card-title">CPL (Cost per Lead)</div>
-                        <span class="toggle-icon">+</span>
-                    </div>
-                    <div class="card-body">
-                        <div class="formula-block">
-                            <div class="formula-title">Formel</div>
-                            <div class="formula-text">Werbekosten ÷ Leads</div>
-                        </div>
-                        <div class="example-block">
-                            <div class="formula-title">Beispiel</div>
-                            <div class="example-text">500 € ÷ 100 = 5 €</div>
-                        </div>
-                        <div class="meaning-block">
-                            <div class="formula-title">Bedeutung</div>
-                            <p>Ein Lead kostet 5 €.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="playbook-card searchable-item">
-                    <div class="card-header" onclick="toggleCard(this)">
-                        <div class="card-title">Conversion-Wert</div>
-                        <span class="toggle-icon">+</span>
-                    </div>
-                    <div class="card-body">
-                        <div class="formula-block">
-                            <div class="formula-title">Formel</div>
-                            <div class="formula-text">Conversions x Bestellwert</div>
-                        </div>
-                        <div class="example-block">
-                            <div class="formula-title">Beispiel</div>
-                            <div class="example-text">480 x 100 € = 48.000 €</div>
-                        </div>
-                        <div class="meaning-block">
-                            <div class="formula-title">Bedeutung</div>
-                            <p>Gesamtumsatz der Kampagne.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="playbook-card searchable-item">
-                    <div class="card-header" onclick="toggleCard(this)">
-                        <div class="card-title">ROAS (Return on Ad Spend)</div>
-                        <span class="toggle-icon">+</span>
-                    </div>
-                    <div class="card-body">
-                        <div class="formula-block">
-                            <div class="formula-title">Formel</div>
-                            <div class="formula-text">Conversion-Wert ÷ Werbekosten</div>
-                        </div>
-                        <div class="example-block">
-                            <div class="formula-title">Beispiel</div>
-                            <div class="example-text">48.000 € ÷ 9.600 € = 5</div>
-                        </div>
-                        <div class="meaning-block">
-                            <div class="formula-title">Bedeutung</div>
-                            <p>1 € Werbung bringt 5 € Umsatz. ROAS 5 entspricht 500 %.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="playbook-card searchable-item">
-                    <div class="card-header" onclick="toggleCard(this)">
-                        <div class="card-title">ROI (Return on Investment)</div>
-                        <span class="toggle-icon">+</span>
-                    </div>
-                    <div class="card-body">
-                        <div class="formula-block">
-                            <div class="formula-title">Formel</div>
-                            <div class="formula-text">(Gewinn - Investition) ÷ Investition x 100</div>
-                        </div>
-                        <div class="example-block">
-                            <div class="formula-title">Beispiel</div>
-                            <div class="example-text">(4.000 - 800) ÷ 800 x 100 = 400%</div>
-                        </div>
-                        <div class="meaning-block">
-                            <div class="formula-title">Bedeutung</div>
-                            <p>Gewinn im Verhältnis zur Investition.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="playbook-card searchable-item">
-                    <div class="card-header" onclick="toggleCard(this)">
-                        <div class="card-title">Frequenz</div>
-                        <span class="toggle-icon">+</span>
-                    </div>
-                    <div class="card-body">
-                        <div class="formula-block">
-                            <div class="formula-title">Formel</div>
-                            <div class="formula-text">Impressionen ÷ Reichweite</div>
-                        </div>
-                        <div class="example-block">
-                            <div class="formula-title">Beispiel</div>
-                            <div class="example-text">100.000 ÷ 50.000 = 2</div>
-                        </div>
-                        <div class="meaning-block">
-                            <div class="formula-title">Bedeutung</div>
-                            <p>Jede Person sieht die Anzeige 2-mal.</p>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-        <div id="tab-kpi-landkarte" class="tab-content">
-            <div class="section-header">
-                <h2>KPI-Landkarte (Analyse-Workflow)</h2>
-                <p>Systematische Fehlersuche bei abweichenden Kampagnenwerten</p>
-            </div>
-
-            <div class="cards-grid">
-                
-                <div class="playbook-card searchable-item">
-                    <div class="card-header" onclick="toggleCard(this)">
-                        <div class="card-title map-item-title">Problem 1: Zu wenige Klicks</div>
-                        <span class="toggle-icon">+</span>
-                    </div>
-                    <div class="card-body">
-                        <div class="problem-alert">
-                            <div>
-                                <div class="problem-alert-title">Woran erkennst du das?</div>
-                                <p>• CTR niedrig<br>• Impressionen hoch<br>• Klicks niedrig</p>
-                            </div>
-                        </div>
-                        <div class="formula-title">Prüfen</div>
-                        <ul class="check-list">
-                            <li class="check-list-item">Anzeige</li>
-                            <li class="check-list-item">Überschrift</li>
-                            <li class="check-list-item">Keywords</li>
-                            <li class="check-list-item">Zielgruppe</li>
-                            <li class="check-list-item">Suchintention</li>
-                            <li class="check-list-item">Call-to-Action</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="playbook-card searchable-item">
-                    <div class="card-header" onclick="toggleCard(this)">
-                        <div class="card-title map-item-title">Problem 2: Viele Klicks, aber kaum Conversions</div>
-                        <span class="toggle-icon">+</span>
-                    </div>
-                    <div class="card-body">
-                        <div class="problem-alert">
-                            <div>
-                                <div class="problem-alert-title">Woran erkennst du das?</div>
-                                <p>• CTR hoch<br>• Conversion Rate niedrig</p>
-                            </div>
-                        </div>
-                        <div class="formula-title">Prüfen</div>
-                        <ul class="check-list">
-                            <li class="check-list-item">Landingpage</li>
-                            <li class="check-list-item">Ladezeit</li>
-                            <li class="check-list-item">Vertrauen</li>
-                            <li class="check-list-item">Preis</li>
-                            <li class="check-list-item">Checkout</li>
-                            <li class="check-list-item">Mobile Darstellung</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="playbook-card searchable-item">
-                    <div class="card-header" onclick="toggleCard(this)">
-                        <div class="card-title map-item-title">Problem 3: Klicks sind zu teuer</div>
-                        <span class="toggle-icon">+</span>
-                    </div>
-                    <div class="card-body">
-                        <div class="problem-alert">
-                            <div>
-                                <div class="problem-alert-title">Woran erkennst du das?</div>
-                                <p>• CPC hoch</p>
-                            </div>
-                        </div>
-                        <div class="formula-title">Prüfen</div>
-                        <ul class="check-list">
-                            <li class="check-list-item">Qualitätsfaktor</li>
-                            <li class="check-list-item">Wettbewerb</li>
-                            <li class="check-list-item">Keywords</li>
-                            <li class="check-list-item">Anzeigenqualität</li>
-                            <li class="check-list-item">Landingpage</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="playbook-card searchable-item">
-                    <div class="card-header" onclick="toggleCard(this)">
-                        <div class="card-title map-item-title">Problem 4: Conversion zu teuer</div>
-                        <span class="toggle-icon">+</span>
-                    </div>
-                    <div class="card-body">
-                        <div class="problem-alert">
-                            <div>
-                                <div class="problem-alert-title">Woran erkennst du das?</div>
-                                <p>• CPA / CPO / CPL hoch</p>
-                            </div>
-                        </div>
-                        <div class="formula-title">Prüfen</div>
-                        <ul class="check-list">
-                            <li class="check-list-item">Landingpage</li>
-                            <li class="check-list-item">Zielgruppe</li>
-                            <li class="check-list-item">Conversion Rate</li>
-                            <li class="check-list-item">Anzeigenqualität</li>
-                            <li class="check-list-item">Gebotsstrategie</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="playbook-card searchable-item">
-                    <div class="card-header" onclick="toggleCard(this)">
-                        <div class="card-title map-item-title">Problem 5: Zu wenig Umsatz</div>
-                        <span class="toggle-icon">+</span>
-                    </div>
-                    <div class="card-body">
-                        <div class="problem-alert">
-                            <div>
-                                <div class="problem-alert-title">Woran erkennst du das?</div>
-                                <p>• ROAS niedrig (Faktor-Abweichung)</p>
-                            </div>
-                        </div>
-                        <div class="formula-title">Prüfen</div>
-                        <ul class="check-list">
-                            <li class="check-list-item">Conversion-Wert</li>
-                            <li class="check-list-item">Produktpreis</li>
-                            <li class="check-list-item">Zielgruppe</li>
-                            <li class="check-list-item">Budget</li>
-                            <li class="check-list-item">Gebotsstrategie</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="playbook-card searchable-item">
-                    <div class="card-header" onclick="toggleCard(this)">
-                        <div class="card-title map-item-title">Problem 6: Anzeige wird zu oft gezeigt</div>
-                        <span class="toggle-icon">+</span>
-                    </div>
-                    <div class="card-body">
-                        <div class="problem-alert">
-                            <div>
-                                <div class="problem-alert-title">Woran erkennst du das?</div>
-                                <p>• Frequenz &gt; 5</p>
-                            </div>
-                        </div>
-                        <div class="formula-title">Prüfen</div>
-                        <ul class="check-list">
-                            <li class="check-list-item">Neue Creatives</li>
-                            <li class="check-list-item">Zielgruppe erweitern</li>
-                            <li class="check-list-item">Budget</li>
-                            <li class="check-list-item">Anzeigen aktualisieren</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="playbook-card searchable-item">
-                    <div class="card-header" onclick="toggleCard(this)">
-                        <div class="card-title map-item-title">Problem 7: Zu geringe Reichweite</div>
-                        <span class="toggle-icon">+</span>
-                    </div>
-                    <div class="card-body">
-                        <div class="problem-alert">
-                            <div>
-                                <div class="problem-alert-title">Woran erkennst du das?</div>
-                                <p>• Reichweite niedrig</p>
-                            </div>
-                        </div>
-                        <div class="formula-title">Prüfen</div>
-                        <ul class="check-list">
-                            <li class="check-list-item">Budget</li>
-                            <li class="check-list-item">Zielgruppe</li>
-                            <li class="check-list-item">Kampagneneinstellungen</li>
-                            <li class="check-list-item">Gebote</li>
-                        </ul>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-        <div id="tab-unternehmensziele" class="tab-content">
-            <div class="section-header">
-                <h2>Zusammenhang: Unternehmensziele &amp; Kampagnen-Setup</h2>
-                <p>Verbindung von Unternehmenszielen mit konkreten Google Ads-Funktionen (Entscheidungsbaum-Modell)</p>
-            </div>
-
-            <div class="tree-container">
-                
-                <div class="tree-node searchable-item">
-                    <div class="tree-node-header" onclick="toggleTreeNode(this)">
-                        <div class="tree-node-title">
-                            <span class="goal-badge">Mehr Verkäufe</span>
-                             
-                        </div>
-                        <span class="toggle-icon">+</span>
-                    </div>
-                    <div class="tree-node-body">
-                        <div class="tree-grid">
-                            <div class="tree-block">
-                                <div class="tree-block-title">Kampagnenziel</div>
-                                <p><strong>Verkäufe</strong></p>
-                            </div>
-                            <div class="tree-block">
-                                <div class="tree-block-title">Geeignete Kampagnentypen</div>
-                                <div class="tree-list">
-                                    <span class="tree-pill highlight">Suchkampagne</span>
-                                    <span class="tree-pill highlight">Shopping</span>
-                                    <span class="tree-pill highlight">Performance Max</span>
-                                </div>
-                            </div>
-                            <div class="tree-block">
-                                <div class="tree-block-title">Geeignete Gebotsstrategien</div>
-                                <div class="tree-list">
-                                    <span class="tree-pill">Conversions maximieren</span>
-                                    <span class="tree-pill">Conversion-Wert maximieren</span>
-                                    <span class="tree-pill">Ziel-CPA</span>
-                                    <span class="tree-pill">Ziel-ROAS</span>
-                                </div>
-                            </div>
-                            <div class="tree-block">
-                                <div class="tree-block-title">Wichtige KPIs</div>
-                                <div class="tree-list">
-                                    <span class="tree-pill">Conversion Rate</span>
-                                    <span class="tree-pill">CPA</span>
-                                    <span class="tree-pill">ROAS</span>
-                                    <span class="tree-pill">Conversion-Wert</span>
-                                    <span class="tree-pill">Conversions</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="tree-node searchable-item">
-                    <div class="tree-node-header" onclick="toggleTreeNode(this)">
-                        <div class="tree-node-title">
-                            <span class="goal-badge">Mehr Umsatz</span>
-                             
-                        </div>
-                        <span class="toggle-icon">+</span>
-                    </div>
-                    <div class="tree-node-body">
-                        <div class="tree-grid">
-                            <div class="tree-block">
-                                <div class="tree-block-title">Kampagnenziel</div>
-                                <p><strong>Verkäufe</strong></p>
-                            </div>
-                            <div class="tree-block">
-                                <div class="tree-block-title">Geeignete Kampagnentypen</div>
-                                <div class="tree-list">
-                                    <span class="tree-pill highlight">Shopping</span>
-                                    <span class="tree-pill highlight">Performance Max</span>
-                                    <span class="tree-pill highlight">Suchkampagne</span>
-                                </div>
-                            </div>
-                            <div class="tree-block">
-                                <div class="tree-block-title">Geeignete Gebotsstrategien</div>
-                                <div class="tree-list">
-                                    <span class="tree-pill">Conversion-Wert maximieren</span>
-                                    <span class="tree-pill">Ziel-ROAS</span>
-                                </div>
-                            </div>
-                            <div class="tree-block">
-                                <div class="tree-block-title">Wichtige KPIs</div>
-                                <div class="tree-list">
-                                    <span class="tree-pill">ROAS</span>
-                                    <span class="tree-pill">Conversion-Wert</span>
-                                    <span class="tree-pill">ROI</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="tree-node searchable-item">
-                    <div class="tree-node-header" onclick="toggleTreeNode(this)">
-                        <div class="tree-node-title">
-                            <span class="goal-badge">Mehr Leads</span>
-                           
-                        </div>
-                        <span class="toggle-icon">+</span>
-                    </div>
-                    <div class="tree-node-body">
-                        <div class="tree-grid">
-                            <div class="tree-block">
-                                <div class="tree-block-title">Kampagnenziel</div>
-                                <p><strong>Leads</strong></p>
-                            </div>
-                            <div class="tree-block">
-                                <div class="tree-block-title">Geeignete Kampagnentypen</div>
-                                <div class="tree-list">
-                                    <span class="tree-pill highlight">Suchkampagne</span>
-                                    <span class="tree-pill highlight">Performance Max</span>
-                                    <span class="tree-pill highlight">Demand Gen</span>
-                                </div>
-                            </div>
-                            <div class="tree-block">
-                                <div class="tree-block-title">Geeignete Gebotsstrategien</div>
-                                <div class="tree-list">
-                                    <span class="tree-pill">Conversions maximieren</span>
-                                    <span class="tree-pill">Ziel-CPA</span>
-                                </div>
-                            </div>
-                            <div class="tree-block">
-                                <div class="tree-block-title">Wichtige KPIs</div>
-                                <div class="tree-list">
-                                    <span class="tree-pill">CPA</span>
-                                    <span class="tree-pill">CPL</span>
-                                    <span class="tree-pill">Conversion Rate</span>
-                                    <span class="tree-pill">Conversions</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="tree-node searchable-item">
-                    <div class="tree-node-header" onclick="toggleTreeNode(this)">
-                        <div class="tree-node-title">
-                            <span class="goal-badge">Mehr Traffic</span>
-                            
-                        </div>
-                        <span class="toggle-icon">+</span>
-                    </div>
-                    <div class="tree-node-body">
-                        <div class="tree-grid">
-                            <div class="tree-block">
-                                <div class="tree-block-title">Kampagnenziel</div>
-                                <p><strong>Websitezugriffe</strong></p>
-                            </div>
-                            <div class="tree-block">
-                                <div class="tree-block-title">Geeignete Kampagnentypen</div>
-                                <div class="tree-list">
-                                    <span class="tree-pill highlight">Suchkampagne</span>
-                                    <span class="tree-pill highlight">Display</span>
-                                    <span class="tree-pill highlight">Demand Gen</span>
-                                </div>
-                            </div>
-                            <div class="tree-block">
-                                <div class="tree-block-title">Geeignete Gebotsstrategien</div>
-                                <div class="tree-list">
-                                    <span class="tree-pill">Klicks maximieren</span>
-                                </div>
-                            </div>
-                            <div class="tree-block">
-                                <div class="tree-block-title">Wichtige KPIs</div>
-                                <div class="tree-list">
-                                    <span class="tree-pill">Klicks</span>
-                                    <span class="tree-pill">CTR</span>
-                                    <span class="tree-pill">CPC</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="tree-node searchable-item">
-                    <div class="tree-node-header" onclick="toggleTreeNode(this)">
-                        <div class="tree-node-title">
-                            <span class="goal-badge">Mehr Reichweite</span>
-                             
-                        </div>
-                        <span class="toggle-icon">+</span>
-                    </div>
-                    <div class="tree-node-body">
-                        <div class="tree-grid">
-                            <div class="tree-block">
-                                <div class="tree-block-title">Kampagnenziel</div>
-                                <p><strong>Markenbekanntheit und Reichweite</strong></p>
-                            </div>
-                            <div class="tree-block">
-                                <div class="tree-block-title">Geeignete Kampagnentypen</div>
-                                <div class="tree-list">
-                                    <span class="tree-pill highlight">Display</span>
-                                    <span class="tree-pill highlight">Video</span>
-                                    <span class="tree-pill highlight">Demand Gen</span>
-                                </div>
-                            </div>
-                            <div class="tree-block">
-                                <div class="tree-block-title">Geeignete Gebotsstrategien</div>
-                                <div class="tree-list">
-                                    <span class="tree-pill">Sichtbare Impressionen maximieren</span>
-                                    <span class="tree-pill">CPM</span>
-                                </div>
-                            </div>
-                            <div class="tree-block">
-                                <div class="tree-block-title">Wichtige KPIs</div>
-                                <div class="tree-list">
-                                    <span class="tree-pill">Impressionen</span>
-                                    <span class="tree-pill">Reichweite</span>
-                                    <span class="tree-pill">Frequenz</span>
-                                    <span class="tree-pill">CPM</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="tree-node searchable-item">
-                    <div class="tree-node-header" onclick="toggleTreeNode(this)">
-                        <div class="tree-node-title">
-                            <span class="goal-badge">Mehr App-Installationen</span>
-                            
-                        </div>
-                        <span class="toggle-icon">+</span>
-                    </div>
-                    <div class="tree-node-body">
-                        <div class="tree-grid">
-                            <div class="tree-block">
-                                <div class="tree-block-title">Kampagnenziel</div>
-                                <p><strong>App-Promotion</strong></p>
-                            </div>
-                            <div class="tree-block">
-                                <div class="tree-block-title">Geeignete Kampagnentypen</div>
-                                <div class="tree-list">
-                                    <span class="tree-pill highlight">App-Kampagne</span>
-                                </div>
-                            </div>
-                            <div class="tree-block">
-                                <div class="tree-block-title">Geeignete Gebotsstrategien</div>
-                                <div class="tree-list">
-                                    <span class="tree-pill">Installationen maximieren</span>
-                                    <span class="tree-pill">Ziel-CPA</span>
-                                </div>
-                            </div>
-                            <div class="tree-block">
-                                <div class="tree-block-title">Wichtige KPIs</div>
-                                <div class="tree-list">
-                                    <span class="tree-pill">Installationen</span>
-                                    <span class="tree-pill">CPA</span>
-                                    <span class="tree-pill">Conversion Rate</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-    </main>
-
-    <script>
+</div>
+</div>
+</header>
+<div class="tab-nav-bg">
+<div class="tab-nav">
+<button class="tab-btn active" onclick="switchTab(event, 'tab-kpi-uebersicht')">1. KPI-Übersicht</button>
+<button class="tab-btn" onclick="switchTab(event, 'tab-kpi-formeln')">2. KPI-Formeln</button>
+<button class="tab-btn" onclick="switchTab(event, 'tab-kpi-landkarte')">3. KPI-Landkarte</button>
+<button class="tab-btn" onclick="switchTab(event, 'tab-unternehmensziele')">4. Unternehmensziele</button>
+</div>
+</div>
+</div>
+<main>
+<div class="no-results" id="search-no-results">
+<p>Keine Einträge gefunden, die Ihrer Suche entsprechen.</p>
+</div>
+<div class="tab-content active" id="tab-kpi-uebersicht">
+<div class="section-header">
+<h2>KPI-Klassifizierung</h2>
+<p>Über das Plus in der Spalte „Info“ öffnest du Bedeutung und Praxisbeispiel.</p>
+</div>
+<div class="table-card searchable-item">
+<div class="table-responsive">
+<table>
+<thead>
+<tr>
+<th>KPI</th>
+<th>Sehr gut</th>
+<th>Gut</th>
+<th>Schlecht</th>
+<th class="info-col">Info</th></tr>
+</thead>
+<tbody>
+<tr aria-label="Zusätzliche Informationen öffnen" class="clickable-row" onclick="toggleRowDetail('row-ctr', this)">
+<td><strong>CTR</strong> (Click-Through-Rate)</td>
+<td><span class="badge badge-green">&gt; 5%</span></td>
+<td><span class="badge badge-yellow">2 - 5%</span></td>
+<td><span class="badge badge-red">&lt; 2%</span></td>
+<td class="info-cell"><button aria-expanded="false" aria-label="Informationen öffnen" class="info-toggle" onclick="event.stopPropagation(); toggleRowDetail('row-ctr', this.closest('tr'))" type="button">+</button></td></tr>
+<tr class="detail-row" id="row-ctr">
+<td colspan="5">
+<div class="detail-box"><h4>CTR (Click-Through-Rate)</h4><div class="detail-content-grid"><div class="detail-copy"><div class="detail-copy-title">Bedeutung</div><p>Die CTR zeigt, wie attraktiv und relevant eine Anzeige für die erreichten Personen ist. Eine niedrige CTR kann auf ein unpassendes Motiv, eine schwache Überschrift, falsche Keywords oder eine ungenaue Zielgruppe hinweisen.</p></div><div class="detail-copy detail-example"><div class="detail-copy-title">Praxisbeispiel</div><p>Beispiel: Die Anzeige wird 10.000-mal eingeblendet und 400-mal angeklickt. Die CTR beträgt 4 %. Das bedeutet: 4 von 100 Einblendungen führen zu einem Klick.</p></div></div></div>
+</td>
+</tr>
+<tr aria-label="Zusätzliche Informationen öffnen" class="clickable-row" onclick="toggleRowDetail('row-cpc', this)">
+<td><strong>CPC</strong> (Cost per Click)</td>
+<td><span class="badge badge-green">&lt; 1 €</span></td>
+<td><span class="badge badge-yellow">1 - 3 €</span></td>
+<td><span class="badge badge-red">&gt; 3 €</span></td>
+<td class="info-cell"><button aria-expanded="false" aria-label="Informationen öffnen" class="info-toggle" onclick="event.stopPropagation(); toggleRowDetail('row-cpc', this.closest('tr'))" type="button">+</button></td></tr>
+<tr class="detail-row" id="row-cpc">
+<td colspan="5">
+<div class="detail-box"><h4>CPC (Cost per Click)</h4><div class="detail-content-grid"><div class="detail-copy"><div class="detail-copy-title">Bedeutung</div><p>Der CPC zeigt, wie viel ein einzelner Klick durchschnittlich kostet. Er wird unter anderem durch Wettbewerb, Gebot, Anzeigenqualität, Keywords und Zielgruppenrelevanz beeinflusst.</p></div><div class="detail-copy detail-example"><div class="detail-copy-title">Praxisbeispiel</div><p>Beispiel: Bei 500 € Werbekosten und 1.000 Klicks kostet ein Klick durchschnittlich 0,50 €.</p></div></div></div>
+</td>
+</tr>
+<tr aria-label="Zusätzliche Informationen öffnen" class="clickable-row" onclick="toggleRowDetail('row-cpm', this)">
+<td><strong>CPM</strong> (Cost per Mille)</td>
+<td><span class="badge badge-green">&lt; 5 €</span></td>
+<td><span class="badge badge-yellow">5 - 15 €</span></td>
+<td><span class="badge badge-red">&gt; 15 €</span></td>
+<td class="info-cell"><button aria-expanded="false" aria-label="Informationen öffnen" class="info-toggle" onclick="event.stopPropagation(); toggleRowDetail('row-cpm', this.closest('tr'))" type="button">+</button></td></tr>
+<tr class="detail-row" id="row-cpm">
+<td colspan="5">
+<div class="detail-box"><h4>CPM (Cost per Mille)</h4><div class="detail-content-grid"><div class="detail-copy"><div class="detail-copy-title">Bedeutung</div><p>Der CPM zeigt die Kosten für 1.000 Werbeeinblendungen. Er ist besonders bei Reichweiten- und Brandingkampagnen wichtig und hilft dabei, die Kosten verschiedener Zielgruppen oder Platzierungen zu vergleichen.</p></div><div class="detail-copy detail-example"><div class="detail-copy-title">Praxisbeispiel</div><p>Beispiel: 800 € Werbekosten bei 100.000 Impressionen ergeben einen CPM von 8 €.</p></div></div></div>
+</td>
+</tr>
+<tr aria-label="Zusätzliche Informationen öffnen" class="clickable-row" onclick="toggleRowDetail('row-cr', this)">
+<td><strong>Conversion Rate</strong></td>
+<td><span class="badge badge-green">&gt; 5%</span></td>
+<td><span class="badge badge-yellow">2 - 5%</span></td>
+<td><span class="badge badge-red">&lt; 2%</span></td>
+<td class="info-cell"><button aria-expanded="false" aria-label="Informationen öffnen" class="info-toggle" onclick="event.stopPropagation(); toggleRowDetail('row-cr', this.closest('tr'))" type="button">+</button></td></tr>
+<tr class="detail-row" id="row-cr">
+<td colspan="5">
+<div class="detail-box"><h4>Conversion Rate</h4><div class="detail-content-grid"><div class="detail-copy"><div class="detail-copy-title">Bedeutung</div><p>Die Conversion Rate zeigt, wie viele Besucher nach dem Klick die gewünschte Handlung ausführen – zum Beispiel kaufen, ein Formular absenden oder sich anmelden. Sie bewertet damit vor allem Angebot, Landingpage und Nutzerführung.</p></div><div class="detail-copy detail-example"><div class="detail-copy-title">Praxisbeispiel</div><p>Beispiel: Von 2.000 Websitebesuchern kaufen 80. Die Conversion Rate beträgt 4 %.</p></div></div></div>
+</td>
+</tr>
+<tr aria-label="Zusätzliche Informationen öffnen" class="clickable-row" onclick="toggleRowDetail('row-roas', this)">
+<td><strong>ROAS</strong> (Return on Ad Spend)</td>
+<td><span class="badge badge-green">&gt; 4</span></td>
+<td><span class="badge badge-yellow">2 - 4</span></td>
+<td><span class="badge badge-red">&lt; 2</span></td>
+<td class="info-cell"><button aria-expanded="false" aria-label="Informationen öffnen" class="info-toggle" onclick="event.stopPropagation(); toggleRowDetail('row-roas', this.closest('tr'))" type="button">+</button></td></tr>
+<tr class="detail-row" id="row-roas">
+<td colspan="5">
+<div class="detail-box"><h4>ROAS (Return on Ad Spend)</h4><div class="detail-content-grid"><div class="detail-copy"><div class="detail-copy-title">Bedeutung</div><p>Der ROAS zeigt, wie viel Umsatz im Verhältnis zu den reinen Werbekosten erzielt wurde. Er eignet sich zur Beurteilung der direkten Werbewirkung, berücksichtigt aber noch nicht alle weiteren Unternehmenskosten.</p></div><div class="detail-copy detail-example"><div class="detail-copy-title">Praxisbeispiel</div><p>Beispiel: 2.000 € Werbekosten erzeugen 8.000 € Umsatz. Der ROAS beträgt 4 beziehungsweise 400 % – jeder Werbe-Euro bringt 4 € Umsatz.</p></div></div></div>
+</td>
+</tr>
+<tr aria-label="Zusätzliche Informationen öffnen" class="clickable-row" onclick="toggleRowDetail('row-roi', this)">
+<td><strong>ROI</strong> (Return on Investment)</td>
+<td><span class="badge badge-green">&gt; 100%</span></td>
+<td><span class="badge badge-yellow">20 - 100%</span></td>
+<td><span class="badge badge-red">&lt; 20%</span></td>
+<td class="info-cell"><button aria-expanded="false" aria-label="Informationen öffnen" class="info-toggle" onclick="event.stopPropagation(); toggleRowDetail('row-roi', this.closest('tr'))" type="button">+</button></td></tr>
+<tr class="detail-row" id="row-roi">
+<td colspan="5">
+<div class="detail-box"><h4>ROI (Return on Investment)</h4><div class="detail-content-grid"><div class="detail-copy"><div class="detail-copy-title">Bedeutung</div><p>Der ROI bewertet die Wirtschaftlichkeit einer Investition und bezieht den Gewinn ein. Im Unterschied zum ROAS können dabei neben Werbekosten auch weitere Kosten wie Produktion, Personal oder Tools berücksichtigt werden.</p></div><div class="detail-copy detail-example"><div class="detail-copy-title">Praxisbeispiel</div><p>Beispiel: Nach Abzug aller Kosten bleiben 3.000 € Gewinn bei einer Investition von 1.000 €. Der ROI zeigt, ob sich die gesamte Investition gerechnet hat.</p></div></div></div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section-header">
+<h2>Praxisbeispiel einer Kampagne</h2>
+<p>Simuliertes Szenario zur Veranschaulichung der Bewertungsstufen</p>
+</div>
+<div class="table-card searchable-item">
+<div class="table-responsive">
+<table>
+<thead>
+<tr>
+<th>KPI</th>
+<th>Sehr gut</th>
+<th>Gut</th>
+<th>Schlecht</th>
+</tr>
+</thead>
+<tbody>
+<tr><td><strong>Impressionen</strong></td><td>100.000</td><td>100.000</td><td>100.000</td></tr>
+<tr><td><strong>Reichweite</strong></td><td>50.000</td><td>50.000</td><td>50.000</td></tr>
+<tr><td><strong>Frequenz</strong></td><td>2</td><td>2</td><td>2</td></tr>
+<tr><td><strong>Klicks</strong></td><td><span class="badge badge-green">8.000</span></td><td><span class="badge badge-yellow">3.500</span></td><td><span class="badge badge-red">800</span></td></tr>
+<tr><td><strong>CTR</strong></td><td><span class="badge badge-green">8%</span></td><td><span class="badge badge-yellow">3,5%</span></td><td><span class="badge badge-red">0,8%</span></td></tr>
+<tr><td><strong>Conversions</strong></td><td><span class="badge badge-green">480</span></td><td><span class="badge badge-yellow">105</span></td><td><span class="badge badge-red">8</span></td></tr>
+<tr><td><strong>Conversion Rate</strong></td><td><span class="badge badge-green">6%</span></td><td><span class="badge badge-yellow">3%</span></td><td><span class="badge badge-red">1%</span></td></tr>
+<tr><td><strong>Conversion-Wert</strong></td><td><span class="badge badge-green">48.000 €</span></td><td><span class="badge badge-yellow">14.000 €</span></td><td><span class="badge badge-red">800 €</span></td></tr>
+<tr><td><strong>Werbekosten</strong></td><td>9.600 €</td><td>4.666,67 €</td><td>1.000 €</td></tr>
+<tr><td><strong>ROAS</strong> (Prozent)</td><td><span class="badge badge-green">500%</span></td><td><span class="badge badge-yellow">300%</span></td><td><span class="badge badge-red">80%</span></td></tr>
+<tr><td><strong>ROAS</strong> (Faktor)</td><td><span class="badge badge-green">5</span></td><td><span class="badge badge-yellow">3</span></td><td><span class="badge badge-red">0,8</span></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section-header">
+<h2>CPA (Orientierung auch für CPO/CPL)</h2>
+<p>Richtwerte basierend auf dem Produktwert</p>
+</div>
+<div class="table-card searchable-item">
+<div class="table-responsive">
+<table>
+<thead>
+<tr>
+<th>Produktwert</th>
+<th>Sehr gut</th>
+<th>Gut</th>
+<th>Schlecht</th>
+</tr>
+</thead>
+<tbody>
+<tr><td><strong>5 €</strong></td><td><span class="badge badge-green">&lt; 0,50 €</span></td><td><span class="badge badge-yellow">0,50 - 1,00 €</span></td><td><span class="badge badge-red">&gt; 1,00 €</span></td></tr>
+<tr><td><strong>50 €</strong></td><td><span class="badge badge-green">&lt; 10 €</span></td><td><span class="badge badge-yellow">10 - 20 €</span></td><td><span class="badge badge-red">&gt; 20 €</span></td></tr>
+<tr><td><strong>100 €</strong></td><td><span class="badge badge-green">&lt; 20 €</span></td><td><span class="badge badge-yellow">20 - 40 €</span></td><td><span class="badge badge-red">&gt; 40 €</span></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="tab-content" id="tab-kpi-formeln">
+<div class="section-header">
+<h2>KPI-Formeln &amp; Rechenbeispiele</h2>
+<p>Mathematische Grundlagen zur exakten Berechnung der Performance-Metriken</p>
+</div>
+<div class="cards-grid single-column-grid formula-grid">
+<div class="playbook-card searchable-item">
+<div class="card-header" onclick="toggleCard(this)">
+<div class="card-title">CTR (Click-Through-Rate)</div>
+<span class="toggle-icon">+</span>
+</div>
+<div class="card-body">
+<div class="formula-block">
+<div class="formula-title">Formel</div>
+<div class="formula-text">Klicks ÷ Impressionen x 100</div>
+</div>
+<div class="example-block">
+<div class="formula-title">Beispiel</div>
+<div class="example-text">8.000 ÷ 100.000 x 100 = 8%</div>
+</div>
+<div class="meaning-block">
+<div class="formula-title">Bedeutung</div>
+<p>Von 100 Personen klicken 8 auf die Anzeige.</p>
+</div>
+</div>
+</div>
+<div class="playbook-card searchable-item">
+<div class="card-header" onclick="toggleCard(this)">
+<div class="card-title">CPC (Cost per Click)</div>
+<span class="toggle-icon">+</span>
+</div>
+<div class="card-body">
+<div class="formula-block">
+<div class="formula-title">Formel</div>
+<div class="formula-text">Werbekosten ÷ Klicks</div>
+</div>
+<div class="example-block">
+<div class="formula-title">Beispiel</div>
+<div class="example-text">800 € ÷ 8.000 = 0,10 €</div>
+</div>
+<div class="meaning-block">
+<div class="formula-title">Bedeutung</div>
+<p>Ein Klick kostet durchschnittlich 0,10 €.</p>
+</div>
+</div>
+</div>
+<div class="playbook-card searchable-item">
+<div class="card-header" onclick="toggleCard(this)">
+<div class="card-title">CPM (Cost per Mille)</div>
+<span class="toggle-icon">+</span>
+</div>
+<div class="card-body">
+<div class="formula-block">
+<div class="formula-title">Formel</div>
+<div class="formula-text">Werbekosten ÷ Impressionen x 1.000</div>
+</div>
+<div class="example-block">
+<div class="formula-title">Beispiel</div>
+<div class="example-text">800 € ÷ 100.000 x 1.000 = 8 €</div>
+</div>
+<div class="meaning-block">
+<div class="formula-title">Bedeutung</div>
+<p>1.000 Impressionen kosten 8 €.</p>
+</div>
+</div>
+</div>
+<div class="playbook-card searchable-item">
+<div class="card-header" onclick="toggleCard(this)">
+<div class="card-title">Conversion Rate</div>
+<span class="toggle-icon">+</span>
+</div>
+<div class="card-body">
+<div class="formula-block">
+<div class="formula-title">Formel</div>
+<div class="formula-text">Conversions ÷ Klicks x 100</div>
+</div>
+<div class="example-block">
+<div class="formula-title">Beispiel</div>
+<div class="example-text">480 ÷ 8.000 x 100 = 6%</div>
+</div>
+<div class="meaning-block">
+<div class="formula-title">Bedeutung</div>
+<p>6 von 100 Besuchern konvertieren.</p>
+</div>
+</div>
+</div>
+<div class="playbook-card searchable-item">
+<div class="card-header" onclick="toggleCard(this)">
+<div class="card-title">CPA (Cost per Action)</div>
+<span class="toggle-icon">+</span>
+</div>
+<div class="card-body">
+<div class="formula-block">
+<div class="formula-title">Formel</div>
+<div class="formula-text">Werbekosten ÷ Conversions</div>
+</div>
+<div class="example-block">
+<div class="formula-title">Beispiel</div>
+<div class="example-text">800 € ÷ 480 = 1,67 €</div>
+</div>
+<div class="meaning-block">
+<div class="formula-title">Bedeutung</div>
+<p>Ein Kunde kostet 1,67 €.</p>
+</div>
+</div>
+</div>
+<div class="playbook-card searchable-item">
+<div class="card-header" onclick="toggleCard(this)">
+<div class="card-title">CPO (Cost per Order)</div>
+<span class="toggle-icon">+</span>
+</div>
+<div class="card-body">
+<div class="formula-block">
+<div class="formula-title">Formel</div>
+<div class="formula-text">Werbekosten ÷ Bestellungen</div>
+</div>
+<div class="example-block">
+<div class="formula-title">Beispiel</div>
+<div class="example-text">800 € ÷ 480 = 1,67 €</div>
+</div>
+<div class="meaning-block">
+<div class="formula-title">Bedeutung</div>
+<p>Eine Bestellung kostet 1,67 €.</p>
+</div>
+</div>
+</div>
+<div class="playbook-card searchable-item">
+<div class="card-header" onclick="toggleCard(this)">
+<div class="card-title">CPL (Cost per Lead)</div>
+<span class="toggle-icon">+</span>
+</div>
+<div class="card-body">
+<div class="formula-block">
+<div class="formula-title">Formel</div>
+<div class="formula-text">Werbekosten ÷ Leads</div>
+</div>
+<div class="example-block">
+<div class="formula-title">Beispiel</div>
+<div class="example-text">500 € ÷ 100 = 5 €</div>
+</div>
+<div class="meaning-block">
+<div class="formula-title">Bedeutung</div>
+<p>Ein Lead kostet 5 €.</p>
+</div>
+</div>
+</div>
+<div class="playbook-card searchable-item">
+<div class="card-header" onclick="toggleCard(this)">
+<div class="card-title">Conversion-Wert</div>
+<span class="toggle-icon">+</span>
+</div>
+<div class="card-body">
+<div class="formula-block">
+<div class="formula-title">Formel</div>
+<div class="formula-text">Conversions x Bestellwert</div>
+</div>
+<div class="example-block">
+<div class="formula-title">Beispiel</div>
+<div class="example-text">480 x 100 € = 48.000 €</div>
+</div>
+<div class="meaning-block">
+<div class="formula-title">Bedeutung</div>
+<p>Gesamtumsatz der Kampagne.</p>
+</div>
+</div>
+</div>
+<div class="playbook-card searchable-item">
+<div class="card-header" onclick="toggleCard(this)">
+<div class="card-title">ROAS (Return on Ad Spend)</div>
+<span class="toggle-icon">+</span>
+</div>
+<div class="card-body">
+<div class="formula-block">
+<div class="formula-title">Formel</div>
+<div class="formula-text">Conversion-Wert ÷ Werbekosten</div>
+</div>
+<div class="example-block">
+<div class="formula-title">Beispiel</div>
+<div class="example-text">48.000 € ÷ 9.600 € = 5</div>
+</div>
+<div class="meaning-block">
+<div class="formula-title">Bedeutung</div>
+<p>1 € Werbung bringt 5 € Umsatz. ROAS 5 entspricht 500 %.</p>
+</div>
+</div>
+</div>
+<div class="playbook-card searchable-item">
+<div class="card-header" onclick="toggleCard(this)">
+<div class="card-title">ROI (Return on Investment)</div>
+<span class="toggle-icon">+</span>
+</div>
+<div class="card-body">
+<div class="formula-block">
+<div class="formula-title">Formel</div>
+<div class="formula-text">(Gewinn - Investition) ÷ Investition x 100</div>
+</div>
+<div class="example-block">
+<div class="formula-title">Beispiel</div>
+<div class="example-text">(4.000 - 800) ÷ 800 x 100 = 400%</div>
+</div>
+<div class="meaning-block">
+<div class="formula-title">Bedeutung</div>
+<p>Gewinn im Verhältnis zur Investition.</p>
+</div>
+</div>
+</div>
+<div class="playbook-card searchable-item">
+<div class="card-header" onclick="toggleCard(this)">
+<div class="card-title">Frequenz</div>
+<span class="toggle-icon">+</span>
+</div>
+<div class="card-body">
+<div class="formula-block">
+<div class="formula-title">Formel</div>
+<div class="formula-text">Impressionen ÷ Reichweite</div>
+</div>
+<div class="example-block">
+<div class="formula-title">Beispiel</div>
+<div class="example-text">100.000 ÷ 50.000 = 2</div>
+</div>
+<div class="meaning-block">
+<div class="formula-title">Bedeutung</div>
+<p>Jede Person sieht die Anzeige 2-mal.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="tab-content" id="tab-kpi-landkarte">
+<div class="section-header">
+<h2>KPI-Landkarte (Analyse-Workflow)</h2>
+<p>Systematische Fehlersuche bei abweichenden Kampagnenwerten</p>
+</div>
+<div class="cards-grid single-column-grid map-grid">
+<div class="playbook-card searchable-item">
+<div class="card-header" onclick="toggleCard(this)">
+<div class="card-title map-item-title">Problem 1: Zu wenige Klicks</div>
+<span class="toggle-icon">+</span>
+</div>
+<div class="card-body"><div class="problem-layout"><div class="signal-panel"><div class="problem-alert">
+<div>
+<div class="problem-alert-title">Woran erkennst du das?</div>
+<p>• CTR niedrig<br/>• Impressionen hoch<br/>• Klicks niedrig</p>
+</div>
+</div></div><div class="check-panel"><div class="formula-title">Prüfen</div><ul class="check-list">
+<li class="check-list-item">Anzeige</li>
+<li class="check-list-item">Überschrift</li>
+<li class="check-list-item">Keywords</li>
+<li class="check-list-item">Zielgruppe</li>
+<li class="check-list-item">Suchintention</li>
+<li class="check-list-item">Call-to-Action</li>
+</ul></div></div></div>
+</div>
+<div class="playbook-card searchable-item">
+<div class="card-header" onclick="toggleCard(this)">
+<div class="card-title map-item-title">Problem 2: Viele Klicks, aber kaum Conversions</div>
+<span class="toggle-icon">+</span>
+</div>
+<div class="card-body"><div class="problem-layout"><div class="signal-panel"><div class="problem-alert">
+<div>
+<div class="problem-alert-title">Woran erkennst du das?</div>
+<p>• CTR hoch<br/>• Conversion Rate niedrig</p>
+</div>
+</div></div><div class="check-panel"><div class="formula-title">Prüfen</div><ul class="check-list">
+<li class="check-list-item">Landingpage</li>
+<li class="check-list-item">Ladezeit</li>
+<li class="check-list-item">Vertrauen</li>
+<li class="check-list-item">Preis</li>
+<li class="check-list-item">Checkout</li>
+<li class="check-list-item">Mobile Darstellung</li>
+</ul></div></div></div>
+</div>
+<div class="playbook-card searchable-item">
+<div class="card-header" onclick="toggleCard(this)">
+<div class="card-title map-item-title">Problem 3: Klicks sind zu teuer</div>
+<span class="toggle-icon">+</span>
+</div>
+<div class="card-body"><div class="problem-layout"><div class="signal-panel"><div class="problem-alert">
+<div>
+<div class="problem-alert-title">Woran erkennst du das?</div>
+<p>• CPC hoch</p>
+</div>
+</div></div><div class="check-panel"><div class="formula-title">Prüfen</div><ul class="check-list">
+<li class="check-list-item">Qualitätsfaktor</li>
+<li class="check-list-item">Wettbewerb</li>
+<li class="check-list-item">Keywords</li>
+<li class="check-list-item">Anzeigenqualität</li>
+<li class="check-list-item">Landingpage</li>
+</ul></div></div></div>
+</div>
+<div class="playbook-card searchable-item">
+<div class="card-header" onclick="toggleCard(this)">
+<div class="card-title map-item-title">Problem 4: Conversion zu teuer</div>
+<span class="toggle-icon">+</span>
+</div>
+<div class="card-body"><div class="problem-layout"><div class="signal-panel"><div class="problem-alert">
+<div>
+<div class="problem-alert-title">Woran erkennst du das?</div>
+<p>• CPA / CPO / CPL hoch</p>
+</div>
+</div></div><div class="check-panel"><div class="formula-title">Prüfen</div><ul class="check-list">
+<li class="check-list-item">Landingpage</li>
+<li class="check-list-item">Zielgruppe</li>
+<li class="check-list-item">Conversion Rate</li>
+<li class="check-list-item">Anzeigenqualität</li>
+<li class="check-list-item">Gebotsstrategie</li>
+</ul></div></div></div>
+</div>
+<div class="playbook-card searchable-item">
+<div class="card-header" onclick="toggleCard(this)">
+<div class="card-title map-item-title">Problem 5: Zu wenig Umsatz</div>
+<span class="toggle-icon">+</span>
+</div>
+<div class="card-body"><div class="problem-layout"><div class="signal-panel"><div class="problem-alert">
+<div>
+<div class="problem-alert-title">Woran erkennst du das?</div>
+<p>• ROAS niedrig (Faktor-Abweichung)</p>
+</div>
+</div></div><div class="check-panel"><div class="formula-title">Prüfen</div><ul class="check-list">
+<li class="check-list-item">Conversion-Wert</li>
+<li class="check-list-item">Produktpreis</li>
+<li class="check-list-item">Zielgruppe</li>
+<li class="check-list-item">Budget</li>
+<li class="check-list-item">Gebotsstrategie</li>
+</ul></div></div></div>
+</div>
+<div class="playbook-card searchable-item">
+<div class="card-header" onclick="toggleCard(this)">
+<div class="card-title map-item-title">Problem 6: Anzeige wird zu oft gezeigt</div>
+<span class="toggle-icon">+</span>
+</div>
+<div class="card-body"><div class="problem-layout"><div class="signal-panel"><div class="problem-alert">
+<div>
+<div class="problem-alert-title">Woran erkennst du das?</div>
+<p>• Frequenz &gt; 5</p>
+</div>
+</div></div><div class="check-panel"><div class="formula-title">Prüfen</div><ul class="check-list">
+<li class="check-list-item">Neue Creatives</li>
+<li class="check-list-item">Zielgruppe erweitern</li>
+<li class="check-list-item">Budget</li>
+<li class="check-list-item">Anzeigen aktualisieren</li>
+</ul></div></div></div>
+</div>
+<div class="playbook-card searchable-item">
+<div class="card-header" onclick="toggleCard(this)">
+<div class="card-title map-item-title">Problem 7: Zu geringe Reichweite</div>
+<span class="toggle-icon">+</span>
+</div>
+<div class="card-body"><div class="problem-layout"><div class="signal-panel"><div class="problem-alert">
+<div>
+<div class="problem-alert-title">Woran erkennst du das?</div>
+<p>• Reichweite niedrig</p>
+</div>
+</div></div><div class="check-panel"><div class="formula-title">Prüfen</div><ul class="check-list">
+<li class="check-list-item">Budget</li>
+<li class="check-list-item">Zielgruppe</li>
+<li class="check-list-item">Kampagneneinstellungen</li>
+<li class="check-list-item">Gebote</li>
+</ul></div></div></div>
+</div>
+</div>
+</div>
+<div class="tab-content" id="tab-unternehmensziele">
+<div class="section-header">
+<h2>Zusammenhang: Unternehmensziele &amp; Kampagnen-Setup</h2>
+<p>Verbindung von Unternehmenszielen mit konkreten Google Ads-Funktionen (Entscheidungsbaum-Modell)</p>
+</div>
+<div class="tree-container">
+<div class="tree-node searchable-item">
+<div class="tree-node-header" onclick="toggleTreeNode(this)">
+<div class="tree-node-title"><span class="goal-sentence">Wenn das Unternehmen mehr Verkäufe erzielen will</span></div>
+<span class="toggle-icon">+</span>
+</div>
+<div class="tree-node-body">
+<div class="tree-grid">
+<div class="tree-block">
+<div class="tree-block-title">Kampagnenziel</div>
+<p><strong>Verkäufe</strong></p>
+</div>
+<div class="tree-block">
+<div class="tree-block-title">Geeignete Kampagnentypen</div>
+<div class="tree-list">
+<span class="tree-pill highlight">Suchkampagne</span>
+<span class="tree-pill highlight">Shopping</span>
+<span class="tree-pill highlight">Performance Max</span>
+</div>
+</div>
+<div class="tree-block">
+<div class="tree-block-title">Geeignete Gebotsstrategien</div>
+<div class="tree-list">
+<span class="tree-pill">Conversions maximieren</span>
+<span class="tree-pill">Conversion-Wert maximieren</span>
+<span class="tree-pill">Ziel-CPA</span>
+<span class="tree-pill">Ziel-ROAS</span>
+</div>
+</div>
+<div class="tree-block">
+<div class="tree-block-title">Wichtige KPIs</div>
+<div class="tree-list">
+<span class="tree-pill">Conversion Rate</span>
+<span class="tree-pill">CPA</span>
+<span class="tree-pill">ROAS</span>
+<span class="tree-pill">Conversion-Wert</span>
+<span class="tree-pill">Conversions</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="tree-node searchable-item">
+<div class="tree-node-header" onclick="toggleTreeNode(this)">
+<div class="tree-node-title"><span class="goal-sentence">Wenn das Unternehmen den Umsatz steigern will</span></div>
+<span class="toggle-icon">+</span>
+</div>
+<div class="tree-node-body">
+<div class="tree-grid">
+<div class="tree-block">
+<div class="tree-block-title">Kampagnenziel</div>
+<p><strong>Verkäufe</strong></p>
+</div>
+<div class="tree-block">
+<div class="tree-block-title">Geeignete Kampagnentypen</div>
+<div class="tree-list">
+<span class="tree-pill highlight">Shopping</span>
+<span class="tree-pill highlight">Performance Max</span>
+<span class="tree-pill highlight">Suchkampagne</span>
+</div>
+</div>
+<div class="tree-block">
+<div class="tree-block-title">Geeignete Gebotsstrategien</div>
+<div class="tree-list">
+<span class="tree-pill">Conversion-Wert maximieren</span>
+<span class="tree-pill">Ziel-ROAS</span>
+</div>
+</div>
+<div class="tree-block">
+<div class="tree-block-title">Wichtige KPIs</div>
+<div class="tree-list">
+<span class="tree-pill">ROAS</span>
+<span class="tree-pill">Conversion-Wert</span>
+<span class="tree-pill">ROI</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="tree-node searchable-item">
+<div class="tree-node-header" onclick="toggleTreeNode(this)">
+<div class="tree-node-title"><span class="goal-sentence">Wenn das Unternehmen mehr qualifizierte Leads gewinnen will</span></div>
+<span class="toggle-icon">+</span>
+</div>
+<div class="tree-node-body">
+<div class="tree-grid">
+<div class="tree-block">
+<div class="tree-block-title">Kampagnenziel</div>
+<p><strong>Leads</strong></p>
+</div>
+<div class="tree-block">
+<div class="tree-block-title">Geeignete Kampagnentypen</div>
+<div class="tree-list">
+<span class="tree-pill highlight">Suchkampagne</span>
+<span class="tree-pill highlight">Performance Max</span>
+<span class="tree-pill highlight">Demand Gen</span>
+</div>
+</div>
+<div class="tree-block">
+<div class="tree-block-title">Geeignete Gebotsstrategien</div>
+<div class="tree-list">
+<span class="tree-pill">Conversions maximieren</span>
+<span class="tree-pill">Ziel-CPA</span>
+</div>
+</div>
+<div class="tree-block">
+<div class="tree-block-title">Wichtige KPIs</div>
+<div class="tree-list">
+<span class="tree-pill">CPA</span>
+<span class="tree-pill">CPL</span>
+<span class="tree-pill">Conversion Rate</span>
+<span class="tree-pill">Conversions</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="tree-node searchable-item">
+<div class="tree-node-header" onclick="toggleTreeNode(this)">
+<div class="tree-node-title"><span class="goal-sentence">Wenn das Unternehmen mehr Websitezugriffe erzielen will</span></div>
+<span class="toggle-icon">+</span>
+</div>
+<div class="tree-node-body">
+<div class="tree-grid">
+<div class="tree-block">
+<div class="tree-block-title">Kampagnenziel</div>
+<p><strong>Websitezugriffe</strong></p>
+</div>
+<div class="tree-block">
+<div class="tree-block-title">Geeignete Kampagnentypen</div>
+<div class="tree-list">
+<span class="tree-pill highlight">Suchkampagne</span>
+<span class="tree-pill highlight">Display</span>
+<span class="tree-pill highlight">Demand Gen</span>
+</div>
+</div>
+<div class="tree-block">
+<div class="tree-block-title">Geeignete Gebotsstrategien</div>
+<div class="tree-list">
+<span class="tree-pill">Klicks maximieren</span>
+</div>
+</div>
+<div class="tree-block">
+<div class="tree-block-title">Wichtige KPIs</div>
+<div class="tree-list">
+<span class="tree-pill">Klicks</span>
+<span class="tree-pill">CTR</span>
+<span class="tree-pill">CPC</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="tree-node searchable-item">
+<div class="tree-node-header" onclick="toggleTreeNode(this)">
+<div class="tree-node-title"><span class="goal-sentence">Wenn das Unternehmen seine Reichweite erhöhen will</span></div>
+<span class="toggle-icon">+</span>
+</div>
+<div class="tree-node-body">
+<div class="tree-grid">
+<div class="tree-block">
+<div class="tree-block-title">Kampagnenziel</div>
+<p><strong>Markenbekanntheit und Reichweite</strong></p>
+</div>
+<div class="tree-block">
+<div class="tree-block-title">Geeignete Kampagnentypen</div>
+<div class="tree-list">
+<span class="tree-pill highlight">Display</span>
+<span class="tree-pill highlight">Video</span>
+<span class="tree-pill highlight">Demand Gen</span>
+</div>
+</div>
+<div class="tree-block">
+<div class="tree-block-title">Geeignete Gebotsstrategien</div>
+<div class="tree-list">
+<span class="tree-pill">Sichtbare Impressionen maximieren</span>
+<span class="tree-pill">CPM</span>
+</div>
+</div>
+<div class="tree-block">
+<div class="tree-block-title">Wichtige KPIs</div>
+<div class="tree-list">
+<span class="tree-pill">Impressionen</span>
+<span class="tree-pill">Reichweite</span>
+<span class="tree-pill">Frequenz</span>
+<span class="tree-pill">CPM</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="tree-node searchable-item">
+<div class="tree-node-header" onclick="toggleTreeNode(this)">
+<div class="tree-node-title"><span class="goal-sentence">Wenn das Unternehmen mehr App-Installationen erzielen will</span></div>
+<span class="toggle-icon">+</span>
+</div>
+<div class="tree-node-body">
+<div class="tree-grid">
+<div class="tree-block">
+<div class="tree-block-title">Kampagnenziel</div>
+<p><strong>App-Promotion</strong></p>
+</div>
+<div class="tree-block">
+<div class="tree-block-title">Geeignete Kampagnentypen</div>
+<div class="tree-list">
+<span class="tree-pill highlight">App-Kampagne</span>
+</div>
+</div>
+<div class="tree-block">
+<div class="tree-block-title">Geeignete Gebotsstrategien</div>
+<div class="tree-list">
+<span class="tree-pill">Installationen maximieren</span>
+<span class="tree-pill">Ziel-CPA</span>
+</div>
+</div>
+<div class="tree-block">
+<div class="tree-block-title">Wichtige KPIs</div>
+<div class="tree-list">
+<span class="tree-pill">Installationen</span>
+<span class="tree-pill">CPA</span>
+<span class="tree-pill">Conversion Rate</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<footer>Performance Marketing Lernplattform · Spezialisierung 1</footer>
+<script>
         // Setze Standard-Tab 1 beim Laden
         document.addEventListener('DOMContentLoaded', () => {
             switchTab(null, 'tab-kpi-uebersicht');
@@ -1621,9 +1639,16 @@
         }
 
         // Toggle für Detail-Zeilen in Tab 1 (KPI-Übersicht)
-        function toggleRowDetail(rowId) {
+        function toggleRowDetail(rowId, sourceRow) {
             const row = document.getElementById(rowId);
-            row.classList.toggle('active');
+            const isOpen = row.classList.toggle('active');
+            const trigger = sourceRow ? sourceRow.querySelector('.info-toggle') : null;
+
+            if (trigger) {
+                trigger.textContent = isOpen ? '−' : '+';
+                trigger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+                trigger.setAttribute('aria-label', isOpen ? 'Informationen schließen' : 'Informationen öffnen');
+            }
         }
 
         // Toggle für Cards in Tab 2 & Tab 3
@@ -1655,6 +1680,10 @@
                 if (icon) icon.textContent = '−';
             });
             document.querySelectorAll('.detail-row').forEach(row => row.classList.add('active'));
+            document.querySelectorAll('.info-toggle').forEach(btn => {
+                btn.textContent = '−';
+                btn.setAttribute('aria-expanded', 'true');
+            });
         }
 
         // Globales Schließen aller ausklappbaren Bereiche
@@ -1670,6 +1699,10 @@
                 if (icon) icon.textContent = '+';
             });
             document.querySelectorAll('.detail-row').forEach(row => row.classList.remove('active'));
+            document.querySelectorAll('.info-toggle').forEach(btn => {
+                btn.textContent = '+';
+                btn.setAttribute('aria-expanded', 'false');
+            });
         }
 
         // Suchfunktion, die im aktiven Tab filtert
