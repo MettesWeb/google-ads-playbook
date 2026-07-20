@@ -828,10 +828,274 @@
             font-size: 1.02rem;
             font-weight: 750;
         }
+
+
+        /* --- Ergänzung: Anfänger-Reiter + Google Ads Navigator --- */
+        .intro {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-left: 5px solid var(--gold);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+            padding: 1.2rem 1.35rem;
+            margin: 1.2rem 0 1rem;
+        }
+
+        .playbook-main-search {
+            max-width: none;
+            margin: 0 0 1rem 0;
+        }
+
+        .playbook-main-search .search-input {
+            width: 100%;
+            background-color: #ffffff;
+        }
+
+        .beginner-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(255px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .beginner-card,
+        .nav-section,
+        .mini-flow {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+        }
+
+        .beginner-card {
+            padding: 1.15rem;
+        }
+
+        .beginner-card h3,
+        .nav-section h3,
+        .mini-flow h3 {
+            color: var(--primary-blue);
+            margin-bottom: 0.45rem;
+        }
+
+        .beginner-card p,
+        .mini-flow p {
+            color: var(--text-muted);
+        }
+
+        .step-badge {
+            display: inline-grid;
+            place-items: center;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: var(--primary-blue);
+            color: #ffffff;
+            font-weight: 800;
+            margin-bottom: 0.7rem;
+        }
+
+        .mini-flow {
+            padding: 1.2rem;
+            margin: 1rem 0;
+        }
+
+        .flow-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+            gap: 0.75rem;
+            margin-top: 0.9rem;
+        }
+
+        .flow-step {
+            background: #f8fafc;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .flow-step strong {
+            display: block;
+            color: var(--primary-blue);
+            margin-bottom: 0.2rem;
+        }
+
+        .navigator-search-box {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-left: 5px solid var(--gold);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .navigator-search-box label {
+            display: block;
+            color: var(--primary-blue);
+            font-weight: 800;
+            margin-bottom: 0.55rem;
+        }
+
+        .navigator-search-input {
+            width: 100%;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            padding: 0.85rem 1rem;
+            font-size: 1rem;
+            color: var(--text-dark);
+            background: #ffffff;
+            transition: var(--transition);
+        }
+
+        .navigator-search-input:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 3px rgba(30, 73, 118, 0.12);
+        }
+
+        .nav-section {
+            margin-bottom: 1rem;
+        }
+
+        .nav-section-title {
+            padding: 1rem 1.1rem;
+            background: var(--primary-blue);
+            color: #ffffff;
+            border-bottom: 3px solid var(--gold);
+        }
+
+        .nav-section-title h3 {
+            color: #ffffff;
+            margin: 0;
+        }
+
+        .nav-section-title p {
+            color: #cbd5e1;
+            margin-top: 0.2rem;
+            font-size: 0.92rem;
+        }
+
+        .navigator-table th {
+            background: #f8fafc;
+            color: var(--primary-blue);
+            text-transform: uppercase;
+            font-size: 0.82rem;
+            letter-spacing: 0.04em;
+        }
+
+        .navigator-table td:first-child {
+            font-weight: 800;
+            color: var(--primary-blue);
+            width: 25%;
+        }
+
+        .nav-merksatz {
+            padding: 0.85rem 1rem;
+            background: #f8fafc;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+        }
+
+        .nav-merksatz strong {
+            color: var(--primary-blue);
+        }
+
+        .navigator-no-results {
+            display: none;
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 1.2rem;
+            color: var(--text-muted);
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+
+
+        /* --- Anpassung: Suche im Header + helle Tab-Navigation --- */
+        .header-actions {
+            flex: 1;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        .header-search {
+            flex: 1;
+            min-width: min(420px, 100%);
+            max-width: 520px;
+        }
+
+        .header-search .search-input {
+            width: 100%;
+            min-width: 0;
+            background: rgba(255,255,255,0.96);
+            border-color: rgba(255,255,255,0.55);
+            box-shadow: 0 8px 22px rgba(0,0,0,0.10);
+        }
+
+        .tab-nav-bg {
+            background: transparent !important;
+            border-bottom: none !important;
+            margin: 1.2rem 0 1rem;
+        }
+
+        .tab-nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.55rem;
+            overflow-x: visible;
+        }
+
+        .tab-btn {
+            background: #ffffff !important;
+            border: 1px solid #cbd5e1 !important;
+            border-radius: 999px !important;
+            color: var(--primary-blue) !important;
+            padding: 0.65rem 0.9rem !important;
+            font-size: 0.9rem !important;
+            font-weight: 750 !important;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .tab-btn:hover {
+            color: var(--primary-blue) !important;
+            background: #f8fafc !important;
+            border-color: var(--secondary-blue) !important;
+            transform: translateY(-1px);
+        }
+
+        .tab-btn.active {
+            background: var(--primary-blue) !important;
+            border-color: var(--primary-blue) !important;
+            color: #ffffff !important;
+            box-shadow: var(--shadow-md);
+        }
+
+        @media (max-width: 767px) {
+            .header-actions {
+                width: 100%;
+                justify-content: stretch;
+            }
+
+            .header-search {
+                max-width: none;
+                width: 100%;
+            }
+
+            .back-link-header {
+                width: 100%;
+            }
+        }
+
 </style>
 </head>
 <body>
-<div class="sticky-top">
 <header>
 <div class="header-container">
 <div class="header-title">
@@ -839,30 +1103,111 @@
 <h1>Google Ads Playbook</h1>
 <p>Interaktives Nachschlagewerk &amp; Analyse-Workflow</p>
 </div>
-<div class="controls">
-<a class="back-link-header" href="index.html">← Zurück zur Übersicht</a>
-<div class="search-wrapper">
-<input class="search-input" id="playbookSearch" onkeyup="handleSearch()" placeholder="Suchen..." type="text"/>
+<div class="controls header-actions">
+<div class="search-wrapper header-search">
+<input class="search-input" id="playbookSearch" onkeyup="handleSearch()" placeholder="Im Google Ads Playbook suchen ..." type="text"/>
 </div>
-
-
+<a class="back-link-header" href="index.html">← Zurück zur Übersicht</a>
 </div>
 </div>
 </header>
+<main>
 <div class="tab-nav-bg">
 <div class="tab-nav">
-<button class="tab-btn active" onclick="switchTab(event, 'tab-kpi-uebersicht')">1. KPI-Übersicht</button>
-<button class="tab-btn" onclick="switchTab(event, 'tab-kpi-formeln')">2. KPI-Formeln</button>
-<button class="tab-btn" onclick="switchTab(event, 'tab-kpi-landkarte')">3. KPI-Landkarte</button>
-<button class="tab-btn" onclick="switchTab(event, 'tab-unternehmensziele')">4. Unternehmensziele</button>
+<button class="tab-btn active" onclick="switchTab(event, 'tab-google-anfaenger')">1. Google Ads für Anfänger</button>
+<button class="tab-btn" onclick="switchTab(event, 'tab-kpi-uebersicht')">2. KPI-Übersicht</button>
+<button class="tab-btn" onclick="switchTab(event, 'tab-kpi-formeln')">3. KPI-Formeln</button>
+<button class="tab-btn" onclick="switchTab(event, 'tab-kpi-landkarte')">4. KPI-Landkarte</button>
+<button class="tab-btn" onclick="switchTab(event, 'tab-unternehmensziele')">5. Unternehmensziele</button>
+<button class="tab-btn" onclick="switchTab(event, 'tab-google-navigation')">6. Google Ads Navigation</button>
 </div>
 </div>
-</div>
-<main>
+
 <div class="no-results" id="search-no-results">
 <p>Keine Einträge gefunden, die Ihrer Suche entsprechen.</p>
 </div>
-<div class="tab-content active" id="tab-kpi-uebersicht">
+
+<div class="tab-content active" id="tab-google-anfaenger">
+<div class="section-header searchable-item">
+<h2>Google Ads für Anfänger</h2>
+<p>Das Grundsystem in 6 einfachen Schritten: Ziel festlegen, Kampagnentyp wählen, Daten geben, Anzeigen ausspielen, Ergebnisse messen und optimieren.</p>
+</div>
+
+<div class="mini-flow searchable-item">
+<h3>Das 6-Schritte-System</h3>
+<p>Google Ads ist kein „Anzeige erstellen und hoffen“-System. Es ist ein Kreislauf aus Planung, Ausspielung, Messung und Optimierung.</p>
+<div class="flow-steps">
+<div class="flow-step"><strong>1. Ziel festlegen</strong>Was soll die Werbung erreichen?</div>
+<div class="flow-step"><strong>2. Kampagnentyp wählen</strong>Wo und wie soll die Anzeige erscheinen?</div>
+<div class="flow-step"><strong>3. Daten geben</strong>Welche Informationen braucht Google?</div>
+<div class="flow-step"><strong>4. Anzeigen ausspielen</strong>Google verteilt die Anzeige passend zum Ziel.</div>
+<div class="flow-step"><strong>5. Ergebnisse messen</strong>Hat Werbung wirklich etwas gebracht?</div>
+<div class="flow-step"><strong>6. Optimieren</strong>Zahlen prüfen und gezielt verbessern.</div>
+</div>
+</div>
+
+<div class="beginner-grid">
+<article class="beginner-card searchable-item">
+<div class="step-badge">1</div>
+<h3>Du hast ein Ziel</h3>
+<p>Bevor irgendetwas eingestellt wird, muss klar sein: Soll die Kampagne Verkäufe, Leads, Website-Traffic, Reichweite, App-Installationen oder Ladenbesuche erzeugen?</p>
+</article>
+
+<article class="beginner-card searchable-item">
+<div class="step-badge">2</div>
+<h3>Du wählst einen Kampagnentyp</h3>
+<p>Der Kampagnentyp entscheidet, auf welchen Google-Flächen Werbung laufen kann: Suche, Display, Shopping, YouTube, App oder Performance Max.</p>
+</article>
+
+<article class="beginner-card searchable-item">
+<div class="step-badge">3</div>
+<h3>Du gibst Google Daten</h3>
+<p>Google braucht Keywords, Produktdaten, Zielgruppen, Assets, Budget, Conversion-Ziele und eine passende Landingpage. Ohne gute Daten kann Google schlecht optimieren.</p>
+</article>
+
+<article class="beginner-card searchable-item">
+<div class="step-badge">4</div>
+<h3>Google spielt Anzeigen aus</h3>
+<p>Google nutzt deine Einstellungen und entscheidet, wem welche Anzeige wann und wo gezeigt wird. Besonders Performance Max arbeitet kanalübergreifend.</p>
+</article>
+
+<article class="beginner-card searchable-item">
+<div class="step-badge">5</div>
+<h3>Du misst Ergebnisse</h3>
+<p>Nicht nur Klicks zählen. Wichtig ist, ob daraus Verkäufe, Leads, Umsatz oder andere echte Ergebnisse entstehen.</p>
+</article>
+
+<article class="beginner-card searchable-item">
+<div class="step-badge">6</div>
+<h3>Du optimierst</h3>
+<p>Optimierung heißt: Zahlen anschauen, Problem erkennen und gezielt verbessern. Dabei nicht ständig die Lernphase durch hektische Änderungen unterbrechen.</p>
+</article>
+</div>
+
+<div class="table-card searchable-item">
+<div class="table-responsive">
+<table>
+<thead>
+<tr><th>Kampagnentyp</th><th>Einfach erklärt</th><th>Wann sinnvoll?</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Suchkampagne</strong></td><td>Textanzeigen in der Google-Suche.</td><td>Wenn Menschen aktiv nach etwas suchen.</td></tr>
+<tr><td><strong>Displaykampagne</strong></td><td>Bildanzeigen auf Websites, Apps oder Gmail.</td><td>Für Sichtbarkeit, Retargeting und Markenaufbau.</td></tr>
+<tr><td><strong>Shopping-Kampagne</strong></td><td>Produktanzeigen mit Bild, Preis und Shop.</td><td>Für Online-Shops mit Produkten.</td></tr>
+<tr><td><strong>Videokampagne</strong></td><td>Anzeigen auf YouTube.</td><td>Für Aufmerksamkeit, Erklärung und Branding.</td></tr>
+<tr><td><strong>App-Kampagne</strong></td><td>Werbung für App-Downloads oder App-Aktionen.</td><td>Wenn eine App beworben wird.</td></tr>
+<tr><td><strong>Performance Max</strong></td><td>KI-gestützte Kampagne über mehrere Google-Kanäle.</td><td>Wenn Google kanalübergreifend auf Ziele optimieren soll.</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div class="note searchable-item">
+<strong>Super-Merksatz:</strong> Google Ads funktioniert nur dann gut, wenn Ziel, Kampagnentyp, Daten, Anzeige, Landingpage und Tracking zusammenpassen.
+</div>
+</div>
+
+<div class="tab-content" id="tab-kpi-uebersicht">
 <div class="section-header">
 <h2>KPI-Klassifizierung</h2>
 <p>Über das Plus in der Spalte „Info“ öffnest du Bedeutung und Praxisbeispiel.</p>
@@ -1599,12 +1944,181 @@
 </div>
 </div>
 </div>
+
+<div class="tab-content" id="tab-google-navigation">
+<div class="section-header searchable-item">
+<h2>Google Ads Navigation im Konto</h2>
+<p>Dieser Reiter ist wie eine Karte für den Google-Ads-Werbeanzeigenmanager: Wo finde ich was und wofür ist es wichtig?</p>
+</div>
+
+<div class="navigator-search-box searchable-item">
+<label for="navigatorSearch">Nur im Google-Ads-Navigator suchen</label>
+<input class="navigator-search-input" id="navigatorSearch" onkeyup="handleNavigatorSearch()" placeholder="Begriff eingeben: z. B. Assets, Conversions, Suchbegriffe, Abrechnung, Keywords ..." type="text"/>
+</div>
+
+<div class="navigator-no-results" id="navigatorNoResults">
+Keine passenden Zeilen im Google-Ads-Navigator gefunden.
+</div>
+
+<section class="nav-section searchable-item" data-section="gesamtlogik navigation">
+<div class="nav-section-title">
+<h3>Gesamtlogik der Navigation</h3>
+<p>Die wichtigsten Hauptbereiche im Google-Ads-Konto.</p>
+</div>
+<div class="table-responsive">
+<table class="navigator-table">
+<thead><tr><th>Hauptbereich</th><th>Einfach erklärt</th><th>Frage dahinter</th></tr></thead>
+<tbody>
+<tr class="nav-row"><td>Übersicht</td><td>Startpunkt des Kontos mit den wichtigsten Kennzahlen.</td><td>Wie läuft mein Konto gerade?</td></tr>
+<tr class="nav-row"><td>Empfehlungen</td><td>Google schlägt mögliche Optimierungen vor.</td><td>Was könnte verbessert werden?</td></tr>
+<tr class="nav-row"><td>Statistiken &amp; Berichte</td><td>Auswertungen, Berichte und Detailanalysen.</td><td>Was sagen die Zahlen?</td></tr>
+<tr class="nav-row"><td>Kampagnen</td><td>Bereich für Kampagnen, Anzeigengruppen und Anzeigen.</td><td>Welche Werbung läuft?</td></tr>
+<tr class="nav-row"><td>Assets</td><td>Zusatzbausteine für Anzeigen.</td><td>Welche Elemente machen die Anzeige stärker?</td></tr>
+<tr class="nav-row"><td>Zielgruppen, Keywords und Inhalte</td><td>Steuerung von Menschen, Suchbegriffen, Orten, Zeiten und Umfeld.</td><td>Wen erreiche ich, wonach suchen sie und wo erscheinen Anzeigen?</td></tr>
+<tr class="nav-row"><td>Änderungsverlauf</td><td>Protokoll aller Änderungen im Konto.</td><td>Was wurde wann geändert?</td></tr>
+<tr class="nav-row"><td>Zielvorhaben / Conversions</td><td>Einrichtung und Auswertung von Erfolgsaktionen.</td><td>Welche Erfolge werden gemessen?</td></tr>
+<tr class="nav-row"><td>Tools</td><td>Hilfswerkzeuge für Planung, Daten, Prüfung und Fehlerbehebung.</td><td>Welche Werkzeuge helfen bei der Arbeit?</td></tr>
+<tr class="nav-row"><td>Abrechnung</td><td>Kosten, Rechnungen und Zahlungen.</td><td>Was kostet es und wie wird bezahlt?</td></tr>
+<tr class="nav-row"><td>Verwaltung</td><td>Zugriffe, Verknüpfungen und Grundeinstellungen.</td><td>Wer darf was und wie ist das Konto verbunden?</td></tr>
+</tbody>
+</table>
+</div>
+<div class="nav-merksatz"><strong>Merksatz:</strong> Google Ads ist wie ein Kontrollzentrum: planen, schalten, auswerten, optimieren und verwalten.</div>
+</section>
+
+<section class="nav-section searchable-item" data-section="übersicht empfehlungen berichte statistiken">
+<div class="nav-section-title">
+<h3>Übersicht, Empfehlungen, Statistiken &amp; Berichte</h3>
+<p>Hier prüfst du, wie das Konto läuft und was die Zahlen sagen.</p>
+</div>
+<div class="table-responsive">
+<table class="navigator-table">
+<thead><tr><th>Reiter / Unterreiter</th><th>Einfach erklärt</th><th>Wofür wichtig?</th></tr></thead>
+<tbody>
+<tr class="nav-row"><td>Übersicht</td><td>Startseite mit den wichtigsten Zahlen und Entwicklungen des Kontos.</td><td>Schneller Blick auf Kampagnenleistung und Auffälligkeiten.</td></tr>
+<tr class="nav-row"><td>Empfehlungen</td><td>Google gibt Vorschläge zu Budget, Keywords, Assets oder Conversion-Tracking.</td><td>Hilfreich, aber kritisch prüfen. Nicht jede Empfehlung passt zum Ziel.</td></tr>
+<tr class="nav-row"><td>Statistiken</td><td>Allgemeiner Bereich mit Auswertungen, Trends und Auffälligkeiten.</td><td>Erkennen, was im Konto gerade wichtig oder ungewöhnlich ist.</td></tr>
+<tr class="nav-row"><td>Markenbericht</td><td>Zeigt, wie Marke oder Kampagnen über verschiedene Kampagnentypen wirken.</td><td>Eher für Branding, Reichweite und Gesamtwirkung relevant.</td></tr>
+<tr class="nav-row"><td>Auktionsdaten</td><td>Zeigt, mit welchen Mitbewerbern du in Google Ads konkurrierst.</td><td>Wichtig, um Wettbewerb bei ähnlichen Suchanfragen zu sehen.</td></tr>
+<tr class="nav-row"><td>Suchbegriffe</td><td>Zeigt echte Suchanfragen, bevor Nutzer auf deine Anzeige geklickt haben.</td><td>Sehr wichtig: gute Begriffe finden und unpassende ausschließen.</td></tr>
+<tr class="nav-row"><td>Wann und wo Anzeigen ausgeliefert wurden</td><td>Zeigt Zeiten, Orte und Platzierungen deiner Anzeigen.</td><td>Hilft zu erkennen, wann und wo Anzeigen gut oder schlecht laufen.</td></tr>
+<tr class="nav-row"><td>Kanalleistung</td><td>Zeigt, welche Google-Kanäle performen, z. B. Suche, Display, YouTube oder Shopping.</td><td>Wichtig bei kampagnenübergreifender Ausspielung.</td></tr>
+<tr class="nav-row"><td>Landingpages</td><td>Zeigt, auf welche Zielseiten Nutzer nach dem Klick kommen und wie diese abschneiden.</td><td>Prüfen, ob Zielseite, Angebot und Nutzererwartung zusammenpassen.</td></tr>
+<tr class="nav-row"><td>Berichtseditor</td><td>Eigene Berichte mit Kennzahlen, Tabellen und Diagrammen bauen.</td><td>Für genaue Analysen, Exporte und Präsentationen.</td></tr>
+<tr class="nav-row"><td>Dashboards</td><td>Übersicht mit mehreren wichtigen Kennzahlen auf einer Seite.</td><td>Für regelmäßige Kontrolle und schnelle Präsentationen.</td></tr>
+</tbody>
+</table>
+</div>
+<div class="nav-merksatz"><strong>Merksatz:</strong> Statistiken &amp; Berichte zeigen dir, was die Zahlen über Kampagnen, Nutzer und Ergebnisse sagen.</div>
+</section>
+
+<section class="nav-section searchable-item" data-section="kampagnen anzeigen anzeigengruppen tests">
+<div class="nav-section-title">
+<h3>Kampagnen</h3>
+<p>Hier wird die eigentliche Werbung aufgebaut und gesteuert.</p>
+</div>
+<div class="table-responsive">
+<table class="navigator-table">
+<thead><tr><th>Reiter / Unterreiter</th><th>Einfach erklärt</th><th>Wofür wichtig?</th></tr></thead>
+<tbody>
+<tr class="nav-row"><td>Kampagnen</td><td>Die große Werbe-Ebene. Hier legst du Hauptziel, Budget und Kampagnentyp fest.</td><td>Steuert Ziel, Budget, Kampagnentyp, Gebotsstrategie und grobe Ausrichtung.</td></tr>
+<tr class="nav-row"><td>Anzeigengruppen</td><td>Unterbereiche innerhalb einer Kampagne für ähnliche Themen, Keywords oder Zielgruppen.</td><td>Damit Kampagnen sauber sortiert bleiben.</td></tr>
+<tr class="nav-row"><td>Anzeigen</td><td>Die sichtbare Werbung: Überschriften, Beschreibungen, Bilder, Videos, Links und CTA.</td><td>Das sehen und klicken Nutzer tatsächlich.</td></tr>
+<tr class="nav-row"><td>Tests</td><td>Bereich für Varianten und A/B-Tests, z. B. Texte, Zielseiten oder Gebotsstrategien.</td><td>Um herauszufinden, welche Variante besser funktioniert.</td></tr>
+<tr class="nav-row"><td>Kampagnengruppen</td><td>Zusammenfassung mehrerer Kampagnen, oft für größere Konten.</td><td>Hilft, mehrere Kampagnen übergeordnet zu organisieren.</td></tr>
+</tbody>
+</table>
+</div>
+<div class="nav-merksatz"><strong>Merksatz:</strong> Kampagne = Ziel und Budget. Anzeigengruppe = Thema/Keywords/Zielgruppe. Anzeige = sichtbare Werbung.</div>
+</section>
+
+<section class="nav-section searchable-item" data-section="assets zielgruppen keywords inhalte standorte werbezeitplaner">
+<div class="nav-section-title">
+<h3>Assets, Zielgruppen, Keywords und Inhalte</h3>
+<p>Hier steuerst du, was die Anzeige stärker macht und wem sie gezeigt wird.</p>
+</div>
+<div class="table-responsive">
+<table class="navigator-table">
+<thead><tr><th>Reiter / Unterreiter</th><th>Einfach erklärt</th><th>Wofür wichtig?</th></tr></thead>
+<tbody>
+<tr class="nav-row"><td>Assets</td><td>Zusätzliche Bausteine für Anzeigen, z. B. Sitelinks, Bilder, Preise, Anrufbutton oder Zusatzinformationen.</td><td>Machen Anzeigen größer, auffälliger und informativer.</td></tr>
+<tr class="nav-row"><td>Keywords</td><td>Suchbegriffe, bei denen deine Anzeige erscheinen soll.</td><td>Besonders wichtig bei Suchanzeigen.</td></tr>
+<tr class="nav-row"><td>Zielgruppen</td><td>Gruppen von Menschen mit Interessen, Kaufabsichten oder Eigenschaften.</td><td>Damit Werbung eher passenden Menschen angezeigt wird.</td></tr>
+<tr class="nav-row"><td>Standorte</td><td>Länder, Städte oder Regionen, in denen Anzeigen ausgespielt werden.</td><td>Verhindert Streuverluste und schützt Budget.</td></tr>
+<tr class="nav-row"><td>Inhalt</td><td>Themen, Websites, Videos oder Platzierungen, in deren Umfeld Anzeigen erscheinen können.</td><td>Wichtig für Display-, YouTube- und Performance-Max-Kampagnen.</td></tr>
+<tr class="nav-row"><td>Werbezeitplaner</td><td>Legt fest, an welchen Tagen und Uhrzeiten Anzeigen laufen sollen.</td><td>Damit Anzeigen laufen, wenn die Zielgruppe aktiv ist.</td></tr>
+<tr class="nav-row"><td>Erweiterte Gebotsanpassungen</td><td>Gebote für bestimmte Situationen erhöhen oder senken.</td><td>Mehr Budget auf gute Chancen, weniger auf schwächere Situationen.</td></tr>
+</tbody>
+</table>
+</div>
+<div class="nav-merksatz"><strong>Merksatz:</strong> Keywords = wonach gesucht wird. Zielgruppen = wer erreicht wird. Standorte = wo geworben wird. Inhalte = Umfeld der Anzeige.</div>
+</section>
+
+<section class="nav-section searchable-item" data-section="änderungsverlauf conversions zielvorhaben attribution uploads wertregeln">
+<div class="nav-section-title">
+<h3>Änderungsverlauf &amp; Zielvorhaben / Conversions</h3>
+<p>Hier siehst du, was geändert wurde und was Google als Erfolg messen soll.</p>
+</div>
+<div class="table-responsive">
+<table class="navigator-table">
+<thead><tr><th>Reiter / Unterreiter</th><th>Einfach erklärt</th><th>Wofür wichtig?</th></tr></thead>
+<tbody>
+<tr class="nav-row"><td>Änderungsverlauf</td><td>Protokoll aller Änderungen im Konto, z. B. Budget, Anzeigenstatus, Keywords oder Gebotsstrategie.</td><td>Wichtig, wenn sich Kampagnen plötzlich verändern.</td></tr>
+<tr class="nav-row"><td>Conversions Zusammenfassung</td><td>Zeigt eingerichtete Conversion-Ziele, z. B. Kauf, Lead, Anruf oder Formular.</td><td>Damit du prüfst, was Google Ads als Erfolg misst.</td></tr>
+<tr class="nav-row"><td>Wertregeln</td><td>Bestimmte Conversions können mehr oder weniger Wert erhalten.</td><td>Wenn Käufe, Kunden oder Regionen unterschiedlich wertvoll sind.</td></tr>
+<tr class="nav-row"><td>Benutzerdefinierte Variablen</td><td>Zusätzliche Informationen zu Conversions, z. B. Produktkategorie oder Kundentyp.</td><td>Fortgeschritten, aber hilfreich für genauere Analysen.</td></tr>
+<tr class="nav-row"><td>Conversion-Einstellungen</td><td>Legt fest, wie Conversions gezählt und zur Optimierung verwendet werden.</td><td>Wichtig, damit Google Erfolg richtig zählt.</td></tr>
+<tr class="nav-row"><td>Uploads</td><td>Offline-Conversion-Daten nachträglich hochladen.</td><td>Wenn Verkäufe oder Leads nicht direkt online gemessen wurden.</td></tr>
+<tr class="nav-row"><td>Attribution</td><td>Zeigt, welche Anzeigen, Keywords oder Kanäle zu einer Conversion beigetragen haben.</td><td>Wichtig, weil Käufe oft nicht nach nur einem Kontakt passieren.</td></tr>
+<tr class="nav-row"><td>Medienübergreifende Reichweite</td><td>Zeigt Reichweite über verschiedene Google-Kanäle.</td><td>Relevant bei Kampagnen über Suche, Display, YouTube, Gmail oder Discover.</td></tr>
+</tbody>
+</table>
+</div>
+<div class="nav-merksatz"><strong>Merksatz:</strong> Conversions zeigen, was als Erfolg zählt. Attribution erklärt, welche Werbekontakte zum Erfolg beigetragen haben.</div>
+</section>
+
+<section class="nav-section searchable-item" data-section="tools abrechnung verwaltung data manager richtlinienmanager fehlerbehebung">
+<div class="nav-section-title">
+<h3>Tools, Abrechnung &amp; Verwaltung</h3>
+<p>Hier findest du Hilfswerkzeuge, Kosten und Kontoeinstellungen.</p>
+</div>
+<div class="table-responsive">
+<table class="navigator-table">
+<thead><tr><th>Reiter / Unterreiter</th><th>Einfach erklärt</th><th>Wofür wichtig?</th></tr></thead>
+<tbody>
+<tr class="nav-row"><td>Asset-Studio</td><td>Bereich für kreative Werbemittel wie Bilder, Videos oder Anzeigen-Assets.</td><td>Hilft bei Erstellung und Verwaltung von Anzeigenmaterial.</td></tr>
+<tr class="nav-row"><td>Planung</td><td>Planungswerkzeuge für Keywords, Reichweite oder Kampagnenideen.</td><td>Wichtig vor Kampagnenstart oder Erweiterung.</td></tr>
+<tr class="nav-row"><td>Hub für App-Werbung</td><td>Bereich für Kampagnen, die Apps bewerben sollen.</td><td>Relevant, wenn ein Unternehmen eine App hat.</td></tr>
+<tr class="nav-row"><td>Gemeinsam genutzte Bibliothek</td><td>Sammlung von Elementen wie Zielgruppen, Listen oder Budgets.</td><td>Spart Zeit und sorgt für einheitliche Einstellungen.</td></tr>
+<tr class="nav-row"><td>Eignung der Inhalte</td><td>Steuert, in welchem Umfeld Anzeigen erscheinen dürfen oder ausgeschlossen werden.</td><td>Wichtig für Markensicherheit.</td></tr>
+<tr class="nav-row"><td>Data Manager</td><td>Bereich für Datenverbindungen, Tracking und Datenquellen.</td><td>Wichtig für Conversion-Tracking und saubere Datenverbindungen.</td></tr>
+<tr class="nav-row"><td>Fehlerbehebung</td><td>Hilft, Probleme im Konto, bei Anzeigen oder beim Tracking zu finden.</td><td>Wenn Anzeigen nicht laufen, abgelehnt werden oder Daten fehlen.</td></tr>
+<tr class="nav-row"><td>Richtlinienmanager</td><td>Zeigt Probleme mit Google-Richtlinien, z. B. abgelehnte Anzeigen.</td><td>Damit Anzeigen regelkonform sind und freigegeben werden können.</td></tr>
+<tr class="nav-row"><td>Anzeigenvorschau und Diagnose</td><td>Prüft, ob und wie eine Anzeige in der Suche erscheinen kann.</td><td>Testen, ohne echte Impressionen zu verursachen.</td></tr>
+<tr class="nav-row"><td>Abrechnungsübersicht</td><td>Zeigt Kosten, Zahlungen, offenen Betrag und Zahlungsstatus.</td><td>Damit du weißt, was Werbung gekostet hat.</td></tr>
+<tr class="nav-row"><td>Zahlungsmethoden</td><td>Verwaltung von Kreditkarte, Bankkonto oder anderen Zahlungsmethoden.</td><td>Ohne gültige Zahlungsmethode laufen Anzeigen nicht zuverlässig.</td></tr>
+<tr class="nav-row"><td>Transaktionen / Rechnungen</td><td>Zeigt Abbuchungen, Rechnungen und Zahlungsbelege.</td><td>Wichtig für Buchhaltung und Kostenkontrolle.</td></tr>
+<tr class="nav-row"><td>Kontozugriff</td><td>Hier wird festgelegt, wer Zugriff auf das Google-Ads-Konto hat.</td><td>Wichtig für Teams, Agenturen oder Freelancer.</td></tr>
+<tr class="nav-row"><td>Verknüpfte Konten</td><td>Verbindet Google Ads mit Analytics, Merchant Center, YouTube usw.</td><td>Damit Daten und Kampagnen besser zusammenarbeiten.</td></tr>
+<tr class="nav-row"><td>Kontoeinstellungen</td><td>Allgemeine Einstellungen wie Sprache, Zeitzone oder Kontoinformationen.</td><td>Wichtig, weil Grundeinstellungen später schwerer änderbar sein können.</td></tr>
+<tr class="nav-row"><td>Benachrichtigungen</td><td>Einstellungen für Hinweise, Warnungen und E-Mails von Google Ads.</td><td>Damit wichtige Probleme oder Empfehlungen nicht verpasst werden.</td></tr>
+</tbody>
+</table>
+</div>
+<div class="nav-merksatz"><strong>Merksatz:</strong> Tools sichern Planung, Daten, Kontrolle und Fehlerbehebung. Abrechnung und Verwaltung sichern Kosten, Zugriffe und Kontoverbindungen.</div>
+</section>
+
+<div class="note searchable-item">
+<strong>Prüfungs-Kurzlogik:</strong> Google Ads wird leichter, wenn man die Navigation als Arbeitsweg versteht: planen → schalten → auswerten → optimieren → verwalten.
+</div>
+</div>
+
 </main>
 <footer>Performance Marketing Lernplattform · Spezialisierung 1</footer>
 <script>
         // Setze Standard-Tab 1 beim Laden
         document.addEventListener('DOMContentLoaded', () => {
-            switchTab(null, 'tab-kpi-uebersicht');
+            switchTab(null, 'tab-google-anfaenger');
         });
 
         // Tab-Umschalter
@@ -1746,6 +2260,11 @@
                 }
             });
 
+            // Falls der Navigator aktiv ist, seine eigene Suche erneut anwenden
+            if (activeTab && activeTab.id === 'tab-google-navigation') {
+                handleNavigatorSearch();
+            }
+
             // "Keine Ergebnisse" Text anzeigen/verbergen
             const noResultsPlaceholder = document.getElementById('search-no-results');
             if (visibleCount === 0 && query.length > 0) {
@@ -1754,6 +2273,38 @@
                 noResultsPlaceholder.style.display = 'none';
             }
         }
+
+
+        // Extra-Suche nur im Google-Ads-Navigator
+        function handleNavigatorSearch() {
+            const input = document.getElementById('navigatorSearch');
+            if (!input) return;
+
+            const query = input.value.toLowerCase().trim();
+            const sections = document.querySelectorAll('#tab-google-navigation .nav-section');
+            const noResults = document.getElementById('navigatorNoResults');
+            let visibleRowsTotal = 0;
+
+            sections.forEach(section => {
+                const rows = section.querySelectorAll('.nav-row');
+                let visibleRowsInSection = 0;
+
+                rows.forEach(row => {
+                    const text = row.textContent.toLowerCase();
+                    const match = text.includes(query);
+                    row.style.display = match || query.length === 0 ? '' : 'none';
+                    if (match || query.length === 0) visibleRowsInSection++;
+                });
+
+                section.style.display = visibleRowsInSection > 0 ? '' : 'none';
+                visibleRowsTotal += visibleRowsInSection;
+            });
+
+            if (noResults) {
+                noResults.style.display = visibleRowsTotal === 0 && query.length > 0 ? 'block' : 'none';
+            }
+        }
+
     </script>
 </body>
 </html>
