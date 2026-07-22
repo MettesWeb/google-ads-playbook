@@ -1,26 +1,661 @@
 <!doctype html>
 <html lang="de">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>YouTube Ads Quiz</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prüfungsvorbereitung: YouTube Ads</title>
+    <style>
+        :root {
+            --primary-blue: #1e3a8a; /* Dark blue for title */
+            --text-dark: #1e293b; /* Dark text for question */
+            --text-gray: #64748b; /* Gray for progress and options */
+            --border-gray: #cbd5e1;
+            --bg-hover: #f8fafc;
+            --correct-bg: #d1fae5;
+            --correct-border: #10b981;
+            --incorrect-bg: #fee2e2;
+            --incorrect-border: #ef4444;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #ffffff;
+            color: var(--text-dark);
+            display: flex;
+            justify-content: center;
+            padding: 40px 20px;
+            margin: 0;
+        }
+
+        .quiz-container {
+            width: 100%;
+            max-width: 850px;
+            background-color: #ffffff;
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--primary-blue);
+            font-size: 32px;
+            font-weight: 800;
+            margin: 0 0 10px 0;
+            letter-spacing: -0.5px;
+        }
+
+        .progress {
+            text-align: center;
+            color: var(--text-gray);
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 50px;
+        }
+
+        .question {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 30px;
+            line-height: 1.4;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .option-btn {
+            background-color: #ffffff;
+            border: 1.5px solid var(--border-gray);
+            border-radius: 10px;
+            padding: 20px 24px;
+            font-size: 18px;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: var(--text-gray);
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            background-color: var(--bg-hover);
+            border-color: #94a3b8;
+        }
+
+        .option-btn.correct {
+            background-color: var(--correct-bg) !important;
+            border-color: var(--correct-border) !important;
+            color: #065f46 !important;
+            font-weight: 600;
+        }
+
+        .option-btn.incorrect {
+            background-color: var(--incorrect-bg) !important;
+            border-color: var(--incorrect-border) !important;
+            color: #991b1b !important;
+        }
+
+        .option-btn:disabled {
+            cursor: default;
+        }
+
+        .feedback {
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 16px;
+            line-height: 1.6;
+            display: none;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .feedback.success {
+            background-color: var(--correct-bg);
+            color: #065f46;
+            border: 1.5px solid var(--correct-border);
+        }
+
+        .feedback.error {
+            background-color: var(--incorrect-bg);
+            color: #991b1b;
+            border: 1.5px solid var(--incorrect-border);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .controls {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 30px;
+        }
+
+        .next-btn {
+            display: none;
+            background-color: var(--primary-blue);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 14px 28px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .next-btn:hover {
+            opacity: 0.9;
+        }
+
+        .result-screen {
+            display: none;
+            text-align: center;
+            padding-top: 40px;
+        }
+
+        .result-screen h2 {
+            font-size: 36px;
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+        }
+
+        .score-circle {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            background-color: var(--primary-blue);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            font-weight: 800;
+            margin: 0 auto 30px auto;
+        }
+
+        .restart-btn {
+            background-color: #0ea5e9;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 14px 28px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        
+        .restart-btn:hover {
+            background-color: #0284c7;
+        }
+    </style>
 </head>
 <body>
-<header>
-  <div class="header-inner">
-    <div class="header-kicker">Interaktives Prüfungstraining</div>
-    <h1>YouTube Ads Quiz</h1>
-    <p>Fragen werden nach Abschluss des Themenblocks ergänzt</p>
-  </div>
-</header>
-<main>
-  <a class="back-link" href="quiz.html">← Zurück zum Quiz-Center</a>
-  <section class="placeholder">
-    <span class="status build">Noch keine Fragen hinterlegt</span>
-    <h2>Dieses Quiz ist vorbereitet.</h2>
-    <p>Sobald die Vorlesungsdatei und das Transkript ausgewertet sind, werden hier anklickbare Multiple-Choice-Fragen mit direktem Feedback und Auswertung eingefügt.</p>
-  </section>
-</main>
+
+    <div class="quiz-container">
+        
+        <!-- QUIZ SCREEN -->
+        <div id="quiz-screen">
+            <h1>Prüfungsvorbereitung: YouTube Ads</h1>
+            <div class="progress" id="progress-text">Frage 1 von 30</div>
+
+            <div class="question" id="question-text">Lade Frage...</div>
+
+            <div class="options" id="options-grid">
+                <!-- Buttons injected via JS -->
+            </div>
+
+            <div class="feedback" id="feedback-box"></div>
+
+            <div class="controls">
+                <button class="next-btn" id="next-btn" onclick="nextQuestion()">Nächste Frage</button>
+            </div>
+        </div>
+
+        <!-- RESULT SCREEN -->
+        <div id="result-screen" class="result-screen">
+            <h2>Prüfung abgeschlossen!</h2>
+            <div class="score-circle">
+                <span id="final-score">0</span>
+            </div>
+            <p style="font-size: 22px; color: var(--text-gray); font-weight: 600;">von 30 Fragen richtig beantwortet.</p>
+            <button class="restart-btn" onclick="restartQuiz()">Quiz neu starten</button>
+        </div>
+
+    </div>
+
+    <script>
+        const questions = [
+            {
+                q: "1. Warum ist YouTube aus Sicht des Performance-Marketings so wichtig?",
+                options: [
+                    "A) Es ist die einzige Plattform ohne Werbekosten.",
+                    "B) Es ist die zweitgrößte Suchmaschine der Welt, in der Nutzer bereits mit klarer Absicht suchen (z.B. Produkttests).",
+                    "C) Man kann dort nur Videos unter 5 Sekunden posten.",
+                    "D) Es wird ausschließlich auf Smartphones genutzt."
+                ],
+                answer: 1,
+                explanation: "YouTube gehört zu Google und wird monatlich von Milliarden Menschen genutzt, oft mit einer konkreten Suchabsicht (z. B. nach Anleitungen oder Testberichten)."
+            },
+            {
+                q: "2. Was hat sich bei YouTube-Ads im Vergleich zu früher grundlegend verändert?",
+                options: [
+                    "A) Früher ging es nur um Branding, heute ist YouTube ein vollwertiger Performance-Kanal für Leads und Verkäufe.",
+                    "B) Früher waren Ads klickbar, heute nicht mehr.",
+                    "C) Früher gab es nur Bumper Ads, heute nur noch In-Stream-Ads.",
+                    "D) Früher durfte man keine Links setzen."
+                ],
+                answer: 0,
+                explanation: "Dank KI-gestütztem Targeting und Kampagnentypen wie Performance Max lassen sich heute konkrete Verkäufe und Website-Besuche generieren, nicht mehr nur reine Markenbekanntheit."
+            },
+            {
+                q: "3. Was bedeutet die Abkürzung 'TOFU' im Marketing-Funnel?",
+                options: [
+                    "A) Time of First Use",
+                    "B) Target Oriented Funnel Uptake",
+                    "C) Top of Funnel (Aufmerksamkeit gewinnen)",
+                    "D) Tone of Funnel"
+                ],
+                answer: 2,
+                explanation: "Top of Funnel (TOFU) zielt darauf ab, neue Personen auf eine Marke aufmerksam zu machen, die bisher keinen Kontakt zu ihr hatten."
+            },
+            {
+                q: "4. Welches YouTube-Anzeigenformat eignet sich besonders für die TOFU-Phase (Aufmerksamkeit)?",
+                options: [
+                    "A) Bumper Ads (6 Sekunden, nicht überspringbar)",
+                    "B) In-Feed Ads",
+                    "C) Demand Gen",
+                    "D) Search Ads"
+                ],
+                answer: 0,
+                explanation: "Bumper Ads sind kurz, nicht überspringbar und sehr reichweitenstark – ideal, um erste Aufmerksamkeit (TOFU) für eine Marke zu wecken."
+            },
+            {
+                q: "5. In welcher Funnel-Phase befindet man sich, wenn man die Nutzerfrage 'Ist das Produkt gut?' mit Tutorials oder Testimonials beantworten möchte?",
+                options: [
+                    "A) TOFU",
+                    "B) BOFU",
+                    "C) MOFU (Middle of Funnel)",
+                    "D) Out of Funnel"
+                ],
+                answer: 2,
+                explanation: "Im Middle of Funnel (MOFU) geht es darum, bei Nutzern mit Erstkontakt das Interesse zu vertiefen und Vertrauen aufzubauen."
+            },
+            {
+                q: "6. Was ist das primäre Ziel in der BOFU-Phase (Bottom of Funnel)?",
+                options: [
+                    "A) Einen neuen YouTube-Kanal abonnieren.",
+                    "B) Die Conversion auslösen (z.B. Kauf oder Registrierung) durch klare Handlungsaufforderungen.",
+                    "C) Das Video zu liken.",
+                    "D) Möglichst viele Videoaufrufe (Views) generieren."
+                ],
+                answer: 1,
+                explanation: "Im Bottom of Funnel (BOFU) sollen kaufbereite Nutzer durch starke CTAs ('Jetzt kaufen') zur endgültigen Handlung bewegt werden."
+            },
+            {
+                q: "7. Welcher Kampagnentyp in Google Ads wird für die BOFU-Phase auf YouTube besonders empfohlen?",
+                options: [
+                    "A) Brand Awareness Kampagne",
+                    "B) Demand Gen Campaigns",
+                    "C) Bumper Ad Campaigns",
+                    "D) Reach Campaigns"
+                ],
+                answer: 1,
+                explanation: "Demand Gen Campaigns (früher Video Action Campaigns) sind stark conversion-orientiert und zielen auf Nutzer mit hoher Kaufabsicht ab."
+            },
+            {
+                q: "8. Welche YouTube-Messzahl (KPI) gibt an, wie viel Prozent der Nutzer ein Video mindestens 30 Sekunden lang angesehen haben?",
+                options: [
+                    "A) Conversion-Rate",
+                    "B) Click-Through-Rate (CTR)",
+                    "C) View-Rate",
+                    "D) Cost-per-View (CPV)"
+                ],
+                answer: 2,
+                explanation: "Die View-Rate misst die prozentuale Betrachtungsdauer und zeigt, wie fesselnd der Videoinhalt ist."
+            },
+            {
+                q: "9. Was misst eine View-Through-Conversion (VTC)?",
+                options: [
+                    "A) Jemand klickt auf die Anzeige, kauft aber erst 30 Tage später.",
+                    "B) Jemand sieht die Anzeige, klickt nicht darauf, kauft aber später trotzdem.",
+                    "C) Jemand kauft direkt nach dem Klick.",
+                    "D) Jemand bricht den Kauf nach dem Video ab."
+                ],
+                answer: 1,
+                explanation: "VTC erfasst Conversions von Nutzern, die durch die Videoanzeige beeinflusst wurden, ohne direkt darauf geklickt zu haben."
+            },
+            {
+                q: "10. Was sind 'Affinity-Zielgruppen' (Affinity Audiences) in YouTube Ads?",
+                options: [
+                    "A) Nutzer mit einer akuten, tagesaktuellen Kaufabsicht.",
+                    "B) Nutzer mit langfristigen Interessen, Hobbys und Lebensstilen (z.B. 'Technikfans').",
+                    "C) Personen, die bereits den Online-Shop besucht haben.",
+                    "D) Nutzer aus einem bestimmten Postleitzahlengebiet."
+                ],
+                answer: 1,
+                explanation: "Affinity-Zielgruppen basieren auf den allgemeinen und beständigen Leidenschaften der Nutzer."
+            },
+            {
+                q: "11. Welche Art von Datenbasis verbirgt sich hinter 'Customer Match'?",
+                options: [
+                    "A) Hochladen eigener, verschlüsselter Kundendaten (First-Party-Data wie E-Mails).",
+                    "B) Eine von Google generierte Liste von Wettbewerbskunden.",
+                    "C) Das Auslesen von Cookies fremder Websites.",
+                    "D) Die Suche nach Nutzern anhand demografischer Daten."
+                ],
+                answer: 0,
+                explanation: "Mit Customer Match können Werbetreibende eigene Kundendaten (z.B. Newsletter-Listen) in Google Ads hochladen, um diese gezielt anzusprechen oder Lookalikes zu bilden."
+            },
+            {
+                q: "12. Was bedeutet 'Audience Prediction' im Kontext von KI-gestütztem Targeting?",
+                options: [
+                    "A) Der Werbetreibende wählt exakt aus, welche Altersgruppe die Anzeige sieht.",
+                    "B) Die KI sagt vollautomatisch voraus, welche Nutzer am ehesten konvertieren, basierend auf Echtzeit-Signalen.",
+                    "C) Das Vorhersagen der Videolänge durch Google.",
+                    "D) Das automatische Blockieren von Nutzern, die nie klicken."
+                ],
+                answer: 1,
+                explanation: "Bei der Audience Prediction wertet die Plattform Signale (Suchverhalten, Watch-History) aus, um selbstständig die besten Zielgruppen für Conversions zu finden."
+            },
+            {
+                q: "13. Welcher Google-Kampagnentyp nutzt die KI-gestützte Audience Prediction über alle Kanäle hinweg (Suche, YouTube, Display, etc.)?",
+                options: [
+                    "A) Performance Max (PMax)",
+                    "B) Standard-Shopping",
+                    "C) Bumper Ads",
+                    "D) YouTube Studio Ads"
+                ],
+                answer: 0,
+                explanation: "Performance Max ist eine All-in-One-Lösung, bei der die KI die Aussteuerung über das gesamte Google-Netzwerk basierend auf Zielgruppensignalen übernimmt."
+            },
+            {
+                q: "14. Welche Aufgabe haben die von Werbetreibenden festgelegten Zielgruppen im Jahr 2026 bei KI-Kampagnen?",
+                options: [
+                    "A) Sie bilden eine starre Grenze, die Google nicht überschreiten darf.",
+                    "B) Sie dienen der KI lediglich als 'Audience Signals' (Startpunkt), um darüber hinaus eigenständig Käufer zu finden.",
+                    "C) Sie werden von Google komplett ignoriert.",
+                    "D) Sie definieren ausschließlich den maximalen Klickpreis."
+                ],
+                answer: 1,
+                explanation: "In modernen KI-Kampagnen (wie PMax) schränken Zielgruppen die Ausspielung nicht mehr starr ein, sondern dienen dem Algorithmus als initiale Richtungsvorgabe."
+            },
+            {
+                q: "15. Was ist ein 'Lookalike-Segment'?",
+                options: [
+                    "A) Eine Zielgruppe, die optisch gleiche Endgeräte nutzt.",
+                    "B) Die Ansprache statistischer Zwillinge, deren Online-Verhalten den eigenen profitablen Bestandskunden ähnelt.",
+                    "C) Eine Zielgruppe, die in der gleichen Stadt wohnt.",
+                    "D) Personen, die nach dem gleichen Keyword suchen."
+                ],
+                answer: 1,
+                explanation: "Lookalike Audiences helfen bei der Skalierung, indem sie neue Nutzer finden, die ähnliche Verhaltensmuster aufweisen wie bereits konvertierte Kunden."
+            },
+            {
+                q: "16. Welches Tool dient Kanalbetreibern primär für organisches Wachstum (Views/Abonnenten), aber NICHT für tiefes Performance-Tracking?",
+                options: [
+                    "A) Google Ads",
+                    "B) YouTube Studio (Reiter 'Werbung')",
+                    "C) Google Analytics",
+                    "D) Performance Max"
+                ],
+                answer: 1,
+                explanation: "YouTube Studio bietet eine einfache Werbefunktion zum 'Boosten' von Videos, erlaubt aber keine ROI-getriebene Conversion-Optimierung."
+            },
+            {
+                q: "17. Wenn ein Werbetreibender YouTube-Anzeigen gezielt für den Abverkauf (Sales) schalten will, welches Tool muss er zwingend nutzen?",
+                options: [
+                    "A) YouTube Studio",
+                    "B) Google Ads (z.B. Demand Gen oder PMax)",
+                    "C) Google Search Console",
+                    "D) YouTube Shorts Editor"
+                ],
+                answer: 1,
+                explanation: "Nur in Google Ads stehen die benötigten Tracking-Funktionen (Conversions) und intelligenten Kampagnentypen (Demand Gen, PMax) zur Verfügung."
+            },
+            {
+                q: "18. Welche Videoformate sollte man bei einer YouTube-Kampagne in Google Ads am besten hochladen?",
+                options: [
+                    "A) Nur 16:9 Querformate.",
+                    "B) Nur 9:16 Hochformate.",
+                    "C) Verschiedene Ausrichtungen (9:16, 16:9, 1:1), damit die KI automatisch entscheiden kann, was wo am besten performt.",
+                    "D) Ausschließlich 1:1 quadratische Videos."
+                ],
+                answer: 2,
+                explanation: "Um der KI maximale Flexibilität für Platzierungen (z.B. In-Stream vs. Shorts) zu geben, sollte ein Asset-Mix aus verschiedenen Formaten bereitgestellt werden."
+            },
+            {
+                q: "19. Welcher Ad-Typ erlaubt es dem Nutzer, das Werbevideo nach 5 Sekunden zu überspringen?",
+                options: [
+                    "A) Bumper Ad",
+                    "B) Non-Skippable In-Stream Ad",
+                    "C) In-Feed Ad",
+                    "D) Überspringbare In-Stream-Anzeige (Skippable Ad)"
+                ],
+                answer: 3,
+                explanation: "Überspringbare (Skippable) In-Stream-Anzeigen können vor, während oder nach einem Video laufen und vom Nutzer nach 5 Sekunden abgebrochen werden."
+            },
+            {
+                q: "20. Was ist ein Merkmal von 'Nicht überspringbaren In-Stream-Anzeigen' (Non-Skippable Ads)?",
+                options: [
+                    "A) Sie sind stark conversion-orientiert.",
+                    "B) Sie dürfen bis zu 3 Minuten lang sein.",
+                    "C) Sie sind maximal 15 bis 20 Sekunden lang und dienen primär dem Reichweitenaufbau.",
+                    "D) Sie erscheinen nur auf Google Discover."
+                ],
+                answer: 2,
+                explanation: "Non-Skippable Ads erzwingen die Ansicht und werden per CPM abgerechnet, eignen sich aber in der Regel nicht für direkte Verkäufe (Conversions)."
+            },
+            {
+                q: "21. Welche YouTube-Ad wird klassischerweise per CPC (Cost-per-Click) abgerechnet, weil der Nutzer aktiv auf das Vorschaubild klicken muss?",
+                options: [
+                    "A) Bumper Ad",
+                    "B) In-Feed-Videoanzeige (ehemals Discovery Ads)",
+                    "C) Pre-Roll Ad",
+                    "D) Skippable Ad"
+                ],
+                answer: 1,
+                explanation: "In-Feed-Anzeigen erscheinen z.B. in Suchergebnissen. Der Werbetreibende zahlt erst, wenn der Nutzer sich entscheidet, das Video anzuklicken."
+            },
+            {
+                q: "22. Wofür eignet sich laut Vorlesung eine In-Feed-Videoanzeige besonders gut?",
+                options: [
+                    "A) Für kurze 6-Sekunden Branding-Spots.",
+                    "B) Um Nutzer anzusprechen, die gerade aktiv nach Tutorials oder Produktvergleichen stöbern.",
+                    "C) Um den Nutzer mitten im Video zu unterbrechen.",
+                    "D) Für reine Audio-Kampagnen."
+                ],
+                answer: 1,
+                explanation: "Da In-Feed-Ads oft in den Suchergebnissen auftauchen, sind sie ideal, um aktive Informationsbedürfnisse (Pull-Marketing) abzufangen."
+            },
+            {
+                q: "23. Was versteht man unter 'In-Market-Zielgruppen'?",
+                options: [
+                    "A) Nutzer, die einen Ad-Blocker verwenden.",
+                    "B) Personen, die bereits Kunden sind.",
+                    "C) Nutzer mit einer nachgewiesenen, akuten Kaufabsicht für bestimmte Produktkategorien.",
+                    "D) Nutzer aus einem bestimmten Bundesland."
+                ],
+                answer: 2,
+                explanation: "In-Market-Zielgruppen (z.B. 'Kameras kaufen') umfassen Personen, bei denen Google aufgrund des aktuellen Surfverhaltens ein starkes Kaufinteresse erkannt hat."
+            },
+            {
+                q: "24. Was verbirgt sich im YouTube Ads Transparency Center?",
+                options: [
+                    "A) Ein Tool, um eigene Videos zu schneiden.",
+                    "B) Ein Archiv, in dem man die Werbeanzeigen (inkl. Video-Ads) von bekannten Marken zu Analysezwecken recherchieren kann.",
+                    "C) Ein Steuerberater-Tool für Google Ads.",
+                    "D) Die Einstellungen für das Passwort."
+                ],
+                answer: 1,
+                explanation: "Im Transparency Center legt Google offen, welche Anzeigen ein Werbetreibender aktuell schaltet. Ideal für Konkurrenz-Analysen."
+            },
+            {
+                q: "25. Welcher Grundsatz gilt für die KI bei YouTube Ads (Motto: 'Garbage in - Garbage out')?",
+                options: [
+                    "A) Je schlechter das Video, desto günstiger der Klick.",
+                    "B) Die KI kann nur mit den Daten und Assets arbeiten, die man ihr gibt; ohne gute Signale und Creatives optimiert sie falsch.",
+                    "C) Alte Kampagnen müssen wöchentlich gelöscht werden.",
+                    "D) Man sollte immer alle Sprachen weltweit auswählen."
+                ],
+                answer: 1,
+                explanation: "Audience Prediction funktioniert nur dann, wenn die KI saubere Conversion-Daten und zielgruppengerechtes Videomaterial als Grundlage hat."
+            },
+            {
+                q: "26. Welcher dieser Faktoren gehört zwingend zu einem guten Video-'Hook' in YouTube Ads?",
+                options: [
+                    "A) Ein langsames Fade-In mit klassischer Musik.",
+                    "B) Ein visuelles oder inhaltliches Element in den allerersten Sekunden, das den Nutzer am Überspringen (Skip) hindert.",
+                    "C) Das Impressum der Firma.",
+                    "D) Ein Countdown von 10 auf 0."
+                ],
+                answer: 1,
+                explanation: "Da viele Ads nach 5 Sekunden übersprungen werden können, ist der 'Hook' entscheidend, um sofort Neugierde zu wecken."
+            },
+            {
+                q: "27. Welche Aufgabe übernimmt das 'Optimized Targeting' (Optimierte Ausrichtung) in Google Ads?",
+                options: [
+                    "A) Es sperrt Nutzer, die nie etwas kaufen.",
+                    "B) Es sucht selbstständig nach Conversions außerhalb der manuell definierten Zielgruppen.",
+                    "C) Es passt das Video-Seitenverhältnis an.",
+                    "D) Es ändert automatisch das Tagesbudget."
+                ],
+                answer: 1,
+                explanation: "Die Funktion erlaubt es der KI, über die vorgegebenen Grenzen hinauszugehen und neue, vielversprechende Nutzer zu akquirieren."
+            },
+            {
+                q: "28. Welches YouTube-Anzeigenformat zwingt den Nutzer NICHT, das Video vor dem eigentlichen Inhalt anzusehen?",
+                options: [
+                    "A) Bumper Ad",
+                    "B) Non-Skippable Ad",
+                    "C) In-Feed Ad",
+                    "D) Pre-Roll Ad"
+                ],
+                answer: 2,
+                explanation: "In-Feed Ads tauchen als Empfehlung oder in der Suche auf. Der Nutzer entscheidet selbst durch einen Klick, ob er das Video starten möchte."
+            },
+            {
+                q: "29. Was ist ein Hauptziel der 'Demand Gen'-Kampagnen in Google Ads?",
+                options: [
+                    "A) Sie sollen Suchanzeigen komplett ersetzen.",
+                    "B) Sie zielen auf YouTube (inkl. Shorts), Discover und Gmail ab, um durch stark visuelle Kaufreize Conversions (BOFU) zu generieren.",
+                    "C) Sie erstellen automatisch neue Produkte im Onlineshop.",
+                    "D) Sie verwalten E-Mail-Postfächer."
+                ],
+                answer: 1,
+                explanation: "Demand Gen ist der Performance-Kampagnentyp für Googles visuelle Netzwerke, um Nutzer mit hoher Kaufabsicht zu konvertieren."
+            },
+            {
+                q: "30. Warum sind reine Reichweitenwerte wie Impressionen im Performance-Marketing eher zweitrangig?",
+                options: [
+                    "A) Weil sie nicht messbar sind.",
+                    "B) Weil im Performance-Marketing der Fokus auf harten Zielen wie Conversions (Verkäufen/Leads) und dem ROI/CPA liegt.",
+                    "C) Weil Impressionen zu teuer sind.",
+                    "D) Weil sie nur bei Instagram wichtig sind."
+                ],
+                answer: 1,
+                explanation: "Impressionen zeigen nur Sichtbarkeit an. Für den wirtschaftlichen Erfolg einer Kampagne zählen die tatsächlichen Aktionen (Conversions) der Nutzer."
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let answered = false;
+
+        const questionText = document.getElementById('question-text');
+        const optionsGrid = document.getElementById('options-grid');
+        const feedbackBox = document.getElementById('feedback-box');
+        const nextBtn = document.getElementById('next-btn');
+        const progressText = document.getElementById('progress-text');
+        
+        const quizScreen = document.getElementById('quiz-screen');
+        const resultScreen = document.getElementById('result-screen');
+        const finalScore = document.getElementById('final-score');
+
+        function loadQuestion() {
+            answered = false;
+            feedbackBox.style.display = 'none';
+            feedbackBox.className = 'feedback';
+            nextBtn.style.display = 'none';
+            
+            const q = questions[currentQuestionIndex];
+            progressText.innerText = `Frage ${currentQuestionIndex + 1} von ${questions.length}`;
+            questionText.innerText = q.q;
+            
+            optionsGrid.innerHTML = '';
+            
+            q.options.forEach((optText, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.innerText = optText;
+                btn.onclick = () => handleSelection(index, btn);
+                optionsGrid.appendChild(btn);
+            });
+        }
+
+        function handleSelection(selectedIndex, selectedBtn) {
+            if (answered) return;
+            answered = true;
+
+            const q = questions[currentQuestionIndex];
+            const allBtns = optionsGrid.children;
+
+            // Mark correct answer and disable all buttons
+            for(let i=0; i<allBtns.length; i++) {
+                allBtns[i].disabled = true;
+                if(i === q.answer) {
+                    allBtns[i].classList.add('correct');
+                }
+            }
+
+            if(selectedIndex === q.answer) {
+                score++;
+                feedbackBox.innerHTML = `<strong>Richtig! 🎉</strong><br><br>${q.explanation}`;
+                feedbackBox.classList.add('success');
+            } else {
+                selectedBtn.classList.add('incorrect');
+                feedbackBox.innerHTML = `<strong>Falsch!</strong><br><br>${q.explanation}`;
+                feedbackBox.classList.add('error');
+            }
+
+            feedbackBox.style.display = 'block';
+
+            if(currentQuestionIndex < questions.length - 1) {
+                nextBtn.innerText = "Nächste Frage";
+            } else {
+                nextBtn.innerText = "Zum Ergebnis";
+            }
+            nextBtn.style.display = 'inline-block';
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if(currentQuestionIndex < questions.length) {
+                loadQuestion();
+            } else {
+                showResult();
+            }
+        }
+
+        function showResult() {
+            quizScreen.style.display = 'none';
+            resultScreen.style.display = 'block';
+            finalScore.innerText = score;
+        }
+
+        function restartQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            resultScreen.style.display = 'none';
+            quizScreen.style.display = 'block';
+            loadQuestion();
+        }
+
+        // Initialize first question
+        loadQuestion();
+    </script>
 </body>
 </html>

@@ -1,26 +1,144 @@
 <!doctype html>
 <html lang="de">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>YouTube Ads Playbook</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>YouTube Ads Playbook</title><style>
+:root{--primary-blue:#0b1f38;--secondary-blue:#16365d;--accent-blue:#1e4976;--gold:#c8a84e;--light-bg:#f4f7f9;--card-bg:#fff;--border-color:#e2e8f0;--text-dark:#1e293b;--text-muted:#64748b;--green:#065f46;--green-bg:#d1fae5;--yellow:#92400e;--yellow-bg:#fef3c7;--red:#991b1b;--red-bg:#fee2e2;--blue-bg:#eaf6fd;--shadow-sm:0 1px 3px rgba(0,0,0,.10);--shadow-md:0 8px 24px rgba(11,31,56,.13);--radius:14px;--transition:all .2s ease}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{min-height:100vh;background:var(--light-bg);color:var(--text-dark);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.55}
+header{background:var(--primary-blue);color:#fff;padding:2rem 1.5rem;border-bottom:4px solid var(--gold);box-shadow:var(--shadow-md)}.header-inner,main{width:min(1200px,calc(100% - 2rem));margin:0 auto}.header-grid{display:flex;justify-content:space-between;gap:1rem;align-items:center;flex-wrap:wrap}.header-title{min-width:280px;flex:1 1 420px}.header-kicker{color:#cbd5e1;font-weight:800;text-transform:uppercase;letter-spacing:.12em;font-size:.75rem;margin-bottom:.45rem}h1{font-size:clamp(2rem,4vw,3rem);line-height:1.08}header p{color:#cbd5e1;margin-top:.65rem;max-width:760px}.header-actions{display:flex;align-items:center;justify-content:flex-end;gap:1rem;flex:1 1 620px}.search{border:1px solid #cbd5e1;border-radius:10px;padding:.85rem 1rem;font-size:1rem;color:var(--text-dark);background:#fff;box-shadow:var(--shadow-sm);transition:var(--transition)}.search:focus{outline:none;border-color:var(--accent-blue);box-shadow:0 0 0 3px rgba(30,73,118,.12)}.header-search{flex:1;min-width:280px;max-width:620px;margin:0;background:rgba(255,255,255,.96);border-color:rgba(255,255,255,.55);box-shadow:0 8px 22px rgba(0,0,0,.10)}.back-link-header{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;color:#fff;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.28);padding:.82rem 1rem;border-radius:9px;font-weight:800;white-space:nowrap;transition:var(--transition)}.back-link-header:hover{background:rgba(255,255,255,.18)}
+main{padding:2.1rem 0 4rem}.tabs{display:flex;flex-wrap:wrap;gap:.55rem;margin:0 0 1.4rem}.tab-btn{border:1px solid #cbd5e1;background:#fff;color:var(--primary-blue);border-radius:999px;padding:.68rem .95rem;font-weight:800;cursor:pointer;transition:var(--transition);box-shadow:var(--shadow-sm);font-size:.92rem}.tab-btn:hover{background:#f8fafc;border-color:var(--secondary-blue);transform:translateY(-1px)}.tab-btn.active{background:var(--primary-blue);border-color:var(--primary-blue);color:#fff;box-shadow:var(--shadow-md)}.tab-content{display:none}.tab-content.active{display:block}.section-header{margin:1.2rem 0 1rem}.section-header h2{color:var(--primary-blue);font-size:clamp(1.45rem,3vw,2rem)}.section-header p{color:var(--text-muted);margin-top:.25rem;max-width:920px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:1rem;margin-bottom:1rem}.two-col{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1rem;margin-bottom:1rem}.card,.table-card,.note,.workflow{background:var(--card-bg);border:1px solid var(--border-color);border-radius:var(--radius);box-shadow:var(--shadow-sm)}.card{padding:1.2rem}.card h3{color:var(--primary-blue);margin-bottom:.45rem}.card p,.card li{color:var(--text-muted)}.tag{display:inline-flex;align-items:center;padding:.25rem .6rem;border-radius:999px;font-size:.76rem;font-weight:800;margin-bottom:.75rem}.tag.blue{background:var(--blue-bg);color:var(--primary-blue)}.tag.green{background:var(--green-bg);color:var(--green)}.tag.yellow{background:var(--yellow-bg);color:var(--yellow)}.tag.red{background:var(--red-bg);color:var(--red)}
+.table-card{overflow:hidden;margin-bottom:1rem}.table-responsive{overflow-x:auto}table{width:100%;border-collapse:collapse;background:#fff}th,td{padding:.9rem 1rem;text-align:left;border-bottom:1px solid var(--border-color);vertical-align:top}th{background:#f8fafc;color:var(--primary-blue);font-size:.85rem;text-transform:uppercase;letter-spacing:.04em}tr:last-child td{border-bottom:none}td strong{color:var(--primary-blue)}
+.note{border-left:5px solid var(--gold);padding:1rem 1.1rem;margin:1rem 0;color:var(--text-muted)}.note strong{color:var(--primary-blue)}.workflow{padding:1.2rem;margin-bottom:1rem}.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.75rem;margin-top:.8rem}.step{background:#f8fafc;border:1px solid var(--border-color);border-radius:12px;padding:.9rem;color:var(--text-muted)}.step-num{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--primary-blue);color:#fff;font-weight:800;margin-bottom:.5rem}.step strong{display:block;color:var(--primary-blue);margin-bottom:.2rem}.formula{background:#f8fafc;border:1px solid var(--border-color);border-radius:10px;padding:.75rem .9rem;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;color:var(--primary-blue);font-weight:700;margin-top:.5rem}ul.clean{padding-left:1.1rem}
+.accordion{display:grid;gap:.8rem;margin-bottom:1.2rem}.acc-card{background:#fff;border:1px solid var(--border-color);border-radius:var(--radius);box-shadow:var(--shadow-sm);overflow:hidden}.acc-head{width:100%;border:0;background:#fff;color:var(--primary-blue);padding:1rem 1.1rem;display:flex;align-items:center;justify-content:space-between;font-size:1rem;font-weight:800;cursor:pointer;text-align:left}.acc-head:hover{background:#f8fafc}.acc-icon{font-size:1.35rem}.acc-body{display:none;padding:0 1.1rem 1.1rem;color:var(--text-muted)}.acc-card.open .acc-body{display:block}.acc-card.open .acc-icon{transform:rotate(45deg)}.pill-row{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:.65rem}.pill{display:inline-flex;padding:.28rem .65rem;border-radius:999px;background:#f8fafc;border:1px solid var(--border-color);color:var(--primary-blue);font-weight:750;font-size:.82rem}.hidden-search{display:none!important}.no-results{display:none;background:#fff;border:1px solid var(--border-color);border-radius:var(--radius);padding:2rem;text-align:center;color:var(--text-muted)}footer{text-align:center;color:var(--text-muted);font-size:.84rem;padding:1.5rem}
+@media(max-width:900px){.header-actions{width:100%;flex-direction:column;align-items:stretch;margin-top:1rem}.header-search{max-width:none;width:100%;min-width:0}.back-link-header{width:100%}}@media(max-width:760px){th,td{padding:.75rem .8rem}.tab-btn{width:100%;justify-content:center}}
+</style></head>
 <body>
-<header>
-  <div class="header-inner">
-    <div class="header-kicker">Spezialisierung 1 · Performance Marketing</div>
-    <h1>YouTube Ads Playbook</h1>
-    <p>Anzeigenformate, Zielgruppen, Creatives und Optimierung als Lern-Playbook.</p>
-  </div>
-</header>
+<header><div class="header-inner header-grid"><div class="header-title"><div class="header-kicker">Talentspring · Spezialisierung 1</div><h1>YouTube Ads Playbook</h1><p>Video Performance Marketing: YouTube im Funnel, Werbeformate, Demand Gen, Performance Max, Audience Prediction, KPIs und Optimierung.</p></div><div class="header-actions"><input id="searchInput" class="search header-search" type="search" placeholder="Im YouTube Ads Playbook suchen ..."><a class="back-link-header" href="index.html">← Zurück zur Übersicht</a></div></div></header>
 <main>
-  <a class="back-link" href="index.html">← Zurück zur Übersicht</a>
-  <section class="placeholder">
-    <span class="status build">Noch nicht hinterlegt</span>
-    <h2>Dieses Playbook wird nach Abschluss des Themenblocks ergänzt.</h2>
-    <p>Hier erscheinen später die wichtigsten Begriffe, Kennzahlen, Entscheidungen, Kampagnenstrukturen, Tracking-Grundlagen und Praxisbeispiele.</p>
-  </section>
+<nav class="tabs" aria-label="Playbook-Reiter">
+<button class="tab-btn active" data-tab="overview">1. Überblick</button><button class="tab-btn" data-tab="funnel">2. Funnel & Ziele</button><button class="tab-btn" data-tab="formats">3. Werbeformate</button><button class="tab-btn" data-tab="setup">4. Kampagne erstellen</button><button class="tab-btn" data-tab="audience">5. Zielgruppen & KI</button><button class="tab-btn" data-tab="kpis">6. KPIs & Optimierung</button><button class="tab-btn" data-tab="checklist">7. Checklisten</button>
+</nav>
+<div id="noResults" class="no-results">Keine passenden Inhalte gefunden.</div>
+
+<section id="overview" class="tab-content active">
+  <div class="section-header searchable-item"><h2>1. Überblick: Warum YouTube im Performance-Marketing wichtig ist</h2><p>YouTube ist nicht nur eine Videoplattform, sondern ein Google-Kanal mit Suchintention, Reichweite, Emotion, Vertrauen und messbaren Performance-Zielen.</p></div>
+  <div class="grid">
+    <article class="card searchable-item"><span class="tag blue">Suchintention</span><h3>YouTube als Suchmaschine</h3><p>Nutzer*innen suchen nach Produkttests, Anleitungen und Erfahrungsberichten. Dadurch können Unternehmen Menschen erreichen, die bereits ein Thema, Problem oder Kaufinteresse haben.</p><div class="pill-row"><span class="pill">Produkttests</span><span class="pill">How-to</span><span class="pill">Reviews</span></div></article>
+    <article class="card searchable-item"><span class="tag green">Emotion</span><h3>Video schafft Vertrauen</h3><p>Videos verbinden Mimik, Stimme, Musik und Storytelling. Das ist besonders wertvoll für erklärungsbedürftige Produkte, neue Marken, teure Angebote und Dienstleistungen mit Vertrauensbedarf.</p></article>
+    <article class="card searchable-item"><span class="tag yellow">Ökosystem</span><h3>Owned, Earned & Paid</h3><p>YouTube kann gleichzeitig eigener Kanal, organische Reichweite und bezahlte Werbefläche sein: Kanalvideos, Shorts, Kommentare, Creator-Partnerschaften und Ads arbeiten zusammen.</p></article>
+  </div>
+  <div class="table-card searchable-item"><div class="table-responsive"><table><thead><tr><th>Rolle von YouTube</th><th>Einfach erklärt</th><th>Marketing-Bedeutung</th></tr></thead><tbody>
+  <tr><td><strong>Suchplattform</strong></td><td>Menschen suchen aktiv nach Lösungen, Produkten, Tests oder Anleitungen.</td><td>Gut für erklärende Inhalte und Kaufvorbereitung.</td></tr>
+<tr><td><strong>Videoplattform</strong></td><td>Bewegtbild transportiert Emotion, Stimme, Vertrauen und Story.</td><td>Stark für Markenwirkung, Vertrauen und Produktverständnis.</td></tr>
+<tr><td><strong>Performance-Kanal</strong></td><td>YouTube Ads können über Google Ads mit Conversion-Zielen, Zielgruppensignalen und KI optimiert werden.</td><td>Reichweite wird mit messbaren Zielen wie Leads, Verkäufen oder Traffic verbunden.</td></tr>
+<tr><td><strong>Google-Ökosystem</strong></td><td>YouTube arbeitet mit Google-Daten, Google Ads, PMax, Demand Gen und Tracking zusammen.</td><td>Wichtig für datenbasierte Steuerung und KI-Optimierung.</td></tr></tbody></table></div></div>
+  <div class="note searchable-item"><strong>Kurzlogik:</strong> YouTube verbindet Aufmerksamkeit, Vertrauen und Performance. Es ist besonders stark, wenn ein Produkt erklärt, emotional aufgeladen oder vor dem Kauf erlebbar gemacht werden soll.</div>
+</section>
+
+<section id="funnel" class="tab-content">
+<div class="section-header searchable-item"><h2>2. YouTube im Funnel: TOFU, MOFU, BOFU</h2><p>Bei YouTube muss immer klar sein, ob du Aufmerksamkeit gewinnen, Interesse aufbauen oder Conversions auslösen willst.</p></div>
+<div class="table-card searchable-item"><div class="table-responsive"><table><thead><tr><th>Funnel-Stufe</th><th>Ziel</th><th>YouTube-Einsatz</th><th>Passende Formate</th><th>Wichtige KPIs</th></tr></thead><tbody><tr><td><strong>TOFU</strong><br>Top of Funnel</td><td>Neue Personen auf Marke oder Produkt aufmerksam machen.</td><td>Emotionale Markenbotschaft, Problem zeigen, erstes Interesse wecken.</td><td>Bumper Ads, Skippable In-Stream, YouTube Shorts Ads.</td><td>Reichweite, Impressionen, CPM, View Rate.</td></tr>
+<tr><td><strong>MOFU</strong><br>Middle of Funnel</td><td>Interesse vertiefen und Nutzer*innen überzeugen.</td><td>Erklärvideo, Produktvergleich, How-to, Nutzenargumente.</td><td>In-Feed Video, längere Skippable Ads, How-to-Video.</td><td>View Rate, CTR, CPC, Website-Traffic.</td></tr>
+<tr><td><strong>BOFU</strong><br>Bottom of Funnel</td><td>Kauf, Lead, Anmeldung oder Reaktivierung auslösen.</td><td>Retargeting, Sonderangebot, klare Zielseite, Conversion-Fokus.</td><td>Demand Gen, Performance Max, Retargeting über First-Party-Daten.</td><td>Conversions, CPA, Conversion Rate, ROAS, VTC.</td></tr></tbody></table></div></div>
+<div class="two-col">
+<article class="card searchable-item"><span class="tag blue">Kampagnenziele</span><h3>Mögliche Ziele bei YouTube Ads</h3><ul class="clean"><li><strong>Conversions:</strong> Verkäufe oder Leads auf der Website auslösen.</li><li><strong>Video-Aufrufe:</strong> möglichst viele Menschen sollen das Video ansehen.</li><li><strong>Reichweite & Markenbekanntheit:</strong> viele Impressionen erzielen.</li><li><strong>Produkt- & Markenkaufbereitschaft:</strong> Interesse bei noch nicht kaufbereiten Menschen wecken.</li><li><strong>Website-Traffic:</strong> gezielt Besucher*innen auf Landingpages bringen.</li><li><strong>Performance Max:</strong> KI-gestützt über mehrere Google-Kanäle inklusive YouTube ausspielen.</li></ul></article>
+<article class="card searchable-item"><span class="tag green">Strategieformel</span><h3>Zielgruppe + Funnel + Video-Inhalt</h3><p>Eine gute YouTube-Strategie entsteht aus vier Bausteinen: Wer soll angesprochen werden? In welcher Funnel-Phase ist die Person? Welcher Videoinhalt passt dazu? Welche KPIs zeigen Erfolg?</p><div class="formula">Zielgruppe + Funnel-Phase + Video-Inhalt + Messung = YouTube-Strategie</div></article>
+</div>
+<div class="table-card searchable-item"><div class="table-responsive"><table><thead><tr><th>Zielgruppe</th><th>Ziel der Kampagne</th><th>Anzeigenformat / Video-Typ</th><th>Funnel-Stufe</th></tr></thead><tbody><tr><td><strong>Junge Erwachsene 18–24</strong></td><td>Bekanntheit steigern.</td><td>Bumper Ad, YouTube Shorts.</td><td>TOFU</td></tr>
+<tr><td><strong>Preisbewusste Käufer*innen 30–45</strong></td><td>Überzeugen und erklären.</td><td>In-Feed Video, How-to-Video.</td><td>MOFU</td></tr>
+<tr><td><strong>Frühere Käufer*innen</strong></td><td>Reaktivieren und konvertieren.</td><td>Demand Gen mit Sonderangebot.</td><td>BOFU</td></tr></tbody></table></div></div>
+</section>
+
+<section id="formats" class="tab-content">
+<div class="section-header searchable-item"><h2>3. Die wichtigsten YouTube-Werbeformate</h2><p>Das Format entscheidet, wie viel Zeit du für die Botschaft hast und ob die Anzeige eher Branding, Engagement oder Conversion unterstützt.</p></div>
+<div class="table-card searchable-item"><div class="table-responsive"><table><thead><tr><th>Format</th><th>Einfach erklärt</th><th>Stärke</th><th>Typischer Einsatz</th></tr></thead><tbody><tr><td><strong>Skippable In-Stream</strong></td><td>Überspringbare Videoanzeige vor, während oder nach Videos.</td><td>Reichweite plus Storytelling; Nutzer kann nach 5 Sekunden überspringen.</td><td>Awareness, Erklärung, längere Botschaften, Einstieg in Funnel.</td></tr>
+<tr><td><strong>Non-Skippable In-Stream</strong></td><td>Nicht überspringbare Anzeige.</td><td>Garantierte Aufmerksamkeit für kurze Botschaft.</td><td>Branding, Launch, kurze Kernbotschaft.</td></tr>
+<tr><td><strong>Bumper Ads</strong></td><td>Maximal 6 Sekunden, nicht überspringbar.</td><td>Schnell, aufmerksamkeitsstark, gut für Wiedererkennung.</td><td>TOFU, Teaser, Frequenz, Markenbekanntheit.</td></tr>
+<tr><td><strong>In-Feed Video Ads</strong></td><td>Videoanzeige erscheint in YouTube-Suchergebnissen, Empfehlungen oder Feed.</td><td>Nutzer entscheidet aktiv, ob er das Video öffnet.</td><td>MOFU, Erklärung, Vergleich, How-to, Recherchephase.</td></tr>
+<tr><td><strong>YouTube Shorts Ads</strong></td><td>Vertikale Kurzvideoanzeigen im Shorts-Umfeld.</td><td>Mobil, schnell, aufmerksamkeitsstark.</td><td>Jüngere Zielgruppen, schnelle Aufmerksamkeit, visuelle Kaufreize.</td></tr>
+<tr><td><strong>Demand Gen</strong></td><td>Visueller Performance-Kampagnentyp mit starker YouTube-/Shorts-/Discover-/Gmail-Logik.</td><td>Nachfrage erzeugen, Lookalike-Segmente und visuelle Conversion-Reize nutzen.</td><td>MOFU/BOFU, Neukundengewinnung, Retargeting, Produktimpulse.</td></tr>
+<tr><td><strong>Performance Max</strong></td><td>KI-Kampagne über Google-Kanäle inklusive YouTube.</td><td>Automatische Ausspielung über Suche, Display, YouTube, Discover, Gmail, Maps usw.</td><td>Plattformübergreifende Conversions, Verkäufe, Leads.</td></tr></tbody></table></div></div>
+<div class="accordion">
+<article class="acc-card searchable-item"><button class="acc-head" type="button">Pre-Roll, Mid-Roll, Post-Roll einfach erklärt <span class="acc-icon">+</span></button><div class="acc-body"><ul class="clean"><li><strong>Pre-Roll:</strong> Anzeige läuft vor dem Hauptvideo. Hohe Aufmerksamkeit am Anfang.</li><li><strong>Mid-Roll:</strong> Anzeige unterbricht ein laufendes Video. Gut für Storytelling, braucht aber starken Hook.</li><li><strong>Post-Roll:</strong> Anzeige läuft nach dem Video. Eher weniger aufmerksamkeitsstark.</li><li><strong>Performance-Fokus:</strong> Bei KI-gesteuerten Kampagnen wie Demand Gen entscheidet Google dynamisch, wo die höchste Conversion-Wahrscheinlichkeit liegt.</li></ul></div></article>
+<article class="acc-card searchable-item"><button class="acc-head" type="button">Format nach Ziel auswählen <span class="acc-icon">+</span></button><div class="acc-body"><div class="table-responsive"><table><thead><tr><th>Ziel</th><th>Empfohlenes Format</th></tr></thead><tbody><tr><td><strong>Aufmerksamkeit / Branding</strong></td><td>Bumper Ads, Non-Skippable In-Stream, Skippable In-Stream.</td></tr>
+<tr><td><strong>Information / Engagement</strong></td><td>In-Feed Ads, Erklärvideo, Vergleich, How-to.</td></tr>
+<tr><td><strong>Kauf / Conversion</strong></td><td>Performance Max und Demand Gen mit Asset-Mix aus Shorts, In-Stream und In-Feed.</td></tr>
+<tr><td><strong>Retargeting / Reaktivierung</strong></td><td>Demand Gen und Performance Max mit First-Party-Daten als Zielgruppensignale.</td></tr></tbody></table></div></div></article></div></section>
+
+<section id="setup" class="tab-content">
+<div class="section-header searchable-item"><h2>4. YouTube-Kampagnen in Google Ads erstellen</h2><p>Für echtes Performance-Marketing reicht YouTube Studio nicht aus. Professionelle YouTube-Kampagnen werden über Google Ads, Demand Gen oder Performance Max gesteuert.</p></div>
+<div class="two-col">
+<article class="card searchable-item"><span class="tag yellow">YouTube Studio</span><h3>Für Kanalwachstum</h3><p>YouTube Studio eignet sich, um Videos schnell zu pushen, mehr Views oder Abonnenten zu gewinnen. Die Steuerung ist eingeschränkt und nicht auf echte Conversions optimiert.</p></article>
+<article class="card searchable-item"><span class="tag green">Google Ads</span><h3>Für Performance</h3><p>Google Ads ist für professionelle YouTube-Kampagnen mit Conversion-Zielen, Targeting, Tracking, Zielgruppensignalen, Demand Gen und Performance Max geeignet.</p></article>
+</div>
+<div class="workflow searchable-item"><h3>YouTube-Kampagne in 7 Schritten</h3><div class="steps">
+<div class="step"><div class="step-num">1</div><strong>Neue Kampagne</strong>Google Ads öffnen, neues Ziel wählen, z. B. Verkäufe oder Leads.</div>
+<div class="step"><div class="step-num">2</div><strong>Kampagnentyp</strong>Für Performance eher Demand Gen oder Performance Max statt reine Video-Kampagne.</div>
+<div class="step"><div class="step-num">3</div><strong>Einstellungen</strong>Name, Conversion-Ziel, Budget und Gebote festlegen.</div>
+<div class="step"><div class="step-num">4</div><strong>Zielgruppensignale</strong>First-Party-Daten, Customer Match, Lookalike und optimierte Ausrichtung nutzen.</div>
+<div class="step"><div class="step-num">5</div><strong>Videos / Assets</strong>Mehrere Ausrichtungen bereitstellen: 9:16, 16:9 und 1:1.</div>
+<div class="step"><div class="step-num">6</div><strong>CTA & Zielseite</strong>Überschriften, Beschreibungen, Button und Landingpage ergänzen.</div>
+<div class="step"><div class="step-num">7</div><strong>Beobachten</strong>Conversions, Ziel-CPA und Kosten prüfen, nicht nur Aufrufe.</div>
+</div></div>
+<div class="table-card searchable-item"><div class="table-responsive"><table><thead><tr><th>Frage</th><th>Besserer Bereich</th><th>Warum?</th></tr></thead><tbody><tr><td><strong>Clip schnell pushen?</strong></td><td>YouTube Studio</td><td>Einfacher Anschub für Views, Interaktion und Abonnenten.</td></tr>
+<tr><td><strong>Produkte oder Dienstleistungen verkaufen?</strong></td><td>Google Ads: Demand Gen oder PMax</td><td>Conversion-Ziele, Landingpage, KI-Steuerung und Tracking möglich.</td></tr>
+<tr><td><strong>Professionell messen und optimieren?</strong></td><td>Google Ads</td><td>Volles Conversion-Tracking, Zielgruppensignale und datenbasierte Optimierung.</td></tr></tbody></table></div></div>
+<div class="note searchable-item"><strong>Wichtig:</strong> Reine Video-Kampagnen sind eher Branding/Reichweite. Für YouTube-Performance mit Leads oder Sales sind Demand Gen und Performance Max prüfungsrelevant.</div>
+</section>
+
+<section id="audience" class="tab-content">
+<div class="section-header searchable-item"><h2>5. Zielgruppen, Daten & KI-gestützte Audience Prediction</h2><p>Moderne YouTube Ads werden nicht nur über starre Zielgruppen gesteuert. Google nutzt Signale, Daten und KI, um wahrscheinliche Conversions vorherzusagen.</p></div>
+<div class="grid">
+<article class="card searchable-item"><span class="tag blue">Standard</span><h3>Vordefinierte Zielgruppen</h3><p>Affinity Audiences, In-Market Audiences, Lebensereignisse und demografische Merkmale geben der Google-KI erste Startsignale.</p></article>
+<article class="card searchable-item"><span class="tag green">First-Party</span><h3>Eigene Daten</h3><p>Website-Besucher, Customer Match, CRM-Listen, Newsletter-Daten und YouTube-Nutzer sind wertvolle Signale für Retargeting und KI-Lernen.</p></article>
+<article class="card searchable-item"><span class="tag yellow">KI</span><h3>Audience Prediction</h3><p>Google erkennt Muster und schätzt, welche Nutzer*innen am ehesten konvertieren – auch außerhalb eng definierter Zielgruppen.</p></article>
+</div>
+<div class="table-card searchable-item"><div class="table-responsive"><table><thead><tr><th>Zielgruppenart</th><th>Beschreibung</th><th>Beispiel</th></tr></thead><tbody><tr><td><strong>Demografische Merkmale</strong></td><td>Alter, Geschlecht, Elternstatus, Bildungsniveau.</td><td>Frauen 25–34 mit Kind.</td></tr>
+<tr><td><strong>Affinity Audiences</strong></td><td>Langfristige Interessen und Lebensstile.</td><td>Fitnessbegeisterte, Technikfans.</td></tr>
+<tr><td><strong>In-Market Audiences</strong></td><td>Aktuelle Kaufabsicht in festen Google-Kategorien.</td><td>Hausratversicherung, WLAN-Router kaufen.</td></tr>
+<tr><td><strong>Lebensereignisse</strong></td><td>Nutzer*innen vor wichtigen Umbrüchen.</td><td>Umzug, Hochzeit, Berufsstart.</td></tr>
+<tr><td><strong>Benutzerdefinierte Segmente</strong></td><td>Ansprache über Suchbegriffe oder Interessen.</td><td>E-Gitarre für Anfänger, bestes Kamera-Stativ.</td></tr>
+<tr><td><strong>Customer Match</strong></td><td>Eigene verschlüsselte Kundendaten hochladen.</td><td>CRM-Daten, Newsletter-Listen.</td></tr>
+<tr><td><strong>Retargeting</strong></td><td>Erneutes Ansprechen von Interaktionen.</td><td>Websitebesucher, Videozuschauer, Warenkorb-Abbrecher.</td></tr></tbody></table></div></div>
+<div class="table-card searchable-item"><div class="table-responsive"><table><thead><tr><th>KI-Funktion</th><th>Bedeutung</th><th>Vorteil</th></tr></thead><tbody><tr><td><strong>Lookalike-Segmente</strong></td><td>KI-Skalierung auf Basis eigener First-Party-Daten.</td><td>Präzise Neukundengewinnung, besonders in Demand Gen.</td></tr>
+<tr><td><strong>Optimierte Ausrichtung</strong></td><td>Algorithmus sucht selbstständig nach Conversions außerhalb der definierten Zielgruppen.</td><td>Mehr Conversion-Volumen und bessere Effizienz.</td></tr>
+<tr><td><strong>Zielgruppensignale</strong></td><td>Eigene Daten dienen der KI als Startpunkt und Richtungsvorgabe.</td><td>Schnellere Lernphase und bessere Conversion-Chancen in PMax und Demand Gen.</td></tr></tbody></table></div></div>
+<div class="note searchable-item"><strong>Merksatz:</strong> Früher wurde Targeting enger manuell definiert. Heute gibt man der KI Signale und misst, ob sie profitable Nutzer*innen findet.</div>
+</section>
+
+<section id="kpis" class="tab-content">
+<div class="section-header searchable-item"><h2>6. KPIs & datenbasierte Optimierung</h2><p>Bei YouTube dürfen Views nicht isoliert bewertet werden. Für Performance zählt, ob Sichtbarkeit zu Klicks, Leads, Verkäufen oder späteren Conversions beiträgt.</p></div>
+<div class="table-card searchable-item"><div class="table-responsive"><table><thead><tr><th>KPI</th><th>Bedeutung</th><th>Wofür wichtig?</th></tr></thead><tbody><tr><td><strong>View Rate</strong></td><td>Anteil der Nutzer*innen, die das Video mindestens 30 Sekunden oder bis zum Ende angesehen haben.</td><td>Zeigt, ob Video und Hook relevant genug sind.</td></tr>
+<tr><td><strong>CTR</strong></td><td>Wie viele Nutzer*innen auf den Call-to-Action klicken.</td><td>Zeigt, ob Anzeige und CTA zum nächsten Schritt motivieren.</td></tr>
+<tr><td><strong>Conversion Rate</strong></td><td>Wie viele nach dem Klick tatsächlich kaufen, sich registrieren oder ein Lead werden.</td><td>Zeigt, ob Zielseite, Angebot und Tracking funktionieren.</td></tr>
+<tr><td><strong>CPV</strong></td><td>Kosten pro Videoaufruf.</td><td>Wichtig bei Video-View-Zielen.</td></tr>
+<tr><td><strong>CPM</strong></td><td>Kosten pro 1.000 Einblendungen.</td><td>Wichtig bei Reichweite und Branding.</td></tr>
+<tr><td><strong>CPA</strong></td><td>Kosten pro Ergebnis, z. B. Lead, Kauf oder Registrierung.</td><td>Zentral für Performance-Kampagnen.</td></tr>
+<tr><td><strong>View-Through-Conversion</strong></td><td>Nutzer sieht die Ad, klickt nicht, konvertiert aber später.</td><td>Wichtig für YouTube, weil Video oft Wirkung vor dem Klick erzeugt.</td></tr></tbody></table></div></div>
+<div class="accordion">
+<article class="acc-card searchable-item"><button class="acc-head" type="button">Typische YouTube-Diagnose <span class="acc-icon">+</span></button><div class="acc-body"><ul class="clean"><li><strong>Viele Impressionen, niedrige View Rate:</strong> Hook, Zielgruppe oder Videoeinstieg prüfen.</li><li><strong>Gute View Rate, niedrige CTR:</strong> CTA, Angebot, Headline oder nächster Schritt ist nicht klar genug.</li><li><strong>Viele Klicks, keine Conversions:</strong> Landingpage, Ladezeit, Vertrauen, Angebot oder Tracking prüfen.</li><li><strong>Hohe Kosten, wenig Ergebnis:</strong> Ziel, Gebotsstrategie, Zielgruppensignale, Assets und Lernphase prüfen.</li><li><strong>Views wirken gut, aber CPA schlecht:</strong> Reichweite allein nicht überbewerten – Performance-Ziel prüfen.</li></ul></div></article>
+<article class="acc-card searchable-item"><button class="acc-head" type="button">Welche Kennzahl passt zu welchem Ziel? <span class="acc-icon">+</span></button><div class="acc-body"><div class="table-responsive"><table><thead><tr><th>Ziel</th><th>Wichtige KPIs</th><th>Was prüfen?</th></tr></thead><tbody><tr><td><strong>Awareness</strong></td><td>Reichweite, Impressionen, CPM, View Rate.</td><td>Wird die Zielgruppe sichtbar erreicht?</td></tr>
+<tr><td><strong>Engagement / Interesse</strong></td><td>View Rate, Watchtime, CTR, CPC.</td><td>Bleiben Nutzer dran und klicken sie weiter?</td></tr>
+<tr><td><strong>Lead / Kauf</strong></td><td>Conversions, Conversion Rate, CPA, ROAS.</td><td>Entsteht ein messbares Geschäftsergebnis?</td></tr>
+<tr><td><strong>Retargeting</strong></td><td>CPA, Conversion Rate, ROAS, View-Through-Conversions.</td><td>Bringt die erneute Ansprache Ergebnisse?</td></tr></tbody></table></div></div></article></div></section>
+
+<section id="checklist" class="tab-content">
+<div class="section-header searchable-item"><h2>7. Schnell-Checklisten</h2><p>Zum Wiederholen vor Aufgaben, Kampagnenaufbau und Quiz.</p></div>
+<div class="grid">
+<article class="card searchable-item"><span class="tag blue">Strategie</span><h3>Vor dem Start</h3><ul class="clean"><li>Ziel klar: Awareness, Traffic, Lead oder Verkauf?</li><li>Funnel-Stufe definiert: TOFU, MOFU oder BOFU?</li><li>Produkt erklärungsbedürftig oder emotional?</li><li>Zielseite vorhanden und passend?</li><li>Budget für Lernphase realistisch?</li></ul></article>
+<article class="card searchable-item"><span class="tag green">Assets</span><h3>Videos & Creatives</h3><ul class="clean"><li>Starker Hook in den ersten Sekunden.</li><li>Mehrere Formate: 9:16, 16:9, 1:1.</li><li>Klare Botschaft und sichtbarer Nutzen.</li><li>CTA passend zum Ziel.</li><li>Landingpage stimmt mit Anzeige überein.</li></ul></article>
+<article class="card searchable-item"><span class="tag yellow">Daten</span><h3>Targeting & KI</h3><ul class="clean"><li>Customer Match oder CRM-Daten möglich?</li><li>Website-Besucher oder Videozuschauer nutzbar?</li><li>Zielgruppensignale sinnvoll gesetzt?</li><li>Optimierte Ausrichtung verstanden?</li><li>Conversions korrekt eingerichtet?</li></ul></article>
+<article class="card searchable-item"><span class="tag red">Analyse</span><h3>Nach dem Start</h3><ul class="clean"><li>Nicht nur Views bewerten.</li><li>View Rate, CTR und Conversion Rate zusammen anschauen.</li><li>CPA und Kosten kontrollieren.</li><li>Lernphase nicht durch hektische Änderungen stören.</li><li>Schwache Assets austauschen.</li></ul></article>
+</div>
+<div class="workflow searchable-item"><h3>Mini-Workflow für YouTube Ads</h3><div class="steps"><div class="step"><div class="step-num">1</div><strong>Ziel</strong>Was soll passieren?</div><div class="step"><div class="step-num">2</div><strong>Funnel</strong>TOFU, MOFU oder BOFU?</div><div class="step"><div class="step-num">3</div><strong>Format</strong>Welcher Videotyp passt?</div><div class="step"><div class="step-num">4</div><strong>Daten</strong>Welche Signale bekommt die KI?</div><div class="step"><div class="step-num">5</div><strong>Messung</strong>Welche KPI zeigt Erfolg?</div><div class="step"><div class="step-num">6</div><strong>Optimierung</strong>Was wird gezielt verbessert?</div></div></div>
+</section>
+
 </main>
-</body>
-</html>
+<footer>Performance Marketing Lernplattform · YouTube Ads Playbook</footer>
+<script>
+const tabs=document.querySelectorAll('.tab-btn');const contents=document.querySelectorAll('.tab-content');const searchInput=document.getElementById('searchInput');const noResults=document.getElementById('noResults');
+tabs.forEach(btn=>{btn.addEventListener('click',()=>{tabs.forEach(b=>b.classList.remove('active'));contents.forEach(c=>c.classList.remove('active'));btn.classList.add('active');document.getElementById(btn.dataset.tab).classList.add('active');searchInput.value='';clearSearch();window.scrollTo({top:0,behavior:'smooth'});});});
+document.querySelectorAll('.acc-head').forEach(head=>{head.addEventListener('click',()=>{head.closest('.acc-card').classList.toggle('open');});});
+function clearSearch(){document.querySelectorAll('.searchable-item').forEach(el=>el.classList.remove('hidden-search'));noResults.style.display='none';}
+searchInput.addEventListener('input',()=>{const term=searchInput.value.toLowerCase().trim();if(!term){clearSearch();return;}tabs.forEach(b=>b.classList.remove('active'));contents.forEach(c=>c.classList.add('active'));let count=0;document.querySelectorAll('.searchable-item').forEach(el=>{const hit=el.textContent.toLowerCase().includes(term);el.classList.toggle('hidden-search',!hit);if(hit)count++;});noResults.style.display=count?'none':'block';});
+</script>
+</body></html>
