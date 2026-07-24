@@ -4,23 +4,573 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>TikTok Ads Playbook</title>
-  <link rel="stylesheet" href="styles.css">
+  <style>
+:root{--primary-blue:#0b1f38;--secondary-blue:#16365d;--accent-blue:#1e4976;--gold:#c8a84e;--light-bg:#f4f7f9;--card-bg:#fff;--border-color:#e2e8f0;--text-dark:#1e293b;--text-muted:#64748b;--green:#065f46;--green-bg:#d1fae5;--yellow:#92400e;--yellow-bg:#fef3c7;--red:#991b1b;--red-bg:#fee2e2;--blue-bg:#eaf6fd;--shadow-sm:0 1px 3px rgba(0,0,0,.10);--shadow-md:0 8px 24px rgba(11,31,56,.13);--radius:14px;--transition:all .2s ease}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{min-height:100vh;background:var(--light-bg);color:var(--text-dark);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.55}
+header{background:var(--primary-blue);color:#fff;padding:2rem 1.5rem;border-bottom:4px solid var(--gold);box-shadow:var(--shadow-md)}.header-inner,main{width:min(1200px,calc(100% - 2rem));margin:0 auto}.header-grid{display:flex;justify-content:space-between;gap:1rem;align-items:center;flex-wrap:wrap}.header-title{min-width:280px;flex:1 1 420px}.header-kicker{color:#cbd5e1;font-weight:800;text-transform:uppercase;letter-spacing:.12em;font-size:.75rem;margin-bottom:.45rem}h1{font-size:clamp(2rem,4vw,3rem);line-height:1.08}header p{color:#cbd5e1;margin-top:.65rem;max-width:760px}.header-actions{display:flex;align-items:center;justify-content:flex-end;gap:1rem;flex:1 1 620px}.search{border:1px solid #cbd5e1;border-radius:10px;padding:.85rem 1rem;font-size:1rem;color:var(--text-dark);background:#fff;box-shadow:var(--shadow-sm);transition:var(--transition)}.search:focus{outline:none;border-color:var(--accent-blue);box-shadow:0 0 0 3px rgba(30,73,118,.12)}.header-search{flex:1;min-width:280px;max-width:620px;margin:0;background:rgba(255,255,255,.96);border-color:rgba(255,255,255,.55);box-shadow:0 8px 22px rgba(0,0,0,.10)}.back-link-header{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;color:#fff;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.28);padding:.82rem 1rem;border-radius:9px;font-weight:800;white-space:nowrap;transition:var(--transition)}.back-link-header:hover{background:rgba(255,255,255,.18)}
+main{padding:2.1rem 0 4rem}.tabs{display:flex;flex-wrap:wrap;gap:.55rem;margin:0 0 1.4rem}.tab-btn{border:1px solid #cbd5e1;background:#fff;color:var(--primary-blue);border-radius:999px;padding:.68rem .95rem;font-weight:800;cursor:pointer;transition:var(--transition);box-shadow:var(--shadow-sm);font-size:.92rem}.tab-btn:hover{background:#f8fafc;border-color:var(--secondary-blue);transform:translateY(-1px)}.tab-btn.active{background:var(--primary-blue);border-color:var(--primary-blue);color:#fff;box-shadow:var(--shadow-md)}.tab-content{display:none}.tab-content.active{display:block}.section-header{margin:1.2rem 0 1rem}.section-header h2{color:var(--primary-blue);font-size:clamp(1.45rem,3vw,2rem)}.section-header p{color:var(--text-muted);margin-top:.25rem;max-width:920px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:1rem;margin-bottom:1rem}.two-col{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1rem;margin-bottom:1rem}.card,.table-card,.note,.workflow{background:var(--card-bg);border:1px solid var(--border-color);border-radius:var(--radius);box-shadow:var(--shadow-sm)}.card{padding:1.2rem}.card h3{color:var(--primary-blue);margin-bottom:.45rem}.card p,.card li{color:var(--text-muted)}.tag{display:inline-flex;align-items:center;padding:.25rem .6rem;border-radius:999px;font-size:.76rem;font-weight:800;margin-bottom:.75rem}.tag.blue{background:var(--blue-bg);color:var(--primary-blue)}.tag.green{background:var(--green-bg);color:var(--green)}.tag.yellow{background:var(--yellow-bg);color:var(--yellow)}.tag.red{background:var(--red-bg);color:var(--red)}
+.table-card{overflow:hidden;margin-bottom:1rem}.table-responsive{overflow-x:auto}table{width:100%;border-collapse:collapse;background:#fff}th,td{padding:.9rem 1rem;text-align:left;border-bottom:1px solid var(--border-color);vertical-align:top}th{background:#f8fafc;color:var(--primary-blue);font-size:.85rem;text-transform:uppercase;letter-spacing:.04em}tr:last-child td{border-bottom:none}td strong{color:var(--primary-blue)}
+.note{border-left:5px solid var(--gold);padding:1rem 1.1rem;margin:1rem 0;color:var(--text-muted)}.note strong{color:var(--primary-blue)}.workflow{padding:1.2rem;margin-bottom:1rem}.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.75rem;margin-top:.8rem}.step{background:#f8fafc;border:1px solid var(--border-color);border-radius:12px;padding:.9rem;color:var(--text-muted)}.step-num{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--primary-blue);color:#fff;font-weight:800;margin-bottom:.5rem}.step strong{display:block;color:var(--primary-blue);margin-bottom:.2rem}.formula{background:#f8fafc;border:1px solid var(--border-color);border-radius:10px;padding:.75rem .9rem;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;color:var(--primary-blue);font-weight:700;margin-top:.5rem}ul.clean{padding-left:1.1rem}
+.accordion{display:grid;gap:.8rem;margin-bottom:1.2rem}.acc-card{background:#fff;border:1px solid var(--border-color);border-radius:var(--radius);box-shadow:var(--shadow-sm);overflow:hidden}.acc-head{width:100%;border:0;background:#fff;color:var(--primary-blue);padding:1rem 1.1rem;display:flex;align-items:center;justify-content:space-between;font-size:1rem;font-weight:800;cursor:pointer;text-align:left}.acc-head:hover{background:#f8fafc}.acc-icon{font-size:1.35rem}.acc-body{display:none;padding:0 1.1rem 1.1rem;color:var(--text-muted)}.acc-card.open .acc-body{display:block}.acc-card.open .acc-icon{transform:rotate(45deg)}.pill-row{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:.65rem}.pill{display:inline-flex;padding:.28rem .65rem;border-radius:999px;background:#f8fafc;border:1px solid var(--border-color);color:var(--primary-blue);font-weight:750;font-size:.82rem}.hidden-search{display:none!important}.no-results{display:none;background:#fff;border:1px solid var(--border-color);border-radius:var(--radius);padding:2rem;text-align:center;color:var(--text-muted)}footer{text-align:center;color:var(--text-muted);font-size:.84rem;padding:1.5rem}
+@media(max-width:900px){.header-actions{width:100%;flex-direction:column;align-items:stretch;margin-top:1rem}.header-search{max-width:none;width:100%;min-width:0}.back-link-header{width:100%}}@media(max-width:760px){th,td{padding:.75rem .8rem}.tab-btn{width:100%;justify-content:center}}
+
+/* --- Finale Header-Anpassung: kompakter Header --- */
+.header-kicker{display:none!important}
+header{
+  padding:1.15rem 1.5rem!important;
+  border-bottom:4px solid var(--gold)!important;
+}
+.header-container,
+.header-inner.header-grid{
+  width:min(1200px,calc(100% - 2rem));
+  margin:0 auto;
+  display:grid!important;
+  grid-template-columns:minmax(280px,1fr) minmax(340px,700px);
+  gap:1rem;
+  align-items:center!important;
+}
+.header-title{min-width:0!important}
+header h1{
+  font-size:clamp(2rem,3.8vw,2.8rem)!important;
+  line-height:1.08!important;
+  margin:0!important;
+}
+header p{
+  margin-top:.35rem!important;
+  font-size:1rem!important;
+  line-height:1.45!important;
+  max-width:760px!important;
+  color:#cbd5e1!important;
+}
+.header-actions,
+.controls.header-actions{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:flex-end!important;
+  gap:.8rem!important;
+}
+.header-search,
+.search-wrapper.header-search{
+  flex:1 1 auto!important;
+  max-width:560px!important;
+  min-width:260px!important;
+  margin:0!important;
+}
+.header-search .search-input,
+.header-search.search,
+.search.header-search{
+  width:100%!important;
+  min-width:0!important;
+  background:rgba(255,255,255,.96)!important;
+  border-color:rgba(255,255,255,.55)!important;
+  box-shadow:0 8px 22px rgba(0,0,0,.10)!important;
+}
+.back-link-header{
+  white-space:nowrap!important;
+}
+@media(max-width:900px){
+  .header-container,
+  .header-inner.header-grid{
+    grid-template-columns:1fr!important;
+  }
+  .header-actions,
+  .controls.header-actions{
+    width:100%!important;
+    flex-direction:column!important;
+    align-items:stretch!important;
+  }
+  .header-search,
+  .search-wrapper.header-search{
+    max-width:none!important;
+    width:100%!important;
+    min-width:0!important;
+  }
+  .back-link-header{width:100%!important}
+}
+
+</style>
 </head>
 <body>
 <header>
-  <div class="header-inner">
-    <div class="header-kicker">Spezialisierung 1 · Performance Marketing</div>
-    <h1>TikTok Ads Playbook</h1>
-    <p>TikTok-Kampagnen, Creatives, Tracking und wichtige Kennzahlen als Lern-Playbook.</p>
+  <div class="header-inner header-grid">
+    <div class="header-title">
+      <h1>TikTok Ads Playbook</h1>
+      <p>Kurzvideo-Performance: Funnel, Algorithmus, Werbeformate, Spark Ads, Targeting, KI, KPIs und Best Practices.</p>
+    </div>
+    <div class="header-actions">
+      <input id="searchInput" class="search header-search" type="search" placeholder="Im TikTok Ads Playbook suchen ...">
+      <a class="back-link-header" href="index.html">← Zurück zur Übersicht</a>
+    </div>
   </div>
 </header>
+
 <main>
-  <a class="back-link" href="index.html">← Zurück zur Übersicht</a>
-  <section class="placeholder">
-    <span class="status build">Noch nicht hinterlegt</span>
-    <h2>Dieses Playbook wird nach Abschluss des Themenblocks ergänzt.</h2>
-    <p>Hier erscheinen später die wichtigsten Begriffe, Kennzahlen, Entscheidungen, Kampagnenstrukturen, Tracking-Grundlagen und Praxisbeispiele.</p>
-  </section>
+<nav class="tabs" aria-label="Playbook-Reiter">
+  <button class="tab-btn active" data-tab="overview">1. Überblick</button>
+  <button class="tab-btn" data-tab="funnel">2. Funnel & Potenziale</button>
+  <button class="tab-btn" data-tab="algorithm">3. Algorithmus</button>
+  <button class="tab-btn" data-tab="formats">4. Werbeformate</button>
+  <button class="tab-btn" data-tab="targeting">5. Targeting & Tracking</button>
+  <button class="tab-btn" data-tab="creative">6. Creatives & KI</button>
+  <button class="tab-btn" data-tab="kpis">7. KPIs & Optimierung</button>
+  <button class="tab-btn" data-tab="checklist">8. Checklisten</button>
+</nav>
+
+<div id="noResults" class="no-results">Keine passenden Inhalte gefunden.</div>
+
+<section id="overview" class="tab-content active">
+  <div class="section-header searchable-item">
+    <h2>1. Überblick: Warum TikTok ein besonderer Performance-Kanal ist</h2>
+    <p>TikTok ist weniger ein klassisches soziales Netzwerk und stärker eine interessenbasierte Discovery-Plattform. Entscheidend ist nicht nur, wem jemand folgt, sondern wie gut ein Video zum Nutzerverhalten passt.</p>
+  </div>
+
+  <div class="grid">
+    <article class="card searchable-item">
+      <span class="tag blue">Discovery</span>
+      <h3>For You Page als Reichweitenmotor</h3>
+      <p>TikTok zeigt Inhalte auch Menschen, die dem Account nicht folgen. Dadurch können auch kleine Marken und neue Accounts Sichtbarkeit bekommen, wenn der Content gut funktioniert.</p>
+      <div class="pill-row"><span class="pill">FYP</span><span class="pill">Discovery</span><span class="pill">Viralität</span></div>
+    </article>
+    <article class="card searchable-item">
+      <span class="tag green">Native Content</span>
+      <h3>„Make TikToks, not Ads“</h3>
+      <p>Werbliche Inhalte müssen wie echte TikToks wirken: schnell, authentisch, unterhaltsam, mobile-first und nicht wie klassische Werbespots.</p>
+    </article>
+    <article class="card searchable-item">
+      <span class="tag yellow">Performance</span>
+      <h3>Organisch + Paid + Creator</h3>
+      <p>TikTok kombiniert organische Reichweite, Creator-Content, Spark Ads, In-Feed Ads, TikTok Shop, Website-Traffic, Leads und Conversions.</p>
+    </article>
+  </div>
+
+  <div class="table-card searchable-item">
+    <div class="table-responsive">
+      <table>
+        <thead><tr><th>Bereich</th><th>Einfach erklärt</th><th>Marketing-Bedeutung</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Short-Form Video</strong></td><td>Kurze, dynamische Videos mit starkem Hook, Sound, Voiceover und Untertiteln.</td><td>Aufmerksamkeit muss in den ersten Sekunden entstehen.</td></tr>
+          <tr><td><strong>Entertainment-first</strong></td><td>Nutzer erwarten Unterhaltung, Trends, Storytelling und Authentizität.</td><td>Zu werbliche Inhalte werden schnell übersprungen.</td></tr>
+          <tr><td><strong>Algorithmus</strong></td><td>Relevanz wird stark über Watch Time, Completion Rate, Interaktionen und Video-Informationen bewertet.</td><td>Guter Content kann auch ohne große Followerbasis skalieren.</td></tr>
+          <tr><td><strong>Daten & KI</strong></td><td>Creative Center, Predictive Analytics, Smart+ und KI-Tools unterstützen Produktion und Ausspielung.</td><td>Performance wird schneller, datenbasierter und testbarer.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="note searchable-item">
+    <strong>Kurzlogik:</strong> TikTok Performance Marketing bedeutet nicht einfach „Werbung schalten“. Es bedeutet: TikTok-native Inhalte erstellen, schnell testen, Daten auswerten und Gewinner-Creatives skalieren.
+  </div>
+</section>
+
+<section id="funnel" class="tab-content">
+  <div class="section-header searchable-item">
+    <h2>2. TikTok im Funnel: TOFU, MOFU, BOFU</h2>
+    <p>TikTok kann für Awareness, Consideration und Conversion eingesetzt werden. Wichtig ist, dass Ziel, Format und Kennzahl zusammenpassen.</p>
+  </div>
+
+  <div class="table-card searchable-item">
+    <div class="table-responsive">
+      <table>
+        <thead><tr><th>Funnel-Stufe</th><th>Ziel</th><th>TikTok-Einsatz</th><th>Passende Formate</th><th>Wichtige KPIs</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>TOFU</strong><br>Awareness</td>
+            <td>Marke oder Produkt sichtbar machen.</td>
+            <td>Trends, Sounds, Hashtags, Challenges und organische Reichweite nutzen.</td>
+            <td>Organische Posts, TopView, Branded Hashtag Challenge, Branded Effects.</td>
+            <td>Reach, Impressions, Video Views, Completion Rate, Engagement Rate.</td>
+          </tr>
+          <tr>
+            <td><strong>MOFU</strong><br>Consideration</td>
+            <td>Interesse, Vertrauen und Produktverständnis aufbauen.</td>
+            <td>Tutorials, How-to, Produkt-Demos, Storytelling, Duets, Stitch und Community-Interaktion.</td>
+            <td>In-Feed Ads, Spark Ads, Creator-Content, UGC.</td>
+            <td>Video Views, Retention, CTR, Engagement Rate, CPC.</td>
+          </tr>
+          <tr>
+            <td><strong>BOFU</strong><br>Conversion</td>
+            <td>Kauf, Lead, App-Download oder Shop-Besuch auslösen.</td>
+            <td>Direkte Verlinkung zu Website, Shop, TikTok Shop, Lead-Formular oder App.</td>
+            <td>Spark Ads, In-Feed Ads, Shoppable Ads, Live Shopping, Retargeting.</td>
+            <td>Conversions, CPA, Conversion Rate, ROAS.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="grid">
+    <article class="card searchable-item">
+      <span class="tag green">Potenzial</span>
+      <h3>Organische Reichweite</h3>
+      <p>Durch die For You Page kann guter Content schnell Reichweite erhalten – auch ohne große Followerbasis oder hohes Werbebudget.</p>
+    </article>
+    <article class="card searchable-item">
+      <span class="tag yellow">Potenzial</span>
+      <h3>Traffic & Sales</h3>
+      <p>Paid Ads, Shop-Verlinkungen, TikTok Shop und Shoppable Ads können direkte Kaufimpulse erzeugen. Kurzvideos fördern FOMO und schnelle Entscheidungen.</p>
+    </article>
+    <article class="card searchable-item">
+      <span class="tag red">Risiko</span>
+      <h3>Trend-Kurzlebigkeit</h3>
+      <p>Trends können nach wenigen Tagen oder sogar Stunden wieder verschwinden. Deshalb braucht TikTok schnelle Prozesse und flexible Content-Produktion.</p>
+    </article>
+  </div>
+</section>
+
+<section id="algorithm" class="tab-content">
+  <div class="section-header searchable-item">
+    <h2>3. Der TikTok-Algorithmus</h2>
+    <p>Der Algorithmus entscheidet über Reichweite, indem er Videos testet, Nutzerreaktionen misst und gute Inhalte weiter ausspielt.</p>
+  </div>
+
+  <div class="grid">
+    <article class="card searchable-item">
+      <span class="tag blue">Wichtigstes Signal</span>
+      <h3>Watch Time & Completion Rate</h3>
+      <p>Wie lange schauen Nutzer*innen? Wird das Video bis zum Ende angesehen? Je stärker diese Werte sind, desto eher wird das Video weiter ausgespielt.</p>
+    </article>
+    <article class="card searchable-item">
+      <span class="tag green">Interaktion</span>
+      <h3>Likes, Kommentare, Shares, Saves</h3>
+      <p>Interaktionen zeigen dem Algorithmus, dass ein Video relevant ist. Besonders wertvoll sind Shares und Saves, weil sie aktive Wertschätzung zeigen.</p>
+    </article>
+    <article class="card searchable-item">
+      <span class="tag yellow">Kontext</span>
+      <h3>Caption, Sounds, Hashtags</h3>
+      <p>Video-Informationen helfen TikTok zu verstehen, worum es geht und welcher Zielgruppe der Inhalt ausgespielt werden sollte.</p>
+    </article>
+  </div>
+
+  <div class="table-card searchable-item">
+    <div class="table-responsive">
+      <table>
+        <thead><tr><th>Signal</th><th>Bedeutung</th><th>Optimierung</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Hook Rate</strong></td><td>Wie viele bleiben nach den ersten Sekunden dran?</td><td>Problem, Überraschung, Kontrast oder klares Nutzenversprechen direkt am Anfang.</td></tr>
+          <tr><td><strong>Completion Rate</strong></td><td>Wie viele schauen das Video bis zum Ende?</td><td>Kurze Videos, klare Dramaturgie, offene Schleifen und schnelles Tempo.</td></tr>
+          <tr><td><strong>Engagement</strong></td><td>Likes, Kommentare, Shares, Saves.</td><td>Fragen stellen, Diskussion auslösen, hilfreiche Inhalte liefern.</td></tr>
+          <tr><td><strong>Relevanz-Kontext</strong></td><td>Caption, Hashtags, Sounds, Sprache, Standort.</td><td>Klare Keywords, passende Sounds, relevante Hashtags, keine Hashtag-Spam-Strategie.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="note searchable-item">
+    <strong>Prüfungswissen:</strong> TikTok ist eine Content-Discovery-Plattform. Reichweite entsteht nicht nur durch Follower, sondern durch Relevanzsignale und Nutzerverhalten.
+  </div>
+</section>
+
+<section id="formats" class="tab-content">
+  <div class="section-header searchable-item">
+    <h2>4. TikTok-Werbeformate</h2>
+    <p>Nicht jedes TikTok-Format ist gleich gut für Performance geeignet. Für Conversions, Leads oder Shop-Abverkäufe sind besonders In-Feed Ads und Spark Ads wichtig.</p>
+  </div>
+
+  <div class="table-card searchable-item">
+    <div class="table-responsive">
+      <table>
+        <thead><tr><th>Format</th><th>Einfach erklärt</th><th>Stärke</th><th>Performance-Eignung</th></tr></thead>
+        <tbody>
+          <tr><td><strong>In-Feed Ads</strong></td><td>Native Anzeigen im „Für dich“-Feed mit CTA.</td><td>Gut messbar, skalierbar, A/B-testfähig.</td><td><strong>Hoch</strong></td></tr>
+          <tr><td><strong>Spark Ads</strong></td><td>Organische Posts werden als Anzeige verstärkt.</td><td>Social Proof bleibt erhalten: Kommentare, Likes und Shares bleiben sichtbar.</td><td><strong>Sehr hoch</strong></td></tr>
+          <tr><td><strong>TopView Ads</strong></td><td>Full-Screen-Anzeige direkt nach App-Start.</td><td>Sehr hohe Sichtbarkeit, aber teuer.</td><td>Mittel, eher Awareness.</td></tr>
+          <tr><td><strong>Brand Takeover</strong></td><td>Direkt beim Öffnen der App, oft statisch, GIF oder kurzes Video.</td><td>Exklusiv, teuer, stark für große Marken.</td><td>Eher Awareness.</td></tr>
+          <tr><td><strong>Branded Hashtag Challenge</strong></td><td>Nutzer werden zu einer Challenge mit Hashtag eingeladen.</td><td>Interaktion, UGC und organische Reichweite.</td><td>Mittel, stark für Engagement.</td></tr>
+          <tr><td><strong>Branded Effects / AR</strong></td><td>Filter, Lenses, Sticker oder AR-Effekte für Nutzer-Videos.</td><td>Spielerische Markeninteraktion.</td><td>Eher Awareness/Engagement.</td></tr>
+          <tr><td><strong>LIVE Shopping / Shoppable Ads</strong></td><td>Kauf-CTAs direkt im Video oder Livestream.</td><td>Direkter Kaufimpuls im Content.</td><td>Hoch, besonders E-Commerce.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <article class="acc-card searchable-item">
+      <button class="acc-head" type="button">Warum Spark Ads so wichtig sind <span class="acc-icon">+</span></button>
+      <div class="acc-body">
+        <p>Spark Ads verbinden organischen Social Proof mit bezahlter Reichweite. Sie können eigene organische Posts oder Creator-Content bewerben. Dadurch wirken sie nativer als klassische Anzeigen und sind besonders stark für Produkt-Demos, Reviews und UGC.</p>
+      </div>
+    </article>
+
+    <article class="acc-card searchable-item">
+      <button class="acc-head" type="button">Organisch vs. Paid im Überblick <span class="acc-icon">+</span></button>
+      <div class="acc-body">
+        <div class="table-responsive">
+          <table>
+            <thead><tr><th>Format-Typ</th><th>Sichtbarkeit</th><th>Kontrolle</th><th>Kosten</th><th>Performance-Eignung</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Organischer Post</strong></td><td>Niedrig bis hoch, viral möglich.</td><td>Gering.</td><td>Kostenlos.</td><td>Eingeschränkt.</td></tr>
+              <tr><td><strong>Spark Ad</strong></td><td>Hoch.</td><td>Mittel.</td><td>Mittel.</td><td>Hoch.</td></tr>
+              <tr><td><strong>In-Feed Ad</strong></td><td>Hoch.</td><td>Hoch.</td><td>Mittel.</td><td>Hoch.</td></tr>
+              <tr><td><strong>TopView</strong></td><td>Sehr hoch.</td><td>Hoch.</td><td>Sehr hoch.</td><td>Mittel.</td></tr>
+              <tr><td><strong>Branded Hashtag</strong></td><td>Mittel bis hoch.</td><td>Mittel.</td><td>Hoch.</td><td>Mittel.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="targeting" class="tab-content">
+  <div class="section-header searchable-item">
+    <h2>5. Targeting, Audience & Tracking</h2>
+    <p>Der TikTok Ads Manager ermöglicht Targeting nach demografischen Daten, Interessen, Verhalten, Custom Audiences und Lookalikes. Für Performance ist sauberes Tracking entscheidend.</p>
+  </div>
+
+  <div class="grid">
+    <article class="card searchable-item">
+      <span class="tag blue">Standard</span>
+      <h3>Demografie & Geräte</h3>
+      <p>Alter, Geschlecht, Standort, Sprache der Nutzeroberfläche und Gerätetyp wie Android, iOS, WLAN oder mobile Daten.</p>
+    </article>
+    <article class="card searchable-item">
+      <span class="tag green">Interessen</span>
+      <h3>Interest Targeting</h3>
+      <p>TikTok ordnet Nutzer*innen Interessen zu, basierend auf angesehenen Videos, Interaktionen und Followern, z. B. Beauty, Fitness, Haustiere oder Shopping.</p>
+    </article>
+    <article class="card searchable-item">
+      <span class="tag yellow">Verhalten</span>
+      <h3>Behavioral Targeting</h3>
+      <p>Ansprache nach aktuellem Plattformverhalten, z. B. Video-Interaktionen, Creator-Interaktionen, Hashtag-Interaktionen oder Kaufabsicht.</p>
+    </article>
+  </div>
+
+  <div class="table-card searchable-item">
+    <div class="table-responsive">
+      <table>
+        <thead><tr><th>Audience-Art</th><th>Bedeutung</th><th>Beispiel</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Custom Audiences</strong></td><td>Bekannte Nutzergruppen erneut ansprechen.</td><td>Website-Besucher via TikTok Pixel, App-Nutzer über SDK, Video Viewer, Kunden-Uploads.</td></tr>
+          <tr><td><strong>Remarketing</strong></td><td>Nutzer zurückholen, die schon Interesse gezeigt haben.</td><td>Warenkorb-Besucher ohne Kauf mit „Jetzt sichern“-Ad erneut ansprechen.</td></tr>
+          <tr><td><strong>Lookalike Audiences</strong></td><td>Neue Nutzer finden, die bestehenden Kundengruppen ähneln.</td><td>Ähnliche Personen wie Käufer oder hochwertige Leads.</td></tr>
+          <tr><td><strong>TikTok Pixel</strong></td><td>Website-Events messen.</td><td>ViewContent, AddToCart, InitiateCheckout, CompletePayment.</td></tr>
+          <tr><td><strong>Events API</strong></td><td>Serverseitige Ereignisse ergänzen Browser-Tracking.</td><td>Wichtig bei Tracking-Lücken durch Privacy-Updates.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="note searchable-item">
+    <strong>Datenschutz:</strong> Bei EU-Daten sind DSGVO, Consent und rechtliche Grundlage wichtig. Tracking ohne Zustimmung kann unzulässig sein und führt außerdem zu schlechter Datenqualität.
+  </div>
+</section>
+
+<section id="creative" class="tab-content">
+  <div class="section-header searchable-item">
+    <h2>6. Creatives, virale Mechanismen & KI</h2>
+    <p>Auf TikTok ist das Creative oft wichtiger als die reine Kampagnenstruktur. Wer gute Hooks, nativen Stil und schnelle Tests beherrscht, hat bessere Performance-Chancen.</p>
+  </div>
+
+  <div class="grid">
+    <article class="card searchable-item">
+      <span class="tag red">Hook</span>
+      <h3>Die ersten 1–3 Sekunden</h3>
+      <p>Problem-Hook, Kontrast-Hook oder Überraschungs-Hook stoppen den Scroll. Ohne starken Einstieg wird das Video oft sofort übersprungen.</p>
+    </article>
+    <article class="card searchable-item">
+      <span class="tag blue">Native Look</span>
+      <h3>9:16, Sound, Untertitel</h3>
+      <p>Mobile First, Hochformat, schnelle Schnitte, Sound-on-Denken, Voiceover und Untertitel gehören zu den wichtigsten Creative-Basics.</p>
+    </article>
+    <article class="card searchable-item">
+      <span class="tag green">Creator-Stil</span>
+      <h3>UGC statt Hochglanz</h3>
+      <p>Creator-Content, Produkt-Demos, Reviews, Unboxings und Life-Hacks wirken glaubwürdiger als klassische Werbespots.</p>
+    </article>
+  </div>
+
+  <div class="table-card searchable-item">
+    <div class="table-responsive">
+      <table>
+        <thead><tr><th>Modell / Tool</th><th>Bedeutung</th><th>Praxisnutzen</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Flicker</strong></td><td>Schnelle, reaktive Inhalte zu Trends, Sounds oder Memes.</td><td>Aktuelle Reichweitenchancen nutzen.</td></tr>
+          <tr><td><strong>Flash</strong></td><td>Geplante, wiederkehrende Serienformate.</td><td>Verlässlicher Content und Community-Aufbau.</td></tr>
+          <tr><td><strong>Flare</strong></td><td>Große Leuchtturm-Kampagnen mit Paid, Creators oder Challenges.</td><td>Massive Aufmerksamkeit erzeugen.</td></tr>
+          <tr><td><strong>TikTok Creative Center</strong></td><td>Trend-Insights zu Sounds, Hashtags und Creatives.</td><td>Trend Detection und Ideenfindung.</td></tr>
+          <tr><td><strong>Predictive Analytics</strong></td><td>Prognosen, welche Creatives wahrscheinlich gut performen.</td><td>Creative-Auswahl datenbasierter machen.</td></tr>
+          <tr><td><strong>Content Automation</strong></td><td>Skripte, Untertitel, Video-Templates, Editing und Voiceovers mit KI.</td><td>Content schneller und günstiger produzieren.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <article class="acc-card searchable-item">
+      <button class="acc-head" type="button">Best Practices für TikTok Ads <span class="acc-icon">+</span></button>
+      <div class="acc-body">
+        <ul class="clean">
+          <li>Hook in den ersten 1–3 Sekunden.</li>
+          <li>Hochformat 9:16, schnelle Schnitte, Untertitel.</li>
+          <li>Video meist kurz halten, oft 10–30 Sekunden.</li>
+          <li>TikTok-typischer Look: authentisch, trendnah, nicht werblich.</li>
+          <li>Mehrere Hooks, CTAs und Thumbnails gegeneinander testen.</li>
+          <li>Gewinner-Creatives als Spark Ads verstärken.</li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="kpis" class="tab-content">
+  <div class="section-header searchable-item">
+    <h2>7. KPIs & Optimierung</h2>
+    <p>TikTok darf nicht nur über Views bewertet werden. Entscheidend ist, ob Aufmerksamkeit zu Klicks, Leads, Käufen oder effizientem ROAS führt.</p>
+  </div>
+
+  <div class="table-card searchable-item">
+    <div class="table-responsive">
+      <table>
+        <thead><tr><th>KPI</th><th>Bedeutung</th><th>Formel / Messung</th><th>Orientierung</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Hook Rate</strong></td><td>Anteil der Nutzer, die nach ca. 2 Sekunden noch zuschauen.</td><td>2-Sekunden-Views / Impressionen × 100</td><td>&gt; 20–30 % als Lernwert.</td></tr>
+          <tr><td><strong>Completion Rate</strong></td><td>Anteil, der das Video bis zum Ende schaut.</td><td>Komplette Views / gestartete Views × 100</td><td>Je höher, desto besser.</td></tr>
+          <tr><td><strong>CTR</strong></td><td>Klickrate auf Werbelink oder CTA.</td><td>Klicks / Impressionen × 100</td><td>&gt; 1 % im Performance-Umfeld.</td></tr>
+          <tr><td><strong>CPC</strong></td><td>Kosten pro Klick.</td><td>Werbekosten / Klicks</td><td>Ca. 0,20–0,80 € als grober Lernwert.</td></tr>
+          <tr><td><strong>CPM</strong></td><td>Kosten pro 1.000 Impressionen.</td><td>Kosten / Impressionen × 1.000</td><td>Ca. 2–5 € als grober Lernwert.</td></tr>
+          <tr><td><strong>CPA</strong></td><td>Kosten pro gewünschter Handlung.</td><td>Gesamtkosten / Conversions</td><td>Stark abhängig von Ziel und Produkt.</td></tr>
+          <tr><td><strong>ROAS</strong></td><td>Umsatz pro eingesetztem Werbe-Euro.</td><td>Umsatz / Werbekosten</td><td>&gt; 3x im E-Commerce als grobe Orientierung.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <article class="acc-card searchable-item">
+      <button class="acc-head" type="button">TikTok Diagnose-Logik <span class="acc-icon">+</span></button>
+      <div class="acc-body">
+        <ul class="clean">
+          <li><strong>Hook Rate niedrig:</strong> Einstieg, visuelles Muster, Problemansprache oder erstes Bild verbessern.</li>
+          <li><strong>Completion Rate niedrig:</strong> Video kürzen, schneller schneiden, bessere Dramaturgie, klarerer Nutzen.</li>
+          <li><strong>CTR niedrig:</strong> CTA, Angebot, Caption, Zielseite und Hook-to-CTA-Verbindung prüfen.</li>
+          <li><strong>CPA hoch:</strong> Creative, Zielgruppe, Pixel-Events, Landingpage und Gebots-/Optimierungsziel prüfen.</li>
+          <li><strong>ROAS niedrig:</strong> Produktpreis, Warenkorbwert, Conversion-Wert, Zielgruppe und Creatives prüfen.</li>
+          <li><strong>Ad Fatigue:</strong> Neue Creative-Varianten testen, Hooks austauschen, Spark Ads aktualisieren.</li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="checklist" class="tab-content">
+  <div class="section-header searchable-item">
+    <h2>8. Schnell-Checklisten</h2>
+    <p>Zum Wiederholen vor Aufgaben, Quiz und Kampagnenplanung.</p>
+  </div>
+
+  <div class="grid">
+    <article class="card searchable-item">
+      <span class="tag blue">Strategie</span>
+      <h3>Vor dem Start</h3>
+      <ul class="clean">
+        <li>Ziel klar: Awareness, Traffic, Lead oder Verkauf?</li>
+        <li>Funnel-Stufe definiert?</li>
+        <li>Produkt geeignet für Demo, Review, Life-Hack oder Story?</li>
+        <li>TikTok Shop, Website, Landingpage oder Lead-Formular bereit?</li>
+        <li>Tracking mit Pixel, Events API und Consent geklärt?</li>
+      </ul>
+    </article>
+
+    <article class="card searchable-item">
+      <span class="tag green">Creative</span>
+      <h3>Video prüfen</h3>
+      <ul class="clean">
+        <li>Hook in den ersten 1–3 Sekunden.</li>
+        <li>9:16 Hochformat und mobile-first.</li>
+        <li>Sound, Voiceover oder Untertitel vorhanden.</li>
+        <li>Authentisch statt Hochglanz.</li>
+        <li>Klarer CTA: Kaufen, Mehr erfahren, Shop besuchen.</li>
+      </ul>
+    </article>
+
+    <article class="card searchable-item">
+      <span class="tag yellow">Performance</span>
+      <h3>Nach dem Start</h3>
+      <ul class="clean">
+        <li>Nicht nur Views bewerten.</li>
+        <li>Hook Rate, Completion Rate, CTR, CPA und ROAS zusammen prüfen.</li>
+        <li>Creatives regelmäßig austauschen.</li>
+        <li>Gewinner-Creatives als Spark Ads skalieren.</li>
+        <li>Zu enges Targeting vermeiden, damit der Algorithmus lernen kann.</li>
+      </ul>
+    </article>
+
+    <article class="card searchable-item">
+      <span class="tag red">Risiken</span>
+      <h3>Typische Fehler</h3>
+      <ul class="clean">
+        <li>Zu werblich statt TikTok-nativ.</li>
+        <li>Trend zu spät aufgegriffen.</li>
+        <li>Keine Untertitel oder schwacher Einstieg.</li>
+        <li>Nur Reichweite statt Conversion-Ziel betrachtet.</li>
+        <li>DSGVO/Consent/Tracking ignoriert.</li>
+      </ul>
+    </article>
+  </div>
+
+  <div class="workflow searchable-item">
+    <h3>Mini-Workflow für TikTok Ads</h3>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><strong>Ziel</strong>Awareness, Traffic, Lead oder Sale?</div>
+      <div class="step"><div class="step-num">2</div><strong>Funnel</strong>TOFU, MOFU oder BOFU?</div>
+      <div class="step"><div class="step-num">3</div><strong>Creative</strong>Hook, 9:16, UGC, CTA.</div>
+      <div class="step"><div class="step-num">4</div><strong>Format</strong>In-Feed, Spark, Shop oder Retargeting.</div>
+      <div class="step"><div class="step-num">5</div><strong>Tracking</strong>Pixel, Events API, Consent.</div>
+      <div class="step"><div class="step-num">6</div><strong>Optimierung</strong>Hook Rate, CPA, ROAS, Creative Refresh.</div>
+    </div>
+  </div>
+</section>
 </main>
+
+<footer>Performance Marketing Lernplattform</footer>
+
+<script>
+  const tabs = document.querySelectorAll('.tab-btn');
+  const contents = document.querySelectorAll('.tab-content');
+  const searchInput = document.getElementById('searchInput');
+  const noResults = document.getElementById('noResults');
+
+  tabs.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabs.forEach(b => b.classList.remove('active'));
+      contents.forEach(c => c.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.tab).classList.add('active');
+      searchInput.value = '';
+      clearSearch();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+
+  document.querySelectorAll('.acc-head').forEach(head => {
+    head.addEventListener('click', () => {
+      head.closest('.acc-card').classList.toggle('open');
+    });
+  });
+
+  function clearSearch(){
+    document.querySelectorAll('.searchable-item').forEach(el => el.classList.remove('hidden-search'));
+    noResults.style.display = 'none';
+  }
+
+  searchInput.addEventListener('input', () => {
+    const term = searchInput.value.toLowerCase().trim();
+    if(!term){ clearSearch(); return; }
+
+    tabs.forEach(b => b.classList.remove('active'));
+    contents.forEach(c => c.classList.add('active'));
+
+    let count = 0;
+    document.querySelectorAll('.searchable-item').forEach(el => {
+      const hit = el.textContent.toLowerCase().includes(term);
+      el.classList.toggle('hidden-search', !hit);
+      if(hit) count++;
+    });
+
+    noResults.style.display = count ? 'none' : 'block';
+  });
+</script>
 </body>
 </html>
