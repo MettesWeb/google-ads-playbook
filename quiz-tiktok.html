@@ -1,10 +1,10 @@
 <!doctype html>
 <html lang="de">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>TikTok Ads Quiz</title>
-  <style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prüfungsvorbereitung: TikTok Ads</title>
+    <style>
 
 :root{
   --primary-blue:#0b1f38;
@@ -50,6 +50,8 @@ body{
   margin:0;
   font-weight:850;
   letter-spacing:-.02em;
+  color:#fff;
+  text-align:left;
 }
 .back-link-header{
   display:inline-flex;
@@ -80,6 +82,7 @@ body{
   max-width:800px;
   padding:40px;
   box-sizing:border-box;
+  border:none;
 }
 .quiz-container h1{display:none}
 .progress{
@@ -189,8 +192,8 @@ button.next-btn:hover,
 }
 .result-container p,
 .result-screen p{
-  font-size:20px;
-  color:#4a5568;
+  font-size:20px!important;
+  color:#4a5568!important;
   margin-bottom:30px;
 }
 .score-circle{
@@ -199,12 +202,14 @@ button.next-btn:hover,
   border-radius:50%;
   background:var(--primary-blue);
   color:white;
+  border:none;
   display:flex;
   align-items:center;
   justify-content:center;
   font-size:46px;
   font-weight:850;
   margin:0 auto 24px auto;
+  box-shadow:none;
 }
 .restart-btn{
   background-color:var(--secondary-blue);
@@ -227,24 +232,7 @@ button.next-btn:hover,
   .quiz-container{padding:28px 20px}
 }
 
-.placeholder{
-  text-align:center;
-  color:#64748b;
-}
-.placeholder h2{
-  color:#0b1f38;
-  margin:0 0 .7rem;
-}
-.status{
-  display:inline-flex;
-  padding:.28rem .7rem;
-  border-radius:999px;
-  background:#fef3c7;
-  color:#92400e;
-  font-weight:800;
-  margin-bottom:1rem;
-}
-  </style>
+</style>
 </head>
 <body>
 <header class="quiz-header">
@@ -254,11 +242,353 @@ button.next-btn:hover,
   </div>
 </header>
 <main class="quiz-main">
-  <div class="quiz-container placeholder">
-    <span class="status">Im Aufbau</span>
-    <h2>Dieses Quiz ist vorbereitet.</h2>
-    <p>Sobald die Fragen fertig sind, wird diese Datei ersetzt.</p>
-  </div>
+<div class="quiz-container">
+        
+        <div id="quiz-screen">
+<div class="progress" id="progress-text">Frage 1 von 20</div>
+
+            <div class="question" id="question-text">Lade Frage...</div>
+
+            <div class="options" id="options-grid">
+            </div>
+
+            <div class="feedback" id="feedback-box"></div>
+
+            <div class="controls">
+                <button class="next-btn" id="next-btn" onclick="nextQuestion()">Nächste Frage</button>
+            </div>
+        </div>
+
+        <div id="result-screen" class="result-screen">
+            <h2>Prüfung abgeschlossen! 🎉</h2>
+            <div class="score-circle">
+                <span id="final-score">0</span>
+            </div>
+            <p style="font-size: 22px; color: var(--text-muted); font-weight: 600;">von 20 Fragen richtig beantwortet.</p>
+            <button class="restart-btn" onclick="restartQuiz()">Quiz neu starten</button>
+        </div>
+
+    </div>
+
+    <script>
+        const questions = [
+            {
+                q: "1. Welches Grundprinzip macht den Algorithmus von TikTok (die 'For You Page') so besonders für Marken?",
+                options: [
+                    "A) Er zeigt den Nutzern ausschließlich Videos von Accounts, denen sie folgen.",
+                    "B) Er ist eine 'Content-Discovery-Plattform', auf der auch neue Accounts ohne Follower extrem schnell viral gehen können.",
+                    "C) Er sortiert Videos strikt chronologisch nach Upload-Datum.",
+                    "D) Er erlaubt keine bezahlten Anzeigen."
+                ],
+                answer: 1,
+                explanation: "TikTok bricht mit dem Prinzip 'große Reichweite nur mit vielen Followern'. Es testet Content an kleinen Gruppen und skaliert ihn bei gutem Engagement extrem schnell."
+            },
+            {
+                q: "2. Welche Zielgruppe ist auf TikTok in Deutschland besonders stark vertreten?",
+                options: [
+                    "A) Überwiegend Personen ab 65 Jahren.",
+                    "B) B2B-Entscheider aus der Finanzbranche.",
+                    "C) Personen im Alter von 16 bis 34 Jahren, aber mit starkem Wachstum bei den 35- bis 49-Jährigen.",
+                    "D) Ausschließlich Männer unter 18 Jahren."
+                ],
+                answer: 2,
+                explanation: "Während TikTok früher als reine 'Teenie-App' galt, wachsen die älteren Nutzergruppen (Millennials, 35-49 Jahre) aktuell am stärksten."
+            },
+            {
+                q: "3. Was versteht man im TikTok-Marketing unter 'Ad Fatigue'?",
+                options: [
+                    "A) Eine Fehlermeldung im Ads Manager.",
+                    "B) Die Tatsache, dass TikTok-Nutzer sehr wenig Toleranz für klassische, werbliche Formate haben und diese schnell 'ermüden' oder wegwischen.",
+                    "C) Das Sperren von Accounts durch den Algorithmus.",
+                    "D) Ein neues Targeting-Feature."
+                ],
+                answer: 1,
+                explanation: "Nutzer scrollen extrem schnell weiter, sobald ein Video wie ein klassischer TV-Werbespot aussieht. Ads müssen authentisch (native) wirken."
+            },
+            {
+                q: "4. Welches ist laut Vorlesung das wichtigste Signal für den TikTok-Algorithmus, um ein Video viral gehen zu lassen?",
+                options: [
+                    "A) Die Anzahl der Hashtags im Text.",
+                    "B) Die Tageszeit des Uploads.",
+                    "C) Watch Time & Completion Rate (wie lange und ob Nutzer das Video bis zum Ende schauen).",
+                    "D) Die Kameraauflösung des Videos."
+                ],
+                answer: 2,
+                explanation: "Je länger Nutzer im Video bleiben (Watch Time) und je öfter sie es bis zum Schluss ansehen (Completion Rate), desto stärker pusht TikTok das Video."
+            },
+            {
+                q: "5. Wie nennt man die Messgröße, die anzeigt, wie viele Nutzer beim Scrollen anhalten, sobald dein Video beginnt?",
+                options: [
+                    "A) Click-Through-Rate (CTR)",
+                    "B) Scroll-Stop-Rate",
+                    "C) Bounce-Rate",
+                    "D) View-Through-Conversion"
+                ],
+                answer: 1,
+                explanation: "Die Scroll-Stop-Rate bewertet die ersten 2-3 Sekunden (den Hook) und misst die visuelle Anziehungskraft des Videos im Feed."
+            },
+            {
+                q: "6. Was ist der 'Interest Graph' bei TikTok?",
+                options: [
+                    "A) Ein Diagramm für die Werbekosten.",
+                    "B) Die Einteilung von Nutzern in Content-Cluster (z. B. Fitness, BookTok, CleanTok) basierend auf deren Interaktionen und Watch-Time.",
+                    "C) Eine Liste von verbotenen Wörtern.",
+                    "D) Das Freundesnetzwerk eines Nutzers."
+                ],
+                answer: 1,
+                explanation: "Im Gegensatz zum 'Social Graph' (Freunde/Follower auf Facebook) basiert TikToks Ausspielung auf dem 'Interest Graph' (was den Nutzer thematisch fesselt)."
+            },
+            {
+                q: "7. Warum können Videos auf TikTok nach einem ersten Erfolg plötzlich keine Views mehr generieren?",
+                options: [
+                    "A) Weil TikTok maximal 10.000 Views pro Tag erlaubt.",
+                    "B) Weil das Video durch den Content-Testing-Prozess in 'Wellen' ausgespielt wird und bei sinkendem Engagement (z. B. Watch Time) der Push gestoppt wird.",
+                    "C) Weil man kein Geld mehr ausgibt.",
+                    "D) Weil das Video länger als 10 Sekunden war."
+                ],
+                answer: 1,
+                explanation: "Der Algorithmus testet Videos in immer größeren Wellen. Sinken die Kennzahlen in einer Testgruppe, bricht die Reichweite drastisch ab."
+            },
+            {
+                q: "8. Was ist 'Trend Riding'?",
+                options: [
+                    "A) Die Nutzung von Skateboard-Videos für Werbung.",
+                    "B) Das schnelle Aufgreifen aktueller Sounds, Hashtags oder Challenges, um organische Sichtbarkeit durch den Algorithmus zu gewinnen.",
+                    "C) Das manuelle Löschen von negativen Kommentaren.",
+                    "D) Eine Gebotsstrategie im Ads Manager."
+                ],
+                answer: 1,
+                explanation: "Indem man aktuelle TikTok-Trends adaptiert (Trend Riding), kann man die Wahrscheinlichkeit auf virale Reichweite deutlich erhöhen."
+            },
+            {
+                q: "9. Welches Werbeformat eignet sich besonders gut, um Conversions zu generieren und gleichzeitig Social Proof (Likes, Kommentare) zu nutzen?",
+                options: [
+                    "A) TopView Ads",
+                    "B) Spark Ads",
+                    "C) Branded Hashtag Challenge",
+                    "D) Branded Effects"
+                ],
+                answer: 1,
+                explanation: "Spark Ads wandeln organische Posts (von der Brand oder Creatorn) in bezahlte Anzeigen um. Die Interaktionen bleiben dauerhaft sichtbar, was extrem authentisch wirkt."
+            },
+            {
+                q: "10. Wann sollte man eine 'TopView Ad' auf TikTok einsetzen?",
+                options: [
+                    "A) Für den Abverkauf von sehr günstigen Restposten.",
+                    "B) Wenn man ein kleines Budget hat und viel experimentieren will.",
+                    "C) Für große Branding-Kampagnen, um maximale Reichweite und Sichtbarkeit direkt beim Öffnen der App zu erhalten.",
+                    "D) Für reines B2B-Retargeting."
+                ],
+                answer: 2,
+                explanation: "TopView Ads erscheinen Full-Screen beim App-Start, sind stark limitiert (1x pro User/Tag) und teuer, aber unschlagbar für Brand Awareness."
+            },
+            {
+                q: "11. Was verbirgt sich hinter dem 'TikTok Pixel'?",
+                options: [
+                    "A) Ein Filter für die Kamera.",
+                    "B) Ein JavaScript-Snippet auf der Website, das Nutzeraktionen (Käufe, Klicks) erfasst, um Kampagnen auf Conversions zu optimieren.",
+                    "C) Ein spezieller Hashtag.",
+                    "D) Das Profilbild eines Creators."
+                ],
+                answer: 1,
+                explanation: "Wie bei Meta ist das Pixel das technische Fundament, um Traffic und Verkäufe zu messen sowie Retargeting-Zielgruppen aufzubauen."
+            },
+            {
+                q: "12. Wie hilft KI bei der 'Predictive Analytics' auf TikTok?",
+                options: [
+                    "A) Sie erstellt die Videos vollautomatisch ohne Zutun.",
+                    "B) Sie prognostiziert basierend auf historischen Daten, welche Creatives oder Zielgruppen voraussichtlich die beste Performance (z.B. Käufe) liefern werden.",
+                    "C) Sie postet heimlich Kommentare.",
+                    "D) Sie sperrt Accounts der Konkurrenz."
+                ],
+                answer: 1,
+                explanation: "Predictive Analytics hilft dabei, Budgets zielgerichtet auf die Varianten zu verteilen, die laut Algorithmus-Prognose am meisten Umsatz bringen werden."
+            },
+            {
+                q: "13. Welche Einschränkung beim Tracking macht das Performance-Marketing auf TikTok (wie auch auf Meta) zunehmend schwerer?",
+                options: [
+                    "A) Man darf keine Links mehr setzen.",
+                    "B) Das Limit von 10 Videos pro Tag.",
+                    "C) Strengere Datenschutz-Regularien (DSGVO) und iOS-Privacy-Updates (App Tracking Transparency), die das Sammeln von Daten limitieren.",
+                    "D) Dass TikTok nur noch in China nutzbar ist."
+                ],
+                answer: 2,
+                explanation: "Nutzer müssen dem Tracking zustimmen. Lehnen sie ab (Opt-Out), entstehen Datenlücken, die die Erfolgsmessung (Attribution) erschweren."
+            },
+            {
+                q: "14. Was ist eine Best Practice für die ersten 2-3 Sekunden eines TikTok-Videos?",
+                options: [
+                    "A) Ein langes Intro mit dem Firmenlogo einblenden.",
+                    "B) Einen starken 'Hook' einbauen (z. B. durch ein Aufsehen erregendes Vorher-Nachher-Bild oder eine provokante Frage).",
+                    "C) Gar nichts sagen, um Spannung aufzubauen.",
+                    "D) Zuerst die rechtlichen Hinweise einblenden."
+                ],
+                answer: 1,
+                explanation: "Der Hook entscheidet darüber, ob der Nutzer weiter scrollt (Wisch-Reflex) oder im Video bleibt. Er muss sofort Neugier wecken."
+            },
+            {
+                q: "15. Warum rät die Vorlesung von 'steriler Studioqualität' in TikTok-Ads ab?",
+                options: [
+                    "A) Weil TikTok eine sehr schlechte Auflösung hat.",
+                    "B) Weil 'raw' (unbearbeitet) und authentisch wirkender Content von Creators viel besser performt und nicht sofort als störende Werbung wahrgenommen wird.",
+                    "C) Weil solche Videos sofort gelöscht werden.",
+                    "D) Weil die Produktion zu lange dauert."
+                ],
+                answer: 1,
+                explanation: "Authentizität schlägt Perfektion. Hochglanz-Spots fallen im Feed als Fremdkörper auf und erzeugen hohe Ad Fatigue."
+            },
+            {
+                q: "16. Was ist eine 'Custom Audience' auf TikTok?",
+                options: [
+                    "A) Eine von TikTok zufällig zusammengestellte Gruppe.",
+                    "B) Eine Zielgruppe, die auf bekannten Nutzergruppen basiert, z.B. Website-Besuchern, App-Nutzern oder eigenen Kundenlisten.",
+                    "C) Eine Zielgruppe, die sich weigert, Werbung zu sehen.",
+                    "D) Die Follower eines Konkurrenten."
+                ],
+                answer: 1,
+                explanation: "Mit Custom Audiences (First-Party-Daten) können Performance-Marketer sehr gezieltes Remarketing betreiben."
+            },
+            {
+                q: "17. Wofür ist das Tool 'TikTok Creative Center' nützlich?",
+                options: [
+                    "A) Um die Buchhaltung zu machen.",
+                    "B) Zur Trend Detection: Es zeigt Insights zu aufkommenden Sounds, Hashtags und viralen Video-Formaten direkt von TikTok an.",
+                    "C) Um die Landingpage zu programmieren.",
+                    "D) Um Follower zu kaufen."
+                ],
+                answer: 1,
+                explanation: "Das Creative Center ist die offizielle Anlaufstelle, um zu analysieren, welche kreativen Trends und Ads aktuell gut performen."
+            },
+            {
+                q: "18. Wie nennt man die Targeting-Methode, bei der TikTok statistische Zwillinge deiner besten Kunden sucht?",
+                options: [
+                    "A) Interest Graph",
+                    "B) Broad Targeting",
+                    "C) Lookalike Audiences",
+                    "D) Keyword Targeting"
+                ],
+                answer: 2,
+                explanation: "Ausgehend von einer Custom Audience (z. B. bisherigen Käufern) findet die KI mit Lookalikes neue Nutzer mit sehr ähnlichem Surf- und Kaufverhalten."
+            },
+            {
+                q: "19. Welcher Fehler sollte bei TikTok-Ads zwingend vermieden werden?",
+                options: [
+                    "A) Die Verwendung von Musik und Sounds.",
+                    "B) Das Recycling von alten horizontalen (16:9) TV-Spots für den vertikalen TikTok-Feed.",
+                    "C) Das Hinzufügen von Untertiteln.",
+                    "D) Das Zusammenarbeiten mit Mikro-Influencern."
+                ],
+                answer: 1,
+                explanation: "TikTok ist eine Mobile-First, Full-Screen-Plattform. Formate müssen nativ im 9:16 Hochformat gedreht und konzipiert werden."
+            },
+            {
+                q: "20. Was ist der Hauptnutzen von 'Duets' und 'Stitch' für Marken?",
+                options: [
+                    "A) Sie reduzieren die Werbekosten um 50%.",
+                    "B) Sie fördern Community Interaction und erzeugen durch nutzergenerierte Reaktionen auf das Originalvideo zusätzliche virale Reichweite.",
+                    "C) Sie verstecken das Video vor bestimmten Nutzern.",
+                    "D) Sie ersetzen das Conversion-Tracking."
+                ],
+                answer: 1,
+                explanation: "Diese Features sind massive Viralitäts-Booster, da das Originalvideo durch die Reaktionen der Nutzer immer weiter organisch gepusht wird."
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let answered = false;
+
+        const questionText = document.getElementById('question-text');
+        const optionsGrid = document.getElementById('options-grid');
+        const feedbackBox = document.getElementById('feedback-box');
+        const nextBtn = document.getElementById('next-btn');
+        const progressText = document.getElementById('progress-text');
+        
+        const quizScreen = document.getElementById('quiz-screen');
+        const resultScreen = document.getElementById('result-screen');
+        const finalScore = document.getElementById('final-score');
+
+        function loadQuestion() {
+            answered = false;
+            feedbackBox.style.display = 'none';
+            feedbackBox.className = 'feedback';
+            nextBtn.style.display = 'none';
+            
+            const q = questions[currentQuestionIndex];
+            progressText.innerText = `Frage ${currentQuestionIndex + 1} von ${questions.length}`;
+            questionText.innerText = q.q;
+            
+            optionsGrid.innerHTML = '';
+            
+            q.options.forEach((optText, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.innerText = optText;
+                btn.onclick = () => handleSelection(index, btn);
+                optionsGrid.appendChild(btn);
+            });
+        }
+
+        function handleSelection(selectedIndex, selectedBtn) {
+            if (answered) return;
+            answered = true;
+
+            const q = questions[currentQuestionIndex];
+            const allBtns = optionsGrid.children;
+
+            for(let i=0; i<allBtns.length; i++) {
+                allBtns[i].disabled = true;
+                if(i === q.answer) {
+                    allBtns[i].classList.add('correct');
+                }
+            }
+
+            if(selectedIndex === q.answer) {
+                score++;
+                feedbackBox.innerHTML = `<strong>Richtig! 🎉</strong><br><br>${q.explanation}`;
+                feedbackBox.classList.add('success');
+            } else {
+                selectedBtn.classList.add('incorrect');
+                feedbackBox.innerHTML = `<strong>Falsch!</strong><br><br>${q.explanation}`;
+                feedbackBox.classList.add('error');
+            }
+
+            feedbackBox.style.display = 'block';
+
+            if(currentQuestionIndex < questions.length - 1) {
+                nextBtn.innerText = "Nächste Frage";
+            } else {
+                nextBtn.innerText = "Zum Ergebnis";
+            }
+            nextBtn.style.display = 'inline-block';
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if(currentQuestionIndex < questions.length) {
+                loadQuestion();
+            } else {
+                showResult();
+            }
+        }
+
+        function showResult() {
+            quizScreen.style.display = 'none';
+            resultScreen.style.display = 'block';
+            finalScore.innerText = score;
+        }
+
+        function restartQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            resultScreen.style.display = 'none';
+            quizScreen.style.display = 'block';
+            loadQuestion();
+        }
+
+        // Initialize first question
+        loadQuestion();
+    </script>
 </main>
 </body>
 </html>
