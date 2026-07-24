@@ -10,9 +10,95 @@ main{padding:2.1rem 0 4rem}.tabs{display:flex;flex-wrap:wrap;gap:.55rem;margin:0
 .note{border-left:5px solid var(--gold);padding:1rem 1.1rem;margin:1rem 0;color:var(--text-muted)}.note strong{color:var(--primary-blue)}.workflow{padding:1.2rem;margin-bottom:1rem}.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.75rem;margin-top:.8rem}.step{background:#f8fafc;border:1px solid var(--border-color);border-radius:12px;padding:.9rem;color:var(--text-muted)}.step-num{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--primary-blue);color:#fff;font-weight:800;margin-bottom:.5rem}.step strong{display:block;color:var(--primary-blue);margin-bottom:.2rem}.formula{background:#f8fafc;border:1px solid var(--border-color);border-radius:10px;padding:.75rem .9rem;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;color:var(--primary-blue);font-weight:700;margin-top:.5rem}ul.clean{padding-left:1.1rem}
 .accordion{display:grid;gap:.8rem;margin-bottom:1.2rem}.acc-card{background:#fff;border:1px solid var(--border-color);border-radius:var(--radius);box-shadow:var(--shadow-sm);overflow:hidden}.acc-head{width:100%;border:0;background:#fff;color:var(--primary-blue);padding:1rem 1.1rem;display:flex;align-items:center;justify-content:space-between;font-size:1rem;font-weight:800;cursor:pointer;text-align:left}.acc-head:hover{background:#f8fafc}.acc-icon{font-size:1.35rem}.acc-body{display:none;padding:0 1.1rem 1.1rem;color:var(--text-muted)}.acc-card.open .acc-body{display:block}.acc-card.open .acc-icon{transform:rotate(45deg)}.pill-row{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:.65rem}.pill{display:inline-flex;padding:.28rem .65rem;border-radius:999px;background:#f8fafc;border:1px solid var(--border-color);color:var(--primary-blue);font-weight:750;font-size:.82rem}.hidden-search{display:none!important}.no-results{display:none;background:#fff;border:1px solid var(--border-color);border-radius:var(--radius);padding:2rem;text-align:center;color:var(--text-muted)}footer{text-align:center;color:var(--text-muted);font-size:.84rem;padding:1.5rem}
 @media(max-width:900px){.header-actions{width:100%;flex-direction:column;align-items:stretch;margin-top:1rem}.header-search{max-width:none;width:100%;min-width:0}.back-link-header{width:100%}}@media(max-width:760px){th,td{padding:.75rem .8rem}.tab-btn{width:100%;justify-content:center}}
+
+/* --- Finale Header-Anpassung: kompakter Header --- */
+.header-kicker{display:none!important}
+header{
+  padding:1.15rem 1.5rem!important;
+  border-bottom:4px solid var(--gold)!important;
+}
+.header-container,
+.header-inner.header-grid{
+  width:min(1200px,calc(100% - 2rem));
+  margin:0 auto;
+  display:grid!important;
+  grid-template-columns:minmax(280px,1fr) minmax(340px,700px);
+  gap:1rem;
+  align-items:center!important;
+}
+.header-title{min-width:0!important}
+header h1{
+  font-size:clamp(2rem,3.8vw,2.8rem)!important;
+  line-height:1.08!important;
+  margin:0!important;
+}
+header p{
+  margin-top:.35rem!important;
+  font-size:1rem!important;
+  line-height:1.45!important;
+  max-width:760px!important;
+  color:#cbd5e1!important;
+}
+.header-actions,
+.controls.header-actions{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:flex-end!important;
+  gap:.8rem!important;
+}
+.header-search,
+.search-wrapper.header-search{
+  flex:1 1 auto!important;
+  max-width:560px!important;
+  min-width:260px!important;
+  margin:0!important;
+}
+.header-search .search-input,
+.header-search.search,
+.search.header-search{
+  width:100%!important;
+  min-width:0!important;
+  background:rgba(255,255,255,.96)!important;
+  border-color:rgba(255,255,255,.55)!important;
+  box-shadow:0 8px 22px rgba(0,0,0,.10)!important;
+}
+.back-link-header{
+  white-space:nowrap!important;
+}
+@media(max-width:900px){
+  .header-container,
+  .header-inner.header-grid{
+    grid-template-columns:1fr!important;
+  }
+  .header-actions,
+  .controls.header-actions{
+    width:100%!important;
+    flex-direction:column!important;
+    align-items:stretch!important;
+  }
+  .header-search,
+  .search-wrapper.header-search{
+    max-width:none!important;
+    width:100%!important;
+    min-width:0!important;
+  }
+  .back-link-header{width:100%!important}
+}
+
 </style></head>
 <body>
-<header><div class="header-inner header-grid"><div class="header-title"><div class="header-kicker">Talentspring · Spezialisierung 1</div><h1>YouTube Ads Playbook</h1><p>Video Performance Marketing: YouTube im Funnel, Werbeformate, Demand Gen, Performance Max, Audience Prediction, KPIs und Optimierung.</p></div><div class="header-actions"><input id="searchInput" class="search header-search" type="search" placeholder="Im YouTube Ads Playbook suchen ..."><a class="back-link-header" href="index.html">← Zurück zur Übersicht</a></div></div></header>
+<header>
+  <div class="header-inner header-grid">
+    <div class="header-title">
+      <h1>YouTube Ads Playbook</h1>
+      <p>Video Performance Marketing: Funnel, Formate, Zielgruppen, KI und KPIs.</p>
+    </div>
+    <div class="header-actions">
+      <input id="searchInput" class="search header-search" type="search" placeholder="Im YouTube Ads Playbook suchen ...">
+      <a class="back-link-header" href="index.html">← Zurück zur Übersicht</a>
+    </div>
+  </div>
+</header>
 <main>
 <nav class="tabs" aria-label="Playbook-Reiter">
 <button class="tab-btn active" data-tab="overview">1. Überblick</button><button class="tab-btn" data-tab="funnel">2. Funnel & Ziele</button><button class="tab-btn" data-tab="formats">3. Werbeformate</button><button class="tab-btn" data-tab="setup">4. Kampagne erstellen</button><button class="tab-btn" data-tab="audience">5. Zielgruppen & KI</button><button class="tab-btn" data-tab="kpis">6. KPIs & Optimierung</button><button class="tab-btn" data-tab="checklist">7. Checklisten</button>

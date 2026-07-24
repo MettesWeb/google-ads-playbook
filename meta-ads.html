@@ -282,15 +282,89 @@
       }
     }
 
+
+/* --- Finale Header-Anpassung: kompakter Header --- */
+.header-kicker{display:none!important}
+header{
+  padding:1.15rem 1.5rem!important;
+  border-bottom:4px solid var(--gold)!important;
+}
+.header-container,
+.header-inner.header-grid{
+  width:min(1200px,calc(100% - 2rem));
+  margin:0 auto;
+  display:grid!important;
+  grid-template-columns:minmax(280px,1fr) minmax(340px,700px);
+  gap:1rem;
+  align-items:center!important;
+}
+.header-title{min-width:0!important}
+header h1{
+  font-size:clamp(2rem,3.8vw,2.8rem)!important;
+  line-height:1.08!important;
+  margin:0!important;
+}
+header p{
+  margin-top:.35rem!important;
+  font-size:1rem!important;
+  line-height:1.45!important;
+  max-width:760px!important;
+  color:#cbd5e1!important;
+}
+.header-actions,
+.controls.header-actions{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:flex-end!important;
+  gap:.8rem!important;
+}
+.header-search,
+.search-wrapper.header-search{
+  flex:1 1 auto!important;
+  max-width:560px!important;
+  min-width:260px!important;
+  margin:0!important;
+}
+.header-search .search-input,
+.header-search.search,
+.search.header-search{
+  width:100%!important;
+  min-width:0!important;
+  background:rgba(255,255,255,.96)!important;
+  border-color:rgba(255,255,255,.55)!important;
+  box-shadow:0 8px 22px rgba(0,0,0,.10)!important;
+}
+.back-link-header{
+  white-space:nowrap!important;
+}
+@media(max-width:900px){
+  .header-container,
+  .header-inner.header-grid{
+    grid-template-columns:1fr!important;
+  }
+  .header-actions,
+  .controls.header-actions{
+    width:100%!important;
+    flex-direction:column!important;
+    align-items:stretch!important;
+  }
+  .header-search,
+  .search-wrapper.header-search{
+    max-width:none!important;
+    width:100%!important;
+    min-width:0!important;
+  }
+  .back-link-header{width:100%!important}
+}
+
 </style>
 </head>
 <body>
 <header>
   <div class="header-inner header-grid">
     <div class="header-title">
-      <div class="header-kicker">Talentspring · Spezialisierung 1</div>
       <h1>Meta Ads Playbook</h1>
-      <p>Facebook- und Instagram-Anzeigen kompakt: Plattformlogik, Kampagnenziele, Formate, Tracking, KPIs, Reporting und rechtliche Basics.</p>
+      <p>Facebook &amp; Instagram Ads: Ziele, Formate, Tracking, KPIs und Reporting.</p>
     </div>
     <div class="header-actions">
       <input id="searchInput" class="search header-search" type="search" placeholder="Im Meta Ads Playbook suchen ...">
