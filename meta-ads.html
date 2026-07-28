@@ -39,52 +39,36 @@
     header{
       background:var(--primary-blue);
       color:white;
-      padding:2rem 1.5rem;
+      padding:1.15rem 1.5rem;
       border-bottom:4px solid var(--gold);
       box-shadow:var(--shadow-md);
     }
-    .header-inner,main{width:min(1180px,calc(100% - 2rem));margin:0 auto}
+    .header-inner,main{width:min(1200px,calc(100% - 2rem));margin:0 auto}
     .header-grid{
-      display:flex;
-      justify-content:space-between;
-      gap:1rem;
-      align-items:flex-start;
-      flex-wrap:wrap;
-    }
-    .header-kicker{
-      color:#cbd5e1;
-      font-weight:800;
-      text-transform:uppercase;
-      letter-spacing:.12em;
-      font-size:.75rem;
-      margin-bottom:.45rem;
-    }
-    h1{font-size:clamp(1.9rem,4vw,2.8rem);line-height:1.15}
-    header p{color:#cbd5e1;margin-top:.65rem;max-width:760px}
-    .back-link-header{
-      display:inline-flex;align-items:center;justify-content:center;
-      text-decoration:none;color:white;
-      background:rgba(255,255,255,.10);
-      border:1px solid rgba(255,255,255,.28);
-      padding:.72rem 1rem;border-radius:9px;
-      font-weight:750;white-space:nowrap;transition:var(--transition)
-    }
-    .back-link-header:hover{background:rgba(255,255,255,.18)}
-    main{padding:1.7rem 0 4rem}
-    .intro{
-      background:#fff;
-      border:1px solid var(--border-color);
-      border-left:5px solid var(--gold);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow-sm);
-      padding:1.2rem 1.35rem;
-      margin-bottom:1rem;
-    }
-    .toolbar{
       display:grid;
-      grid-template-columns:1fr;
+      grid-template-columns:minmax(280px,1fr) minmax(340px,700px);
       gap:1rem;
-      margin:1rem 0 1.2rem;
+      align-items:center;
+    }
+    .header-title{min-width:0}
+    h1{
+      font-size:clamp(2rem,3.8vw,2.8rem);
+      line-height:1.08;
+      margin:0;
+      letter-spacing:-.025em;
+    }
+    header p{
+      color:#cbd5e1;
+      margin-top:.35rem;
+      font-size:1rem;
+      line-height:1.45;
+      max-width:760px;
+    }
+    .header-actions{
+      display:flex;
+      align-items:center;
+      justify-content:flex-end;
+      gap:.8rem;
     }
     .search{
       width:100%;
@@ -95,37 +79,81 @@
       color:var(--text-dark);
       background:white;
       box-shadow:var(--shadow-sm);
+      transition:var(--transition);
     }
+    .search:focus{
+      outline:none;
+      border-color:var(--accent-blue);
+      box-shadow:0 0 0 3px rgba(30,73,118,.12);
+    }
+    .header-search{
+      flex:1 1 auto;
+      max-width:560px;
+      min-width:260px;
+      margin:0;
+      background:rgba(255,255,255,.96);
+      border-color:rgba(255,255,255,.55);
+      box-shadow:0 8px 22px rgba(0,0,0,.10);
+    }
+    .back-link-header{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      text-decoration:none;
+      color:white;
+      background:rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.28);
+      padding:.82rem 1rem;
+      border-radius:9px;
+      font-weight:800;
+      white-space:nowrap;
+      transition:var(--transition)
+    }
+    .back-link-header:hover{background:rgba(255,255,255,.18)}
+    main{padding:1.7rem 0 4rem}
     .tabs{
       display:flex;
       flex-wrap:wrap;
       gap:.55rem;
-      margin-bottom:1rem;
+      margin:0 0 1rem;
     }
     .tab-btn{
       border:1px solid #cbd5e1;
       background:white;
       color:var(--primary-blue);
       border-radius:999px;
-      padding:.65rem .9rem;
-      font-weight:750;
+      padding:.68rem .95rem;
+      font-weight:800;
       cursor:pointer;
       transition:var(--transition);
+      box-shadow:var(--shadow-sm);
+      font-size:.92rem;
     }
-    .tab-btn:hover{border-color:var(--secondary-blue);transform:translateY(-1px)}
+    .tab-btn:hover{
+      border-color:var(--secondary-blue);
+      transform:translateY(-1px);
+      background:#f8fafc;
+    }
     .tab-btn.active{
       background:var(--primary-blue);
       border-color:var(--primary-blue);
       color:white;
+      box-shadow:var(--shadow-md);
     }
     .tab-content{display:none}
     .tab-content.active{display:block}
-    .section-header{margin:1.2rem 0 1rem}
-    .section-header h2{color:var(--primary-blue);font-size:clamp(1.35rem,3vw,2rem)}
-    .section-header p{color:var(--text-muted);margin-top:.25rem}
+    .section-header{margin:1.25rem 0 1rem}
+    .section-header h2{color:var(--primary-blue);font-size:clamp(1.45rem,3vw,2.1rem);line-height:1.15}
+    .section-header p{color:var(--text-muted);margin-top:.3rem;max-width:980px}
     .grid{
       display:grid;
       grid-template-columns:repeat(auto-fit,minmax(245px,1fr));
+      gap:1rem;
+      margin-bottom:1rem;
+    }
+    .two-col{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
       gap:1rem;
       margin-bottom:1rem;
     }
@@ -138,7 +166,7 @@
     .card{padding:1.2rem}
     .card h3{color:var(--primary-blue);margin-bottom:.45rem}
     .card p,.card li{color:var(--text-muted)}
-    .tag{
+    .tag,.badge{
       display:inline-flex;
       align-items:center;
       padding:.25rem .6rem;
@@ -147,56 +175,44 @@
       font-weight:800;
       margin-bottom:.75rem;
     }
-    .tag.blue{background:var(--blue-bg);color:var(--primary-blue)}
-    .tag.green{background:var(--green-bg);color:var(--green)}
-    .tag.yellow{background:var(--yellow-bg);color:var(--yellow)}
-    .tag.red{background:var(--red-bg);color:var(--red)}
+    .tag.blue,.badge.blue{background:var(--blue-bg);color:var(--primary-blue)}
+    .tag.green,.badge.green{background:var(--green-bg);color:var(--green)}
+    .tag.yellow,.badge.yellow{background:var(--yellow-bg);color:var(--yellow)}
+    .tag.red,.badge.red{background:var(--red-bg);color:var(--red)}
     .table-card{overflow:hidden;margin-bottom:1rem}
     .table-responsive{overflow-x:auto}
     table{width:100%;border-collapse:collapse;background:white}
-    th,td{padding:.9rem 1rem;text-align:left;border-bottom:1px solid var(--border-color);vertical-align:top}
-    th{background:#f8fafc;color:var(--primary-blue);font-size:.85rem;text-transform:uppercase;letter-spacing:.04em}
+    th,td{
+      padding:.9rem 1rem;
+      text-align:left;
+      border-bottom:1px solid var(--border-color);
+      vertical-align:top;
+    }
+    th{
+      background:#f8fafc;
+      color:var(--primary-blue);
+      font-size:.85rem;
+      text-transform:uppercase;
+      letter-spacing:.04em;
+    }
     tr:last-child td{border-bottom:none}
     td strong{color:var(--primary-blue)}
-    .badge{
-      display:inline-flex;
-      padding:.2rem .55rem;
-      border-radius:999px;
-      font-size:.76rem;
-      font-weight:800;
-      white-space:nowrap;
-    }
-    .badge.green{background:var(--green-bg);color:var(--green)}
-    .badge.yellow{background:var(--yellow-bg);color:var(--yellow)}
-    .badge.red{background:var(--red-bg);color:var(--red)}
-    .accordion{display:grid;gap:.8rem;margin-bottom:1.2rem}
-    .acc-card{
-      background:white;border:1px solid var(--border-color);border-radius:var(--radius);
-      box-shadow:var(--shadow-sm);overflow:hidden
-    }
-    .acc-head{
-      width:100%;border:0;background:white;color:var(--primary-blue);
-      padding:1rem 1.1rem;display:flex;align-items:center;justify-content:space-between;
-      font-size:1rem;font-weight:800;cursor:pointer;text-align:left
-    }
-    .acc-head:hover{background:#f8fafc}
-    .acc-icon{font-size:1.35rem}
-    .acc-body{display:none;padding:0 1.1rem 1.1rem;color:var(--text-muted)}
-    .acc-card.open .acc-body{display:block}
-    .acc-card.open .acc-icon{transform:rotate(45deg)}
     .note{
       border-left:5px solid var(--gold);
       padding:1rem 1.1rem;
       margin:1rem 0;
+      color:var(--text-muted);
     }
     .note strong{color:var(--primary-blue)}
     .workflow{
       padding:1.2rem;
-      margin-bottom:1rem;
+      margin:1rem 0;
     }
+    .workflow h3{color:var(--primary-blue);margin-bottom:.4rem}
+    .workflow p{color:var(--text-muted)}
     .steps{
       display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(155px,1fr));
+      grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
       gap:.75rem;
       margin-top:.8rem;
     }
@@ -205,14 +221,20 @@
       border:1px solid var(--border-color);
       border-radius:12px;
       padding:.9rem;
+      color:var(--text-muted);
     }
     .step-num{
       display:inline-grid;
       place-items:center;
-      width:28px;height:28px;border-radius:50%;
+      width:30px;
+      height:30px;
+      border-radius:50%;
       background:var(--primary-blue);
-      color:white;font-weight:800;margin-bottom:.5rem
+      color:white;
+      font-weight:800;
+      margin-bottom:.5rem
     }
+    .step strong{display:block;color:var(--primary-blue);margin-bottom:.2rem}
     .formula{
       background:#f8fafc;
       border:1px solid var(--border-color);
@@ -224,147 +246,97 @@
       margin-top:.5rem;
     }
     ul.clean{padding-left:1.1rem}
-    .two-col{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1rem;margin-bottom:1rem}
-    footer{text-align:center;color:var(--text-muted);font-size:.84rem;padding:1.5rem}
-    .hidden-search{display:none!important}
-    .no-results{
-      display:none;background:white;border:1px solid var(--border-color);
-      border-radius:var(--radius);padding:2rem;text-align:center;color:var(--text-muted)
+    .accordion{display:grid;gap:.8rem;margin-bottom:1.2rem}
+    .acc-card{
+      background:white;
+      border:1px solid var(--border-color);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow-sm);
+      overflow:hidden;
     }
-    @media(max-width:760px){
-      .header-grid{display:block}
-      .back-link-header{margin-top:1rem}
-      th,td{padding:.75rem .8rem}
-    }
-  
-
-    /* --- Anpassung: Header wie Google Ads --- */
-    .header-grid{
-      align-items:center;
-    }
-    .header-title{
-      min-width:280px;
-      flex:1 1 420px;
-    }
-    .header-actions{
+    .acc-head{
+      width:100%;
+      border:0;
+      background:white;
+      color:var(--primary-blue);
+      padding:1rem 1.1rem;
       display:flex;
       align-items:center;
-      justify-content:flex-end;
+      justify-content:space-between;
+      font-size:1rem;
+      font-weight:800;
+      cursor:pointer;
+      text-align:left;
       gap:1rem;
-      flex:1 1 620px;
     }
-    .header-search{
-      flex:1;
-      min-width:280px;
-      max-width:620px;
-      margin:0;
-      background:rgba(255,255,255,.96);
-      border-color:rgba(255,255,255,.55);
-      box-shadow:0 8px 22px rgba(0,0,0,.10);
+    .acc-head:hover{background:#f8fafc}
+    .acc-icon{font-size:1.35rem;line-height:1}
+    .acc-body{
+      display:none;
+      padding:0 1.1rem 1.1rem;
+      color:var(--text-muted);
     }
-    .tabs{
-      margin:1.2rem 0 1rem;
+    .acc-body p{margin:.4rem 0}
+    .acc-card.open .acc-body{display:block}
+    .acc-card.open .acc-icon{transform:rotate(45deg)}
+    .diagnose-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(285px,1fr));
+      gap:1rem;
+      margin-bottom:1rem;
     }
+    .diagnose-card{
+      background:white;
+      border:1px solid var(--border-color);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow-sm);
+      overflow:hidden;
+    }
+    .diagnose-card button{
+      width:100%;
+      border:0;
+      background:white;
+      padding:1rem;
+      text-align:left;
+      color:var(--primary-blue);
+      font-weight:850;
+      display:flex;
+      justify-content:space-between;
+      gap:.8rem;
+      cursor:pointer;
+    }
+    .diagnose-card button:hover{background:#f8fafc}
+    .diagnose-body{display:none;padding:0 1rem 1rem;color:var(--text-muted)}
+    .diagnose-card.open .diagnose-body{display:block}
+    .hidden-search{display:none!important}
+    .no-results{
+      display:none;
+      background:white;
+      border:1px solid var(--border-color);
+      border-radius:var(--radius);
+      padding:2rem;
+      text-align:center;
+      color:var(--text-muted);
+    }
+    footer{text-align:center;color:var(--text-muted);font-size:.84rem;padding:1.5rem}
     @media(max-width:900px){
-      .header-actions{
-        width:100%;
-        flex-direction:column;
-        align-items:stretch;
-        margin-top:1rem;
-      }
-      .header-search{
-        max-width:none;
-        width:100%;
-        min-width:0;
-      }
-      .back-link-header{
-        width:100%;
-      }
+      .header-grid{grid-template-columns:1fr}
+      .header-actions{width:100%;flex-direction:column;align-items:stretch}
+      .header-search{max-width:none;width:100%;min-width:0}
+      .back-link-header{width:100%}
     }
-
-
-/* --- Finale Header-Anpassung: kompakter Header --- */
-.header-kicker{display:none!important}
-header{
-  padding:1.15rem 1.5rem!important;
-  border-bottom:4px solid var(--gold)!important;
-}
-.header-container,
-.header-inner.header-grid{
-  width:min(1200px,calc(100% - 2rem));
-  margin:0 auto;
-  display:grid!important;
-  grid-template-columns:minmax(280px,1fr) minmax(340px,700px);
-  gap:1rem;
-  align-items:center!important;
-}
-.header-title{min-width:0!important}
-header h1{
-  font-size:clamp(2rem,3.8vw,2.8rem)!important;
-  line-height:1.08!important;
-  margin:0!important;
-}
-header p{
-  margin-top:.35rem!important;
-  font-size:1rem!important;
-  line-height:1.45!important;
-  max-width:760px!important;
-  color:#cbd5e1!important;
-}
-.header-actions,
-.controls.header-actions{
-  display:flex!important;
-  align-items:center!important;
-  justify-content:flex-end!important;
-  gap:.8rem!important;
-}
-.header-search,
-.search-wrapper.header-search{
-  flex:1 1 auto!important;
-  max-width:560px!important;
-  min-width:260px!important;
-  margin:0!important;
-}
-.header-search .search-input,
-.header-search.search,
-.search.header-search{
-  width:100%!important;
-  min-width:0!important;
-  background:rgba(255,255,255,.96)!important;
-  border-color:rgba(255,255,255,.55)!important;
-  box-shadow:0 8px 22px rgba(0,0,0,.10)!important;
-}
-.back-link-header{
-  white-space:nowrap!important;
-}
-@media(max-width:900px){
-  .header-container,
-  .header-inner.header-grid{
-    grid-template-columns:1fr!important;
-  }
-  .header-actions,
-  .controls.header-actions{
-    width:100%!important;
-    flex-direction:column!important;
-    align-items:stretch!important;
-  }
-  .header-search,
-  .search-wrapper.header-search{
-    max-width:none!important;
-    width:100%!important;
-    min-width:0!important;
-  }
-  .back-link-header{width:100%!important}
-}
-
-</style>
+    @media(max-width:760px){
+      th,td{padding:.75rem .8rem}
+      .tab-btn{width:100%}
+    }
+  </style>
 </head>
 <body>
 <header>
   <div class="header-inner header-grid">
     <div class="header-title">
       <h1>Meta Ads Playbook</h1>
-      <p>Facebook &amp; Instagram Ads: Ziele, Formate, Tracking, KPIs und Reporting.</p>
+      <p>Facebook &amp; Instagram Ads: Ziele, Zielgruppen, Formate, Tracking, KPIs und Diagnose.</p>
     </div>
     <div class="header-actions">
       <input id="searchInput" class="search header-search" type="search" placeholder="Im Meta Ads Playbook suchen ...">
@@ -374,39 +346,39 @@ header p{
 </header>
 
 <main>
-
   <nav class="tabs" aria-label="Playbook-Reiter">
-    <button class="tab-btn active" data-tab="overview">Überblick</button>
-    <button class="tab-btn" data-tab="campaigns">Kampagnen & Funnel</button>
-    <button class="tab-btn" data-tab="formats">Anzeigenformate</button>
-    <button class="tab-btn" data-tab="tracking">Tracking & KPIs</button>
-    <button class="tab-btn" data-tab="tools">Tools & Recht</button>
-    <button class="tab-btn" data-tab="checklist">Checklisten</button>
+    <button class="tab-btn active" data-tab="beginner">1. Für Anfänger</button>
+    <button class="tab-btn" data-tab="goals">2. Ziele &amp; Funnel</button>
+    <button class="tab-btn" data-tab="audiences">3. Zielgruppenarten</button>
+    <button class="tab-btn" data-tab="formats">4. Formate</button>
+    <button class="tab-btn" data-tab="tracking">5. Tracking &amp; KPIs</button>
+    <button class="tab-btn" data-tab="diagnosis">6. Diagnose</button>
+    <button class="tab-btn" data-tab="tools">7. Tools &amp; Recht</button>
   </nav>
 
   <div id="noResults" class="no-results">Keine passenden Inhalte gefunden.</div>
 
-  <section id="overview" class="tab-content active">
+  <section id="beginner" class="tab-content active">
     <div class="section-header searchable-item">
-      <h2>1. Überblick: Was ist Meta Ads Performance Marketing?</h2>
-      <p>Meta Ads umfasst bezahlte Anzeigen auf Facebook und Instagram über den Meta Werbeanzeigenmanager.</p>
+      <h2>1. Meta Ads für Anfänger</h2>
+      <p>Meta Ads bedeutet: bezahlte Anzeigen auf Facebook und Instagram über den Meta Werbeanzeigenmanager. Wichtig ist immer die Verbindung aus Ziel, Zielgruppe, Creative, Tracking und Auswertung.</p>
     </div>
 
     <div class="grid">
       <article class="card searchable-item">
         <span class="tag blue">Grundlogik</span>
-        <h3>Performance Marketing</h3>
-        <p>Performance-Marketing bedeutet: Eine Maßnahme wird nicht nur nach Sichtbarkeit bewertet, sondern danach, ob eine messbare Handlung entsteht – z. B. Klick, Lead, Kauf oder Anmeldung.</p>
+        <h3>Was sind Meta Ads?</h3>
+        <p>Meta Ads sind bezahlte Werbeanzeigen auf Facebook und Instagram. Unternehmen nutzen sie, um Reichweite, Klicks, Leads, Verkäufe oder Retargeting zu erzeugen.</p>
       </article>
       <article class="card searchable-item">
-        <span class="tag yellow">Wichtig</span>
-        <h3>Sichtbarkeit ≠ Erfolg</h3>
-        <p>Viele Likes, Kommentare oder Impressionen können gut aussehen. Entscheidend ist aber, ob Menschen die gewünschte Handlung durchführen.</p>
+        <span class="tag green">Performance</span>
+        <h3>Nicht nur schön, sondern messbar</h3>
+        <p>Eine Anzeige ist nicht automatisch gut, nur weil sie Likes bekommt. Entscheidend ist, ob sie das gewünschte Ziel erreicht: Klick, Lead, Kauf oder andere Conversion.</p>
       </article>
       <article class="card searchable-item">
-        <span class="tag green">Steuerung</span>
-        <h3>Ziel + Messwert</h3>
-        <p>Erst das Ziel festlegen, dann die passende Kennzahl wählen. Beispiel: Traffic → Klicks, CPC, CTR. Verkäufe → Conversions, CPA, ROAS.</p>
+        <span class="tag yellow">Konto-Logik</span>
+        <h3>Kampagne → Anzeigengruppe → Anzeige</h3>
+        <p>Oben wird das Ziel festgelegt. In der Mitte werden Zielgruppe, Budget und Platzierung gesteuert. Unten liegt das sichtbare Creative mit Text, Bild/Video und CTA.</p>
       </article>
     </div>
 
@@ -419,7 +391,7 @@ header p{
           <tbody>
             <tr>
               <td><strong>Zielgruppe</strong></td>
-              <td>Breiter, tendenziell älter, stärker für Gruppen, lokale Themen und Diskussionen.</td>
+              <td>Breiter, tendenziell älter, stärker für Gruppen, lokale Themen, Diskussionen und Community.</td>
               <td>Jünger, visueller, stärker für Lifestyle, Markenimage, Reels, Stories und Shopping-Inspiration.</td>
             </tr>
             <tr>
@@ -429,31 +401,53 @@ header p{
             </tr>
             <tr>
               <td><strong>Strategische Rolle</strong></td>
-              <td>Retargeting, Community, ältere Zielgruppen, lokale Unternehmen, Informationsvermittlung.</td>
-              <td>Branding, Produktinszenierung, Social Commerce, jüngere Zielgruppen, emotionale Creatives.</td>
+              <td>Retargeting, Community, lokale Unternehmen, Informationsvermittlung, ältere Zielgruppen.</td>
+              <td>Branding, Produktinszenierung, Social Commerce, emotionale Creatives, jüngere Zielgruppen.</td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
 
+    <div class="workflow searchable-item">
+      <h3>7-Schritte-Workflow für Meta Ads</h3>
+      <p>Diese Reihenfolge hilft dir, Meta Ads logisch zu verstehen und nicht durcheinander zu denken.</p>
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><strong>Ziel</strong>Was soll passieren: Reichweite, Traffic, Lead oder Verkauf?</div>
+        <div class="step"><div class="step-num">2</div><strong>Funnel</strong>Ist die Person kalt, interessiert oder kaufnah?</div>
+        <div class="step"><div class="step-num">3</div><strong>Zielgruppe</strong>Wer soll die Anzeige sehen?</div>
+        <div class="step"><div class="step-num">4</div><strong>Format</strong>Bild, Video, Reel, Story, Carousel oder Collection?</div>
+        <div class="step"><div class="step-num">5</div><strong>Tracking</strong>Sind Pixel, CAPI, Events und Consent sauber?</div>
+        <div class="step"><div class="step-num">6</div><strong>Creative</strong>Warum sollte jemand stoppen und klicken?</div>
+        <div class="step"><div class="step-num">7</div><strong>Optimierung</strong>Welche KPI zeigt, was geändert werden muss?</div>
+      </div>
+    </div>
+
     <div class="note searchable-item">
-      <strong>Praxisentscheidung:</strong> Nicht zuerst fragen „Facebook oder Instagram?“, sondern: Was ist das Ziel? Wer ist die Zielgruppe? Wie erklärungsbedürftig ist das Produkt? Gibt es genug Budget und Tracking?
+      <strong>Merksatz:</strong> Meta Ads sind am stärksten, wenn Ziel, Zielgruppe und Creative zusammenpassen und Meta durch Tracking genug Daten zum Optimieren bekommt.
     </div>
   </section>
 
-  <section id="campaigns" class="tab-content">
+  <section id="goals" class="tab-content">
     <div class="section-header searchable-item">
-      <h2>2. Kampagnenstruktur & Funnel</h2>
-      <p>Meta-Kampagnen werden von oben nach unten gedacht: Ziel → Zielgruppe/Platzierung → Anzeige.</p>
+      <h2>2. Ziele & Funnel</h2>
+      <p>Bevor du Anzeigen baust, musst du wissen: Soll die Kampagne Aufmerksamkeit erzeugen, Klicks bringen, Leads sammeln oder Verkäufe auslösen?</p>
     </div>
 
-    <div class="workflow searchable-item">
-      <h3>Meta-Kampagnenaufbau</h3>
-      <div class="steps">
-        <div class="step"><div class="step-num">1</div><strong>Kampagne</strong><p>Ziel festlegen: Awareness, Traffic, Leads, Sales, App usw.</p></div>
-        <div class="step"><div class="step-num">2</div><strong>Anzeigengruppe</strong><p>Zielgruppe, Budget, Platzierungen, Optimierungsziel.</p></div>
-        <div class="step"><div class="step-num">3</div><strong>Anzeige</strong><p>Creative, Text, Headline, CTA, Link, Format.</p></div>
+    <div class="table-card searchable-item">
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr><th>Kampagnenziel</th><th>Wofür?</th><th>Typische Nutzung</th><th>Wichtige KPIs</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Awareness</strong></td><td>Bekanntheit und Sichtbarkeit.</td><td>Markenaufbau, Produktlaunch, neue Zielgruppen.</td><td>Reichweite, Impressionen, CPM, Frequenz.</td></tr>
+            <tr><td><strong>Traffic</strong></td><td>Menschen auf Website, Shop oder Landingpage bringen.</td><td>Blogartikel, Produktseite, Angebotsseite.</td><td>CTR, CPC, Landingpage-Aufrufe.</td></tr>
+            <tr><td><strong>Engagement</strong></td><td>Interaktionen mit Content oder Profil erzeugen.</td><td>Kommentare, Likes, Nachrichten, Videoaufrufe.</td><td>Engagement Rate, Video Views, Nachrichten.</td></tr>
+            <tr><td><strong>Leads</strong></td><td>Kontakte oder Anfragen sammeln.</td><td>Formulare, Beratung, Newsletter, Download.</td><td>CPL, Lead-Qualität, Conversion Rate.</td></tr>
+            <tr><td><strong>Sales</strong></td><td>Käufe oder Bestellungen auslösen.</td><td>Online-Shop, Katalog, Retargeting, Angebote.</td><td>CPA/CPO, ROAS, Umsatz, Purchase Events.</td></tr>
+          </tbody>
+        </table>
       </div>
     </div>
 
@@ -461,26 +455,26 @@ header p{
       <div class="table-responsive">
         <table>
           <thead>
-            <tr><th>Funnel-Stufe</th><th>Ziel</th><th>Passende Kampagne</th><th>Wichtige KPIs</th></tr>
+            <tr><th>Funnel-Stufe</th><th>Person kennt dich?</th><th>Ziel</th><th>Passende Meta-Logik</th></tr>
           </thead>
           <tbody>
             <tr>
               <td><strong>TOFU</strong><br>Top of Funnel</td>
+              <td>Noch kalt.</td>
               <td>Aufmerksamkeit und Bekanntheit schaffen.</td>
-              <td>Awareness, Reichweite, Video/Story/Reels.</td>
-              <td>Reichweite, Impressionen, CPM, View Rate, Frequenz.</td>
+              <td>Awareness, Video/Reels, breite Zielgruppen, starke Hooks.</td>
             </tr>
             <tr>
               <td><strong>MOFU</strong><br>Middle of Funnel</td>
-              <td>Interesse, Klicks, Engagement oder Leads erzeugen.</td>
-              <td>Traffic, Engagement, Lead-Kampagnen.</td>
-              <td>CTR, CPC, Landingpage-Aufrufe, CPL.</td>
+              <td>Hat Interesse gezeigt.</td>
+              <td>Interesse vertiefen, Klicks, Engagement oder Leads erzeugen.</td>
+              <td>Traffic, Engagement, Lead-Formulare, Website-Besucher, Video Viewer.</td>
             </tr>
             <tr>
               <td><strong>BOFU</strong><br>Bottom of Funnel</td>
-              <td>Kauf, Anfrage, Buchung oder Retargeting.</td>
-              <td>Sales, Conversion, Katalog/Shop, Retargeting.</td>
-              <td>Conversions, CPA/CPO, Conversion Rate, ROAS.</td>
+              <td>Ist kaufnah oder war schon im Kontakt.</td>
+              <td>Kauf, Anfrage, Buchung oder Retargeting auslösen.</td>
+              <td>Sales, Conversion, Katalog, Warenkorb-Abbrecher, Retargeting.</td>
             </tr>
           </tbody>
         </table>
@@ -493,7 +487,7 @@ header p{
         <div class="acc-body">
           <ul class="clean">
             <li>Bei Traffic-Kampagnen besser auf <strong>Landingpage-Aufrufe</strong> optimieren als nur auf Link-Klicks.</li>
-            <li>Bei kleinem Budget eher <strong>manuelle Platzierungen</strong> prüfen, damit Budget nicht in wenig passende Bereiche läuft.</li>
+            <li>Bei kleinem Budget eher prüfen, ob automatische Platzierungen sinnvoll sind oder ob Budget in wenig passende Bereiche läuft.</li>
             <li>Aktuelle Tagesdaten nicht überbewerten: Reporting besser mit abgeschlossenen Tagen auswerten.</li>
             <li>Lead-Formulare kritisch prüfen, weil Autofill zu weniger qualifizierten Leads führen kann.</li>
             <li>Bei besonderen Anzeigenkategorien wie Jobs, Immobilien oder Krediten sind Zielgruppen-Einschränkungen rechtlich begrenzt.</li>
@@ -502,7 +496,20 @@ header p{
       </article>
 
       <article class="acc-card searchable-item">
-        <button class="acc-head" type="button">Creative-Logik bei Meta <span class="acc-icon">+</span></button>
+        <button class="acc-head" type="button">Budget-Logik kurz erklärt <span class="acc-icon">+</span></button>
+        <div class="acc-body">
+          <ul class="clean">
+            <li><strong>Zu kleines Budget:</strong> Meta sammelt zu wenig Daten und kann schlechter optimieren.</li>
+            <li><strong>Zu viele Anzeigengruppen:</strong> Budget verteilt sich zu stark und jede Gruppe lernt zu langsam.</li>
+            <li><strong>Zu frühe Änderungen:</strong> Ständige Anpassungen können die Lernphase stören.</li>
+            <li><strong>Funnel-Logik:</strong> Awareness darf günstiger sein, Sales und Leads sind meist teurer, aber wertvoller.</li>
+            <li><strong>Praxis:</strong> Budget immer nach Ziel bewerten, nicht nur nach Klickpreis.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="acc-card searchable-item">
+        <button class="acc-head" type="button">Kreative Logik bei Meta <span class="acc-icon">+</span></button>
         <div class="acc-body">
           <ul class="clean">
             <li>Meta kann mehrere Texte und Überschriften kombinieren, um bessere Varianten zu testen.</li>
@@ -515,10 +522,69 @@ header p{
     </div>
   </section>
 
+  <section id="audiences" class="tab-content">
+    <div class="section-header searchable-item">
+      <h2>3. Zielgruppenarten</h2>
+      <p>Zielgruppen gehören in Meta Ads zur strategischen Steuerung: Wer soll angesprochen werden, wer ist bereits warm und wer ähnelt guten Kund*innen?</p>
+    </div>
+
+    <div class="table-card searchable-item">
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr><th>Zielgruppenart</th><th>Einfach erklärt</th><th>Beispiel</th><th>Typischer Funnel</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Core Audiences</strong></td>
+              <td>Zielgruppen nach Merkmalen wie Alter, Standort, Interessen oder Verhalten.</td>
+              <td>Frauen 25–44, Interesse an Yoga, Wohnen oder Online-Shopping.</td>
+              <td>TOFU / MOFU</td>
+            </tr>
+            <tr>
+              <td><strong>Custom Audiences</strong></td>
+              <td>Eigene Daten oder Interaktionen werden als Zielgruppe genutzt.</td>
+              <td>Website-Besucher, Instagram-Interaktionen, Kundenliste, Video Viewer.</td>
+              <td>MOFU / BOFU</td>
+            </tr>
+            <tr>
+              <td><strong>Lookalike Audiences</strong></td>
+              <td>Meta sucht Menschen, die einer bestehenden guten Zielgruppe ähneln.</td>
+              <td>Ähnliche Personen wie Käufer, Leads oder Newsletter-Abonnenten.</td>
+              <td>TOFU / MOFU</td>
+            </tr>
+            <tr>
+              <td><strong>Retargeting</strong></td>
+              <td>Menschen erneut ansprechen, die bereits Kontakt hatten.</td>
+              <td>Warenkorb-Abbrecher, Produktseiten-Besucher, Leadformular geöffnet.</td>
+              <td>BOFU</td>
+            </tr>
+            <tr>
+              <td><strong>Broad / Advantage+ Audience</strong></td>
+              <td>Meta bekommt nur wenige Signale und sucht selbst passende Nutzer*innen.</td>
+              <td>Breite Zielgruppe mit starkem Creative und gutem Conversion-Tracking.</td>
+              <td>TOFU bis BOFU</td>
+            </tr>
+            <tr>
+              <td><strong>Ausschlüsse</strong></td>
+              <td>Bestimmte Gruppen werden ausgeschlossen, damit Budget nicht verschwendet wird.</td>
+              <td>Käufer der letzten 30 Tage ausschließen, wenn nur Neukunden gesucht werden.</td>
+              <td>Alle Stufen</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="note searchable-item">
+      <strong>Merksatz:</strong> Kalte Zielgruppen entdecken neue Menschen. Warme Zielgruppen kennen dich schon. Retargeting spricht Menschen an, die nah an der Handlung sind.
+    </div>
+  </section>
+
   <section id="formats" class="tab-content">
     <div class="section-header searchable-item">
-      <h2>3. Anzeigenformate</h2>
-      <p>Das Format entscheidet, wie schnell die Botschaft verstanden wird und ob Nutzer*innen weiterklicken.</p>
+      <h2>4. Anzeigenformate</h2>
+      <p>Das Format entscheidet, wie schnell die Botschaft verstanden wird und wie viel Raum du für Erklärung, Emotion oder Produktdarstellung hast.</p>
     </div>
 
     <div class="table-card searchable-item">
@@ -553,7 +619,7 @@ header p{
               <td>Mobile Shopping, Produktserien, Fashion, Beauty, Technik.</td>
             </tr>
             <tr>
-              <td><strong>Stories/Reels</strong></td>
+              <td><strong>Stories / Reels</strong></td>
               <td>Mobil, vollflächig, schnell, aufmerksamkeitsstark.</td>
               <td>Kurze Aufmerksamkeit, nicht für lange Erklärungen.</td>
               <td>Awareness, Engagement, Trends, kurze Angebote, visuelle Produkte.</td>
@@ -569,29 +635,26 @@ header p{
       </div>
     </div>
 
-    <div class="grid">
-      <article class="card searchable-item">
-        <span class="tag blue">Hook</span>
-        <h3>Die ersten Sekunden zählen</h3>
-        <p>Bei Reels, Stories und Videos muss die Botschaft sofort erkennbar sein: Problem, Wunsch oder visueller Hingucker am Anfang.</p>
-      </article>
-      <article class="card searchable-item">
-        <span class="tag yellow">Design</span>
-        <h3>Klarheit schlägt Überladung</h3>
-        <p>Ein Hauptfokus, lesbare Schrift, starke Kontraste, nicht zu viele Farben und klare Text-Hierarchie.</p>
-      </article>
-      <article class="card searchable-item">
-        <span class="tag green">Creative = Targeting</span>
-        <h3>Das Motiv zieht die Zielgruppe an</h3>
-        <p>Meta erkennt Signale aus Bild, Text, Interaktion und Nutzerverhalten. Darum steuert gutes Creative die Ausspielung mit.</p>
-      </article>
+    <div class="workflow searchable-item">
+      <h3>Content-Formel für Meta Ads</h3>
+      <p>Diese Formel hilft, Anzeigen nicht nur schön, sondern verständlich und handlungsorientiert aufzubauen.</p>
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><strong>Hook</strong>Warum soll jemand stoppen?</div>
+        <div class="step"><div class="step-num">2</div><strong>Problem</strong>Welches Bedürfnis oder welcher Schmerz wird angesprochen?</div>
+        <div class="step"><div class="step-num">3</div><strong>Lösung</strong>Wie hilft Produkt, Angebot oder Dienstleistung?</div>
+        <div class="step"><div class="step-num">4</div><strong>CTA</strong>Was soll die Person als Nächstes tun?</div>
+      </div>
+    </div>
+
+    <div class="note searchable-item">
+      <strong>Praxislogik:</strong> Bei Meta ist das Creative selbst ein Steuerungssignal. Bild, Video, Text und Hook ziehen bestimmte Menschen an und beeinflussen dadurch die Ausspielung.
     </div>
   </section>
 
   <section id="tracking" class="tab-content">
     <div class="section-header searchable-item">
-      <h2>4. Tracking & KPIs</h2>
-      <p>Ohne Tracking optimiert man „ins Blaue hinein“. Pixel und CAPI liefern die Datenbasis.</p>
+      <h2>5. Tracking & KPIs</h2>
+      <p>Ohne Tracking optimiert man „ins Blaue hinein“. Pixel, CAPI, Events und KPIs zeigen, ob Meta Ads wirklich funktionieren.</p>
     </div>
 
     <div class="two-col">
@@ -612,9 +675,27 @@ header p{
 
       <div class="card searchable-item">
         <span class="tag green">Dual Setup</span>
-        <h3>Best Practice</h3>
-        <p>In der Praxis werden Pixel und CAPI gemeinsam genutzt. Der Pixel liefert Browserdaten, CAPI ergänzt Serverdaten. Wichtig: Consent Management, Event-Test und Deduplizierung.</p>
+        <h3>Pixel + CAPI als Best Practice</h3>
+        <p>In der Praxis werden Pixel und CAPI gemeinsam genutzt. Der Pixel liefert Browserdaten, CAPI ergänzt Serverdaten. Wichtig sind Consent Management, Event-Test und Deduplizierung.</p>
         <div class="formula">Pixel + CAPI + Consent + Events = bessere Datenbasis</div>
+      </div>
+    </div>
+
+    <div class="table-card searchable-item">
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr><th>Event</th><th>Bedeutung</th><th>Wann wichtig?</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>PageView</strong></td><td>Eine Seite wurde geladen.</td><td>Grundtracking und Website-Besuche.</td></tr>
+            <tr><td><strong>ViewContent</strong></td><td>Ein Inhalt oder Produkt wurde angesehen.</td><td>Produktseiten, Blogartikel, Angebotsseiten.</td></tr>
+            <tr><td><strong>AddToCart</strong></td><td>Produkt wurde in den Warenkorb gelegt.</td><td>E-Commerce und Retargeting.</td></tr>
+            <tr><td><strong>InitiateCheckout</strong></td><td>Checkout wurde gestartet.</td><td>Warenkorb- und Checkout-Analyse.</td></tr>
+            <tr><td><strong>Purchase</strong></td><td>Kauf wurde abgeschlossen.</td><td>Sales, ROAS, Umsatzoptimierung.</td></tr>
+            <tr><td><strong>Lead</strong></td><td>Kontaktanfrage oder Formular wurde abgeschickt.</td><td>Lead-Kampagnen, Beratung, B2B, Downloads.</td></tr>
+          </tbody>
+        </table>
       </div>
     </div>
 
@@ -631,31 +712,115 @@ header p{
             <tr><td><strong>CTR</strong></td><td>Klicks ÷ Impressionen × 100.</td><td>Anzeige und Zielgruppe bewerten.</td><td>Niedrig = Hook, Creative oder Zielgruppe prüfen.</td></tr>
             <tr><td><strong>CPC</strong></td><td>Kosten ÷ Klicks.</td><td>Traffic-Kosten bewerten.</td><td>Hoch = Wettbewerb, Creative oder Zielgruppe prüfen.</td></tr>
             <tr><td><strong>CPA / CPL / CPO</strong></td><td>Kosten ÷ Aktionen, Leads oder Bestellungen.</td><td>Wirtschaftlichkeit einzelner Ziele.</td><td>Zu hoch = Funnel, Landingpage oder Angebot prüfen.</td></tr>
+            <tr><td><strong>Conversion Rate</strong></td><td>Conversions ÷ Klicks × 100.</td><td>Bewertung nach dem Klick.</td><td>Niedrig = Landingpage, Vertrauen, Angebot oder Tracking prüfen.</td></tr>
             <tr><td><strong>ROAS</strong></td><td>Umsatz ÷ Werbekosten.</td><td>E-Commerce und Umsatzkampagnen.</td><td>Unter Zielwert = Produkt, Preis, Tracking oder Kampagne prüfen.</td></tr>
           </tbody>
         </table>
       </div>
     </div>
+  </section>
 
-    <div class="accordion">
-      <article class="acc-card searchable-item">
-        <button class="acc-head" type="button">Typische KPI-Diagnose <span class="acc-icon">+</span></button>
-        <div class="acc-body">
-          <ul class="clean">
-            <li><strong>Hohe Impressionen, niedrige CTR:</strong> Anzeige wird gesehen, aber nicht als relevant empfunden. Creative, Hook und Zielgruppe prüfen.</li>
-            <li><strong>Viele Klicks, keine Conversions:</strong> Landingpage, Ladezeit, Angebot, Vertrauen oder Tracking prüfen.</li>
-            <li><strong>Hohe Frequenz:</strong> Gefahr von Ad Fatigue. Creative wechseln oder Zielgruppe erweitern.</li>
-            <li><strong>Keine Events:</strong> Pixel, CAPI, Consent, Event Manager und Test-Events prüfen.</li>
-          </ul>
+  <section id="diagnosis" class="tab-content">
+    <div class="section-header searchable-item">
+      <h2>6. Diagnose: Was bedeuten die Zahlen?</h2>
+      <p>Hier geht es nicht um Auswendiglernen, sondern um die Frage: Welche Zahl zeigt welches Problem und was ändere ich dann?</p>
+    </div>
+
+    <div class="diagnose-grid">
+      <article class="diagnose-card searchable-item">
+        <button type="button">Hohe Impressionen, niedrige CTR <span class="acc-icon">+</span></button>
+        <div class="diagnose-body">
+          <p><strong>Bedeutung:</strong> Die Anzeige wird gesehen, aber sie überzeugt nicht zum Klick.</p>
+          <p><strong>Prüfen:</strong> Hook, Bild/Video, Headline, Zielgruppe, Angebot, CTA.</p>
+          <p><strong>Aktion:</strong> Neues Creative testen, stärkeren Einstieg nutzen, Zielgruppe oder Botschaft schärfen.</p>
         </div>
       </article>
+
+      <article class="diagnose-card searchable-item">
+        <button type="button">Viele Klicks, kaum Conversions <span class="acc-icon">+</span></button>
+        <div class="diagnose-body">
+          <p><strong>Bedeutung:</strong> Die Anzeige funktioniert, aber nach dem Klick bricht der Funnel ab.</p>
+          <p><strong>Prüfen:</strong> Landingpage, Ladezeit, Angebot, Vertrauen, Formular, Checkout, Tracking.</p>
+          <p><strong>Aktion:</strong> Zielseite vereinfachen, Angebot klarer machen, Trust-Elemente ergänzen, Events testen.</p>
+        </div>
+      </article>
+
+      <article class="diagnose-card searchable-item">
+        <button type="button">CPC ist hoch <span class="acc-icon">+</span></button>
+        <div class="diagnose-body">
+          <p><strong>Bedeutung:</strong> Klicks sind teuer. Das kann an Wettbewerb, Zielgruppe oder schwachem Creative liegen.</p>
+          <p><strong>Prüfen:</strong> Zielgruppe zu eng? Creative zu werblich? CTA unklar? Platzierung teuer?</p>
+          <p><strong>Aktion:</strong> Zielgruppe erweitern, mehrere Creatives testen, Platzierungen und Kampagnenziel prüfen.</p>
+        </div>
+      </article>
+
+      <article class="diagnose-card searchable-item">
+        <button type="button">CPA / CPL / CPO ist zu hoch <span class="acc-icon">+</span></button>
+        <div class="diagnose-body">
+          <p><strong>Bedeutung:</strong> Die gewünschte Aktion kostet zu viel.</p>
+          <p><strong>Prüfen:</strong> Funnel-Stufe, Angebot, Lead-Qualität, Landingpage, Event, Budget und Lernphase.</p>
+          <p><strong>Aktion:</strong> Kampagnenziel, Zielseite und Creative anpassen. Nicht nur Klickpreis betrachten.</p>
+        </div>
+      </article>
+
+      <article class="diagnose-card searchable-item">
+        <button type="button">ROAS ist niedrig <span class="acc-icon">+</span></button>
+        <div class="diagnose-body">
+          <p><strong>Bedeutung:</strong> Die Kampagne bringt im Verhältnis zu den Kosten zu wenig Umsatz.</p>
+          <p><strong>Prüfen:</strong> Produktpreis, Warenkorbwert, Conversion-Wert, Tracking, Zielgruppe und Retargeting.</p>
+          <p><strong>Aktion:</strong> Hochwertigere Zielgruppen, bessere Produktkommunikation, Bundle/Angebot oder Retargeting testen.</p>
+        </div>
+      </article>
+
+      <article class="diagnose-card searchable-item">
+        <button type="button">Frequenz ist hoch <span class="acc-icon">+</span></button>
+        <div class="diagnose-body">
+          <p><strong>Bedeutung:</strong> Dieselben Menschen sehen die Anzeige zu oft. Das kann zu Ad Fatigue führen.</p>
+          <p><strong>Prüfen:</strong> Zielgruppengröße, Budget, Laufzeit, Creative-Abnutzung.</p>
+          <p><strong>Aktion:</strong> Zielgruppe erweitern, Creative wechseln, Frequenz beobachten, Budget anpassen.</p>
+        </div>
+      </article>
+
+      <article class="diagnose-card searchable-item">
+        <button type="button">Events fehlen oder wirken falsch <span class="acc-icon">+</span></button>
+        <div class="diagnose-body">
+          <p><strong>Bedeutung:</strong> Meta kann Ergebnisse nicht sauber messen oder optimieren.</p>
+          <p><strong>Prüfen:</strong> Pixel, CAPI, Consent, Event Manager, Test-Events, Deduplizierung.</p>
+          <p><strong>Aktion:</strong> Events testen, Datenschicht/Plugin prüfen, CAPI ergänzen, Warnungen im Events Manager beheben.</p>
+        </div>
+      </article>
+
+      <article class="diagnose-card searchable-item">
+        <button type="button">Viele Likes, aber keine Verkäufe <span class="acc-icon">+</span></button>
+        <div class="diagnose-body">
+          <p><strong>Bedeutung:</strong> Engagement ist nicht automatisch Performance.</p>
+          <p><strong>Prüfen:</strong> Kampagnenziel, CTA, Angebot, Zielgruppe, Landingpage und Conversion-Tracking.</p>
+          <p><strong>Aktion:</strong> Von Engagement-Logik auf Lead-/Sales-Logik umstellen und passende KPI wählen.</p>
+        </div>
+      </article>
+    </div>
+
+    <div class="table-card searchable-item">
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr><th>Problem</th><th>Wahrscheinliche Ursache</th><th>Erste Maßnahme</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>CTR niedrig</strong></td><td>Creative, Hook oder Zielgruppe passen nicht.</td><td>Neue Anzeigenvariante testen.</td></tr>
+            <tr><td><strong>Conversion Rate niedrig</strong></td><td>Nach dem Klick stimmt etwas nicht.</td><td>Landingpage, Angebot und Tracking prüfen.</td></tr>
+            <tr><td><strong>CPA hoch</strong></td><td>Aktionen sind zu teuer oder zu wenige.</td><td>Funnel, Zielgruppe und Kampagnenziel prüfen.</td></tr>
+            <tr><td><strong>ROAS niedrig</strong></td><td>Kosten stehen nicht im Verhältnis zum Umsatz.</td><td>Produktkommunikation, Warenkorbwert und Retargeting prüfen.</td></tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </section>
 
   <section id="tools" class="tab-content">
     <div class="section-header searchable-item">
-      <h2>5. Tools & rechtliche Basics</h2>
-      <p>Für Meta-Marketing braucht man nicht nur Creatives, sondern auch die richtigen Verwaltungs- und Analyse-Tools.</p>
+      <h2>7. Tools & rechtliche Basics</h2>
+      <p>Für Meta-Marketing braucht man nicht nur Creatives, sondern auch die richtigen Verwaltungs-, Analyse- und Tracking-Tools.</p>
     </div>
 
     <div class="table-card searchable-item">
@@ -696,74 +861,6 @@ header p{
       <strong>Hinweis:</strong> Das ist eine Lernübersicht, keine Rechtsberatung. Für echte Unternehmensseiten immer aktuelle Rechtsquellen oder anwaltliche Prüfung nutzen.
     </div>
   </section>
-
-  <section id="checklist" class="tab-content">
-    <div class="section-header searchable-item">
-      <h2>6. Schnell-Checklisten</h2>
-      <p>Zum Wiederholen vor Aufgaben, Kampagnenaufbau oder Prüfung.</p>
-    </div>
-
-    <div class="grid">
-      <article class="card searchable-item">
-        <span class="tag blue">Vor Kampagnenstart</span>
-        <h3>Strategie</h3>
-        <ul class="clean">
-          <li>Ziel klar: Reichweite, Traffic, Leads oder Verkäufe?</li>
-          <li>Zielgruppe definiert?</li>
-          <li>Budget realistisch?</li>
-          <li>Passendes Format gewählt?</li>
-          <li>Landingpage oder Shop bereit?</li>
-        </ul>
-      </article>
-
-      <article class="card searchable-item">
-        <span class="tag green">Tracking</span>
-        <h3>Datenbasis</h3>
-        <ul class="clean">
-          <li>Meta Pixel eingebaut?</li>
-          <li>CAPI eingerichtet?</li>
-          <li>CMP/Consent aktiv?</li>
-          <li>Events getestet?</li>
-          <li>Events Manager ohne Warnungen?</li>
-        </ul>
-      </article>
-
-      <article class="card searchable-item">
-        <span class="tag yellow">Creative</span>
-        <h3>Anzeige</h3>
-        <ul class="clean">
-          <li>Hook in den ersten Sekunden?</li>
-          <li>Ein klares Hauptmotiv?</li>
-          <li>Headline gut lesbar?</li>
-          <li>CTA passend zur Erwartung?</li>
-          <li>Mehrere Text-/Headline-Varianten?</li>
-        </ul>
-      </article>
-
-      <article class="card searchable-item">
-        <span class="tag red">Analyse</span>
-        <h3>Optimierung</h3>
-        <ul class="clean">
-          <li>Abgeschlossene Tage prüfen.</li>
-          <li>CTR, CPC, CPA, ROAS vergleichen.</li>
-          <li>Frequenz beobachten.</li>
-          <li>Budget nicht zu früh hektisch ändern.</li>
-          <li>Nicht nur Likes bewerten.</li>
-        </ul>
-      </article>
-    </div>
-
-    <div class="workflow searchable-item">
-      <h3>Mini-Workflow für Meta Ads</h3>
-      <div class="steps">
-        <div class="step"><div class="step-num">1</div><strong>Ziel</strong><p>Was soll passieren?</p></div>
-        <div class="step"><div class="step-num">2</div><strong>Zielgruppe</strong><p>Wer soll reagieren?</p></div>
-        <div class="step"><div class="step-num">3</div><strong>Creative</strong><p>Warum sollte jemand stoppen?</p></div>
-        <div class="step"><div class="step-num">4</div><strong>Tracking</strong><p>Kann Meta das Ergebnis messen?</p></div>
-        <div class="step"><div class="step-num">5</div><strong>Analyse</strong><p>Welche KPI zeigt das Problem?</p></div>
-      </div>
-    </div>
-  </section>
 </main>
 
 <footer>Performance Marketing Lernplattform · Meta Ads Playbook</footer>
@@ -792,6 +889,12 @@ header p{
     });
   });
 
+  document.querySelectorAll('.diagnose-card button').forEach(head => {
+    head.addEventListener('click', () => {
+      head.closest('.diagnose-card').classList.toggle('open');
+    });
+  });
+
   function clearSearch(){
     document.querySelectorAll('.searchable-item').forEach(el => el.classList.remove('hidden-search'));
     noResults.style.display = 'none';
@@ -801,7 +904,6 @@ header p{
     const term = searchInput.value.toLowerCase().trim();
     if(!term){ clearSearch(); return; }
 
-    // Suche über alle Tabs: alle Inhalte sichtbar machen
     tabs.forEach(b => b.classList.remove('active'));
     contents.forEach(c => c.classList.add('active'));
 
