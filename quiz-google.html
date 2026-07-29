@@ -1,11 +1,10 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Google Ads - Interaktives Quiz</title>
-    <style>
-
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Google Ads Quiz</title>
+  <style>
 :root{
   --primary-blue:#0b1f38;
   --secondary-blue:#16365d;
@@ -50,6 +49,8 @@ body{
   margin:0;
   font-weight:850;
   letter-spacing:-.02em;
+  color:#fff;
+  text-align:left;
 }
 .back-link-header{
   display:inline-flex;
@@ -77,11 +78,9 @@ body{
   border-radius:12px;
   box-shadow:var(--shadow-md);
   width:100%;
-  max-width:800px;
+  max-width:850px;
   padding:40px;
-  box-sizing:border-box;
 }
-.quiz-container h1{display:none}
 .progress{
   text-align:center;
   color:var(--text-muted);
@@ -96,13 +95,8 @@ body{
   line-height:1.5;
   color:var(--text-dark);
 }
-.options{
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-}
-.option,
-.option-btn{
+.options{display:flex;flex-direction:column;gap:12px}
+.option{
   background-color:#f8fafc;
   border:2px solid var(--border-color);
   border-radius:8px;
@@ -115,26 +109,10 @@ body{
   color:#48617d;
   line-height:1.45;
 }
-.option:hover:not(:disabled),
-.option-btn:hover:not(:disabled){
-  background-color:#eef4fa;
-  border-color:#b8c8d8;
-}
-.option.correct,
-.option-btn.correct{
-  background-color:var(--correct-bg)!important;
-  border-color:var(--correct-border)!important;
-  color:#065f46!important;
-  font-weight:700;
-}
-.option.incorrect,
-.option-btn.incorrect{
-  background-color:var(--incorrect-bg)!important;
-  border-color:var(--incorrect-border)!important;
-  color:#991b1b!important;
-}
-.option:disabled,
-.option-btn:disabled{cursor:default}
+.option:hover:not(:disabled){background-color:#eef4fa;border-color:#b8c8d8}
+.option.correct{background-color:var(--correct-bg)!important;border-color:var(--correct-border)!important;color:#065f46!important;font-weight:700}
+.option.incorrect{background-color:var(--incorrect-bg)!important;border-color:var(--incorrect-border)!important;color:#991b1b!important}
+.option:disabled{cursor:default}
 .feedback{
   margin-top:25px;
   font-size:16px;
@@ -145,23 +123,9 @@ body{
   display:none;
   line-height:1.5;
 }
-.feedback.success{
-  background-color:var(--correct-bg);
-  color:#065f46;
-  border-left:5px solid var(--correct-border);
-}
-.feedback.error{
-  background-color:var(--incorrect-bg);
-  color:#991b1b;
-  border-left:5px solid var(--incorrect-border);
-}
-.btn-container,
-.controls{
-  display:flex;
-  justify-content:flex-end;
-  margin-top:30px;
-}
-button.next-btn,
+.feedback.success{background-color:var(--correct-bg);color:#065f46;border-left:5px solid var(--correct-border)}
+.feedback.error{background-color:var(--incorrect-bg);color:#991b1b;border-left:5px solid var(--incorrect-border)}
+.btn-container{display:flex;justify-content:flex-end;margin-top:30px}
 .next-btn{
   background-color:var(--secondary-blue);
   color:#fff;
@@ -174,25 +138,10 @@ button.next-btn,
   transition:background-color .2s;
   display:none;
 }
-button.next-btn:hover,
 .next-btn:hover{background-color:var(--primary-blue)}
-.result-container,
-.result-screen{
-  text-align:center;
-  display:none;
-}
-.result-container h2,
-.result-screen h2{
-  color:var(--primary-blue);
-  font-size:30px;
-  margin-bottom:20px;
-}
-.result-container p,
-.result-screen p{
-  font-size:20px;
-  color:#4a5568;
-  margin-bottom:30px;
-}
+.result-container{text-align:center;display:none}
+.result-container h2{color:var(--primary-blue);font-size:30px;margin-bottom:20px}
+.result-container p{font-size:20px;color:#4a5568;margin-bottom:30px}
 .score-circle{
   width:150px;
   height:150px;
@@ -206,28 +155,14 @@ button.next-btn:hover,
   font-weight:850;
   margin:0 auto 24px auto;
 }
-.restart-btn{
-  background-color:var(--secondary-blue);
-  color:white;
-  border:none;
-  border-radius:8px;
-  padding:14px 28px;
-  font-size:16px;
-  font-weight:800;
-  cursor:pointer;
-}
+.restart-btn{background-color:var(--secondary-blue);color:white;border:none;border-radius:8px;padding:14px 28px;font-size:16px;font-weight:800;cursor:pointer}
 .restart-btn:hover{background-color:var(--primary-blue)}
 @media(max-width:760px){
-  .quiz-header-inner{
-    width:100%;
-    flex-direction:column;
-    align-items:stretch;
-  }
+  .quiz-header-inner{width:100%;flex-direction:column;align-items:stretch}
   .back-link-header{width:100%}
   .quiz-container{padding:28px 20px}
 }
-
-</style>
+  </style>
 </head>
 <body>
 <header class="quiz-header">
@@ -236,438 +171,712 @@ button.next-btn:hover,
     <a class="back-link-header" href="index.html">← Zurück zur Übersicht</a>
   </div>
 </header>
+
 <main class="quiz-main">
-<div class="quiz-container">
-    <div id="quiz-ui">
-<div class="progress" id="progress">Frage 1 von 50</div>
-        
-        <div class="question" id="question">Lade Frage...</div>
-        <div class="options" id="options"></div>
-        
-        <div class="feedback" id="feedback"></div>
-        
-        <div class="btn-container">
-            <button class="next-btn" id="next-btn" onclick="nextQuestion()">Nächste Frage</button>
-        </div>
+  <div class="quiz-container">
+    <div id="quiz">
+      <div class="progress" id="progress"></div>
+      <div class="question" id="question"></div>
+      <div class="options" id="options"></div>
+      <div class="feedback" id="feedback"></div>
+      <div class="btn-container"><button class="next-btn" id="nextBtn">Weiter</button></div>
     </div>
 
-    <div class="result-container" id="result-ui">
-        <h2>Prüfung abgeschlossen! 🎉</h2>
-        <p>Du hast <strong id="score" style="color: #2B6CB0; font-size: 24px;">0</strong> von 50 Fragen richtig beantwortet.</p>
-        <button class="restart-btn" onclick="restartQuiz()">Quiz neu starten</button>
+    <div class="result-container" id="result">
+      <div class="score-circle" id="scoreCircle">0</div>
+      <h2>Quiz abgeschlossen</h2>
+      <p id="scoreText"></p>
+      <button class="restart-btn" onclick="restartQuiz()">Nochmal starten</button>
     </div>
-</div>
+  </div>
+</main>
 
 <script>
-    const questions = [
-
-        {
-            q: "1. Womit erwirtschaftet der Alphabet-Konzern (Google) den größten Teil seines Werbeumsatzes?",
-            options: ["A) Google Cloud", "B) Hardware wie Google Pixel", "C) Google Search & andere suchbezogene Werbung", "D) YouTube Premium Abos"],
-            answer: 2,
-            explanation: "Google Search & other ist der größte einzelne Umsatzbereich von Alphabet. Eine feste Prozentzahl sollte immer mit dem jeweiligen Berichtsjahr genannt werden."
-        },
-
-        {
-            q: "2. Welche Platzierung ist typisch für das Google Displaynetzwerk (GDN)?",
-            options: ["A) Organische Suchtreffer", "B) Partner-Websites und Apps", "C) Google Shopping-Ergebnisse", "D) Google Maps-Unternehmenseinträge"],
-            answer: 1,
-            explanation: "Das Google Displaynetzwerk umfasst Partner-Websites und Apps. YouTube, Gmail, Discover und Maps werden heute als eigene Google-Oberflächen geführt und können unter anderem über Demand Gen erreicht werden."
-        },
-        {
-            q: "3. Was ist der grundlegende Unterschied zwischen SEO und SEA?",
-            options: ["A) SEO kostet pro Klick, SEA ist komplett kostenlos.", "B) SEO optimiert organische, unbezahlte Treffer; SEA schaltet kostenpflichtige Anzeigen.", "C) SEO ist nur für Bilder, SEA nur für Texte.", "D) SEA funktioniert nur auf YouTube."],
-            answer: 1,
-            explanation: "Search Engine Optimization (SEO) zielt auf das unbezahlte Ranking ab, während Search Engine Advertising (SEA) kostenpflichtige Anzeigen schaltet."
-        },
-        {
-            q: "4. Was ergab die Studie zu Suchanfragen 2024 ('Zero-Click Searches') in Europa?",
-            options: ["A) 100% aller Suchen enden mit einem Klick auf eine Anzeige.", "B) Fast 60% der Suchen enden ganz ohne Klick (Nutzer finden die Antwort direkt).", "C) Nutzer klicken ausschließlich auf Google Shopping.", "D) SEO-Ergebnisse werden gar nicht mehr geklickt."],
-            answer: 1,
-            explanation: "59,7% der Suchanfragen endeten ohne Klick (Zero-Click), da die Nutzer ihre Antwort direkt auf der Ergebnisseite fanden oder die Suche abbrachen."
-        },
-
-        {
-            q: "5. Welche Faktoren fließen heute in den Anzeigenrang (Ad Rank) von Google Ads ein?",
-            options: ["A) Nur maximales CPC-Gebot × Qualitätsfaktor", "B) Gebot, Anzeigen- und Landingpagequalität, Grenzwerte, Wettbewerb, Suchkontext und erwartete Wirkung der Assets", "C) Nur Tagesbudget und Kampagnenlaufzeit", "D) Conversion-Rate × ROAS"],
-            answer: 1,
-            explanation: "Die bekannte Formel Gebot × Qualitätsfaktor ist nur ein vereinfachtes Lernmodell. Google berücksichtigt beim tatsächlichen Ad Rank mehrere Faktoren, darunter Gebot, Qualität, Wettbewerb, Suchkontext und die erwartete Wirkung der Assets."
-        },
-        {
-            q: "6. Was ist das Ziel eines hohen Qualitätsfaktors?",
-            options: ["A) Geringere tatsächliche Klickkosten (CPC) und bessere Positionen.", "B) Dass die Anzeige auch auf Facebook erscheint.", "C) Dass man unendlich viel Text schreiben darf.", "D) Dass Konkurrenten gebannt werden."],
-            answer: 0,
-            explanation: "Ein hoher Qualitätsfaktor (1-10) belohnt Relevanz: Wer hohe Qualität liefert, zahlt weniger pro Klick und gewinnt häufiger die Auktion."
-        },
-        {
-            q: "7. Welche drei Komponenten bilden den Qualitätsfaktor in Google Ads?",
-            options: ["A) Budget, Laufzeit, Textlänge", "B) Erwartete Klickrate (CTR), Anzeigenrelevanz, Nutzererfahrung auf der Zielseite", "C) Bidding, Targeting, Conversion-Tracking", "D) Bounce Rate, ROAS, Ladezeit"],
-            answer: 1,
-            explanation: "Google bewertet die voraussichtliche Klickrate, die inhaltliche Passgenauigkeit (Relevanz) und die Qualität/Ladezeit der Landingpage."
-        },
-        {
-            q: "8. Welche Syntax wird in Google Ads für die Keyword-Option 'Genau passend' (Exact Match) verwendet?",
-            options: ["A) *keyword*", "B) \"keyword\"", "C) [keyword]", "D) +keyword+"],
-            answer: 2,
-            explanation: "Eckige Klammern [keyword] signalisieren Google, dass die Suchanfrage exakt oder als enge Variante mit der Bedeutung übereinstimmen muss."
-        },
-        {
-            q: "9. Was ist der Unterschied zwischen einem Keyword und einem Suchbegriff in Google Ads?",
-            options: ["A) Keywords sind Bilder, Suchbegriffe sind Texte.", "B) Keywords bucht man ein, Suchbegriffe sind das, was Nutzer tatsächlich eintippen.", "C) Keywords gibt es nur bei SEO.", "D) Es gibt keinen Unterschied."],
-            answer: 1,
-            explanation: "Ein Keyword ist der definierte Begriff im Ad-Konto. Der Suchbegriff ist die tatsächliche Wortkombination, die der Nutzer in die Suchleiste tippt."
-        },
-        {
-            q: "10. Was misst die Metrik 'Impressionen'?",
-            options: ["A) Wie viel Umsatz generiert wurde.", "B) Wie oft eine Anzeige geklickt wurde.", "C) Wie oft eine Anzeige insgesamt ausgespielt (angezeigt) wurde.", "D) Wie viele Nutzer ein Video bis zum Ende sahen."],
-            answer: 2,
-            explanation: "Impressionen sind reine Sichtkontakte. Sie sagen noch nichts über Interaktionen (Klicks) aus."
-        },
-        {
-            q: "11. Wie berechnet sich die CTR (Click-Through-Rate)?",
-            options: ["A) (Conversions / Klicks) * 100", "B) (Klicks / Impressionen) * 100", "C) (Kosten / Klicks)", "D) (Umsatz / Werbekosten)"],
-            answer: 1,
-            explanation: "Die Klickrate (CTR) setzt die erhaltenen Klicks ins prozentuale Verhältnis zu den Gesamtausspielungen (Impressionen)."
-        },
-        {
-            q: "12. Wie berechnet sich der ROAS (Return on Ad Spend)?",
-            options: ["A) Umsatz geteilt durch Werbekosten", "B) Kosten geteilt durch Conversions", "C) Klicks geteilt durch Impressionen", "D) Leads mal Conversion-Rate"],
-            answer: 0,
-            explanation: "Der ROAS drückt den prozentualen oder faktischen Umsatz pro investiertem Euro Werbebudget aus."
-        },
-        {
-            q: "13. Wenn bei einer Suchkampagne die Impressionen sehr hoch sind, aber die CTR sehr niedrig, worauf deutet das hin?",
-            options: ["A) Ein Tracking-Fehler beim Pixel.", "B) Die Landingpage lädt zu langsam.", "C) Ein Relevanzproblem: Die Anzeige spricht die Zielgruppe nicht an oder die Keywords sind zu breit.", "D) Das Tagesbudget ist zu gering."],
-            answer: 2,
-            explanation: "Hohe Sichtbarkeit ohne Klicks bedeutet meistens, dass Suchanfrage und Anzeigentext inhaltlich nicht gut zusammenpassen."
-        },
-        {
-            q: "14. Was ist ein mögliches Problem, wenn eine Kampagne viele Klicks, aber keine Conversions generiert?",
-            options: ["A) Das Gebot (CPC) ist zu niedrig.", "B) Ein Problem mit der User Experience (UX) auf der Landingpage oder falsche Nutzererwartungen.", "C) Die Anzeige ist unsichtbar.", "D) Google Ads ist defekt."],
-            answer: 1,
-            explanation: "Wenn Nutzer klicken, funktioniert die Anzeige. Brechen sie danach ab, stimmt etwas auf der Zielseite nicht (Ladezeit, Vertrauen, Preis)."
-        },
-        {
-            q: "15. Wofür steht die Abkürzung PMax?",
-            options: ["A) Price Maximum", "B) Performance Max (Maximale Performance-Kampagnen)", "C) Pixel Measurement Analytics", "D) Partner Marketing X"],
-            answer: 1,
-            explanation: "Performance Max ist ein KI-gestützter Kampagnentyp, der Anzeigen automatisch im gesamten Google-Inventar ausspielt."
-        },
-
-        {
-            q: "16. Was ist ein wesentliches Risiko beziehungsweise eine Herausforderung bei Performance-Max-Kampagnen?",
-            options: ["A) Man kann keine Videos oder Bilder hinzufügen.", "B) Jedes Keyword muss vollständig manuell gepflegt werden.", "C) Der hohe Automatisierungsgrad führt zu weniger direkter Kontrolle über einzelne Ausspielungen und Suchanfragen.", "D) Die Kampagnen funktionieren nur auf Desktop-Geräten."],
-            answer: 2,
-            explanation: "Performance Max automatisiert Ausspielung und Gebote stark. Es gibt inzwischen Berichte zur Leistung nach Kanälen, trotzdem bleibt die direkte Steuerung einzelner Platzierungen, Suchanfragen und Entscheidungen eingeschränkter als bei klassischen Kampagnen."
-        },
-        {
-            q: "17. Wie viele Anzeigentitel (Headlines) können in einer Responsive Search Ad (RSA) maximal hinterlegt werden?",
-            options: ["A) 3", "B) 5", "C) 10", "D) 15"],
-            answer: 3,
-            explanation: "Google erlaubt bis zu 15 Anzeigentitel und 4 Beschreibungen, die dann durch die KI dynamisch getestet und kombiniert werden."
-        },
-
-        {
-            q: "18. Welche Gebotsstrategie passt zu einem E-Commerce-Ziel, wenn Conversion-Werte sauber erfasst werden und ein bestimmter Umsatz im Verhältnis zu den Werbekosten erreicht werden soll?",
-            options: ["A) Klicks maximieren", "B) Manueller CPC", "C) Angestrebter Anteil an möglichen Impressionen", "D) Ziel-ROAS"],
-            answer: 3,
-            explanation: "Ziel-ROAS eignet sich für wertbasiertes Bieten, wenn zuverlässige Conversion-Werte und ausreichend Daten vorliegen. Die Strategie optimiert auf Conversion-Wert unter Berücksichtigung des gewünschten ROAS."
-        },
-        {
-            q: "19. Welchen Zweck erfüllt der Suchbegriffsbericht (Search Terms Report)?",
-            options: ["A) Er erstellt automatisch neue Videos.", "B) Er zeigt, welche echten Suchanfragen zu Anzeigenklicks führten, um irrelevante Begriffe auszuschließen.", "C) Er analysiert die Ladezeit der Webseite.", "D) Er berechnet den ROAS."],
-            answer: 1,
-            explanation: "Der Bericht ist unverzichtbar, um das tatsächliche Nutzerverhalten zu prüfen und Streuverluste durch das Setzen negativer Keywords zu stoppen."
-        },
-        {
-            q: "20. Welche der folgenden Aussagen ist ein typischer Denkfehler im Performance Marketing?",
-            options: ["A) 'Je mehr Klicks, desto besser.'", "B) 'Qualität ist wichtiger als Quantität.'", "C) 'Der ROAS ist wichtiger als die Klickzahl.'", "D) 'Conversions erfordern funktionierendes Tracking.'"],
-            answer: 0,
-            explanation: "Klicks allein sind wertlos, wenn sie nicht zu Conversions führen. Quantität ohne Relevanz verbrennt nur Budget."
-        },
-        {
-            q: "21. Was ist ein 'Google Partner'?",
-            options: ["A) Ein Mitarbeiter von Google.", "B) Ein zertifiziertes Unternehmen/Agentur, das bestimmte Anforderungen an Budget und Leistung erfüllt.", "C) Jemand, der eine Google-Aktie besitzt.", "D) Ein Influencer auf YouTube."],
-            answer: 1,
-            explanation: "Es ist ein Zertifizierungsstatus für Agenturen. Wichtig: Es ist kein Garant für Perfektion, aber ein Nachweis für Grundkompetenz."
-        },
-        {
-            q: "22. Was ist laut Vorlesung ein absolutes Warnsignal bei der Wahl einer Google-Ads-Agentur?",
-            options: ["A) Die Agentur fordert Administrationsrechte an.", "B) Die Agentur verlangt Transparenz beim Budget.", "C) Die Agentur garantiert vertraglich Platz 1 bei Google für Suchbegriffe.", "D) Die Agentur richtet Conversion-Tracking ein."],
-            answer: 2,
-            explanation: "Da Google Ads ein dynamisches Auktionsmodell nutzt, kann keine seriöse Agentur pauschal 'Platz 1' garantieren."
-        },
-        {
-            q: "23. Was ist ein weiteres Warnsignal bei Agenturen?",
-            options: ["A) Die Agentur bespricht den ROAS.", "B) Die Agentur teilt keine Zugriffsrechte zum Google-Ads-Konto (Eigentum bleibt bei der Agentur).", "C) Die Agentur schlägt PMax vor.", "D) Die Agentur sendet monatliche Reportings."],
-            answer: 1,
-            explanation: "Seriöse Agenturen richten das Werbekonto immer im Namen des Kunden ein und geben volle Admin-Rechte weiter."
-        },
-        {
-            q: "24. Welches mobile Betriebssystem hat in Deutschland historisch den größten Marktanteil (Stand 2025)?",
-            options: ["A) iOS (Apple)", "B) Symbian", "C) Android (Google)", "D) Windows Phone"],
-            answer: 2,
-            explanation: "Android ist weltweit und auch in Deutschland der unangefochtene Marktführer bei mobilen Betriebssystemen."
-        },
-
-        {
-            q: "25. Was ist das Besondere an App-Kampagnen in Google Ads?",
-            options: ["A) Sie werden vollständig manuell gesteuert.", "B) Sie können ausschließlich auf YouTube laufen.", "C) Sie sind stark automatisiert: Google kombiniert bereitgestellte Texte, Bilder und Videos und optimiert Ausspielung sowie Gebote.", "D) Sie funktionieren auch ohne eine veröffentlichte oder vorregistrierbare App."],
-            answer: 2,
-            explanation: "Werbetreibende liefern Ziele, Budget, Gebote, Tracking und geeignete Assets. Google nutzt Machine Learning, um daraus Anzeigenvarianten zu erstellen und sie auf mehreren Google-Oberflächen auszuspielen."
-        },
-        {
-            q: "26. Welches Kampagnenziel für Apps gibt es ausschließlich für Android-Apps?",
-            options: ["A) App-Installationen", "B) App-Interaktionen", "C) App-Vorregistrierungen", "D) App-Käufe"],
-            answer: 2,
-            explanation: "App-Vorregistrierungen (für Apps, die bald im Play Store erscheinen) sind ein exklusives Feature für das Android-Betriebssystem."
-        },
-
-        {
-            q: "27. Was ist Google Analytics for Firebase im Zusammenhang mit App-Kampagnen?",
-            options: ["A) Ein Tool zur Videoerstellung", "B) Eine kostenlose Lösung zur Messung von App-Nutzung, Nutzerinteraktionen und In-App-Events", "C) Eine Gebotsstrategie", "D) Eine Form von Display-Werbung"],
-            answer: 1,
-            explanation: "Google Analytics for Firebase erfasst App-Nutzung und Ereignisse in Android- und iOS-Apps. Diese Daten können für die Erfolgsmessung und Optimierung von App-Kampagnen genutzt werden."
-        },
-        {
-            q: "28. Wie werden Apple Search Ads in der Variante 'Basic' abgerechnet?",
-            options: ["A) Cost-per-Tap (CPT)", "B) Cost-per-Mille (CPM)", "C) Cost-per-Install (CPI) - Zahlung nur bei erfolgreicher Installation.", "D) Flatrate pro Monat."],
-            answer: 2,
-            explanation: "Bei 'Basic' übernimmt Apple die Steuerung und man zahlt risikofrei nur, wenn ein Nutzer die App nach dem Klick auch installiert."
-        },
-        {
-            q: "29. Wofür steht 'ASO'?",
-            options: ["A) App Store Optimization (SEO für App-Stores)", "B) Automated Search Options", "C) Active System Output", "D) Apple Search Advertising"],
-            answer: 0,
-            explanation: "ASO zielt darauf ab, die organische Sichtbarkeit und Downloads einer App in den Stores von Google und Apple zu erhöhen."
-        },
-        {
-            q: "30. Wie werden Keywords für die ASO im Apple App Store hinterlegt?",
-            options: ["A) Sie müssen zwingend in den ersten Satz der Beschreibung.", "B) Es gibt ein unsichtbares 100-Zeichen-Feld im Backend.", "C) Apple nutzt keine Keywords.", "D) Man muss sie im App-Icon platzieren."],
-            answer: 1,
-            explanation: "Im Gegensatz zum Play Store (wo Keywords im Text stehen müssen), nutzt Apple ein spezifisches Keyword-Feld im Hintergrund."
-        },
-
-        {
-            q: "31. Wovon hängt die Dauer der Lernphase bei automatisierten Google-Gebotsstrategien hauptsächlich ab?",
-            options: ["A) Sie dauert immer exakt 7 Tage.", "B) Von Conversion-Volumen, Conversion-Verzögerung und größeren Änderungen an Kampagne oder Gebotsstrategie", "C) Ausschließlich vom Tagesbudget", "D) Sie dauert bei jeder Kampagne genau 14 Tage."],
-            answer: 1,
-            explanation: "Die Lernphase hat keine feste Dauer. Sie hängt unter anderem davon ab, wie viele Conversions vorliegen, wie lange Conversions bis zur Erfassung brauchen und ob größere Änderungen vorgenommen wurden."
-        },
-
-        {
-            q: "32. Wofür eignet sich der Kampagnentyp Demand Gen?",
-            options: ["A) Ausschließlich für klassische Shoppinganzeigen", "B) Für visuelle Bild- und Videoanzeigen auf YouTube, Discover, Gmail, Maps und im Google Displaynetzwerk", "C) Nur für B2B-Kunden auf Google Maps", "D) Ausschließlich für reine Textanzeigen in der Suche"],
-            answer: 1,
-            explanation: "Demand Gen soll Nachfrage und Aktionen mit visuellen Anzeigen erzeugen. Die Kampagnen können auf YouTube einschließlich Shorts, Discover, Gmail, Maps und im Google Displaynetzwerk ausgespielt werden."
-        },
-        {
-            q: "33. Welches Tool in Google Ads ermöglicht die Drag-and-Drop-Erstellung von individuellen Tabellen und Diagrammen?",
-            options: ["A) Keyword-Planer", "B) Berichtseditor (Custom Reports)", "C) Firebase", "D) Asset-Bibliothek"],
-            answer: 1,
-            explanation: "Der Berichtseditor erlaubt das freie Kombinieren von Filtern, Metriken und Dimensionen für tiefe Analysen."
-        },
-        {
-            q: "34. Was versteht man in der Kampagnenanalyse unter 'Segmentierung'?",
-            options: ["A) Das Löschen von alten Kampagnen.", "B) Die Aufschlüsselung von Gesamtdaten nach spezifischen Kriterien wie Gerät, Wochentag oder Region.", "C) Das Erstellen neuer Anzeigengruppen.", "D) Die Abrechnung mit Google."],
-            answer: 1,
-            explanation: "Segmentierung bricht Durchschnittswerte auf (z.B. Mobile vs. Desktop), um verborgene Performance-Unterschiede sichtbar zu machen."
-        },
-        {
-            q: "35. Welche Metrik beantwortet die Frage 'Was kostet mich ein Kauf oder Lead?'",
-            options: ["A) CPC", "B) CPM", "C) CPA (Cost per Acquisition / Cost per Conversion)", "D) Impressionen"],
-            answer: 2,
-            explanation: "Der CPA errechnet sich aus den Gesamtkosten geteilt durch die generierten Conversions."
-        },
-        {
-            q: "36. Welche Empfehlung gilt für die Optimierung von Zielseiten (Landingpages) bei Google Ads?",
-            options: ["A) Alle CTAs (Buttons) sollten entfernt werden.", "B) Sie müssen langsam laden, damit der Nutzer liest.", "C) Ladezeit optimieren (besonders mobil) und Vertrauenssignale wie Siegel integrieren.", "D) Sie sollte exakt aussehen wie die Konkurrenz."],
-            answer: 2,
-            explanation: "Eine gute Nutzererfahrung auf der Landingpage erhöht die Conversion-Rate und verbessert den Google-Qualitätsfaktor."
-        },
-
-        {
-            q: "37. Was bewirken Conversion-Wert-Regeln in Google Ads?",
-            options: ["A) Google setzt jedes Gebot automatisch auf 1 Euro.", "B) Conversion-Werte können abhängig von Standort, Gerät oder Zielgruppe angepasst und für Berichte sowie Smart Bidding berücksichtigt werden.", "C) Gebote werden zufällig verteilt.", "D) Sie erzeugen kostenlose Conversions."],
-            answer: 1,
-            explanation: "Conversion-Wert-Regeln drücken aus, dass bestimmte Conversions für ein Unternehmen mehr oder weniger wertvoll sind. Sie passen den gemeldeten Wert beispielsweise nach Standort, Gerät oder Zielgruppe an und können wertbasiertes Smart Bidding beeinflussen."
-        },
-        {
-            q: "38. Welcher Fehler ist laut der Vorlesung typisch für die Kontostruktur in Eigenregie?",
-            options: ["A) PMax-Kampagnen wurden genutzt.", "B) Keine Funnel-Strategie: Vermischung von Awareness- und Conversion-Zielen ohne Struktur.", "C) Zu viele Verkäufe.", "D) Das Budget wurde nicht überschritten."],
-            answer: 1,
-            explanation: "Eine unklare Struktur (TOFU, MOFU, BOFU in einer Kampagne vermischt) verwirrt die KI und verhindert zielgenaues Auswerten."
-        },
-        {
-            q: "39. Wie heißt das Google-Tool für KI-Bildbearbeitung im E-Commerce?",
-            options: ["A) Google Photoshop", "B) Google Product Studio", "C) Google Merchant Tool", "D) YouTube Editor"],
-            answer: 1,
-            explanation: "Das Google Product Studio hilft Werbetreibenden (insb. im Shopping-Bereich), Produktbilder per KI freizustellen oder mit Hintergründen zu versehen."
-        },
-        {
-            q: "40. Was ist der 'Google Merchant Center'?",
-            options: ["A) Ein Tool, um Bewertungen zu löschen.", "B) Die Plattform zur Hinterlegung von Produktdatenfeeds für Shopping- und PMax-Kampagnen.", "C) Ein Zahlungsdienstleister.", "D) Ein soziales Netzwerk."],
-            answer: 1,
-            explanation: "E-Commerce-Shops müssen ihre Produkte im Merchant Center hochladen, damit Google sie in Shopping-Anzeigen ausspielen kann."
-        },
-        {
-            q: "41. Welche Gebotsstrategie nutzt man am besten, um 'So viele Klicks wie möglich im Budget' zu erhalten?",
-            options: ["A) Ziel-ROAS", "B) Conversions maximieren", "C) Klicks maximieren", "D) Impression Share"],
-            answer: 2,
-            explanation: "Diese Strategie (Klicks maximieren) eignet sich vor allem für reine Reichweite oder wenn das Konto noch keine Conversion-Historie hat."
-        },
-        {
-            q: "42. Wofür steht die Abkürzung 'SEM'?",
-            options: ["A) Search Engine Marketing (umfasst SEO und SEA)", "B) Standard Engagement Model", "C) System Error Management", "D) Shopping Engine Match"],
-            answer: 0,
-            explanation: "Suchmaschinenmarketing (SEM) ist der Überbegriff und spaltet sich in die organische Optimierung (SEO) und die bezahlte Werbung (SEA) auf."
-        },
-
-        {
-            q: "43. Welche Folge kann ein fehlender oder schlecht gepflegter Produktdatenfeed bei einer E-Commerce-Kampagne haben?",
-            options: ["A) Google erstellt automatisch alle fehlenden Produktdaten korrekt.", "B) Shopping-Ausspielungen können eingeschränkt oder fehlerhaft sein und die Kampagnenleistung kann deutlich leiden.", "C) Der CPC halbiert sich automatisch.", "D) Die Kampagne wird ausschließlich auf iOS ausgespielt."],
-            answer: 1,
-            explanation: "Für Shopping- und retailbasierte Performance-Max-Ausspielungen sind vollständige, aktuelle und freigegebene Produktdaten wichtig. Eine Performance-Max-Kampagne kann je nach Setup zwar auch andere Assets nutzen, ein mangelhafter Feed schwächt aber den Shopping-Anteil und die Datenqualität."
-        },
-        {
-            q: "44. Was ist ein 'Signal' in der Google Ads KI-Logik?",
-            options: ["A) Ein akustischer Warnton im Browser.", "B) Datenpunkte wie Nutzerverhalten, Standort, Tageszeit und Endgerät, die Google für Auktionen in Echtzeit auswertet.", "C) Ein Fehlercode.", "D) Die Restlaufzeit einer Kampagne."],
-            answer: 1,
-            explanation: "Die KI nutzt diese Signale, um in Bruchteilen von Sekunden zu entscheiden, wem welche Anzeige zu welchem Gebot gezeigt wird."
-        },
-        {
-            q: "45. Wie hilft die KI bei Anzeigentexten?",
-            options: ["A) Sie testet Varianten automatisch durch und spielt die stärkste Kombination öfter aus.", "B) Sie zwingt den Nutzer, den Text zu lesen.", "C) Sie übersetzt Texte in 50 Sprachen gleichzeitig.", "D) Sie verbietet Konkurrenten das Kopieren."],
-            answer: 0,
-            explanation: "Bei RSA-Anzeigen entscheidet die KI basierend auf dem Nutzerprofil, welche Headline und Description am besten zusammenpassen."
-        },
-        {
-            q: "46. Ab wie vielen Installationen kann laut Google-Vorgabe eine 'App-Interaktionskampagne' geschaltet werden?",
-            options: ["A) 1.000", "B) 10.000", "C) 50.000", "D) 100.000"],
-            answer: 2,
-            explanation: "Google verlangt mindestens 50.000 App-Installationen als Datengrundlage, um Interaktionskampagnen (Re-Engagement) sinnvoll steuern zu können."
-        },
-        {
-            q: "47. Welche Kampagnenart eignet sich, um Nutzer mit hoher Kaufabsicht direkt während ihrer Suche abzufangen?",
-            options: ["A) Suchkampagnen (Search)", "B) Displaykampagnen", "C) Demand Gen", "D) App-Kampagnen"],
-            answer: 0,
-            explanation: "Suchkampagnen agieren als Pull-Marketing: Der Nutzer sucht aktiv nach einer Lösung und bekommt exakt im passenden Moment die Anzeige."
-        },
-        {
-            q: "48. Was bedeutet 'CPA' bei Gebotsstrategien?",
-            options: ["A) Cost per App", "B) Cost per Acquisition (Kosten pro Conversion)", "C) Clicks per Ad", "D) Conversion Profit Analysis"],
-            answer: 1,
-            explanation: "Ziel-CPA weist die KI an, eine Conversion (Kauf/Lead) zu einem vordefinierten maximalen Durchschnittspreis einzukaufen."
-        },
-        {
-            q: "49. Wofür steht die Abkürzung 'CPC'?",
-            options: ["A) Cost per Conversion", "B) Clicks per Customer", "C) Cost per Click (Kosten pro Klick)", "D) Customer Profit Calculation"],
-            answer: 2,
-            explanation: "CPC ist das klassische Abrechnungsmodell bei Google-Suchanzeigen, bei dem Werbetreibende erst zahlen, wenn der Nutzer klickt."
-        },
-        {
-            q: "50. Welchen Tipp gibt die Vorlesung bezüglich 'Negative Keywords' (Ausschließende Keywords)?",
-            options: ["A) Sie sollten nie verwendet werden, da sie die Reichweite senken.", "B) Sie sind extrem wichtig, um irrelevante Suchanfragen zu blockieren und Budgetverschwendung zu stoppen.", "C) Sie kosten extra Budget.", "D) Sie sind nur für YouTube-Ads relevant."],
-            answer: 1,
-            explanation: "Wenn ein Autohändler z. B. 'Autos mieten' als negatives Keyword setzt, verhindert er, dass seine Kauf-Anzeigen bei Miet-Suchen erscheinen."
-        }
-    ];
-
-    let currentQuestionIndex = 0;
-    let score = 0;
-    let answered = false;
-
-    const questionEl = document.getElementById('question');
-    const optionsEl = document.getElementById('options');
-    const feedbackEl = document.getElementById('feedback');
-    const nextBtn = document.getElementById('next-btn');
-    const progressEl = document.getElementById('progress');
-    const quizUi = document.getElementById('quiz-ui');
-    const resultUi = document.getElementById('result-ui');
-    const scoreEl = document.getElementById('score');
-
-    function loadQuestion() {
-        answered = false;
-        feedbackEl.style.display = "none";
-        feedbackEl.className = "feedback";
-        nextBtn.style.display = "none";
-        
-        const q = questions[currentQuestionIndex];
-        progressEl.innerText = `Frage ${currentQuestionIndex + 1} von ${questions.length}`;
-        questionEl.innerText = q.q;
-        
-        optionsEl.innerHTML = "";
-        q.options.forEach((opt, index) => {
-            const btn = document.createElement('button');
-            btn.className = 'option';
-            btn.innerText = opt;
-            btn.onclick = () => selectOption(index, btn);
-            optionsEl.appendChild(btn);
-        });
-    }
-
-    function selectOption(selectedIndex, selectedBtn) {
-        if (answered) return;
-        answered = true;
-
-        const q = questions[currentQuestionIndex];
-        const allOptions = optionsEl.children;
-
-        // Disable all buttons and show correct answer
-        for (let i = 0; i < allOptions.length; i++) {
-            allOptions[i].disabled = true;
-            if (i === q.answer) {
-                allOptions[i].classList.add('correct');
-            }
-        }
-
-        if (selectedIndex === q.answer) {
-            score++;
-            feedbackEl.innerHTML = `<strong>✅ Richtig!</strong><br><br>${q.explanation}`;
-            feedbackEl.classList.add('success');
-        } else {
-            selectedBtn.classList.add('incorrect');
-            feedbackEl.innerHTML = `<strong>❌ Leider falsch!</strong><br><br>${q.explanation}`;
-            feedbackEl.classList.add('error');
-        }
-
-        feedbackEl.style.display = "block";
-
-        if (currentQuestionIndex < questions.length - 1) {
-            nextBtn.innerText = "Nächste Frage";
-        } else {
-            nextBtn.innerText = "Ergebnis anzeigen";
-        }
-        nextBtn.style.display = "inline-block";
-    }
-
-    function nextQuestion() {
-        currentQuestionIndex++;
-        if (currentQuestionIndex < questions.length) {
-            loadQuestion();
-        } else {
-            showResult();
-        }
-    }
-
-    function showResult() {
-        quizUi.style.display = "none";
-        resultUi.style.display = "block";
-        scoreEl.innerText = score;
-    }
-
-    function restartQuiz() {
-        currentQuestionIndex = 0;
-        score = 0;
-        quizUi.style.display = "block";
-        resultUi.style.display = "none";
-        loadQuestion();
-    }
-
-    // Start quiz
-    loadQuestion();
+const questions = [
+  {
+    "q": "Welche Aussage beschreibt Google Ads am besten?",
+    "options": [
+      "Ein Tool ausschließlich für Newsletter-Marketing",
+      "Ein reines Social-Media-Netzwerk",
+      "Eine Werbeplattform für bezahlte Anzeigen in Google-Suche, YouTube, Display, Shopping, Apps und weiteren Platzierungen",
+      "Ein kostenloses SEO-Tool für organische Rankings"
+    ],
+    "answer": 2,
+    "explanation": "Google Ads ist die zentrale Werbeplattform von Google für verschiedene Anzeigenplätze und Kampagnentypen."
+  },
+  {
+    "q": "Was ist der zentrale Unterschied zwischen SEO und SEA?",
+    "options": [
+      "SEO betrifft organische Sichtbarkeit, SEA bezahlte Suchmaschinenwerbung",
+      "SEA darf nur für Apps genutzt werden",
+      "SEO ist bezahlte Werbung, SEA ist immer kostenlos",
+      "SEO funktioniert nur auf Instagram"
+    ],
+    "answer": 0,
+    "explanation": "SEO optimiert unbezahlte Suchergebnisse. SEA meint bezahlte Anzeigen in Suchmaschinen."
+  },
+  {
+    "q": "Warum gilt Google Ads im Suchnetzwerk eher als Pull-Marketing?",
+    "options": [
+      "Weil Google Ads nur mit Influencern funktioniert",
+      "Weil Nutzer bereits aktiv nach etwas suchen",
+      "Weil Nutzer immer zuerst einen Newsletter abonnieren",
+      "Weil Anzeigen ohne Suchanfrage zufällig ausgespielt werden"
+    ],
+    "answer": 1,
+    "explanation": "Im Suchnetzwerk reagiert Google Ads auf bestehende Suchintentionen und aktiven Bedarf."
+  },
+  {
+    "q": "Was bedeutet PPC?",
+    "options": [
+      "Product Placement Content",
+      "Performance Planning Check",
+      "Payment per Campaign",
+      "Pay per Click"
+    ],
+    "answer": 3,
+    "explanation": "PPC bedeutet Pay per Click: Kosten entstehen, wenn jemand auf eine Anzeige klickt."
+  },
+  {
+    "q": "Welcher Kampagnentyp eignet sich besonders, wenn Menschen aktiv nach einem Produkt oder einer Lösung suchen?",
+    "options": [
+      "Organischer Instagram-Post",
+      "Podcast-Intro",
+      "Suchkampagne",
+      "Reine Displaykampagne"
+    ],
+    "answer": 2,
+    "explanation": "Suchkampagnen nutzen aktive Suchanfragen und eignen sich deshalb besonders für vorhandene Nachfrage."
+  },
+  {
+    "q": "Welcher Kampagnentyp ist besonders typisch für E-Commerce-Produkte mit Bild, Preis und Shopname?",
+    "options": [
+      "App-Vorregistrierung",
+      "Shopping-Kampagne",
+      "Newsletter-Kampagne",
+      "Videokampagne"
+    ],
+    "answer": 1,
+    "explanation": "Shopping-Kampagnen zeigen Produkte mit Bild, Preis und Shopinformationen."
+  },
+  {
+    "q": "Welche Voraussetzung ist für Google Shopping besonders wichtig?",
+    "options": [
+      "Eine gedruckte Preisliste",
+      "Ein Podcast-Kanal",
+      "Ein privates Instagram-Profil",
+      "Eine Verbindung zum Google Merchant Center"
+    ],
+    "answer": 3,
+    "explanation": "Für Shopping-Anzeigen braucht Google Produktdaten aus dem Merchant Center."
+  },
+  {
+    "q": "Was beschreibt Performance Max am besten?",
+    "options": [
+      "Eine manuelle Keyword-Liste ohne Automatisierung",
+      "Eine KI-gestützte Kampagne über mehrere Google-Kanäle",
+      "Eine reine Textanzeigenkampagne nur für die Google-Suche",
+      "Eine reine Rechnungsansicht im Google Ads Konto"
+    ],
+    "answer": 1,
+    "explanation": "Performance Max bündelt verschiedene Google-Kanäle und optimiert KI-gestützt auf Ziele."
+  },
+  {
+    "q": "Was sind Audience Signals bei Performance Max?",
+    "options": [
+      "Starre Zielgruppen-Grenzen, die Google niemals überschreiten darf",
+      "Eine Liste verbotener Keywords",
+      "Rechnungsdaten aus dem Merchant Center",
+      "Hinweise für den Algorithmus, welche Nutzergruppen relevant sein könnten"
+    ],
+    "answer": 3,
+    "explanation": "Audience Signals dienen dem Algorithmus als Startsignal, sind aber keine vollständig starre Begrenzung."
+  },
+  {
+    "q": "Was bedeutet Broad Match?",
+    "options": [
+      "Ein negativer Suchbegriff",
+      "Eine offene Keyword-Option mit breiterer Ausspielung",
+      "Genau passende Suchanfragen in eckigen Klammern",
+      "Eine Displayanzeige mit Bild"
+    ],
+    "answer": 1,
+    "explanation": "Broad Match ist weitgehend passend und kann Anzeigen auch bei verwandten oder breiteren Suchanfragen ausspielen."
+  },
+  {
+    "q": "Welche Schreibweise steht für Phrase Match?",
+    "options": [
+      "*schuhe kaufen*",
+      "+schuhe +kaufen",
+      "\"schuhe kaufen\"",
+      "[schuhe kaufen]"
+    ],
+    "answer": 2,
+    "explanation": "Phrase Match wird in Anführungszeichen geschrieben."
+  },
+  {
+    "q": "Welche Schreibweise steht für Exact Match?",
+    "options": [
+      "[möbelhaus]",
+      "*möbelhaus*",
+      "+möbelhaus",
+      "\"möbelhaus\""
+    ],
+    "answer": 0,
+    "explanation": "Exact Match wird mit eckigen Klammern geschrieben und ist die präziseste Keyword-Option."
+  },
+  {
+    "q": "Warum sind negative Keywords wichtig?",
+    "options": [
+      "Sie schließen unpassende Suchanfragen aus und vermeiden Streuverluste",
+      "Sie ersetzen das Conversion-Tracking",
+      "Sie erhöhen automatisch das Tagesbudget",
+      "Sie machen Anzeigen unsichtbar für alle Nutzer"
+    ],
+    "answer": 0,
+    "explanation": "Negative Keywords verhindern, dass Anzeigen bei irrelevanten Suchanfragen erscheinen."
+  },
+  {
+    "q": "Was ist der Suchbegriffbericht?",
+    "options": [
+      "Ein Verzeichnis aller Google-Mitarbeiter",
+      "Ein Bericht über tatsächliche Suchanfragen, die Anzeigen ausgelöst haben",
+      "Ein Tool nur für Bildbearbeitung",
+      "Eine Liste aller Rechnungen"
+    ],
+    "answer": 1,
+    "explanation": "Der Suchbegriffbericht zeigt, welche Nutzeranfragen tatsächlich zur Anzeigenausspielung geführt haben."
+  },
+  {
+    "q": "Was ist laut Vorlesung ein häufiger Fehler bei Keywords?",
+    "options": [
+      "Zu sauberes Conversion-Tracking",
+      "Zu gute Landingpages",
+      "Zu allgemeine Keywords ohne regelmäßige Suchbegriffprüfung",
+      "Zu klare Kampagnenziele"
+    ],
+    "answer": 2,
+    "explanation": "Zu breite Keywords können irrelevante Klicks erzeugen, wenn Suchbegriffe nicht regelmäßig geprüft und ausgeschlossen werden."
+  },
+  {
+    "q": "Wofür dient der Google Keyword Planner?",
+    "options": [
+      "Zur Analyse von Suchvolumen und Wettbewerb für Keywords",
+      "Zum Löschen von Rechnungen",
+      "Zum Schreiben von Datenschutztexten",
+      "Zum Erstellen von Instagram-Reels"
+    ],
+    "answer": 0,
+    "explanation": "Der Keyword Planner hilft bei Keyword-Recherche, Suchvolumen und Wettbewerbseinschätzung."
+  },
+  {
+    "q": "Was ist der Qualitätsfaktor in Google Ads?",
+    "options": [
+      "Ein Rechnungsbetrag",
+      "Ein Diagnosewert für die Relevanz von Keyword, Anzeige und Landingpage",
+      "Ein Videoformat für YouTube",
+      "Eine feste Garantie auf Platz 1"
+    ],
+    "answer": 1,
+    "explanation": "Der Qualitätsfaktor bewertet unter anderem Anzeigenrelevanz, erwartete CTR und Landingpage-Erfahrung."
+  },
+  {
+    "q": "Welche drei Bereiche gehören typischerweise zum Qualitätsfaktor?",
+    "options": [
+      "Impressum, Rechnung, Kontozugriff",
+      "Erwartete CTR, Anzeigenrelevanz, Nutzererfahrung auf der Landingpage",
+      "Uhrzeit, Browserfarbe, Schriftgröße",
+      "Instagram, TikTok, Pinterest"
+    ],
+    "answer": 1,
+    "explanation": "Diese drei Bereiche zeigen, wie gut Suchanfrage, Anzeige und Zielseite zusammenpassen."
+  },
+  {
+    "q": "Was passiert häufig bei niedrigem Qualitätsfaktor?",
+    "options": [
+      "Klickkosten können steigen und Positionen schlechter werden",
+      "SEO wird sofort besser",
+      "Das Merchant Center wird automatisch gelöscht",
+      "Anzeigen werden automatisch kostenlos"
+    ],
+    "answer": 0,
+    "explanation": "Ein niedriger Qualitätsfaktor kann höhere CPCs und schlechtere Anzeigenpositionen verursachen."
+  },
+  {
+    "q": "Welche Aussage beschreibt das Auktionsprinzip in Google Ads am besten?",
+    "options": [
+      "Nur der höchste Bieter bekommt immer den besten Platz",
+      "Die Position wird alphabetisch vergeben",
+      "Alle Anzeigen werden zufällig sortiert",
+      "Gebot und Qualität beeinflussen gemeinsam die Anzeigenposition"
+    ],
+    "answer": 3,
+    "explanation": "Google berücksichtigt nicht nur das Gebot, sondern auch Qualität und Relevanz."
+  },
+  {
+    "q": "Was bedeutet Ad Rank vereinfacht?",
+    "options": [
+      "Eine Liste aller negativen Keywords",
+      "Ein Cookie-Banner",
+      "Ein Wert, der über Anzeigenposition und Teilnahme an der Auktion mitentscheidet",
+      "Eine reine SEO-Bewertung"
+    ],
+    "answer": 2,
+    "explanation": "Der Anzeigenrang entscheidet mit darüber, ob und wo eine Anzeige erscheint."
+  },
+  {
+    "q": "Warum sollte eine Anzeige zur Landingpage passen?",
+    "options": [
+      "Weil Google sonst keine Rechnungen erstellt",
+      "Weil sonst Erwartung und Zielseite auseinanderfallen und die Conversion Rate leiden kann",
+      "Weil Landingpages für Google Ads unwichtig sind",
+      "Weil Anzeigen nur auf Startseiten zeigen dürfen"
+    ],
+    "answer": 1,
+    "explanation": "Anzeige und Zielseite müssen inhaltlich zusammenpassen, sonst springen Nutzer leichter ab."
+  },
+  {
+    "q": "Warum wurde in der Vorlesung vor Startseiten als Zielseite gewarnt?",
+    "options": [
+      "Startseiten können keine Bilder anzeigen",
+      "Startseiten sind oft zu allgemein und passen nicht exakt zum Suchbegriff",
+      "Startseiten zählen automatisch als Kauf",
+      "Startseiten sind rechtlich verboten"
+    ],
+    "answer": 1,
+    "explanation": "Spezifische Produkt- oder Kategorieseiten passen meist besser zur Suchintention."
+  },
+  {
+    "q": "Was beschreibt eine Metrik im schulischen Kontext der Vorlesung am ehesten?",
+    "options": [
+      "Ein Creative-Format",
+      "Ein Rohwert wie Klicks oder Impressionen",
+      "Immer ein finanzieller Zielwert",
+      "Nur ein rechtliches Dokument"
+    ],
+    "answer": 1,
+    "explanation": "Metriken sind eher Rohdaten, zum Beispiel Klicks oder Impressionen."
+  },
+  {
+    "q": "Was beschreibt eine Kennzahl am ehesten?",
+    "options": [
+      "Eine Rechnung ohne Bezug zur Kampagne",
+      "Ein zufälliger Kommentar",
+      "Nur das Firmenlogo",
+      "Ein interpretierbarer Wert wie CTR oder Conversion Rate"
+    ],
+    "answer": 3,
+    "explanation": "Kennzahlen setzen Daten in ein Verhältnis und lassen sich interpretieren."
+  },
+  {
+    "q": "Was ist ein KPI?",
+    "options": [
+      "Eine Datenschutz-Einstellung",
+      "Ein Key Performance Indicator, der direkt zum Ziel der Kampagne passt",
+      "Ein beliebiger Wert ohne Zielbezug",
+      "Ein Format für Bildanzeigen"
+    ],
+    "answer": 1,
+    "explanation": "Ein KPI ist eine entscheidende Leistungskennzahl, die am Kampagnenziel ausgerichtet ist."
+  },
+  {
+    "q": "Welche Formel beschreibt die CTR?",
+    "options": [
+      "Klicks ÷ Impressionen × 100",
+      "Umsatz ÷ Keywordanzahl",
+      "Conversions ÷ Rechnung",
+      "Kosten ÷ Umsatz × 100"
+    ],
+    "answer": 0,
+    "explanation": "CTR bedeutet Click-Through-Rate und misst den Anteil der Klicks an den Impressionen."
+  },
+  {
+    "q": "Was bedeutet CPC?",
+    "options": [
+      "Klicks pro Conversion",
+      "Kosten pro Klick",
+      "Kosten pro Conversion",
+      "Kosten pro Kampagnenname"
+    ],
+    "answer": 1,
+    "explanation": "CPC steht für Cost per Click."
+  },
+  {
+    "q": "Was bedeutet CPA?",
+    "options": [
+      "Kosten pro gewünschter Handlung oder Akquise",
+      "Kosten pro Anzeige im Displaynetzwerk",
+      "Klickrate pro Anzeige",
+      "Conversion pro Asset"
+    ],
+    "answer": 0,
+    "explanation": "CPA bezeichnet Kosten pro definierter Aktion, zum Beispiel Lead oder Kauf."
+  },
+  {
+    "q": "Was misst der ROAS?",
+    "options": [
+      "Klicks im Verhältnis zur Reichweite",
+      "Impressionen pro Keyword",
+      "Kosten pro Ansicht",
+      "Umsatz im Verhältnis zu Werbekosten"
+    ],
+    "answer": 3,
+    "explanation": "ROAS bedeutet Return on Ad Spend: Umsatz geteilt durch Werbekosten."
+  },
+  {
+    "q": "Welche Aussage zur Verwechslung von CTR und CR ist richtig?",
+    "options": [
+      "CTR misst ausschließlich Käufe",
+      "CTR und CR bedeuten exakt dasselbe",
+      "CTR misst Klicks aus Impressionen, CR misst Conversions aus Klicks oder Besuchen",
+      "CR steht für Click Rate"
+    ],
+    "answer": 2,
+    "explanation": "CTR und Conversion Rate dürfen nicht verwechselt werden, weil sie unterschiedliche Schritte im Funnel messen."
+  },
+  {
+    "q": "Wann kann eine Kampagne mit vielen Impressionen und null Conversions trotzdem erfolgreich sein?",
+    "options": [
+      "Wenn das Ziel Verkäufe war",
+      "Wenn das Ziel Branding oder Reichweite war",
+      "Wenn die Landingpage nicht funktioniert",
+      "Wenn kein Tracking eingebaut ist"
+    ],
+    "answer": 1,
+    "explanation": "Die Bewertung hängt vom Kampagnenziel ab. Bei Awareness können Impressionen ein Zielwert sein."
+  },
+  {
+    "q": "Was deutet eine niedrige CTR bei einer Suchkampagne häufig an?",
+    "options": [
+      "Die Conversion Rate ist automatisch perfekt",
+      "Die Rechnung wurde nicht bezahlt",
+      "Das Merchant Center ist immer fehlerhaft",
+      "Anzeige, Keyword oder Botschaft sind nicht relevant genug"
+    ],
+    "answer": 3,
+    "explanation": "Eine niedrige CTR kann bedeuten, dass Suchbegriff und Anzeigentext nicht überzeugend zusammenpassen."
+  },
+  {
+    "q": "Was bedeutet: gute CTR, aber niedrige Conversion Rate?",
+    "options": [
+      "Die Keyword-Recherche ist automatisch perfekt",
+      "Die Anzeige zieht Klicks, aber nach dem Klick gibt es Probleme mit Landingpage, Angebot oder Ziel",
+      "Die Anzeige wurde nicht gesehen",
+      "Es gibt immer zu wenig Impressionen"
+    ],
+    "answer": 1,
+    "explanation": "Dann funktioniert der erste Klick, aber der weitere Conversion-Prozess nicht gut genug."
+  },
+  {
+    "q": "Welcher Dreischritt beschreibt die Optimierungslogik aus der Vorlesung?",
+    "options": [
+      "Designen → Drucken → Verteilen",
+      "Posten → Liken → Teilen",
+      "Löschen → Hoffen → Vergessen",
+      "Beobachten → Interpretieren → Handeln"
+    ],
+    "answer": 3,
+    "explanation": "Zuerst werden Daten beobachtet, dann interpretiert und daraus Maßnahmen abgeleitet."
+  },
+  {
+    "q": "Was sollte man in der Lernphase neuer Kampagnen vermeiden?",
+    "options": [
+      "Das Einrichten von Conversion-Tracking",
+      "Das Festlegen eines Kampagnenziels",
+      "Hektische oder zu häufige Änderungen",
+      "Das Prüfen, ob Impressionen entstehen"
+    ],
+    "answer": 2,
+    "explanation": "Während der Lernphase braucht der Algorithmus Zeit, um Daten zu sammeln."
+  },
+  {
+    "q": "Welche Dauer wurde für die Lernphase in den Vorlesungen grob genannt?",
+    "options": [
+      "Immer genau 30 Tage",
+      "Immer exakt 60 Minuten",
+      "Nur eine Nacht",
+      "5 bis 7 Tage, manchmal bis zu 14 Tage"
+    ],
+    "answer": 3,
+    "explanation": "In der Vorlesung wurde grob eine Lernphase von 5 bis 7 Tagen, teils bis 14 Tagen, genannt."
+  },
+  {
+    "q": "Was beschreibt eine Responsive Search Ad?",
+    "options": [
+      "Eine Anzeige wird ausschließlich als PDF ausgespielt",
+      "Eine App wird ohne Store beworben",
+      "Ein Banner wird per Hand auf Facebook hochgeladen",
+      "Google kombiniert mehrere Titel und Beschreibungen automatisch zu passenden Anzeigenvarianten"
+    ],
+    "answer": 3,
+    "explanation": "Bei RSA werden mehrere Headlines und Beschreibungen hinterlegt, die Google automatisch kombiniert."
+  },
+  {
+    "q": "Was beschreibt eine Dynamic Search Ad?",
+    "options": [
+      "Eine manuelle Facebook-Kampagne",
+      "Eine Anzeige ohne Website",
+      "Google nutzt Inhalte der Website und generiert passende Anzeigen dynamisch",
+      "Eine Rechnung mit dynamischem Preis"
+    ],
+    "answer": 2,
+    "explanation": "DSA-Kampagnen nutzen Website-Inhalte, um passende Anzeigen zu Suchanfragen zu erstellen."
+  },
+  {
+    "q": "Wann ist die Gebotsstrategie „Klicks maximieren“ besonders sinnvoll?",
+    "options": [
+      "Wenn noch wenig Daten vorhanden sind und zuerst Traffic gesammelt werden soll",
+      "Wenn keine Website existiert",
+      "Wenn man keine Anzeigen schalten möchte",
+      "Wenn garantiert nur Käufe gezählt werden sollen"
+    ],
+    "answer": 0,
+    "explanation": "Bei neuen Konten oder wenig Daten kann Klicks maximieren helfen, zunächst Traffic und Nutzersignale zu sammeln."
+  },
+  {
+    "q": "Was ist eine wichtige Voraussetzung für automatisierte Gebotsstrategien wie Conversions maximieren?",
+    "options": [
+      "Funktionierendes Conversion-Tracking",
+      "Ein privates YouTube-Konto",
+      "Ein gedruckter Flyer",
+      "Keine Ziele im Konto"
+    ],
+    "answer": 0,
+    "explanation": "Ohne sauberes Conversion-Tracking kann der Algorithmus nicht sinnvoll auf Conversions optimieren."
+  },
+  {
+    "q": "Warum sollte ein Ziel-ROAS am Anfang nicht zu ambitioniert gewählt werden?",
+    "options": [
+      "Weil Umsatz nie gemessen werden darf",
+      "Weil Ziel-ROAS keine Gebotsstrategie ist",
+      "Weil ROAS nur für Instagram gilt",
+      "Weil der Algorithmus sonst zu wenig Spielraum zum Lernen haben kann"
+    ],
+    "answer": 3,
+    "explanation": "Ein zu hoher Ziel-ROAS kann die Ausspielung einschränken und das Lernen erschweren."
+  },
+  {
+    "q": "Welche Aussage zu Budgetänderungen passt zur Vorlesung?",
+    "options": [
+      "Budgets sollten vorsichtig und schrittweise angepasst werden",
+      "Budgetänderungen haben nie Einfluss auf den Algorithmus",
+      "Google Ads funktioniert ohne Budget",
+      "Budgets sollten möglichst sprunghaft verdoppelt oder halbiert werden"
+    ],
+    "answer": 0,
+    "explanation": "Sprunghafte Budgetänderungen können die Kampagnenleistung und Lernlogik stören."
+  },
+  {
+    "q": "Was sind Hard Conversions?",
+    "options": [
+      "Hauptziele wie Kauf, Anfrage oder echter Abschluss",
+      "Zwischenschritte wie Seitenaufruf ohne Zielwert",
+      "Impressionen ohne Klick",
+      "Kommentare auf Social Media"
+    ],
+    "answer": 0,
+    "explanation": "Hard Conversions sind Makro-Conversions und entsprechen dem eigentlichen Kampagnenziel."
+  },
+  {
+    "q": "Was sind Soft Conversions?",
+    "options": [
+      "Nur Rechnungen",
+      "Immer abgeschlossene Käufe",
+      "Zwischenschritte wie Warenkorb, Formstart oder andere Mikro-Conversions",
+      "Nur negative Keywords"
+    ],
+    "answer": 2,
+    "explanation": "Soft Conversions zeigen Zwischenschritte und sollten sauber von Hard Conversions getrennt werden."
+  },
+  {
+    "q": "Warum ist Segmentierung nach Conversion-Aktion wichtig?",
+    "options": [
+      "Damit keine Berichte mehr nötig sind",
+      "Damit alle Keywords gelöscht werden",
+      "Damit Soft und Hard Conversions nicht falsch gemeinsam interpretiert werden",
+      "Damit Google automatisch das Impressum erstellt"
+    ],
+    "answer": 2,
+    "explanation": "Ohne Segmentierung können Formstarts, Warenkörbe und Käufe vermischt und falsch bewertet werden."
+  },
+  {
+    "q": "Was kann eine niedrige mobile Conversion Rate bei vielen mobilen Klicks bedeuten?",
+    "options": [
+      "Die mobile Landingpage oder der mobile Checkout hat ein Problem",
+      "Desktop-Anzeigen sind verboten",
+      "Die CTR ist immer falsch",
+      "Mobile Nutzer können nie konvertieren"
+    ],
+    "answer": 0,
+    "explanation": "Schwache mobile Performance deutet oft auf Probleme mit mobilem Layout, Ladezeit oder Checkout hin."
+  },
+  {
+    "q": "Welche drei Ziele wurden für App-Kampagnen besonders betont?",
+    "options": [
+      "Rechnungen, Mahnungen und Steuern",
+      "Impressum, Datenschutz und AGB",
+      "Likes, Kommentare und Shares",
+      "Installationen, Interaktionen und Vorregistrierungen"
+    ],
+    "answer": 3,
+    "explanation": "Für App-Kampagnen wurden App-Installationen, App-Interaktionen und App-Vorregistrierungen genannt."
+  },
+  {
+    "q": "Welches App-Kampagnenziel ist nur für Android verfügbar?",
+    "options": [
+      "App-Vorregistrierung",
+      "App-Interaktion",
+      "App-Installation",
+      "CPC"
+    ],
+    "answer": 0,
+    "explanation": "Vorregistrierungen sind im Google Play Store und damit für Android-Apps relevant."
+  },
+  {
+    "q": "Welche zusätzliche Kennzahl ist bei App-Kampagnen besonders wichtig?",
+    "options": [
+      "DSGVO-Quote",
+      "PMax-Name",
+      "CPI",
+      "ROE"
+    ],
+    "answer": 2,
+    "explanation": "CPI steht für Cost per Installation und ist bei App-Kampagnen besonders relevant."
+  },
+  {
+    "q": "Wofür dient Firebase im App-Marketing-Kontext?",
+    "options": [
+      "Zur Messung von App-Nutzung, Interaktionen und In-App-Events",
+      "Zur Erstellung von Rechnungen",
+      "Zur manuellen Auswahl aller Anzeigenplätze",
+      "Zum Drucken von App-Icons"
+    ],
+    "answer": 0,
+    "explanation": "Firebase kann App-Events messen und Daten zur Optimierung an Google Ads liefern."
+  },
+  {
+    "q": "Wo erscheinen Apple Search Ads hauptsächlich?",
+    "options": [
+      "In Google Maps ausschließlich",
+      "Im Apple App Store",
+      "In Gmail-Rechnungen",
+      "Im Google Merchant Center"
+    ],
+    "answer": 1,
+    "explanation": "Apple Search Ads sind Anzeigen im Apple App Store."
+  },
+  {
+    "q": "Was ist ein häufiges Warnsignal bei Google-Ads-Agenturen?",
+    "options": [
+      "Transparente Reportings",
+      "Garantierte Platz-1-Versprechen",
+      "Zugriff des Kunden auf das Konto",
+      "Sauberes Conversion-Tracking"
+    ],
+    "answer": 1,
+    "explanation": "Seriöse Agenturen garantieren keine pauschale Platz-1-Position, weil Google Ads ein dynamisches Auktionssystem ist."
+  },
+  {
+    "q": "Warum sollte der Kunde administrative Hoheit über das Google-Ads-Konto behalten?",
+    "options": [
+      "Damit die Agentur alle Daten verstecken kann",
+      "Damit Google keine Rechnungen mehr erstellt",
+      "Damit Transparenz über Budget, Daten und Kampagnen erhalten bleibt",
+      "Damit keine Kampagnen möglich sind"
+    ],
+    "answer": 2,
+    "explanation": "Kunden sollten Kontrolle und Zugriff behalten, um Budgetverwendung und Kampagnen nachvollziehen zu können."
+  },
+  {
+    "q": "Was sollte bei der Bewertung des ROAS zusätzlich bedacht werden, wenn eine Agentur beteiligt ist?",
+    "options": [
+      "Agenturkosten müssen für die echte Wirtschaftlichkeit mitgedacht werden",
+      "Agenturkosten sind immer irrelevant",
+      "ROAS ersetzt alle Unternehmensdaten",
+      "ROAS gilt nur ohne Umsatz"
+    ],
+    "answer": 0,
+    "explanation": "Der Google-Ads-ROAS zeigt Werbekonto-Leistung. Für echte Rentabilität müssen zusätzliche Kosten berücksichtigt werden."
+  },
+  {
+    "q": "Was ist eine sinnvolle erste Frage vor jeder Google-Ads-Kampagne?",
+    "options": [
+      "Welche Farbe hat das Logo?",
+      "Welches Ziel soll die Kampagne erreichen?",
+      "Wie viele private Kontakte habe ich?",
+      "Welcher Drucker wird genutzt?"
+    ],
+    "answer": 1,
+    "explanation": "Ohne klares Ziel können Kampagnentyp, KPIs, Budget und Optimierung nicht sinnvoll gewählt werden."
+  }
+];
+let currentQuestion = 0;
+let score = 0;
+let answered = false;
+const progressEl = document.getElementById('progress');
+const questionEl = document.getElementById('question');
+const optionsEl = document.getElementById('options');
+const feedbackEl = document.getElementById('feedback');
+const nextBtn = document.getElementById('nextBtn');
+const quizEl = document.getElementById('quiz');
+const resultEl = document.getElementById('result');
+const scoreTextEl = document.getElementById('scoreText');
+const scoreCircleEl = document.getElementById('scoreCircle');
+function loadQuestion(){
+  answered = false;
+  const q = questions[currentQuestion];
+  progressEl.textContent = `Frage ${currentQuestion + 1} von ${questions.length}`;
+  questionEl.textContent = `${currentQuestion + 1}. ${q.q}`;
+  optionsEl.innerHTML = '';
+  feedbackEl.style.display = 'none';
+  feedbackEl.className = 'feedback';
+  nextBtn.style.display = 'none';
+  q.options.forEach((option, index) => {
+    const button = document.createElement('button');
+    button.className = 'option';
+    button.textContent = `${String.fromCharCode(65 + index)}) ${option}`;
+    button.addEventListener('click', () => selectOption(index, button));
+    optionsEl.appendChild(button);
+  });
+}
+function selectOption(index, button){
+  if(answered) return;
+  answered = true;
+  const q = questions[currentQuestion];
+  const optionButtons = document.querySelectorAll('.option');
+  optionButtons.forEach(btn => btn.disabled = true);
+  if(index === q.answer){
+    score++;
+    button.classList.add('correct');
+    feedbackEl.textContent = 'Richtig. ' + q.explanation;
+    feedbackEl.classList.add('success');
+  } else {
+    button.classList.add('incorrect');
+    optionButtons[q.answer].classList.add('correct');
+    feedbackEl.textContent = 'Nicht ganz. ' + q.explanation;
+    feedbackEl.classList.add('error');
+  }
+  feedbackEl.style.display = 'block';
+  nextBtn.style.display = 'inline-block';
+}
+nextBtn.addEventListener('click', () => {
+  currentQuestion++;
+  if(currentQuestion < questions.length){loadQuestion();} else {showResult();}
+});
+function showResult(){
+  quizEl.style.display = 'none';
+  resultEl.style.display = 'block';
+  scoreCircleEl.textContent = score;
+  scoreTextEl.textContent = `Du hast ${score} von ${questions.length} Fragen richtig beantwortet.`;
+}
+function restartQuiz(){
+  currentQuestion = 0;
+  score = 0;
+  quizEl.style.display = 'block';
+  resultEl.style.display = 'none';
+  loadQuestion();
+}
+loadQuestion();
 </script>
-
-</main>
 </body>
 </html>
