@@ -1,0 +1,733 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Influencer Marketing Playbook</title>
+  <style>
+:root{
+  --primary-blue:#0f5132;
+  --secondary-blue:#16834f;
+  --accent-blue:#1f9d60;
+  --gold:#c8a84e;
+  --light-bg:#f4fbf7;
+  --card-bg:#ffffff;
+  --border-color:#dbeee2;
+  --text-dark:#123326;
+  --text-muted:#5f7569;
+  --green:#065f46;
+  --green-bg:#d1fae5;
+  --yellow:#92400e;
+  --yellow-bg:#fef3c7;
+  --red:#991b1b;
+  --red-bg:#fee2e2;
+  --blue-bg:#e8f8ee;
+  --shadow-sm:0 1px 3px rgba(0,0,0,.10);
+  --shadow-md:0 8px 24px rgba(15,81,50,.13);
+  --radius:14px;
+  --transition:all .2s ease;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  min-height:100vh;
+  background:var(--light-bg);
+  color:var(--text-dark);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  line-height:1.55;
+}
+header{
+  background:var(--primary-blue);
+  color:white;
+  padding:1.15rem 1.5rem;
+  border-bottom:4px solid var(--gold);
+  box-shadow:var(--shadow-md);
+}
+.header-inner,main{width:min(1200px,calc(100% - 2rem));margin:0 auto}
+.header-grid{
+  display:grid;
+  grid-template-columns:minmax(280px,1fr) minmax(340px,700px);
+  gap:1rem;
+  align-items:center;
+}
+.header-title{min-width:0}
+h1{
+  font-size:clamp(2rem,3.8vw,2.8rem);
+  line-height:1.08;
+  margin:0;
+  letter-spacing:-.025em;
+}
+header p{
+  color:#d7f5e4;
+  margin-top:.35rem;
+  font-size:1rem;
+  line-height:1.45;
+  max-width:760px;
+}
+.header-actions{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:.8rem;
+}
+.search{
+  width:100%;
+  border:1px solid #cbd5e1;
+  border-radius:10px;
+  padding:.85rem 1rem;
+  font-size:1rem;
+  color:var(--text-dark);
+  background:white;
+  box-shadow:var(--shadow-sm);
+  transition:var(--transition);
+}
+.search:focus{
+  outline:none;
+  border-color:var(--accent-blue);
+  box-shadow:0 0 0 3px rgba(31,157,96,.12);
+}
+.header-search{
+  flex:1 1 auto;
+  max-width:560px;
+  min-width:260px;
+  margin:0;
+  background:rgba(255,255,255,.96);
+  border-color:rgba(255,255,255,.55);
+  box-shadow:0 8px 22px rgba(0,0,0,.10);
+}
+.back-link-header{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  text-decoration:none;
+  color:white;
+  background:rgba(255,255,255,.10);
+  border:1px solid rgba(255,255,255,.28);
+  padding:.82rem 1rem;
+  border-radius:9px;
+  font-weight:800;
+  white-space:nowrap;
+  transition:var(--transition)
+}
+.back-link-header:hover{background:rgba(255,255,255,.18)}
+main{padding:1.7rem 0 4rem}
+.tabs{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.55rem;
+  margin:0 0 1rem;
+}
+.tab-btn{
+  border:1px solid #cbd5e1;
+  background:white;
+  color:var(--primary-blue);
+  border-radius:999px;
+  padding:.68rem .95rem;
+  font-weight:800;
+  cursor:pointer;
+  transition:var(--transition);
+  box-shadow:var(--shadow-sm);
+  font-size:.92rem;
+}
+.tab-btn:hover{
+  border-color:var(--secondary-blue);
+  transform:translateY(-1px);
+  background:#f8fffb;
+}
+.tab-btn.active{
+  background:var(--primary-blue);
+  border-color:var(--primary-blue);
+  color:white;
+  box-shadow:var(--shadow-md);
+}
+.tab-content{display:none}
+.tab-content.active{display:block}
+.section-header{margin:1.25rem 0 1rem}
+.section-header h2{color:var(--primary-blue);font-size:clamp(1.45rem,3vw,2.1rem);line-height:1.15}
+.section-header p{color:var(--text-muted);margin-top:.3rem;max-width:980px}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(245px,1fr));
+  gap:1rem;
+  margin-bottom:1rem;
+}
+.two-col{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:1rem;
+  margin-bottom:1rem;
+}
+.card,.table-card,.note,.workflow{
+  background:var(--card-bg);
+  border:1px solid var(--border-color);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow-sm);
+}
+.card{padding:1.2rem}
+.card h3{color:var(--primary-blue);margin-bottom:.45rem}
+.card p,.card li{color:var(--text-muted)}
+.tag,.badge{
+  display:inline-flex;
+  align-items:center;
+  padding:.25rem .6rem;
+  border-radius:999px;
+  font-size:.76rem;
+  font-weight:800;
+  margin-bottom:.75rem;
+}
+.tag.blue,.badge.blue{background:var(--blue-bg);color:var(--primary-blue)}
+.tag.green,.badge.green{background:var(--green-bg);color:var(--green)}
+.tag.yellow,.badge.yellow{background:var(--yellow-bg);color:var(--yellow)}
+.tag.red,.badge.red{background:var(--red-bg);color:var(--red)}
+.table-card{overflow:hidden;margin-bottom:1rem}
+.table-responsive{overflow-x:auto}
+table{width:100%;border-collapse:collapse;background:white}
+th,td{
+  padding:.9rem 1rem;
+  text-align:left;
+  border-bottom:1px solid var(--border-color);
+  vertical-align:top;
+}
+th{
+  background:#f8fffb;
+  color:var(--primary-blue);
+  font-size:.85rem;
+  text-transform:uppercase;
+  letter-spacing:.04em;
+}
+tr:last-child td{border-bottom:none}
+td strong{color:var(--primary-blue)}
+.note{
+  border-left:5px solid var(--gold);
+  padding:1rem 1.1rem;
+  margin:1rem 0;
+  color:var(--text-muted);
+}
+.note strong{color:var(--primary-blue)}
+.workflow{
+  padding:1.2rem;
+  margin:1rem 0;
+}
+.workflow h3{color:var(--primary-blue);margin-bottom:.4rem}
+.workflow p{color:var(--text-muted)}
+.steps{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:.75rem;
+  margin-top:.8rem;
+}
+.step{
+  background:#f8fffb;
+  border:1px solid var(--border-color);
+  border-radius:12px;
+  padding:.9rem;
+  color:var(--text-muted);
+}
+.step-num{
+  display:inline-grid;
+  place-items:center;
+  width:30px;
+  height:30px;
+  border-radius:50%;
+  background:var(--primary-blue);
+  color:white;
+  font-weight:800;
+  margin-bottom:.5rem
+}
+.step strong{display:block;color:var(--primary-blue);margin-bottom:.2rem}
+.formula{
+  background:#f8fffb;
+  border:1px solid var(--border-color);
+  border-radius:10px;
+  padding:.75rem .9rem;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+  color:var(--primary-blue);
+  font-weight:700;
+  margin-top:.5rem;
+}
+ul.clean{padding-left:1.1rem}
+.accordion{display:grid;gap:.8rem;margin-bottom:1.2rem}
+.acc-card{
+  background:white;
+  border:1px solid var(--border-color);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow-sm);
+  overflow:hidden;
+}
+.acc-head{
+  width:100%;
+  border:0;
+  background:white;
+  color:var(--primary-blue);
+  padding:1rem 1.1rem;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  font-size:1rem;
+  font-weight:800;
+  cursor:pointer;
+  text-align:left;
+  gap:1rem;
+}
+.acc-head:hover{background:#f8fffb}
+.acc-icon{font-size:1.35rem;line-height:1}
+.acc-body{
+  display:none;
+  padding:0 1.1rem 1.1rem;
+  color:var(--text-muted);
+}
+.acc-body p{margin:.4rem 0}
+.acc-card.open .acc-body{display:block}
+.acc-card.open .acc-icon{transform:rotate(45deg)}
+.diagnose-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(285px,1fr));
+  gap:1rem;
+  margin-bottom:1rem;
+}
+.diagnose-card{
+  background:white;
+  border:1px solid var(--border-color);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow-sm);
+  overflow:hidden;
+}
+.diagnose-card button{
+  width:100%;
+  border:0;
+  background:white;
+  padding:1rem;
+  text-align:left;
+  color:var(--primary-blue);
+  font-weight:850;
+  display:flex;
+  justify-content:space-between;
+  gap:.8rem;
+  cursor:pointer;
+}
+.diagnose-card button:hover{background:#f8fffb}
+.diagnose-body{display:none;padding:0 1rem 1rem;color:var(--text-muted)}
+.diagnose-card.open .diagnose-body{display:block}
+.hidden-search{display:none!important}
+.no-results{
+  display:none;
+  background:white;
+  border:1px solid var(--border-color);
+  border-radius:var(--radius);
+  padding:2rem;
+  text-align:center;
+  color:var(--text-muted);
+}
+footer{text-align:center;color:var(--text-muted);font-size:.84rem;padding:1.5rem}
+@media(max-width:900px){
+  .header-grid{grid-template-columns:1fr}
+  .header-actions{width:100%;flex-direction:column;align-items:stretch}
+  .header-search{max-width:none;width:100%;min-width:0}
+  .back-link-header{width:100%}
+}
+@media(max-width:760px){
+  th,td{padding:.75rem .8rem}
+  .tab-btn{width:100%}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="header-inner header-grid">
+    <div class="header-title">
+      <h1>Influencer Marketing Playbook</h1>
+      <p>Datengetriebene Kooperationen: Relevanz, Ziele, Plattformen, Auswahl, Pricing, Tracking, UGC und rechtliche Grundlagen.</p>
+    </div>
+    <div class="header-actions">
+      <input id="searchInput" class="search header-search" type="search" placeholder="Im Influencer Playbook suchen ...">
+      <a class="back-link-header" href="spezi1.html">← Zur grünen Übersicht</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <nav class="tabs" aria-label="Playbook-Reiter">
+    <button class="tab-btn active" data-tab="basics">1. Grundlagen</button>
+    <button class="tab-btn" data-tab="types">2. Typen & Journey</button>
+    <button class="tab-btn" data-tab="strategy">3. Ziele & Strategie</button>
+    <button class="tab-btn" data-tab="platforms">4. Plattformen & Formate</button>
+    <button class="tab-btn" data-tab="collab">5. Kooperation & Pricing</button>
+    <button class="tab-btn" data-tab="tracking">6. Tracking & KPIs</button>
+    <button class="tab-btn" data-tab="ugc">7. UGC & Recht</button>
+    <button class="tab-btn" data-tab="diagnosis">8. Diagnose</button>
+  </nav>
+
+  <div id="noResults" class="no-results">Keine passenden Inhalte gefunden.</div>
+
+  <section id="basics" class="tab-content active">
+    <div class="section-header searchable-item">
+      <h2>1. Grundlagen: Was ist Influencer Marketing?</h2>
+      <p>Influencer Marketing ist eine Form des Online-Marketings, bei der Unternehmen mit einflussreichen Personen auf sozialen Plattformen zusammenarbeiten, um Produkte, Dienstleistungen oder Markenbotschaften zu bewerben.</p>
+    </div>
+
+    <div class="grid">
+      <article class="card searchable-item">
+        <span class="tag blue">Definition</span>
+        <h3>Influencer*innen sind nicht automatisch Prominente</h3>
+        <p>Entscheidend ist, dass sie in einer bestimmten Zielgruppe als glaubwürdig und vertrauenswürdig wahrgenommen werden.</p>
+      </article>
+      <article class="card searchable-item">
+        <span class="tag green">Warum relevant?</span>
+        <h3>Menschen vertrauen Menschen</h3>
+        <p>Klassische Werbung verliert an Wirkung. Influencer*innen erzeugen Nähe, Vertrauen und Social Proof in Communitys.</p>
+      </article>
+      <article class="card searchable-item">
+        <span class="tag yellow">E-Commerce</span>
+        <h3>Content + Kaufimpuls</h3>
+        <p>Influencer Marketing ist im E-Commerce stark, weil Produkte authentisch gezeigt, direkt verlinkt und datenbasiert gemessen werden können.</p>
+      </article>
+    </div>
+
+    <div class="table-card searchable-item">
+      <div class="table-responsive">
+        <table>
+          <thead><tr><th>Grund</th><th>Einfach erklärt</th><th>Marketing-Bedeutung</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Verändertes Medienverhalten</strong></td><td>Social Media ist ein wichtiger Ort für Produktentdeckung, Bewertung und Diskussion.</td><td>Marken müssen dort sichtbar sein, wo Kaufimpulse entstehen.</td></tr>
+            <tr><td><strong>Vertrauensvorschuss</strong></td><td>Menschen vertrauen Personen oft mehr als anonymen Markenbotschaften.</td><td>Empfehlungen wirken glaubwürdiger als klassische Anzeigen.</td></tr>
+            <tr><td><strong>Zielgruppenpräzision</strong></td><td>Creator bedienen oft sehr spezifische Nischen.</td><td>Weniger Streuverlust, wenn Audience Fit und Channel Fit stimmen.</td></tr>
+            <tr><td><strong>Content-Mehrwert</strong></td><td>Influencer*innen produzieren zielgruppenrelevanten Content.</td><td>Content kann im Shop, in Social Ads oder E-Mail-Kampagnen weitergenutzt werden.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="note searchable-item">
+      <strong>Prüfungs-Merker:</strong> Influencer Marketing ist nicht einfach „Person mit vielen Followern posten lassen“. Entscheidend sind Ziel, Zielgruppe, Kanal, Glaubwürdigkeit, Content-Stil, Tracking und Auswertung.
+    </div>
+  </section>
+
+  <section id="types" class="tab-content">
+    <div class="section-header searchable-item">
+      <h2>2. Influencer-Typen & Customer Journey</h2>
+      <p>Influencer*innen unterscheiden sich nach Reichweite, Community-Tiefe und Wirkungspotenzial. Die richtige Auswahl hängt von Funnel-Ziel und Customer-Journey-Phase ab.</p>
+    </div>
+
+    <div class="table-card searchable-item">
+      <div class="table-responsive">
+        <table>
+          <thead><tr><th>Typ</th><th>Followerzahl</th><th>Merkmale</th><th>Typische Wirkung</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Nano</strong></td><td>ca. 500–5.000 / teils &lt;10.000</td><td>Sehr persönliche Bindung, hohe Glaubwürdigkeit.</td><td>Conversion, Community-Nähe, Advocacy.</td></tr>
+            <tr><td><strong>Mikro</strong></td><td>ca. 5.000–100.000</td><td>Nischen, aktives Engagement, starke Nähe.</td><td>Consideration, Conversion.</td></tr>
+            <tr><td><strong>Meso</strong></td><td>ca. 100.000–500.000</td><td>Balance aus Reichweite und Nähe.</td><td>Upper & Mid Funnel.</td></tr>
+            <tr><td><strong>Makro</strong></td><td>ca. 500.000–1 Mio</td><td>Große Community, professionelle Produktion.</td><td>Awareness, Reichweite.</td></tr>
+            <tr><td><strong>Mega / Promi</strong></td><td>&gt;1 Mio</td><td>Sehr sichtbar, oft teuer, weniger Community-Nähe.</td><td>Awareness, Image.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="workflow searchable-item">
+      <h3>5A-Modell nach Kotler</h3>
+      <p>Das Modell beschreibt die digitale Customer Journey: Aware → Appeal → Ask → Act → Advocate.</p>
+      <div class="steps">
+        <div class="step"><span class="step-num">1</span><strong>Aware</strong>Makro/Mega erzeugen schnelle Aufmerksamkeit.</div>
+        <div class="step"><span class="step-num">2</span><strong>Appeal</strong>Meso/Makro emotionalisieren Marke und Produkt.</div>
+        <div class="step"><span class="step-num">3</span><strong>Ask</strong>Mikro/Meso liefern Reviews, Tutorials und Erfahrungsberichte.</div>
+        <div class="step"><span class="step-num">4</span><strong>Act</strong>Nano/Mikro wirken über Vertrauen, Rabattcodes und direkte Links.</div>
+        <div class="step"><span class="step-num">5</span><strong>Advocate</strong>Kund*innen und Nano-Creator werden zu Markenbotschaftern.</div>
+      </div>
+    </div>
+
+    <div class="note searchable-item">
+      <strong>Wichtig:</strong> Followerzahl allein ist kein Qualitätsmerkmal. Engagement Rate, Zielgruppenpassung, Kommentarqualität und Content-Stil sind oft wichtiger.
+    </div>
+  </section>
+
+  <section id="strategy" class="tab-content">
+    <div class="section-header searchable-item">
+      <h2>3. Ziele & Strategie</h2>
+      <p>Ohne klares Zielsystem bleibt der Erfolg subjektiv. Ziele bestimmen Plattform, Influencer-Auswahl, Messwerte und Content-Typ.</p>
+    </div>
+
+    <div class="table-card searchable-item">
+      <div class="table-responsive">
+        <table>
+          <thead><tr><th>Funnel-Stufe</th><th>Zielausrichtung</th><th>Typische Kooperation</th><th>Messwerte</th></tr></thead>
+          <tbody>
+            <tr><td><strong>TOFU</strong></td><td>Reichweite, Sichtbarkeit</td><td>Virale Formate, Challenges, Humor, Launches.</td><td>Impressions, Reach, Erwähnungen.</td></tr>
+            <tr><td><strong>MOFU</strong></td><td>Informationsvermittlung, Vertrauen</td><td>Reviews, Tutorials, Erfahrungsberichte.</td><td>Verweildauer, Link-Klicks, Kommentare.</td></tr>
+            <tr><td><strong>BOFU</strong></td><td>Kaufanreize, Conversion</td><td>Rabattcodes, Call-to-Action, Swipe-up, Affiliate-Link.</td><td>Käufe, Leads, App-Installs, CPA, ROAS.</td></tr>
+            <tr><td><strong>Bindung</strong></td><td>Community & Wiedererkennung</td><td>Ambassador, UGC, Reposts, Community Features.</td><td>Wiederkehrende Interaktionen, Engagement Rate.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <article class="card searchable-item">
+        <span class="tag blue">Klassisch</span>
+        <h3>3 Strategieansätze</h3>
+        <ul class="clean">
+          <li><strong>Kampagnenbasiert:</strong> zeitlich begrenzt, z. B. Produktlaunch oder Black Week.</li>
+          <li><strong>Always-on / Ambassador:</strong> langfristige Markenbotschafter*innen.</li>
+          <li><strong>Multi-Touchpoint:</strong> Kombination aus Plattformen und Funnel-Phasen.</li>
+        </ul>
+      </article>
+      <article class="card searchable-item">
+        <span class="tag green">Datenbasiert</span>
+        <h3>KI & Automatisierung</h3>
+        <ul class="clean">
+          <li>KI-gestützte Influencer-Auswahl.</li>
+          <li>A/B-Testing von Creator, Hook, Format und Posting-Zeit.</li>
+          <li>Attribution über UTM, Affiliate-Links, Rabattcodes und CRM/GA4.</li>
+        </ul>
+      </article>
+    </div>
+
+    <div class="note searchable-item">
+      <strong>Zielkonflikte:</strong> Markenimage vs. Abverkauf, Reichweite vs. Engagement und Kampagnenziel vs. Creator-Stil müssen bewusst abgewogen werden.
+    </div>
+  </section>
+
+  <section id="platforms" class="tab-content">
+    <div class="section-header searchable-item">
+      <h2>4. Plattformen, Audience Fit & Channel Fit</h2>
+      <p>Influencer Marketing wirkt nur effizient, wenn die Audience des Creators zur Buyer Persona passt und der Kanal zur Kommunikationslogik der Zielgruppe.</p>
+    </div>
+
+    <div class="table-card searchable-item">
+      <div class="table-responsive">
+        <table>
+          <thead><tr><th>Plattform</th><th>Eignung</th><th>Zielgruppen-Verhalten</th><th>Typische Creator</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Instagram</strong></td><td>Lifestyle, Fashion, Beauty, Food</td><td>Visuell geprägt, inspiriert sich durch Ästhetik.</td><td>Content Creator, Lifestyle-Influencer.</td></tr>
+            <tr><td><strong>TikTok</strong></td><td>Entertainment, Humor, Trends</td><td>Schnelllebig, impulsiv, niedrigschwellig.</td><td>Creator mit Trendgespür.</td></tr>
+            <tr><td><strong>YouTube</strong></td><td>Bildung, Tutorials, Tech, Reviews</td><td>Informationsorientiert, längere Verweildauer.</td><td>Expert*innen, Tutorial-Creator.</td></tr>
+            <tr><td><strong>Twitch</strong></td><td>Gaming, Tech, Live-Kommunikation</td><td>Interaktiv und Community-getrieben.</td><td>Streamer mit starker Community.</td></tr>
+            <tr><td><strong>LinkedIn</strong></td><td>B2B, Thought Leadership</td><td>Businessorientiert, fakten- und networking-getrieben.</td><td>Professionals, Fachpersonen.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="grid">
+      <article class="card searchable-item"><span class="tag green">Audience Fit</span><h3>Zielgruppenpassung</h3><p>Demografie, Werte, Lifestyle, Interessen, Kaufmotive und Mediennutzung müssen zur Buyer Persona passen.</p></article>
+      <article class="card searchable-item"><span class="tag blue">Channel Fit</span><h3>Kanalpassung</h3><p>Der Kanal muss zur Entscheidungssituation passen: TikTok für Trends, YouTube für Erklärung, LinkedIn für B2B.</p></article>
+      <article class="card searchable-item"><span class="tag yellow">Fehler</span><h3>Trend statt Strategie</h3><p>Nur auf TikTok zu gehen, weil TikTok „trendy“ ist, erzeugt Streuverluste, wenn Zielgruppe und Produkt nicht passen.</p></article>
+    </div>
+  </section>
+
+  <section id="collab" class="tab-content">
+    <div class="section-header searchable-item">
+      <h2>5. Kooperation, Briefing & Pricing</h2>
+      <p>Professionelle Influencer-Kooperationen brauchen klares Kooperationsmodell, transparente Vergütung, saubere Rechteklärung und gutes Erwartungsmanagement.</p>
+    </div>
+
+    <div class="table-card searchable-item">
+      <div class="table-responsive">
+        <table>
+          <thead><tr><th>Kooperationsform</th><th>Beschreibung</th><th>Beispiel</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Product Seeding / Barter</strong></td><td>Produkt gegen möglichen Post oder Test.</td><td>Shampoo-Test, T-Shirt als Gegenleistung.</td></tr>
+            <tr><td><strong>Bezahlte Kooperation</strong></td><td>Klassische Werbeleistung gegen Honorar.</td><td>„Anzeige“ auf Instagram.</td></tr>
+            <tr><td><strong>Ambassador</strong></td><td>Langfristige Zusammenarbeit.</td><td>Markenbotschafter*in für 6 Monate.</td></tr>
+            <tr><td><strong>Affiliate</strong></td><td>Umsatzbeteiligung über personalisierten Link.</td><td>10 % pro Sale.</td></tr>
+            <tr><td><strong>UGC-Fokus</strong></td><td>Creator erstellt Content für Markennutzung.</td><td>Content auf Website, Shop oder in Ads.</td></tr>
+            <tr><td><strong>Co-Creation</strong></td><td>Gemeinsame Produktentwicklung.</td><td>Influencer bringt eigene Duftlinie heraus.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <article class="card searchable-item">
+        <span class="tag yellow">Pricing</span>
+        <h3>Preisfaktoren</h3>
+        <ul class="clean">
+          <li>Reichweite & Plattform.</li>
+          <li>Engagement Rate.</li>
+          <li>Content-Aufwand: Skript, Dreh, Schnitt.</li>
+          <li>Nutzungsrechte / Buyouts.</li>
+          <li>Branche, Zielgruppe, Exklusivität.</li>
+        </ul>
+      </article>
+      <article class="card searchable-item">
+        <span class="tag blue">Briefing</span>
+        <h3>Was rein muss</h3>
+        <ul class="clean">
+          <li>Ziel & Funnel-Stufe.</li>
+          <li>Produktinfos, USPs, Wording, Tabus.</li>
+          <li>Formate, Plattformen, Fristen.</li>
+          <li>Hashtags, Links, @Mentions, CTA.</li>
+          <li>Feedbackschleifen, Freigabeprozess, Umgang mit Kritik.</li>
+        </ul>
+      </article>
+    </div>
+
+    <div class="note searchable-item">
+      <strong>Buyouts:</strong> Wenn Unternehmen Influencer-Content auf eigenen Kanälen, Websites oder in Ads weiterverwenden wollen, müssen Nutzungsrechte und Vergütung klar geregelt werden.
+    </div>
+  </section>
+
+  <section id="tracking" class="tab-content">
+    <div class="section-header searchable-item">
+      <h2>6. Performance-Tracking & Erfolgsmessung</h2>
+      <p>Tracking macht Influencer Marketing steuerbar: Budget rechtfertigen, Maßnahmen vergleichen, Kampagnen optimieren und Wirkung nach Funnel-Stufe analysieren.</p>
+    </div>
+
+    <div class="table-card searchable-item">
+      <div class="table-responsive">
+        <table>
+          <thead><tr><th>Methode</th><th>Nutzen</th><th>Typischer Einsatz</th></tr></thead>
+          <tbody>
+            <tr><td><strong>UTM-Tracking</strong></td><td>Link-Parameter für Analyse in Google Analytics.</td><td>Traffic und Conversions je Creator sichtbar machen.</td></tr>
+            <tr><td><strong>Tracking-Links</strong></td><td>Klickzahlen sichtbar, auch ohne tiefe Webanalyse.</td><td>Bitly oder ähnliche Tools.</td></tr>
+            <tr><td><strong>Promo-/Rabattcodes</strong></td><td>Direkt messbare Käufe pro Creator.</td><td>BOFU und E-Commerce.</td></tr>
+            <tr><td><strong>Affiliate-Tools</strong></td><td>Automatische Zuordnung und Vergütung.</td><td>Provisionen, Publisher, Sales.</td></tr>
+            <tr><td><strong>Social Listening</strong></td><td>Marken-Erwähnungen und Tonalität erkennen.</td><td>Awareness und qualitative Bewertung.</td></tr>
+            <tr><td><strong>Creator Reporting</strong></td><td>Post-Insights dokumentieren.</td><td>Views, Saves, Story-Taps, Kommentare.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="grid">
+      <article class="card searchable-item"><span class="tag green">Quantitativ</span><h3>Zahlen</h3><p>Views, CTR, Klicks, Conversions, Conversion Rate, Sales, CPA, ROAS, CPE.</p></article>
+      <article class="card searchable-item"><span class="tag blue">Qualitativ</span><h3>Wirkung</h3><p>Markenwahrnehmung, Community-Feedback, Tonalität, Markenfit und Storytelling.</p></article>
+      <article class="card searchable-item"><span class="tag yellow">Attribution</span><h3>Wer hat verkauft?</h3><p>Käufe können durch Influencer, Retargeting-Ad, E-Mail oder mehrere Kontaktpunkte entstehen. Deshalb sauber interpretieren.</p></article>
+    </div>
+
+    <div class="note searchable-item">
+      <strong>Praxisregel:</strong> Ergebnisse immer im Funnel-Kontext interpretieren. Reichweite ist bei Awareness wichtig, aber kein Beweis für Conversion-Erfolg.
+    </div>
+  </section>
+
+  <section id="ugc" class="tab-content">
+    <div class="section-header searchable-item">
+      <h2>7. UGC, Markenkooperationen & Recht</h2>
+      <p>User Generated Content bezeichnet Inhalte, die nicht vom Unternehmen, sondern von Kund*innen, Followern, Fans oder Community-Mitgliedern erstellt und öffentlich geteilt werden.</p>
+    </div>
+
+    <div class="table-card searchable-item">
+      <div class="table-responsive">
+        <table>
+          <thead><tr><th>Begriff</th><th>Ersteller</th><th>Beispiel</th></tr></thead>
+          <tbody>
+            <tr><td><strong>UGC</strong></td><td>Kund*innen, Follower, Fans.</td><td>Selfie mit Produkt, Bewertung, Review.</td></tr>
+            <tr><td><strong>Influencer-Content</strong></td><td>Bezahlte Creator.</td><td>Gesponserter Beitrag mit Kennzeichnung.</td></tr>
+            <tr><td><strong>Owned Content</strong></td><td>Unternehmen selbst.</td><td>Produktbilder im Shop, Blogartikel, Ads.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <article class="card searchable-item">
+        <span class="tag green">Warum wertvoll?</span>
+        <h3>UGC wirkt echt</h3>
+        <ul class="clean">
+          <li>Social Proof: Menschen vertrauen anderen Nutzer*innen.</li>
+          <li>Authentizität: echte Menschen, echte Erfahrungen.</li>
+          <li>Alltagstauglichkeit: Produkt wird im echten Leben gezeigt.</li>
+          <li>Mehrfachnutzung: Website, Social Media, Ads, E-Mail.</li>
+        </ul>
+      </article>
+      <article class="card searchable-item">
+        <span class="tag red">Recht</span>
+        <h3>UGC ist kein rechtsfreier Raum</h3>
+        <ul class="clean">
+          <li>Urheberrecht.</li>
+          <li>Recht am eigenen Bild.</li>
+          <li>Markenrecht.</li>
+          <li>Wettbewerbsrecht und Kennzeichnung.</li>
+          <li>Datenschutz / DSGVO.</li>
+        </ul>
+      </article>
+    </div>
+
+    <div class="note searchable-item">
+      <strong>Rechteklärung:</strong> Unternehmen dürfen UGC nicht automatisch kommerziell weiterverwenden. Für Reposts, Ads oder Website-Nutzung braucht es Freigabe, Dokumentation und klare Nutzungsrechte.
+    </div>
+  </section>
+
+  <section id="diagnosis" class="tab-content">
+    <div class="section-header searchable-item">
+      <h2>8. Diagnose: typische Fehler & bessere Maßnahmen</h2>
+      <p>Diese Diagnose hilft dir, typische Prüfungsfälle schnell einzuordnen: Problem erkennen, Ursache verstehen, Maßnahme ableiten.</p>
+    </div>
+
+    <div class="diagnose-grid">
+      <article class="diagnose-card searchable-item">
+        <button type="button">Viele Follower, wenig Wirkung <span>+</span></button>
+        <div class="diagnose-body"><p><strong>Ursache:</strong> Followerzahl wurde mit Relevanz verwechselt. Audience Fit, Engagement Rate oder Kommentarqualität passen nicht.</p><p><strong>Maßnahme:</strong> Zielgruppen-Insights, echte Interaktionen, Brand Fit und Funnel-Ziel prüfen.</p></div>
+      </article>
+      <article class="diagnose-card searchable-item">
+        <button type="button">Viel Reichweite, keine Verkäufe <span>+</span></button>
+        <div class="diagnose-body"><p><strong>Ursache:</strong> TOFU-Erfolg wird als BOFU-Erfolg interpretiert. CTA, Link, Angebot oder Zielseite fehlen.</p><p><strong>Maßnahme:</strong> Conversion-Ziel, Rabattcode, Landingpage, UTM und Retargeting prüfen.</p></div>
+      </article>
+      <article class="diagnose-card searchable-item">
+        <button type="button">Content wirkt unglaubwürdig <span>+</span></button>
+        <div class="diagnose-body"><p><strong>Ursache:</strong> Markenbriefing verbiegt den Creator-Stil oder Produkt passt nicht zur Community.</p><p><strong>Maßnahme:</strong> Co-Creation, klare Leitplanken statt Skript, Creator-Feedback ernst nehmen.</p></div>
+      </article>
+      <article class="diagnose-card searchable-item">
+        <button type="button">Erfolg nicht messbar <span>+</span></button>
+        <div class="diagnose-body"><p><strong>Ursache:</strong> UTM, Rabattcodes, Affiliate-Links oder Creator-Insights fehlen.</p><p><strong>Maßnahme:</strong> Reporting vor Kampagnenstart definieren und vertraglich festlegen.</p></div>
+      </article>
+      <article class="diagnose-card searchable-item">
+        <button type="button">Rechtliches Risiko bei UGC <span>+</span></button>
+        <div class="diagnose-body"><p><strong>Ursache:</strong> Kundenfoto oder Creator-Content wird ohne Freigabe in Werbung oder Shop genutzt.</p><p><strong>Maßnahme:</strong> Rechteklärung, Einwilligung, Nutzungsvertrag, Dokumentation und Archivierung.</p></div>
+      </article>
+      <article class="diagnose-card searchable-item">
+        <button type="button">Kooperation ist zu teuer <span>+</span></button>
+        <div class="diagnose-body"><p><strong>Ursache:</strong> Honorar, Nutzungsrechte, Plattform, Aufwand oder Branchenpreis wurden nicht sauber bewertet.</p><p><strong>Maßnahme:</strong> Mit Marktwerten, Engagement Rate, Zielgruppen-Fit, Contentrechten und erwarteter Wirkung argumentieren.</p></div>
+      </article>
+    </div>
+
+    <div class="note searchable-item">
+      <strong>Merksatz:</strong> Gute Influencer-Kampagnen sind nicht nur kreativ, sondern messbar, rechtlich sauber und strategisch passend.
+    </div>
+  </section>
+</main>
+
+<footer>Influencer Marketing Playbook · Datei: influencer-playbook.html</footer>
+
+<script>
+const tabButtons = document.querySelectorAll('.tab-btn');
+const tabContents = document.querySelectorAll('.tab-content');
+tabButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    tabButtons.forEach(b => b.classList.remove('active'));
+    tabContents.forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.tab).classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+});
+
+document.querySelectorAll('.acc-head').forEach(btn => {
+  btn.addEventListener('click', () => btn.closest('.acc-card').classList.toggle('open'));
+});
+document.querySelectorAll('.diagnose-card button').forEach(btn => {
+  btn.addEventListener('click', () => btn.closest('.diagnose-card').classList.toggle('open'));
+});
+
+const searchInput = document.getElementById('searchInput');
+const searchableItems = document.querySelectorAll('.searchable-item');
+const noResults = document.getElementById('noResults');
+searchInput.addEventListener('input', () => {
+  const q = searchInput.value.trim().toLowerCase();
+  let hits = 0;
+  if(!q){
+    searchableItems.forEach(item => item.classList.remove('hidden-search'));
+    noResults.style.display = 'none';
+    return;
+  }
+  tabContents.forEach(c => c.classList.add('active'));
+  tabButtons.forEach(b => b.classList.remove('active'));
+  searchableItems.forEach(item => {
+    const match = item.textContent.toLowerCase().includes(q);
+    item.classList.toggle('hidden-search', !match);
+    if(match) hits++;
+  });
+  noResults.style.display = hits ? 'none' : 'block';
+});
+</script>
+</body>
+</html>

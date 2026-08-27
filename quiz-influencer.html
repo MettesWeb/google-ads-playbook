@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Influencer Marketing Quiz</title>
+  <style>
+:root{
+  --primary-blue:#0f5132;
+  --secondary-blue:#16834f;
+  --gold:#c8a84e;
+  --light-bg:#f4fbf7;
+  --card-bg:#ffffff;
+  --border-color:#dbeee2;
+  --text-dark:#123326;
+  --text-muted:#5f7569;
+  --correct-bg:#d1fae5;
+  --correct-border:#10b981;
+  --incorrect-bg:#fee2e2;
+  --incorrect-border:#ef4444;
+  --shadow-md:0 12px 30px rgba(15,81,50,.12);
+}
+*{box-sizing:border-box}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  background:var(--light-bg);
+  color:var(--text-dark);
+  min-height:100vh;
+  margin:0;
+}
+.quiz-header{
+  background:var(--primary-blue);
+  color:#fff;
+  border-bottom:4px solid var(--gold);
+  padding:1.15rem 1.5rem;
+  box-shadow:0 8px 24px rgba(15,81,50,.13);
+}
+.quiz-header-inner{
+  width:min(1200px,calc(100% - 2rem));
+  margin:0 auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:1rem;
+}
+.quiz-header h1{
+  font-size:clamp(2rem,3.8vw,2.8rem);
+  line-height:1.08;
+  margin:0;
+  font-weight:850;
+  letter-spacing:-.02em;
+  color:#fff;
+  text-align:left;
+}
+.back-link-header{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  text-decoration:none;
+  color:#fff;
+  background:rgba(255,255,255,.10);
+  border:1px solid rgba(255,255,255,.28);
+  padding:.82rem 1rem;
+  border-radius:9px;
+  font-weight:800;
+  white-space:nowrap;
+}
+.back-link-header:hover{background:rgba(255,255,255,.18)}
+.quiz-main{
+  min-height:calc(100vh - 98px);
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  padding:3rem 1.25rem;
+}
+.quiz-container{
+  background-color:#fff;
+  border-radius:12px;
+  box-shadow:var(--shadow-md);
+  width:100%;
+  max-width:850px;
+  padding:40px;
+}
+.progress{
+  text-align:center;
+  color:var(--text-muted);
+  font-size:15px;
+  margin-bottom:30px;
+  font-weight:700;
+}
+.question{
+  font-size:20px;
+  font-weight:750;
+  margin-bottom:25px;
+  line-height:1.5;
+  color:var(--text-dark);
+}
+.options{display:flex;flex-direction:column;gap:12px}
+.option{
+  background-color:#f8fffb;
+  border:2px solid var(--border-color);
+  border-radius:8px;
+  padding:16px;
+  font-size:16px;
+  cursor:pointer;
+  transition:all .2s ease;
+  text-align:left;
+  font-weight:500;
+  color:#416552;
+  line-height:1.45;
+}
+.option:hover:not(:disabled){background-color:#e8f8ee;border-color:#bfe4ca}
+.option.correct{background-color:var(--correct-bg)!important;border-color:var(--correct-border)!important;color:#065f46!important;font-weight:700}
+.option.incorrect{background-color:var(--incorrect-bg)!important;border-color:var(--incorrect-border)!important;color:#991b1b!important}
+.option:disabled{cursor:default}
+.feedback{
+  margin-top:25px;
+  font-size:16px;
+  text-align:left;
+  min-height:24px;
+  padding:15px;
+  border-radius:8px;
+  display:none;
+  line-height:1.5;
+}
+.feedback.success{background-color:var(--correct-bg);color:#065f46;border-left:5px solid var(--correct-border)}
+.feedback.error{background-color:var(--incorrect-bg);color:#991b1b;border-left:5px solid var(--incorrect-border)}
+.btn-container{display:flex;justify-content:flex-end;margin-top:30px}
+.next-btn{
+  background-color:var(--secondary-blue);
+  color:#fff;
+  border:none;
+  border-radius:8px;
+  padding:14px 28px;
+  font-size:16px;
+  font-weight:800;
+  cursor:pointer;
+  transition:background-color .2s;
+  display:none;
+}
+.next-btn:hover{background-color:var(--primary-blue)}
+.result-container{text-align:center;display:none}
+.result-container h2{color:var(--primary-blue);font-size:30px;margin-bottom:20px}
+.result-container p{font-size:20px;color:#4a5568;margin-bottom:30px}
+.score-circle{
+  width:150px;
+  height:150px;
+  border-radius:50%;
+  background:var(--primary-blue);
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:46px;
+  font-weight:850;
+  margin:0 auto 24px auto;
+}
+.restart-btn{background-color:var(--secondary-blue);color:white;border:none;border-radius:8px;padding:14px 28px;font-size:16px;font-weight:800;cursor:pointer}
+.restart-btn:hover{background-color:var(--primary-blue)}
+@media(max-width:760px){
+  .quiz-header-inner{width:100%;flex-direction:column;align-items:stretch}
+  .back-link-header{width:100%}
+  .quiz-container{padding:28px 20px}
+}
+</style>
+</head>
+<body>
+<header class="quiz-header">
+  <div class="quiz-header-inner">
+    <h1>Influencer Marketing Quiz</h1>
+    <a class="back-link-header" href="spezi1.html">← Zur grünen Übersicht</a>
+  </div>
+</header>
+
+<main class="quiz-main">
+  <div class="quiz-container">
+    <div id="quiz">
+      <div class="progress" id="progress"></div>
+      <div class="question" id="question"></div>
+      <div class="options" id="options"></div>
+      <div class="feedback" id="feedback"></div>
+      <div class="btn-container"><button class="next-btn" id="nextBtn">Weiter</button></div>
+    </div>
+
+    <div class="result-container" id="result">
+      <div class="score-circle" id="scoreCircle">0</div>
+      <h2>Quiz abgeschlossen</h2>
+      <p id="scoreText"></p>
+      <button class="restart-btn" onclick="restartQuiz()">Nochmal starten</button>
+    </div>
+  </div>
+</main>
+
+<script>
+const questions = [
+  {
+    "q": "Welcher psychologische Effekt sorgt dafür, dass Empfehlungen von Influencern oft besser wirken als klassische Werbebanner?",
+    "options": [
+      "Der Halo-Effekt",
+      "Parasoziale Beziehungen: Nutzer entwickeln eine einseitige, aber starke gefühlte Nähe und Vertrautheit zum Influencer.",
+      "Das FOMO-Prinzip",
+      "Der Algorithmus-Push-Effekt"
+    ],
+    "answer": 1,
+    "explanation": "Obwohl die Beziehung einseitig ist (Creator sendet, Follower empfangen), entsteht ein emotionales Vertrauen ('Parasoziale Beziehung'), das Empfehlungen glaubwürdiger macht"
+  },
+  {
+    "q": "Welche Aussage über Followerzahlen bei Influencern ist laut Vorlesung korrekt?",
+    "options": [
+      "Je mehr Follower ein Influencer hat, desto höher ist automatisch auch seine Engagement-Rate.",
+      "Followerzahlen sind das einzige relevante Kriterium für E-Commerce-Ziele.",
+      "Mikro-Influencer (<100.000 Follower) haben oft eine bessere Engagement-Rate und engere Community-Bindung als Mega-Influencer.",
+      "Nano-Influencer werden ausschließlich für Brand Awareness Kampagnen gebucht."
+    ],
+    "answer": 2,
+    "explanation": "Followerzahlen allein sind kein Qualitätsmerkmal. Mikro-Influencer haben meist eine spitzere Zielgruppe, aktiveres Engagement und eignen sich besser für Conversions"
+  },
+  {
+    "q": "Was beschreibt die Abkürzung UGC im Influencer Marketing?",
+    "options": [
+      "Universal Growth Content",
+      "User Generated Content: Inhalte, die nicht vom Unternehmen, sondern von Nutzern, Fans oder Käufern erstellt werden.",
+      "Unique Gadget Campaign",
+      "Unternehmenseigener Content"
+    ],
+    "answer": 1,
+    "explanation": "UGC (z.B. Selfies mit dem Produkt oder Kundenbewertungen) bietet einen enorm hohen 'Social Proof' und ist authentischer als inszenierter Owned Content"
+  },
+  {
+    "q": "Was bedeutet 'Audience Fit' bei der Auswahl von Influencern?",
+    "options": [
+      "Die Kleidergröße des Influencers passt zum Produkt.",
+      "Die Zielgruppe (Follower) des Influencers stimmt mit der gewünschten Buyer Persona (Käuferschicht) der Marke überein.",
+      "Dass der Influencer mindestens 1 Million Follower hat.",
+      "Dass das Video auf TikTok viral geht."
+    ],
+    "answer": 1,
+    "explanation": "Influencer-Marketing wirkt nur effizient, wenn der Audience Fit gegeben ist. Fehlt dieser, entsteht ein hoher Streuverlust (z.B. Beauty-Produkt bei einer Gaming-Community)"
+  },
+  {
+    "q": "Wie lauten die 5 Phasen der digitalen Customer Journey im 5A-Modell von Kotler?",
+    "options": [
+      "Attention, Attraction, Action, Audience, Analysis",
+      "Aware, Appeal, Ask, Act, Advocate",
+      "Accept, Argue, Agree, Act, Achieve",
+      "Awareness, Acquisition, Activation, Action, Adoration"
+    ],
+    "answer": 1,
+    "explanation": "Das 5A-Modell (Aware, Appeal, Ask, Act, Advocate) beschreibt, wie Influencer von der ersten Aufmerksamkeit (Aware) bis hin zur eigenen Weiterempfehlung (Advocate) wirken"
+  },
+  {
+    "q": "Welches Format empfiehlt sich am besten in der 'Ask'-Phase (Informationssuche & Vergleich) der Customer Journey?",
+    "options": [
+      "Kurze 6-Sekunden Bumper Ads.",
+      "Ausführliche Tutorials, Reviews und Erfahrungsberichte (z.B. ein realistischer Langzeittest auf YouTube).",
+      "Reine Rabattcodes in einer Text-Story.",
+      "TopView Ads auf TikTok."
+    ],
+    "answer": 1,
+    "explanation": "In der 'Ask'-Phase wollen sich Nutzer überzeugen. Hier helfen detaillierte Erfahrungsberichte von Mikro- und Meso-Influencern, die Fragen beantworten"
+  },
+  {
+    "q": "Was ist eine 'Ambassador-Strategie' im Influencer Marketing?",
+    "options": [
+      "Ein einmaliger Post zum Black Friday.",
+      "Das automatische Reposten von Influencer-Videos auf der Website.",
+      "Eine langfristige Zusammenarbeit mit Influencern als feste Markenbotschafter (Always-on).",
+      "Die Bezahlung der Influencer mit kostenlosen Produkten statt Geld."
+    ],
+    "answer": 2,
+    "explanation": "Eine Ambassador-Strategie fokussiert sich auf Markenbindung und Vertrauen durch eine kontinuierliche, langfristige Zusammenarbeit statt einzelner Kampagnen-Peaks"
+  },
+  {
+    "q": "Was versteht man unter 'Product Seeding' (oder Barter-Deal)?",
+    "options": [
+      "Der Influencer erhält einen festen Geldbetrag pro Post.",
+      "Der Influencer wird anteilig am Umsatz beteiligt (Affiliate).",
+      "Der Influencer erhält kostenlose Produkte als Gegenleistung oder in der Hoffnung auf eine Erwähnung im Content.",
+      "Das Unternehmen kauft die Bildrechte am Content."
+    ],
+    "answer": 2,
+    "explanation": "Beim Product Seeding fließt kein Honorar. Es basiert auf dem Austausch von Produkt gegen (möglichen) Content und wird oft bei Nano/Mikro-Creatorn eingesetzt"
+  },
+  {
+    "q": "Warum ist die Nutzung von Tracking-Links (z.B. bit.ly) und UTM-Parametern im Influencer Marketing wichtig?",
+    "options": [
+      "Um die Videos schneller hochzuladen.",
+      "Damit der Algorithmus den Post nicht als Spam markiert.",
+      "Um die genaue Herkunft des Traffics (Attribution) und die Conversions, die ein bestimmter Influencer generiert hat, in Tools wie Google Analytics messen zu können.",
+      "Damit der Influencer mehr Follower bekommt."
+    ],
+    "answer": 2,
+    "explanation": "Ohne UTM-Parameter und sauberes Tracking lässt sich im E-Commerce nicht beweisen, ob ein Verkauf (Sale) tatsächlich durch den Influencer ausgelöst wurde"
+  },
+  {
+    "q": "Was bedeutet die Abkürzung 'CPE' bei der Erfolgsmessung?",
+    "options": [
+      "Cost per Engagement",
+      "Content per Editor",
+      "Clicks per Event",
+      "Conversion Probability Estimate"
+    ],
+    "answer": 0,
+    "explanation": "CPE (Cost per Engagement) misst das Verhältnis zwischen den Kosten der Kooperation und den generierten Interaktionen (Likes, Shares, Comments)"
+  },
+  {
+    "q": "Was ist ein großes rechtliches Risiko, wenn Unternehmen UGC-Bilder (z.B. Kunden-Selfies mit Produkt) ohne Erlaubnis in ihren Ads verwenden?",
+    "options": [
+      "TikTok löscht den Account des Nutzers.",
+      "Verstoß gegen das Urheberrecht und das Recht am eigenen Bild, was zu teuren Abmahnungen führen kann.",
+      "Die Bilder werden automatisch unscharf dargestellt.",
+      "Der Facebook-Algorithmus sperrt die Reichweite für 30 Tage."
+    ],
+    "answer": 1,
+    "explanation": "Auch freiwillig hochgeladener Nutzer-Content unterliegt dem Urheberrecht. Eine kommerzielle Nutzung durch Marken erfordert immer eine aktive Einwilligung/Freigabe"
+  },
+  {
+    "q": "Wie muss Influencer-Werbung laut Wettbewerbsrecht gekennzeichnet werden?",
+    "options": [
+      "Es reicht, wenn der Influencer im Video sagt: 'Das wurde mir geschickt'.",
+      "Es reicht der englische Begriff '#ad' ganz unten im Text.",
+      "Klare, gut sichtbare Kennzeichnung (z.B. mit 'Werbung' oder 'Anzeige') am Anfang des Beitrags.",
+      "Nur Beiträge über 1.000 Euro Wert müssen gekennzeichnet werden."
+    ],
+    "answer": 2,
+    "explanation": "Sobald ein direkter kommerzieller Vorteil entsteht oder das Unternehmen mitwirkt, muss der Beitrag transparent und sofort erkennbar auf Deutsch als 'Anzeige/Werbung' markiert werden"
+  },
+  {
+    "q": "Was ist eine häufige, inhaltliche Stolperfalle im Influencer Marketing?",
+    "options": [
+      "Authentizität vs. Markenimage: Zu strikte Vorgaben (Skripte) des Unternehmens zerstören die Glaubwürdigkeit des Creators.",
+      "Influencer posten immer nur um 3 Uhr nachts.",
+      "Das Verwenden von zu vielen Emojis.",
+      "Dass Influencer zu viele Rabattcodes ablehnen."
+    ],
+    "answer": 0,
+    "explanation": "Wenn Creator wie ein Teleprompter ablesen, bricht das Engagement ein. Unternehmen müssen einen Trade-off finden zwischen der eigenen CI und dem authentischen Stil des Influencers"
+  },
+  {
+    "q": "Was versteht man unter 'Buyouts' in einer Influencer-Kooperation?",
+    "options": [
+      "Den Verkauf von Restposten an den Influencer.",
+      "Die vertragliche Regelung (und meist Bezahlung) von Nutzungsrechten, die es der Marke erlaubt, den Content des Influencers selbst zu verwenden (z.B. für Ads).",
+      "Das Kündigungsrecht bei Schlechtleistung.",
+      "Die Anzahl der gekauften Follower."
+    ],
+    "answer": 1,
+    "explanation": "Will eine Marke ein Influencer-Video auf ihrer eigenen Landingpage oder für bezahlte Social-Ads weiterverwenden, muss sie dafür die Nutzungsrechte (Buyouts) erwerben"
+  },
+  {
+    "q": "Was ist das 'Bandwagon-Prinzip' im Kontext von Social Proof?",
+    "options": [
+      "Das Verbot, Werbevideos im Auto aufzunehmen.",
+      "Das psychologische Phänomen, dass Menschen das Verhalten anderer nachahmen ('Wenn so viele das liken/kaufen, muss es gut sein').",
+      "Die Pflicht, in Videos immer Musik zu verwenden.",
+      "Die Messung der Absprungrate."
+    ],
+    "answer": 1,
+    "explanation": "Influencer erzeugen durch Likes, Follower und Kommentare soziale Bewährtheit (Social Proof). Das Bandwagon-Prinzip (Mitläufereffekt) sorgt für Nachahmung"
+  },
+  {
+    "q": "Warum ist eine Multi-Touchpoint-Strategie im Influencer Marketing oft erfolgreich?",
+    "options": [
+      "Weil man den Influencer dann weniger bezahlen muss.",
+      "Weil die Kombination verschiedener Plattformen (z.B. TikTok für TOFU, YouTube für MOFU) die Nutzer durch die gesamte Customer Journey begleitet.",
+      "Weil man damit das Tracking abschalten kann.",
+      "Weil die EU-Gesetze dies zwingend vorschreiben."
+    ],
+    "answer": 1,
+    "explanation": "Multi-Touchpoint deckt alle Trichter-Stufen ab: z.B. TikTok für schnelle Awareness, Instagram für Rabattcodes und YouTube für tiefe Erklärungen"
+  },
+  {
+    "q": "Welcher Storytelling-Typ eignet sich laut Vorlesung besonders gut für Kosmetik- oder Fitnessprodukte?",
+    "options": [
+      "B2B-Whitepapers",
+      "Reine Logo-Einblendungen ohne Text",
+      "Transformation & Vorher-Nachher-Vergleiche, da sie visuell stark sind und durch Wirkung überzeugen.",
+      "Podcasts über Finanzen"
+    ],
+    "answer": 2,
+    "explanation": "Transformationen (Hautbild, Körperform, Interior) sind visuell sofort greifbar und haben eine hohe Überzeugungskraft im E-Commerce"
+  },
+  {
+    "q": "Welches Risiko birgt 'Woke Washing' in Markenkooperationen?",
+    "options": [
+      "Die Videos werden vom Algorithmus aussortiert.",
+      "Reputationsverlust und Shitstorms, wenn Influencer oder Marke Werte kommunizieren (z.B. Nachhaltigkeit), die sie in der Realität nicht leben (z.B. bei Fast Fashion).",
+      "Dass der Content nicht auf dem Smartphone abspielbar ist.",
+      "Dass Influencer zu viel Geld verlangen."
+    ],
+    "answer": 1,
+    "explanation": "Communitys erwarten heute klare Haltungen. Wenn eine Kooperation ethisch oder wertebezogen unglaubwürdig wirkt (Greenwashing/Woke Washing), schadet das beiden Seiten"
+  },
+  {
+    "q": "Warum setzen Marken im E-Commerce verstärkt auf Live-Shopping mit Influencern?",
+    "options": [
+      "Weil es komplett ohne Internetverbindung funktioniert.",
+      "Weil es Content und Commerce direkt verbindet, interaktiv ist und (besonders im D2C-Bereich) starke, impulsive Kaufreize setzt.",
+      "Weil man dabei keine Preise nennen darf.",
+      "Weil es gesetzlich vorgeschrieben ist."
+    ],
+    "answer": 1,
+    "explanation": "Plattformen wie TikTok oder Twitch ermöglichen den direkten Kauf aus einem Livestream heraus, während Influencer Fragen beantworten und das Produkt demonstrieren"
+  },
+  {
+    "q": "Was sollte laut 'Best Practices' bei der Preisverhandlung mit einem Influencer getan werden, wenn dieser 'zu viel' fordert?",
+    "options": [
+      "Sofort die Kooperation abbrechen und den Kontakt blockieren.",
+      "Mit Marktwerten, der Engagement-Rate und dem Zielgruppen-Fit professionell argumentieren.",
+      "Nur noch Fake-Follower analysieren.",
+      "Ihm mit einer Klage drohen."
+    ],
+    "answer": 1,
+    "explanation": "Gute Creator erwarten Professionalität. Eine fundierte Honorar-Argumentation (z.B. Verweis auf Streuverluste oder CPM-Werte) wirkt positiv auf die Beziehung"
+  }
+];
+
+let currentQuestion=0, score=0, answered=false;
+const progressEl=document.getElementById('progress');
+const questionEl=document.getElementById('question');
+const optionsEl=document.getElementById('options');
+const feedbackEl=document.getElementById('feedback');
+const nextBtn=document.getElementById('nextBtn');
+const quizEl=document.getElementById('quiz');
+const resultEl=document.getElementById('result');
+const scoreTextEl=document.getElementById('scoreText');
+const scoreCircleEl=document.getElementById('scoreCircle');
+
+function loadQuestion(){
+  answered=false;
+  const q=questions[currentQuestion];
+  progressEl.textContent=`Frage ${currentQuestion+1} von ${questions.length}`;
+  questionEl.textContent=`${currentQuestion+1}. ${q.q}`;
+  optionsEl.innerHTML='';
+  feedbackEl.style.display='none';
+  feedbackEl.className='feedback';
+  nextBtn.style.display='none';
+  q.options.forEach((option,index)=>{
+    const button=document.createElement('button');
+    button.className='option';
+    button.textContent=`${String.fromCharCode(65+index)}) ${option}`;
+    button.addEventListener('click',()=>selectOption(index,button));
+    optionsEl.appendChild(button);
+  });
+}
+
+function selectOption(index,button){
+  if(answered)return;
+  answered=true;
+  const q=questions[currentQuestion];
+  const optionButtons=document.querySelectorAll('.option');
+  optionButtons.forEach(btn=>btn.disabled=true);
+  optionButtons[q.answer].classList.add('correct');
+  if(index===q.answer){
+    score++;
+    feedbackEl.textContent='Richtig. '+q.explanation;
+    feedbackEl.classList.add('success');
+  }else{
+    button.classList.add('incorrect');
+    feedbackEl.textContent='Nicht ganz. '+q.explanation;
+    feedbackEl.classList.add('error');
+  }
+  feedbackEl.style.display='block';
+  nextBtn.textContent=currentQuestion<questions.length-1?'Weiter':'Ergebnis anzeigen';
+  nextBtn.style.display='inline-block';
+}
+
+nextBtn.addEventListener('click',()=>{
+  currentQuestion++;
+  if(currentQuestion<questions.length){loadQuestion();}else{showResult();}
+});
+
+function showResult(){
+  quizEl.style.display='none';
+  resultEl.style.display='block';
+  scoreCircleEl.textContent=score;
+  scoreTextEl.textContent=`Du hast ${score} von ${questions.length} Fragen richtig beantwortet.`;
+}
+
+function restartQuiz(){
+  currentQuestion=0;
+  score=0;
+  quizEl.style.display='block';
+  resultEl.style.display='none';
+  loadQuestion();
+}
+
+loadQuestion();
+</script>
+</body>
+</html>
