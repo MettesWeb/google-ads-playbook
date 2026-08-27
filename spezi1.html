@@ -115,6 +115,33 @@ main { padding: 2rem 0 4rem; }
 .card-link:hover { background: var(--accent-blue); }
 .back-link { color: var(--primary-blue); border: 1px solid #bfe4ca; background: white; }
 .back-link:hover { background: #f8fffb; }
+
+.header-switch-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1.25rem;
+}
+.header-copy{min-width:0;}
+.header-blue-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  text-decoration:none;
+  border-radius:12px;
+  padding:.85rem 1.15rem;
+  font-weight:800;
+  background:#0f2a4a;
+  color:#fff;
+  box-shadow:0 10px 24px rgba(15,42,74,.22);
+  white-space:nowrap;
+}
+.header-blue-btn:hover{background:#0a2038;}
+@media(max-width:720px){
+  .header-switch-row{align-items:flex-start;flex-direction:column;}
+  .header-blue-btn{width:100%;}
+}
+
 footer { text-align: center; color: var(--text-muted); font-size: .84rem; padding: 1.5rem; }
 @media (max-width: 620px) {
   .card { min-height: auto; }
@@ -123,17 +150,18 @@ footer { text-align: center; color: var(--text-muted); font-size: .84rem; paddin
 </head>
 <body>
 <header>
-  <div class="header-inner">
-    <div class="header-kicker">Spezialisierung 1 · weitere Themen</div>
-    <h1>Weitere Themen der Spezialisierung 1</h1>
-    <p>Zusätzliche Lernplattformen und Prüfungstrainings zu Influencer Marketing, LinkedIn, Support & Affiliate, Landing Pages sowie Conversion-Prozess und datenbasierter Optimierung.</p>
+  <div class="header-inner header-switch-row">
+    <div class="header-copy">
+      <div class="header-kicker">Spezialisierung 1 · weitere Themen</div>
+      <h1>Weitere Themen der Spezialisierung 1</h1>
+      <p>Zusätzliche Lernplattformen und Prüfungstrainings zu Influencer Marketing, LinkedIn, Support & Affiliate, Landing Pages sowie Conversion-Prozess und datenbasierter Optimierung.</p>
+    </div>
+    <a class="header-blue-btn" href="index.html">← Blaue Hauptseite</a>
   </div>
 </header>
 
 <main>
-  <a class="back-link" href="index.html">← Zurück zur blauen Hauptseite</a>
-
-  <section class="intro">
+<section class="intro">
     <strong>Neue Struktur:</strong>
     Influencer und LinkedIn bleiben eigene Themen. Live Chat / Social Media Support und Affiliate Marketing werden als kompakter gemeinsamer Block zusammengelegt. Landing Pages und Conversion-Prozess bleiben getrennt, weil sie deutlich umfangreicher sind.
   </section>

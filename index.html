@@ -5,22 +5,50 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Performance Marketing Lernplattform</title>
   <link rel="stylesheet" href="styles.css">
+
+<style>
+.header-switch-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1.25rem;
+}
+.header-copy{min-width:0;}
+.header-platform-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  text-decoration:none;
+  border-radius:12px;
+  padding:.85rem 1.15rem;
+  font-weight:800;
+  background:#0f7a45;
+  color:#fff;
+  box-shadow:0 10px 24px rgba(15,122,69,.22);
+  white-space:nowrap;
+}
+.header-platform-btn:hover{background:#0b6539;}
+@media(max-width:720px){
+  .header-switch-row{align-items:flex-start;flex-direction:column;}
+  .header-platform-btn{width:100%;}
+}
+</style>
+
 </head>
 <body>
 <header>
-  <div class="header-inner">
-<h1>Performance Marketing Lernplattform</h1>
-    <p>Vier Playbooks und vier interaktive Quizze für Meta Ads, Google Ads, YouTube Ads und TikTok Ads.</p>
+  <div class="header-inner header-switch-row">
+    <div class="header-copy">
+      <h1>Performance Marketing Lernplattform</h1>
+      <p>Vier Playbooks und vier interaktive Quizze für Meta Ads, Google Ads, YouTube Ads und TikTok Ads.</p>
+    </div>
+    <a class="header-platform-btn" href="spezi1.html">🌿 Weitere Themen öffnen</a>
   </div>
 </header>
 <main>
   <section class="intro">
     <strong>So ist die Plattform aufgebaut:</strong>
     Oben findest du die Playbooks zum Nachschlagen. Darunter kannst du direkt das passende Quiz zum Prüfungstraining öffnen.
-
-    <div style="margin-top:1.15rem;">
-      <a href="spezi1.html" style="display:inline-flex;justify-content:center;align-items:center;text-decoration:none;border-radius:9px;padding:.72rem 1rem;font-weight:700;background:#0f7a45;color:white;box-shadow:0 8px 20px rgba(15,122,69,.16);">🌿 Weitere Themen der Spezialisierung 1 öffnen</a>
-    </div>
 
   </section>
 
