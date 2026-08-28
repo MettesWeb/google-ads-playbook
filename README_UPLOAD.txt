@@ -1,24 +1,15 @@
-SPEZI 1 – FINALES PLAYBOOK/QUIZ UPDATE
+Quiz-Antworten gemischt
+=======================
 
-Direkt in den GitHub-Root hochladen/ersetzen:
+Diese Dateien ersetzen die bisherigen grünen Quiz-Dateien.
+Geändert wurde nur die Reihenfolge der Antwortmöglichkeiten.
+Fragen, Erklärungen und richtige Lösungen bleiben inhaltlich gleich.
 
-- index.html
-- spezi1.html
-
-Fertige grüne Playbooks:
-- influencer-playbook.html
-- linkedin-playbook.html
-- support-affiliate-playbook.html
-- landingpage-playbook.html
-- conversion-playbook.html
-
-Fertige grüne Quizze:
+Upload in GitHub Root:
 - quiz-influencer.html
 - quiz-linkedin.html
 - quiz-support-affiliate.html
 - quiz-landingpage.html
 - quiz-conversion.html
 
-Hinweis:
-Alte Dateien wie affiliate-playbook.html, quiz-affiliate.html, support-playbook.html oder quiz-support.html werden nicht mehr gebraucht.
-Sie können liegen bleiben, werden aber von spezi1.html nicht verlinkt.
+index.html, spezi1.html und die Playbooks müssen nicht geändert werden.
