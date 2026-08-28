@@ -3,39 +3,44 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Support &amp; Affiliate Playbook</title>
+<title>Support & Affiliate Playbook</title>
 <style>
 :root{
-  --primary:#0f5132;
-  --secondary:#16834f;
-  --accent:#1f9d60;
+  --primary-blue:#0f5132;
+  --secondary-blue:#16834f;
+  --accent-blue:#1f9d60;
   --gold:#c8a84e;
-  --bg:#f4fbf7;
-  --card:#ffffff;
-  --border:#dbeee2;
-  --text:#123326;
-  --muted:#5f7569;
-  --soft:#e8f8ee;
-  --ok:#10b981;
-  --bad:#ef4444;
+  --light-bg:#f4fbf7;
+  --card-bg:#ffffff;
+  --border-color:#dbeee2;
+  --text-dark:#123326;
+  --text-muted:#5f7569;
+  --green:#065f46;
+  --green-bg:#d1fae5;
+  --yellow:#92400e;
+  --yellow-bg:#fef3c7;
+  --red:#991b1b;
+  --red-bg:#fee2e2;
+  --blue-bg:#e8f8ee;
   --shadow-sm:0 1px 3px rgba(0,0,0,.10);
   --shadow-md:0 8px 24px rgba(15,81,50,.13);
   --radius:14px;
+  --transition:all .2s ease;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{
   min-height:100vh;
-  background:var(--bg);
-  color:var(--text);
+  background:var(--light-bg);
+  color:var(--text-dark);
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   line-height:1.55;
 }
-header.playbook-header{
+header{
   position:sticky;
   top:0;
   z-index:20;
-  background:var(--primary);
+  background:var(--primary-blue);
   color:white;
   padding:1.15rem 1.5rem;
   border-bottom:4px solid var(--gold);
@@ -54,20 +59,41 @@ h1{
   margin:0;
   letter-spacing:-.025em;
 }
-header p{color:#d7f5e4;margin-top:.35rem;font-size:1rem;line-height:1.45;max-width:760px}
-.header-actions{display:flex;align-items:center;justify-content:flex-end;gap:.8rem}
+header p{
+  color:#d7f5e4;
+  margin-top:.35rem;
+  font-size:1rem;
+  line-height:1.45;
+  max-width:760px;
+}
+.header-actions{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:.8rem;
+}
 .search{
   width:100%;
   border:1px solid #cbd5e1;
   border-radius:10px;
   padding:.85rem 1rem;
   font-size:1rem;
-  color:var(--text);
+  color:var(--text-dark);
   background:white;
   box-shadow:var(--shadow-sm);
+  transition:var(--transition);
 }
-.search:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(31,157,96,.12)}
-.header-search{flex:1 1 auto;max-width:560px;min-width:260px;background:rgba(255,255,255,.96)}
+.search:focus{
+  outline:none;
+  border-color:var(--accent-blue);
+  box-shadow:0 0 0 3px rgba(31,157,96,.12);
+}
+.header-search{
+  flex:1 1 auto;
+  max-width:560px;
+  min-width:260px;
+  background:rgba(255,255,255,.96);
+}
 .back-link-header{
   display:inline-flex;
   align-items:center;
@@ -80,39 +106,70 @@ header p{color:#d7f5e4;margin-top:.35rem;font-size:1rem;line-height:1.45;max-wid
   border-radius:9px;
   font-weight:800;
   white-space:nowrap;
+  transition:var(--transition)
 }
 .back-link-header:hover{background:rgba(255,255,255,.18)}
 main{padding:1.7rem 0 4rem}
-.tabs{display:flex;flex-wrap:wrap;gap:.55rem;margin:0 0 1rem}
+.tabs{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.55rem;
+  margin:0 0 1rem;
+}
 .tab-btn{
   border:1px solid #cbd5e1;
   background:white;
-  color:var(--primary);
+  color:var(--primary-blue);
   border-radius:999px;
   padding:.68rem .95rem;
   font-weight:800;
   cursor:pointer;
+  transition:var(--transition);
   box-shadow:var(--shadow-sm);
   font-size:.92rem;
 }
-.tab-btn:hover{border-color:var(--secondary);transform:translateY(-1px);background:#f8fffb}
-.tab-btn.active{background:var(--primary);border-color:var(--primary);color:white;box-shadow:var(--shadow-md)}
+.tab-btn:hover{
+  border-color:var(--secondary-blue);
+  transform:translateY(-1px);
+  background:#f8fffb;
+}
+.tab-btn.active{
+  background:var(--primary-blue);
+  border-color:var(--primary-blue);
+  color:white;
+  box-shadow:var(--shadow-md);
+}
 .tab-content{display:none}
 .tab-content.active{display:block}
 .section-header{margin:1.25rem 0 1rem}
-.section-header h2{color:var(--primary);font-size:clamp(1.45rem,3vw,2.1rem);line-height:1.15}
-.section-header p{color:var(--muted);margin-top:.3rem;max-width:980px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:1rem;margin-bottom:1rem}
-.two-col{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1rem;margin-bottom:1rem}
+.section-header h2{
+  color:var(--primary-blue);
+  font-size:clamp(1.45rem,3vw,2.1rem);
+  line-height:1.15;
+}
+.section-header p{color:var(--text-muted);margin-top:.3rem;max-width:980px}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(245px,1fr));
+  gap:1rem;
+  margin-bottom:1rem;
+}
+.two-col{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:1rem;
+  margin-bottom:1rem;
+}
 .card,.table-card,.note,.workflow{
-  background:var(--card);
-  border:1px solid var(--border);
+  background:var(--card-bg);
+  border:1px solid var(--border-color);
   border-radius:var(--radius);
   box-shadow:var(--shadow-sm);
 }
 .card{padding:1.2rem}
-.card h3{color:var(--primary);margin-bottom:.45rem}
-.card p,.card li{color:var(--muted)}
+.card h3{color:var(--primary-blue);margin-bottom:.45rem}
+.card p,.card li{color:var(--text-muted)}
+.card ul{padding-left:1.1rem;margin-top:.4rem}
 .tag,.badge{
   display:inline-flex;
   align-items:center;
@@ -122,35 +179,86 @@ main{padding:1.7rem 0 4rem}
   font-weight:800;
   margin-bottom:.75rem;
 }
-.tag{background:var(--soft);color:var(--primary)}
-.tag.green{background:#d1fae5;color:#065f46}
-.tag.yellow{background:#fef3c7;color:#92400e}
-.tag.red{background:#fee2e2;color:#991b1b}
+.tag.blue,.badge.blue{background:var(--blue-bg);color:var(--primary-blue)}
+.tag.green,.badge.green{background:var(--green-bg);color:var(--green)}
+.tag.yellow,.badge.yellow{background:var(--yellow-bg);color:var(--yellow)}
+.tag.red,.badge.red{background:var(--red-bg);color:var(--red)}
 .table-card{overflow:hidden;margin-bottom:1rem}
 .table-responsive{overflow-x:auto}
 table{width:100%;border-collapse:collapse;background:white}
-th,td{padding:.9rem 1rem;text-align:left;border-bottom:1px solid var(--border);vertical-align:top}
-th{background:#f8fffb;color:var(--primary);font-size:.85rem;text-transform:uppercase;letter-spacing:.04em}
+th,td{
+  padding:.9rem 1rem;
+  text-align:left;
+  border-bottom:1px solid var(--border-color);
+  vertical-align:top;
+}
+th{
+  background:#f8fffb;
+  color:var(--primary-blue);
+  font-size:.85rem;
+  text-transform:uppercase;
+  letter-spacing:.04em;
+}
 tr:last-child td{border-bottom:none}
-td strong{color:var(--primary)}
-.note{border-left:5px solid var(--gold);padding:1rem 1.1rem;margin:1rem 0;color:var(--muted)}
-.note strong{color:var(--primary)}
-.workflow{padding:1.2rem;margin:1rem 0}
-.workflow h3{color:var(--primary);margin-bottom:.4rem}
-.workflow p{color:var(--muted)}
-.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.75rem;margin-top:.8rem}
-.step{background:#f8fffb;border:1px solid var(--border);border-radius:12px;padding:.9rem;color:var(--muted)}
-.step-num{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--primary);color:white;font-weight:800;margin-bottom:.5rem}
-.step strong{display:block;color:var(--primary);margin-bottom:.2rem}
-.diagnose-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(285px,1fr));gap:1rem;margin-bottom:1rem}
-.diagnose-card{background:white;border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow-sm);overflow:hidden}
+td strong{color:var(--primary-blue)}
+.note{
+  border-left:5px solid var(--gold);
+  padding:1rem 1.1rem;
+  margin:1rem 0;
+  color:var(--text-muted);
+}
+.note strong{color:var(--primary-blue)}
+.workflow{
+  padding:1.2rem;
+  margin:1rem 0;
+}
+.workflow h3{color:var(--primary-blue);margin-bottom:.4rem}
+.workflow p{color:var(--text-muted)}
+.steps{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:.75rem;
+  margin-top:.8rem;
+}
+.step{
+  background:#f8fffb;
+  border:1px solid var(--border-color);
+  border-radius:12px;
+  padding:.9rem;
+  color:var(--text-muted);
+}
+.step-num{
+  display:inline-grid;
+  place-items:center;
+  width:30px;
+  height:30px;
+  border-radius:50%;
+  background:var(--primary-blue);
+  color:white;
+  font-weight:800;
+  margin-bottom:.5rem
+}
+.step strong{display:block;color:var(--primary-blue);margin-bottom:.2rem}
+.diagnose-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(285px,1fr));
+  gap:1rem;
+  margin-bottom:1rem;
+}
+.diagnose-card{
+  background:white;
+  border:1px solid var(--border-color);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow-sm);
+  overflow:hidden;
+}
 .diagnose-card button{
   width:100%;
   border:0;
   background:white;
   padding:1rem;
   text-align:left;
-  color:var(--primary);
+  color:var(--primary-blue);
   font-weight:850;
   display:flex;
   justify-content:space-between;
@@ -158,12 +266,19 @@ td strong{color:var(--primary)}
   cursor:pointer;
 }
 .diagnose-card button:hover{background:#f8fffb}
-.diagnose-body{display:none;padding:0 1rem 1rem;color:var(--muted)}
+.diagnose-body{display:none;padding:0 1rem 1rem;color:var(--text-muted)}
 .diagnose-card.open .diagnose-body{display:block}
 .hidden-search{display:none!important}
-.no-results{display:none;background:white;border:1px solid var(--border);border-radius:var(--radius);padding:2rem;text-align:center;color:var(--muted)}
-footer{text-align:center;color:var(--muted);font-size:.84rem;padding:1.5rem}
-ul.clean{padding-left:1.1rem}
+.no-results{
+  display:none;
+  background:white;
+  border:1px solid var(--border-color);
+  border-radius:var(--radius);
+  padding:2rem;
+  text-align:center;
+  color:var(--text-muted);
+}
+footer{text-align:center;color:var(--text-muted);font-size:.84rem;padding:1.5rem}
 @media(max-width:900px){
   .header-grid{grid-template-columns:1fr}
   .header-actions{width:100%;flex-direction:column;align-items:stretch}
@@ -177,40 +292,408 @@ ul.clean{padding-left:1.1rem}
 </style>
 </head>
 <body>
-<header class="playbook-header">
+<header>
   <div class="header-inner header-grid">
     <div>
-      <h1>Support &amp; Affiliate Playbook</h1>
-      <p>Live Chat / Social Media Support + Affiliate Marketing</p>
+      <h1>Support & Affiliate Playbook</h1>
+      <p>Kompaktblock für Live Chat, Social Media Support, KI-Triage, Public/Private-Kommunikation, Affiliate-System, Provisionsmodelle, Tracking und Optimierung.</p>
     </div>
     <div class="header-actions">
-      <input id="searchInput" class="search header-search" type="search" placeholder="Im Playbook suchen ...">
+      <input id="searchInput" class="search header-search" type="search" placeholder="Im Support & Affiliate Playbook suchen ...">
       <a class="back-link-header" href="spezi1.html">← Zur grünen Übersicht</a>
     </div>
   </div>
 </header>
+
 <main>
   <nav class="tabs" aria-label="Playbook-Reiter">
-    <button class="tab-btn active" data-tab="support">1. Support</button>
-<button class="tab-btn " data-tab="affiliate">2. Affiliate</button>
-<button class="tab-btn " data-tab="prozesse">3. Prozesse &amp; KPIs</button>
-<button class="tab-btn " data-tab="diagnose">4. Diagnose</button>
+    <button class="tab-btn active" data-tab="ueberblick">1. Überblick</button>
+    <button class="tab-btn" data-tab="livechat">2. Live Chat</button>
+    <button class="tab-btn" data-tab="social">3. Social Support</button>
+    <button class="tab-btn" data-tab="ki">4. KI & Handoff</button>
+    <button class="tab-btn" data-tab="affiliate">5. Affiliate-System</button>
+    <button class="tab-btn" data-tab="provision">6. Provision & Tracking</button>
+    <button class="tab-btn" data-tab="erfolg">7. Erfolg & Risiken</button>
+    <button class="tab-btn" data-tab="diagnose">8. KPIs & Diagnose</button>
   </nav>
+
   <div id="noResults" class="no-results">Keine passenden Inhalte gefunden.</div>
-  <section id="support" class="tab-content active">
-<div class="section-header searchable-item"><h2>Live Chat &amp; Social Media Support</h2><p>Support ist im E-Commerce Teil des Kundenerlebnisses: schnell, kanalnah, lösungsorientiert und trotzdem menschlich.</p></div><div class="grid"><article class="card searchable-item"><span class="tag">Support</span><h3>Live Chat</h3><p>Direkte Hilfe auf Website oder Shop. Ziel: Fragen schnell klären, Kaufabbrüche reduzieren und Vertrauen im Moment der Entscheidung schaffen.</p></article><article class="card searchable-item"><span class="tag">Social</span><h3>Social Media Support</h3><p>Kundenservice auf öffentlichen und privaten Social-Kanälen. Wichtig sind Tonalität, Geschwindigkeit, Eskalation und Datenschutz.</p></article><article class="card searchable-item"><span class="tag">KI</span><h3>KI-Triage</h3><p>KI kann Anfragen vorsortieren, Standardantworten vorbereiten und einfache Fälle automatisieren. Kritische Fälle brauchen Handoff an Menschen.</p></article></div><div class="table-card searchable-item"><div class="table-responsive"><table><thead><tr><th>Bereich</th><th>Bedeutung</th><th>Prüfungs-Merker</th></tr></thead><tbody><tr><td><strong>Chatbot</strong></td><td>Automatisierte Antwortlogik für häufige Fragen.</td><td>Gut für Standardfälle, aber nicht für eskalierte Konflikte.</td></tr><tr><td><strong>Live Chat</strong></td><td>Menschlicher oder hybrider Support in Echtzeit.</td><td>Besonders wichtig bei Checkout-, Zahlungs- oder Produktfragen.</td></tr><tr><td><strong>Handoff</strong></td><td>Übergabe vom Bot an einen Menschen.</td><td>Wichtig bei Beschwerden, Sonderfällen oder emotionalen Anfragen.</td></tr><tr><td><strong>Public vs. Private</strong></td><td>Öffentliche Kommentare vs. private Nachrichten.</td><td>Datenschutz und Konfliktlösung meist in private Kanäle verlagern.</td></tr></tbody></table></div></div>
-</section>
-<section id="affiliate" class="tab-content ">
-<div class="section-header searchable-item"><h2>Affiliate Marketing</h2><p>Affiliate Marketing ist ein performanceorientiertes Partnersystem: Publisher empfehlen Produkte und erhalten Provisionen für messbare Ergebnisse.</p></div><div class="table-card searchable-item"><div class="table-responsive"><table><thead><tr><th>Akteur</th><th>Rolle</th><th>Einfach erklärt</th></tr></thead><tbody><tr><td><strong>Advertiser / Merchant</strong></td><td>Unternehmen oder Shop.</td><td>Stellt Produkt, Tracking und Vergütung bereit.</td></tr><tr><td><strong>Publisher / Affiliate</strong></td><td>Partner, Creator, Blog, Vergleichsseite.</td><td>Bringt Reichweite oder Traffic und erhält Provision.</td></tr><tr><td><strong>Affiliate-Netzwerk</strong></td><td>Technische und organisatorische Plattform.</td><td>Verbindet Advertiser und Publisher, verwaltet Tracking und Abrechnung.</td></tr><tr><td><strong>Kund*in</strong></td><td>Kauft oder führt Zielhandlung aus.</td><td>Löst bei korrekter Zuordnung die Provision aus.</td></tr></tbody></table></div></div><div class="grid"><article class="card searchable-item"><span class="tag">Provision</span><h3>CPA / CPO</h3><p>Provision pro Aktion oder Bestellung. Besonders stark im E-Commerce.</p></article><article class="card searchable-item"><span class="tag">Lead</span><h3>CPL</h3><p>Provision pro qualifiziertem Lead, z. B. Formular oder Anmeldung.</p></article><article class="card searchable-item"><span class="tag">Modell</span><h3>Revenue Share</h3><p>Umsatzbeteiligung, häufig bei digitalen Produkten, Abos oder langfristigen Partnerschaften.</p></article></div>
-</section>
-<section id="prozesse" class="tab-content ">
-<div class="section-header searchable-item"><h2>Prozesse, KPIs und Erfolgsmessung</h2><p>Support und Affiliate wirken beide auf Conversion, Vertrauen und Kundenerlebnis – aber mit unterschiedlichen Messwerten.</p></div><div class="table-card searchable-item"><div class="table-responsive"><table><thead><tr><th>Thema</th><th>Wichtige KPIs</th><th>Interpretation</th></tr></thead><tbody><tr><td><strong>Live Chat</strong></td><td>Antwortzeit, Lösungsquote, CSAT, Chat-to-Conversion.</td><td>Schneller und hilfreicher Support kann Kaufabbrüche reduzieren.</td></tr><tr><td><strong>Social Support</strong></td><td>Reaktionszeit, Sentiment, Eskalationen, gelöste Fälle.</td><td>Öffentliche Kommunikation beeinflusst Markenvertrauen.</td></tr><tr><td><strong>Affiliate</strong></td><td>Klicks, Conversion Rate, Sales, CPO, ROAS, Stornoquote.</td><td>Nicht nur Traffic zählt, sondern profitable und saubere Verkäufe.</td></tr><tr><td><strong>Qualität</strong></td><td>Beschwerdequote, Fraud, falsche Versprechen.</td><td>Kurzfristige Sales dürfen nicht Markenvertrauen zerstören.</td></tr></tbody></table></div></div><div class="note searchable-item"><strong>Prüfungs-Merker:</strong> Support optimiert Vertrauen und Reibung. Affiliate optimiert Partner-Traffic und messbare Abschlüsse. Beide brauchen klare Prozesse und sauberes Tracking.</div>
-</section>
-<section id="diagnose" class="tab-content ">
-<div class="section-header searchable-item"><h2>Typische Fehler erkennen</h2><p>In Prüfungsfragen geht es oft darum, Symptome richtig zu deuten und passende Maßnahmen abzuleiten.</p></div><div class="diagnose-grid"><article class="diagnose-card searchable-item"><button type="button">Viele Chat-Anfragen, aber wenige Käufe <span>+</span></button><div class="diagnose-body"><p><strong>Ursache:</strong> Unklare Produktinfos, Checkout-Reibung oder fehlendes Vertrauen.</p><p><strong>Maßnahme:</strong> Häufige Fragen auswerten, Produkttexte verbessern, Trust-Elemente und Checkout prüfen.</p></div></article><article class="diagnose-card searchable-item"><button type="button">Bot löst Beschwerden falsch <span>+</span></button><div class="diagnose-body"><p><strong>Ursache:</strong> Kein sinnvoller Handoff oder zu starre Automatisierung.</p><p><strong>Maßnahme:</strong> Eskalationsregeln, menschliche Übergabe und sensible Tonalität definieren.</p></div></article><article class="diagnose-card searchable-item"><button type="button">Affiliate bringt Klicks, aber keine Sales <span>+</span></button><div class="diagnose-body"><p><strong>Ursache:</strong> Schlechter Audience Fit, falsche Werbeversprechen oder schwache Landingpage.</p><p><strong>Maßnahme:</strong> Publisherqualität, Tracking, Landingpage und Angebot prüfen.</p></div></article><article class="diagnose-card searchable-item"><button type="button">Viele Sales, aber hohe Stornoquote <span>+</span></button><div class="diagnose-body"><p><strong>Ursache:</strong> Irreführender Traffic oder falsche Erwartungen.</p><p><strong>Maßnahme:</strong> Affiliate-Regeln, Freigaben, Partnerqualität und Provisionslogik schärfen.</p></div></article></div>
-</section>
+
+  <section id="ueberblick" class="tab-content active">
+    <div class="section-header searchable-item">
+      <h2>1. Überblick: Warum Support & Affiliate zusammenpassen</h2>
+      <p>Beide Themen sind im Kurs kompakter als Influencer, LinkedIn, Landing Pages oder Conversion. Inhaltlich passen sie trotzdem gut zusammen, weil beide im E-Commerce direkt an Vertrauen, Handlungssicherheit und messbaren Ergebnissen arbeiten.</p>
+    </div>
+
+    <div class="grid">
+      <article class="card searchable-item">
+        <span class="tag green">Support</span>
+        <h3>Reibung reduzieren</h3>
+        <p>Live Chat und Social Support helfen genau dann, wenn Kund*innen Fragen, Unsicherheit, Ärger oder ein konkretes Problem haben. Guter Support kann Abbrüche reduzieren und Vertrauen stabilisieren.</p>
+      </article>
+      <article class="card searchable-item">
+        <span class="tag blue">Affiliate</span>
+        <h3>Messbare Empfehlungen</h3>
+        <p>Affiliate Marketing ist erfolgsbasierte Werbung: Partner empfehlen Produkte, Kund*innen kaufen oder melden sich an, und Provision entsteht nur bei messbarem Erfolg.</p>
+      </article>
+      <article class="card searchable-item">
+        <span class="tag yellow">Gemeinsamkeit</span>
+        <h3>Conversion und Vertrauen</h3>
+        <p>Support verbessert die Entscheidungssicherheit. Affiliate bringt relevanten Traffic über Empfehlungen. Beide brauchen klare Prozesse, sauberes Tracking und Verantwortung.</p>
+      </article>
+    </div>
+
+    <div class="table-card searchable-item">
+      <div class="table-responsive">
+        <table>
+          <thead><tr><th>Bereich</th><th>Hauptfrage</th><th>Typische Begriffe</th><th>Prüfungs-Merker</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Live Chat</strong></td><td>Wie helfe ich schnell, klar und lösungsorientiert?</td><td>Chunking, 5-Phasen-Flow, Priorisierung, Handoff.</td><td>Chat ist Führung in Echtzeit.</td></tr>
+            <tr><td><strong>Social Support</strong></td><td>Wie reagiere ich öffentlich sichtbar richtig?</td><td>Public/Private, A–E-Kommentararten, Moderation, Auto-Replies.</td><td>Public stabilisieren, privat lösen.</td></tr>
+            <tr><td><strong>Affiliate</strong></td><td>Wie wird Empfehlung messbar vergütet?</td><td>Merchant, Affiliate, Netzwerk, Affiliate-Link, Cookie, Attribution.</td><td>Ohne Tracking keine Vergütung.</td></tr>
+            <tr><td><strong>Provisionsmodelle</strong></td><td>Wann und wofür wird bezahlt?</td><td>PPS, PPL, PPC, Recurring, Lifetime, Hybrid.</td><td>Das Modell bestimmt, wann Geld verdient wird.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="note searchable-item">
+      <strong>Finaler Merksatz:</strong> Support löst Reibung im direkten Kundenkontakt. Affiliate skaliert Empfehlungen über Partner. Beide sind nur gut, wenn Prozess, Tonalität, Tracking und Verantwortlichkeit stimmen.
+    </div>
+  </section>
+
+  <section id="livechat" class="tab-content">
+    <div class="section-header searchable-item">
+      <h2>2. Live Chat: schnell, klar, lösungsorientiert</h2>
+      <p>Live Chat passiert im Moment, in dem Kund*innen aktiv sind: Checkout, Zahlung, Paket-Tracking oder ein Problem blockiert den nächsten Schritt. Deshalb ist Chat ein direkter Service- und Conversion-Hebel.</p>
+    </div>
+
+    <div class="table-card searchable-item">
+      <div class="table-responsive">
+        <table>
+          <thead><tr><th>Chat-Logik</th><th>Bedeutung</th><th>Konsequenz</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Kunde liest statt zuzuhören</strong></td><td>Text muss scanbar sein.</td><td>Kurze Nachrichten, klare Struktur.</td></tr>
+            <tr><td><strong>Kunde multitaskt</strong></td><td>Aufmerksamkeit ist begrenzt.</td><td>Führung übernehmen, nicht ausufernd erklären.</td></tr>
+            <tr><td><strong>Alles ist schriftlich nachvollziehbar</strong></td><td>Falsche Zusagen bleiben dokumentiert.</td><td>Klarheit, Datenschutz und Faktencheck beachten.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="grid">
+      <article class="card searchable-item"><span class="tag green">Micro-Regel</span><h3>Kurz schreiben</h3><p>1–2 Sätze pro Nachricht. Im Chat zählt Führung, nicht lange Erklärung.</p></article>
+      <article class="card searchable-item"><span class="tag blue">Micro-Regel</span><h3>1 Message = 1 Zweck</h3><p>Eine Nachricht soll genau eine Aufgabe erfüllen: starten, fragen, Zeit nennen, Lösung geben oder abschließen.</p></article>
+      <article class="card searchable-item"><span class="tag yellow">Micro-Regel</span><h3>Handlung statt Erklärung</h3><p>Der Kunde braucht den nächsten Schritt: „Ich prüfe das jetzt“, „Schick mir bitte…“, „Ich melde mich in…“.</p></article>
+    </div>
+
+    <div class="workflow searchable-item">
+      <h3>Chat-Führung: 5-Phasen-Flow</h3>
+      <p>Der Minimalprozess sorgt dafür, dass auch unter Druck nichts auseinanderfällt.</p>
+      <div class="steps">
+        <div class="step"><span class="step-num">1</span><strong>Start & Rahmen</strong>Freundlich starten, Richtung geben, nötige Info holen.</div>
+        <div class="step"><span class="step-num">2</span><strong>Anliegen klären</strong>Offen fragen, gezielt nachfassen, kurz zusammenfassen.</div>
+        <div class="step"><span class="step-num">3</span><strong>Wartezeit managen</strong>Immer Zeit + nächster Schritt nennen.</div>
+        <div class="step"><span class="step-num">4</span><strong>Lösung führen</strong>Mit 2 Optionen arbeiten: schneller vs. flexibler.</div>
+        <div class="step"><span class="step-num">5</span><strong>Abschluss</strong>Zusammenfassen, nächster Schritt, Sicherheit geben.</div>
+      </div>
+    </div>
+
+    <div class="table-card searchable-item">
+      <div class="table-responsive">
+        <table>
+          <thead><tr><th>Situation</th><th>Priorität</th><th>Erste Reaktion</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Checkout/Zahlung blockiert, Account/Sicherheit, Betrugsvorwurf</strong></td><td>Rot</td><td>Sofort stabilisieren + nächster Schritt.</td></tr>
+            <tr><td><strong>Lieferproblem kurz vor Termin, Retoure-Frist, Bestelländerung</strong></td><td>Gelb</td><td>Kurz prüfen + Zeitangabe.</td></tr>
+            <tr><td><strong>Produktfrage, Versandinfo, „wo finde ich…?“</strong></td><td>Grün</td><td>Kurz antworten + Schritt oder Link.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="note searchable-item">
+      <strong>Chat-Merksatz:</strong> Ein guter Chat fühlt sich an wie ein Navigationssystem: kurz, ruhig, führend und mit klarem nächsten Schritt.
+    </div>
+  </section>
+
+  <section id="social" class="tab-content">
+    <div class="section-header searchable-item">
+      <h2>3. Social Media Support: öffentlich sichtbar richtig reagieren</h2>
+      <p>Social Support unterscheidet sich von Chat und Telefon, weil Antworten nicht nur auf den einzelnen Kunden wirken, sondern auch auf Mitlesende. Jeder Kommentar ist damit Mini-PR.</p>
+    </div>
+
+    <div class="workflow searchable-item">
+      <h3>Public stabilisieren, privat lösen</h3>
+      <div class="steps">
+        <div class="step"><span class="step-num">1</span><strong>Public</strong>Ruhig anerkennen, Lösung starten, DM ankündigen.</div>
+        <div class="step"><span class="step-num">2</span><strong>DM</strong>Daten klären und Fall lösen.</div>
+        <div class="step"><span class="step-num">3</span><strong>Datenschutz</strong>Keine Bestellnummern, Adressen oder Zahlungsdaten öffentlich.</div>
+      </div>
+    </div>
+
+    <div class="table-card searchable-item">
+      <div class="table-responsive">
+        <table>
+          <thead><tr><th>Kategorie</th><th>Kommentarart</th><th>Maßnahme</th><th>Beispiel</th></tr></thead>
+          <tbody>
+            <tr><td><strong>A</strong></td><td>Servicefrage</td><td>Öffentlich beantworten.</td><td>„Wie geht Retoure?“</td></tr>
+            <tr><td><strong>B</strong></td><td>Beschwerde, noch respektvoll</td><td>Öffentlich anerkennen + DM.</td><td>„Schon wieder keine Antwort…“</td></tr>
+            <tr><td><strong>C</strong></td><td>Spam / Wiederholung</td><td>Hide / filtern.</td><td>Wiederholte Werbe- oder Spam-Kommentare.</td></tr>
+            <tr><td><strong>D</strong></td><td>Provokation / Troll</td><td>Einmal ruhig + DM, dann moderieren.</td><td>„Ihr seid Betrüger!!!“</td></tr>
+            <tr><td><strong>E</strong></td><td>Hass / Drohung / illegal</td><td>Löschen, melden, blocken.</td><td>Drohungen oder illegale Inhalte.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="grid">
+      <article class="card searchable-item"><span class="tag green">Antwort</span><h3>4 Bausteine</h3><p>Anerkennen, Lösung starten, DM oder nächsten Schritt nennen, ruhig bleiben.</p></article>
+      <article class="card searchable-item"><span class="tag blue">Moderation</span><h3>A–E-System</h3><p>Nicht jeder Kommentar braucht eine Antwort, aber jeder Kommentar braucht eine Entscheidung.</p></article>
+      <article class="card searchable-item"><span class="tag yellow">Grenzen</span><h3>Ruhig klar bleiben</h3><p>Grenzen schützen Community, Team, Marke und Lösungsfähigkeit.</p></article>
+    </div>
+
+    <div class="note searchable-item">
+      <strong>Template-Merker:</strong> Gute öffentliche Antworten enthalten Grund + Sicherheit + Verantwortung: „Damit wir deine Daten schützen und das schnell lösen, bitte DM mit Bestellnummer – wir kümmern uns sofort.“
+    </div>
+  </section>
+
+  <section id="ki" class="tab-content">
+    <div class="section-header searchable-item">
+      <h2>4. KI, Auto-Replies, Triage & Handoff</h2>
+      <p>KI kann im Support entlasten, aber sie übernimmt keine Verantwortung. Sie sortiert, markiert, schlägt Antworten vor und übersetzt – der Mensch prüft Ton, Fakten, Zusagen und Maßnahme.</p>
+    </div>
+
+    <div class="grid">
+      <article class="card searchable-item"><span class="tag green">KI-Triage</span><h3>Sortieren, priorisieren, vorbereiten</h3><p>KI erkennt Intent, Dringlichkeit, Sprache, Sentiment und mögliche Entities wie Produkt, Order-ID oder Datum.</p></article>
+      <article class="card searchable-item"><span class="tag blue">Human-in-the-Loop</span><h3>Mensch prüft Fakten</h3><p>KI zeigt Richtung, aber vor Zusagen oder Lösungen muss der Mensch Fakten im System prüfen.</p></article>
+      <article class="card searchable-item"><span class="tag yellow">Auto-Replies</span><h3>Nicht lösen, vorbereiten</h3><p>Auto-Replies geben sofort Orientierung, entlasten Teams und setzen Erwartungen, dürfen aber keine ungeprüften Zusagen machen.</p></article>
+    </div>
+
+    <div class="table-card searchable-item">
+      <div class="table-responsive">
+        <table>
+          <thead><tr><th>KI kann</th><th>KI kann nicht sicher</th><th>Regel</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Spam / Toxicity markieren</strong></td><td>Kontext endgültig bewerten.</td><td>Mensch ordnet A–E zu.</td></tr>
+            <tr><td><strong>Intent sortieren</strong></td><td>Mischfälle fehlerfrei lösen.</td><td>Faktencheck im System.</td></tr>
+            <tr><td><strong>Antwort vorschlagen</strong></td><td>Verantwortung übernehmen.</td><td>Entwurf kürzen, prüfen, kundennah formulieren.</td></tr>
+            <tr><td><strong>Übersetzen</strong></td><td>Ton und Kultur immer korrekt treffen.</td><td>Ton, Höflichkeit und Wirkung prüfen.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="workflow searchable-item">
+      <h3>KI-Workflow im Social Support</h3>
+      <div class="steps">
+        <div class="step"><span class="step-num">1</span><strong>Kommentar rein</strong>Anfrage kommt öffentlich oder per DM.</div>
+        <div class="step"><span class="step-num">2</span><strong>KI markiert</strong>Intent, Sprache, Tonalität, Spam-Risiko.</div>
+        <div class="step"><span class="step-num">3</span><strong>Mensch ordnet</strong>A–E, Priorität, Datenschutz, Fakten.</div>
+        <div class="step"><span class="step-num">4</span><strong>Maßnahme</strong>Antwort, DM, moderieren, blocken, dokumentieren.</div>
+      </div>
+    </div>
+
+    <div class="note searchable-item">
+      <strong>KI-Merksatz:</strong> KI scannt – Mensch entscheidet. KI liefert Entwürfe – Verantwortung bleibt beim Menschen.
+    </div>
+  </section>
+
+  <section id="affiliate" class="tab-content">
+    <div class="section-header searchable-item">
+      <h2>5. Affiliate-System: Akteure, Ablauf & Netzwerke</h2>
+      <p>Affiliate Marketing ist erfolgsbasierte Werbung. Partner empfehlen Produkte von Unternehmen und erhalten Provision, wenn eine definierte Aktion passiert – zum Beispiel Verkauf oder Anmeldung.</p>
+    </div>
+
+    <div class="table-card searchable-item">
+      <div class="table-responsive">
+        <table>
+          <thead><tr><th>Akteur</th><th>Rolle</th><th>Typische Aufgabe</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Merchant / Advertiser</strong></td><td>Unternehmen oder Shop.</td><td>Produkte verkaufen, Partnerprogramm betreiben, Provision festlegen, Werbemittel bereitstellen.</td></tr>
+            <tr><td><strong>Affiliate / Publisher</strong></td><td>Partner, der Produkte bewirbt.</td><td>Content erstellen, Traffic bringen, Affiliate-Links nutzen.</td></tr>
+            <tr><td><strong>Affiliate-Netzwerk</strong></td><td>Plattform zwischen Merchant und Affiliate.</td><td>Tracking, Reporting, Werbemittel, Abrechnung und Auszahlung vereinfachen.</td></tr>
+            <tr><td><strong>Kunde</strong></td><td>Klickt und kauft oder meldet sich an.</td><td>Löst bei richtiger Zuordnung die Provision aus.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="workflow searchable-item">
+      <h3>Affiliate-Prozess in 6 Schritten</h3>
+      <div class="steps">
+        <div class="step"><span class="step-num">1</span><strong>Anmelden</strong>Affiliate meldet sich an.</div>
+        <div class="step"><span class="step-num">2</span><strong>Programm wählen</strong>Passendes Partnerprogramm aussuchen.</div>
+        <div class="step"><span class="step-num">3</span><strong>Link erhalten</strong>Affiliate-Link mit Kennung.</div>
+        <div class="step"><span class="step-num">4</span><strong>Einbinden</strong>Link in Blog, Social, Video oder Newsletter.</div>
+        <div class="step"><span class="step-num">5</span><strong>Klick & Kauf</strong>Kunde klickt und kauft.</div>
+        <div class="step"><span class="step-num">6</span><strong>Provision</strong>Provision wird gezahlt.</div>
+      </div>
+    </div>
+
+    <div class="grid">
+      <article class="card searchable-item"><span class="tag green">Affiliate-Link</span><h3>Spezielle Kennung</h3><p>Der Link erkennt, wer vermittelt hat. Ohne Affiliate-Link keine Zuordnung und keine Provision.</p></article>
+      <article class="card searchable-item"><span class="tag blue">Cookie</span><h3>Zuordnungszeitraum</h3><p>Ein Cookie speichert die Affiliate-ID, wenn Consent vorliegt. Kauf innerhalb der Laufzeit kann Provision auslösen.</p></article>
+      <article class="card searchable-item"><span class="tag yellow">Attribution</span><h3>Wer bekommt die Provision?</h3><p>In der Praxis ist meist Last-Click Standard: Der letzte Klick vor dem Kauf gewinnt.</p></article>
+    </div>
+
+    <div class="note searchable-item">
+      <strong>Affiliate-Merksatz:</strong> Klassische Werbung bezahlt Reichweite. Affiliate Marketing bezahlt Ergebnisse.
+    </div>
+  </section>
+
+  <section id="provision" class="tab-content">
+    <div class="section-header searchable-item">
+      <h2>6. Provisionsmodelle, Cookie-Laufzeit & Partnerprogramme</h2>
+      <p>Das Provisionsmodell bestimmt, wann und wie der Affiliate Geld verdient. Unterschiedliche Produkte, Ziele und Kaufhürden brauchen unterschiedliche Modelle.</p>
+    </div>
+
+    <div class="table-card searchable-item">
+      <div class="table-responsive">
+        <table>
+          <thead><tr><th>Modell</th><th>Was wird vergütet?</th><th>Geeignet für</th><th>Merker</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Pay per Sale (PPS)</strong></td><td>Provision pro abgeschlossenen Verkauf.</td><td>Produkttests, E-Commerce, Vergleichsseiten.</td><td>Am weitesten verbreitet, aber Kauf muss passieren.</td></tr>
+            <tr><td><strong>Pay per Lead (PPL)</strong></td><td>Provision für Kontakt, Anmeldung oder Anfrage.</td><td>Finanzen, Versicherungen, SaaS, Apps.</td><td>Kein Kauf nötig, aber Lead-Qualität wird geprüft.</td></tr>
+            <tr><td><strong>Pay per Click (PPC)</strong></td><td>Kleine Provision pro Klick.</td><td>High-Traffic-Seiten.</td><td>Selten im klassischen Affiliate-Marketing, anfällig für Click-Fraud.</td></tr>
+            <tr><td><strong>Recurring Commission</strong></td><td>Wiederkehrende Provision bei Abos.</td><td>SaaS, Software, Kurse.</td><td>Planbarer, aber endet bei Kündigung.</td></tr>
+            <tr><td><strong>Lifetime Commission</strong></td><td>Provision auf spätere Käufe desselben Kunden.</td><td>Langfristige Produkte, SaaS, Finanzangebote.</td><td>Lukrativ, aber selten und oft bedingt.</td></tr>
+            <tr><td><strong>Hybrid</strong></td><td>Kombination mehrerer Modelle.</td><td>Fortgeschrittene Programme.</td><td>Flexibel, aber komplexer.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <article class="card searchable-item">
+        <span class="tag green">Cookie-Laufzeit</span>
+        <h3>Warum sie wichtig ist</h3>
+        <p>Cookie-Laufzeit ist der Zeitraum, in dem ein Verkauf dem Affiliate zugeordnet werden kann. Je länger die Laufzeit, desto besser für den Affiliate – besonders bei teuren Produkten mit längerer Entscheidung.</p>
+      </article>
+      <article class="card searchable-item">
+        <span class="tag blue">Partnerprogramme finden</span>
+        <h3>Netzwerke & Direktprogramme</h3>
+        <p>Netzwerke wie AWIN, Amazon PartnerNet, Digistore24, Belboon, TradeTracker oder CJ Affiliate bündeln Programme, Tracking und Abrechnung. Manche Merchants bieten Direktprogramme an.</p>
+      </article>
+    </div>
+
+    <div class="note searchable-item">
+      <strong>Prüfungs-Merker:</strong> Amazon mit kurzer Cookie-Laufzeit ist einfach für Anfänger, aber bei längeren Kaufentscheidungen kann Diversifikation sinnvoller sein.
+    </div>
+  </section>
+
+  <section id="erfolg" class="tab-content">
+    <div class="section-header searchable-item">
+      <h2>7. Erfolgsfaktoren, Optimierung & Risiken</h2>
+      <p>Affiliate-Erfolg entsteht nicht durch Links allein. Die vier Säulen sind Content, Traffic, Conversion und Optimierung. Gleichzeitig braucht Affiliate Marketing klare Regeln, damit Vertrauen und Rechtssicherheit erhalten bleiben.</p>
+    </div>
+
+    <div class="grid">
+      <article class="card searchable-item"><span class="tag green">1. Content</span><h3>Hilfreich und authentisch</h3><p>Guter Affiliate-Content löst Probleme, beantwortet Fragen, ist ehrlich und detailliert statt oberflächlich.</p></article>
+      <article class="card searchable-item"><span class="tag blue">2. Traffic</span><h3>Besucher gewinnen</h3><p>SEO, Social Media, E-Mail-Marketing und bezahlte Werbung können Traffic bringen. Anfänger starten oft besser mit SEO + Social.</p></article>
+      <article class="card searchable-item"><span class="tag yellow">3. Conversion</span><h3>Vertrauen + Angebot</h3><p>Conversion entsteht, wenn Angebot, Zielgruppe und Vertrauen zusammenpassen.</p></article>
+      <article class="card searchable-item"><span class="tag green">4. Optimierung</span><h3>Besser statt mehr</h3><p>Daten zeigen, welche Inhalte, Links und Trafficquellen funktionieren. Optimierung heißt nicht mehr machen, sondern besser machen.</p></article>
+    </div>
+
+    <div class="table-card searchable-item">
+      <div class="table-responsive">
+        <table>
+          <thead><tr><th>Content-Format</th><th>Warum es funktioniert</th><th>Beispiel</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Produkttests & Reviews</strong></td><td>Konkrete Erfahrung und Einschätzung.</td><td>„iPhone 15 Pro im Test“.</td></tr>
+            <tr><td><strong>Vergleiche</strong></td><td>Hilft bei Entscheidungen.</td><td>„iPhone vs. Samsung Galaxy S24“.</td></tr>
+            <tr><td><strong>Best-of-Listen</strong></td><td>Schnelle Orientierung.</td><td>„Die 10 besten Laptops 2026“.</td></tr>
+            <tr><td><strong>Video-Tutorials</strong></td><td>Zeigt Anwendung praktisch.</td><td>„So richtest du X ein“.</td></tr>
+            <tr><td><strong>Ratgeber</strong></td><td>Löst ein Problem gründlich.</td><td>„Der ultimative Guide für Y“.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <article class="card searchable-item">
+        <span class="tag red">Risiken</span>
+        <h3>Warum Regeln wichtig sind</h3>
+        <ul>
+          <li>Irreführende Empfehlungen oder Fake-Empfehlungen.</li>
+          <li>Click-Fraud oder minderwertiger Traffic.</li>
+          <li>Unklare Kennzeichnung von Affiliate-Links.</li>
+          <li>Cookie-Consent und Tracking-Probleme.</li>
+          <li>Markenschäden durch unseriöse Partner.</li>
+        </ul>
+      </article>
+      <article class="card searchable-item">
+        <span class="tag green">Gute Praxis</span>
+        <h3>Langfristig denken</h3>
+        <ul>
+          <li>Klare Nische statt zu breites Thema.</li>
+          <li>Produkte empfehlen, die zur Zielgruppe passen.</li>
+          <li>Transparente Kennzeichnung.</li>
+          <li>Tracking und Netzwerkreports auswerten.</li>
+          <li>Schwache Inhalte verbessern oder ersetzen.</li>
+        </ul>
+      </article>
+    </div>
+
+    <div class="note searchable-item">
+      <strong>Nischen-Merker:</strong> Je klarer die Nische, desto höher Vertrauen und Conversion.
+    </div>
+  </section>
+
+  <section id="diagnose" class="tab-content">
+    <div class="section-header searchable-item">
+      <h2>8. KPIs & Diagnose</h2>
+      <p>Die Prüfung fragt oft nach Zuordnung: Problem erkennen, Ursache verstehen, passende Maßnahme wählen.</p>
+    </div>
+
+    <div class="table-card searchable-item">
+      <div class="table-responsive">
+        <table>
+          <thead><tr><th>Bereich</th><th>KPIs / Messwerte</th><th>Interpretation</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Live Chat</strong></td><td>Antwortzeit, Lösungsquote, Wartezeit, Kundenzufriedenheit, Chat-to-Conversion.</td><td>Schneller, klarer Support kann Abbruch reduzieren.</td></tr>
+            <tr><td><strong>Social Support</strong></td><td>Reaktionszeit, Kommentararten, Eskalationen, Sentiment, gelöste Fälle.</td><td>Öffentliche Kommunikation beeinflusst Vertrauen und Marke.</td></tr>
+            <tr><td><strong>Affiliate</strong></td><td>Klicks, CTR, Conversion Rate, Sales, Leads, Provision, Stornoquote, CPO/CPL.</td><td>Nicht Traffic allein zählt, sondern passende und profitable Ergebnisse.</td></tr>
+            <tr><td><strong>Optimierung</strong></td><td>Top-Inhalte, Trafficquellen, Link-Klicks, Netzwerk-Reports, Cookie-Laufzeit.</td><td>Stärken ausbauen, Schwächen verbessern oder ersetzen.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="diagnose-grid">
+      <article class="diagnose-card searchable-item">
+        <button type="button">Live Chat: Kunde wird ungeduldig <span>+</span></button>
+        <div class="diagnose-body"><p><strong>Ursache:</strong> Keine Zeitangabe, zu viel Stille oder zu lange Antworten.</p><p><strong>Maßnahme:</strong> Chunking, Zeit + nächster Schritt, kurze Messages.</p></div>
+      </article>
+      <article class="diagnose-card searchable-item">
+        <button type="button">Live Chat: falsche Zusage gemacht <span>+</span></button>
+        <div class="diagnose-body"><p><strong>Ursache:</strong> Zusage ohne Faktencheck oder blindes Vertrauen in KI-Vorschlag.</p><p><strong>Maßnahme:</strong> Human-in-the-Loop, Fakten im System prüfen, sichere Rückfrage stellen.</p></div>
+      </article>
+      <article class="diagnose-card searchable-item">
+        <button type="button">Social Support: Beschwerde eskaliert öffentlich <span>+</span></button>
+        <div class="diagnose-body"><p><strong>Ursache:</strong> Zu defensiv, zu lang oder Diskussion im Kommentarstrang.</p><p><strong>Maßnahme:</strong> Public anerkennen, Lösung starten, DM mit Grund ankündigen.</p></div>
+      </article>
+      <article class="diagnose-card searchable-item">
+        <button type="button">Social Support: Hass oder Drohung <span>+</span></button>
+        <div class="diagnose-body"><p><strong>Ursache:</strong> Kategorie E.</p><p><strong>Maßnahme:</strong> Löschen, melden, blocken und ggf. dokumentieren.</p></div>
+      </article>
+      <article class="diagnose-card searchable-item">
+        <button type="button">Affiliate: viele Klicks, keine Sales <span>+</span></button>
+        <div class="diagnose-body"><p><strong>Ursache:</strong> Falsche Zielgruppe, schwaches Angebot, wenig Vertrauen oder schlechte Landingpage.</p><p><strong>Maßnahme:</strong> Nische, Content, CTA, Produktfit und Conversion Rate prüfen.</p></div>
+      </article>
+      <article class="diagnose-card searchable-item">
+        <button type="button">Affiliate: Provision bleibt aus <span>+</span></button>
+        <div class="diagnose-body"><p><strong>Ursache:</strong> Kein Tracking, Cookie abgelaufen, kein Consent oder falsche Attribution.</p><p><strong>Maßnahme:</strong> Affiliate-Link, Cookie-Laufzeit, Consent und Netzwerkreport prüfen.</p></div>
+      </article>
+    </div>
+
+    <div class="note searchable-item">
+      <strong>Finaler Prüfungs-Merker:</strong> Support-Fragen drehen sich um Ton, Priorität, Datenschutz, Handoff und KI-Verantwortung. Affiliate-Fragen drehen sich um Akteure, Link, Tracking, Provision, Cookie, Content und Risiken.
+    </div>
+  </section>
 </main>
-<footer>Support &amp; Affiliate Playbook · Spezialisierung 1</footer>
+
+<footer>Support & Affiliate Playbook · Datei: support-affiliate-playbook.html</footer>
 
 <script>
 const tabButtons = document.querySelectorAll('.tab-btn');
@@ -252,6 +735,5 @@ searchInput.addEventListener('input', () => {
   noResults.style.display = hits ? 'none' : 'block';
 });
 </script>
-
 </body>
 </html>

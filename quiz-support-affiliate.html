@@ -1,52 +1,177 @@
 <!doctype html>
 <html lang="de">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Support &amp; Affiliate Quiz</title>
-<style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Support & Affiliate Quiz</title>
+  <style>
 :root{
-  --primary:#0f5132;--secondary:#16834f;--gold:#c8a84e;--bg:#f4fbf7;--card:#fff;--border:#dbeee2;--text:#123326;--muted:#5f7569;--ok:#10b981;--bad:#ef4444;--shadow:0 12px 30px rgba(15,81,50,.12)
+  --primary-blue:#0f5132;
+  --secondary-blue:#16834f;
+  --gold:#c8a84e;
+  --light-bg:#f4fbf7;
+  --card-bg:#ffffff;
+  --border-color:#dbeee2;
+  --text-dark:#123326;
+  --text-muted:#5f7569;
+  --correct-bg:#d1fae5;
+  --correct-border:#10b981;
+  --incorrect-bg:#fee2e2;
+  --incorrect-border:#ef4444;
+  --shadow-md:0 12px 30px rgba(15,81,50,.12);
 }
 *{box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;margin:0}
-.quiz-header{background:var(--primary);color:#fff;border-bottom:4px solid var(--gold);padding:1.15rem 1.5rem;box-shadow:0 8px 24px rgba(15,81,50,.13)}
-.quiz-header-inner{width:min(1200px,calc(100% - 2rem));margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:1rem}
-.quiz-header h1{font-size:clamp(2rem,3.8vw,2.8rem);line-height:1.08;margin:0;font-weight:850;letter-spacing:-.02em;color:#fff;text-align:left}
-.back-link-header{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;color:#fff;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.28);padding:.82rem 1rem;border-radius:9px;font-weight:800;white-space:nowrap}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  background:var(--light-bg);
+  color:var(--text-dark);
+  min-height:100vh;
+  margin:0;
+}
+.quiz-header{
+  background:var(--primary-blue);
+  color:#fff;
+  border-bottom:4px solid var(--gold);
+  padding:1.15rem 1.5rem;
+  box-shadow:0 8px 24px rgba(15,81,50,.13);
+}
+.quiz-header-inner{
+  width:min(1200px,calc(100% - 2rem));
+  margin:0 auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:1rem;
+}
+.quiz-header h1{
+  font-size:clamp(2rem,3.8vw,2.8rem);
+  line-height:1.08;
+  margin:0;
+  font-weight:850;
+  letter-spacing:-.02em;
+  color:#fff;
+  text-align:left;
+}
+.back-link-header{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  text-decoration:none;
+  color:#fff;
+  background:rgba(255,255,255,.10);
+  border:1px solid rgba(255,255,255,.28);
+  padding:.82rem 1rem;
+  border-radius:9px;
+  font-weight:800;
+  white-space:nowrap;
+}
 .back-link-header:hover{background:rgba(255,255,255,.18)}
-.quiz-main{min-height:calc(100vh - 98px);display:flex;justify-content:center;align-items:flex-start;padding:3rem 1.25rem}
-.quiz-container{background-color:#fff;border-radius:12px;box-shadow:var(--shadow);width:100%;max-width:850px;padding:40px}
-.progress{text-align:center;color:var(--muted);font-size:15px;margin-bottom:30px;font-weight:700}
-.question{font-size:20px;font-weight:750;margin-bottom:25px;line-height:1.5;color:var(--text)}
+.quiz-main{
+  min-height:calc(100vh - 98px);
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  padding:3rem 1.25rem;
+}
+.quiz-container{
+  background-color:#fff;
+  border-radius:12px;
+  box-shadow:var(--shadow-md);
+  width:100%;
+  max-width:850px;
+  padding:40px;
+}
+.progress{
+  text-align:center;
+  color:var(--text-muted);
+  font-size:15px;
+  margin-bottom:30px;
+  font-weight:700;
+}
+.question{
+  font-size:20px;
+  font-weight:750;
+  margin-bottom:25px;
+  line-height:1.5;
+  color:var(--text-dark);
+}
 .options{display:flex;flex-direction:column;gap:12px}
-.option{background-color:#f8fffb;border:2px solid var(--border);border-radius:8px;padding:16px;font-size:16px;cursor:pointer;transition:all .2s ease;text-align:left;font-weight:500;color:#416552;line-height:1.45}
+.option{
+  background-color:#f8fffb;
+  border:2px solid var(--border-color);
+  border-radius:8px;
+  padding:16px;
+  font-size:16px;
+  cursor:pointer;
+  transition:all .2s ease;
+  text-align:left;
+  font-weight:500;
+  color:#416552;
+  line-height:1.45;
+}
 .option:hover:not(:disabled){background-color:#e8f8ee;border-color:#bfe4ca}
-.option.correct{background-color:#d1fae5!important;border-color:var(--ok)!important;color:#065f46!important;font-weight:700}
-.option.incorrect{background-color:#fee2e2!important;border-color:var(--bad)!important;color:#991b1b!important}
+.option.correct{background-color:var(--correct-bg)!important;border-color:var(--correct-border)!important;color:#065f46!important;font-weight:700}
+.option.incorrect{background-color:var(--incorrect-bg)!important;border-color:var(--incorrect-border)!important;color:#991b1b!important}
 .option:disabled{cursor:default}
-.feedback{margin-top:25px;font-size:16px;text-align:left;min-height:24px;padding:15px;border-radius:8px;display:none;line-height:1.5}
-.feedback.success{background-color:#d1fae5;color:#065f46;border-left:5px solid var(--ok)}
-.feedback.error{background-color:#fee2e2;color:#991b1b;border-left:5px solid var(--bad)}
+.feedback{
+  margin-top:25px;
+  font-size:16px;
+  text-align:left;
+  min-height:24px;
+  padding:15px;
+  border-radius:8px;
+  display:none;
+  line-height:1.5;
+}
+.feedback.success{background-color:var(--correct-bg);color:#065f46;border-left:5px solid var(--correct-border)}
+.feedback.error{background-color:var(--incorrect-bg);color:#991b1b;border-left:5px solid var(--incorrect-border)}
 .btn-container{display:flex;justify-content:flex-end;margin-top:30px}
-.next-btn{background-color:var(--secondary);color:#fff;border:none;border-radius:8px;padding:14px 28px;font-size:16px;font-weight:800;cursor:pointer;display:none}
-.next-btn:hover{background-color:var(--primary)}
+.next-btn{
+  background-color:var(--secondary-blue);
+  color:#fff;
+  border:none;
+  border-radius:8px;
+  padding:14px 28px;
+  font-size:16px;
+  font-weight:800;
+  cursor:pointer;
+  transition:background-color .2s;
+  display:none;
+}
+.next-btn:hover{background-color:var(--primary-blue)}
 .result-container{text-align:center;display:none}
-.result-container h2{color:var(--primary);font-size:30px;margin-bottom:20px}
+.result-container h2{color:var(--primary-blue);font-size:30px;margin-bottom:20px}
 .result-container p{font-size:20px;color:#4a5568;margin-bottom:30px}
-.score-circle{width:150px;height:150px;border-radius:50%;background:var(--primary);color:white;display:flex;align-items:center;justify-content:center;font-size:46px;font-weight:850;margin:0 auto 24px auto}
-.restart-btn{background-color:var(--secondary);color:white;border:none;border-radius:8px;padding:14px 28px;font-size:16px;font-weight:800;cursor:pointer}
-.restart-btn:hover{background-color:var(--primary)}
-@media(max-width:760px){.quiz-header-inner{width:100%;flex-direction:column;align-items:stretch}.back-link-header{width:100%}.quiz-container{padding:28px 20px}}
+.score-circle{
+  width:150px;
+  height:150px;
+  border-radius:50%;
+  background:var(--primary-blue);
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:46px;
+  font-weight:850;
+  margin:0 auto 24px auto;
+}
+.restart-btn{background-color:var(--secondary-blue);color:white;border:none;border-radius:8px;padding:14px 28px;font-size:16px;font-weight:800;cursor:pointer}
+.restart-btn:hover{background-color:var(--primary-blue)}
+@media(max-width:760px){
+  .quiz-header-inner{width:100%;flex-direction:column;align-items:stretch}
+  .back-link-header{width:100%}
+  .quiz-container{padding:28px 20px}
+}
 </style>
 </head>
 <body>
 <header class="quiz-header">
   <div class="quiz-header-inner">
-    <h1>Support &amp; Affiliate Quiz</h1>
+    <h1>Support & Affiliate Quiz</h1>
     <a class="back-link-header" href="spezi1.html">← Zur grünen Übersicht</a>
   </div>
 </header>
+
 <main class="quiz-main">
   <div class="quiz-container">
     <div id="quiz">
@@ -56,6 +181,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Ar
       <div class="feedback" id="feedback"></div>
       <div class="btn-container"><button class="next-btn" id="nextBtn">Weiter</button></div>
     </div>
+
     <div class="result-container" id="result">
       <div class="score-circle" id="scoreCircle">0</div>
       <h2>Quiz abgeschlossen</h2>
@@ -64,229 +190,231 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Ar
     </div>
   </div>
 </main>
+
 <script>
 const questions = [
   {
-    "q": "Was ist ein zentrales Ziel von Live Chat im E-Commerce?",
+    "q": "Warum ist Live Chat im E-Commerce besonders stark?",
     "options": [
-      "Kaufabbrüche reduzieren und Fragen im Entscheidungsprozess klären",
-      "Nur öffentliche Kommentare sammeln",
-      "Alle Zahlungen manuell prüfen",
-      "Produktbilder automatisch verkleinern"
+      "Weil er Kund*innen im aktiven Prozess unterstützt, z. B. bei Checkout, Zahlung oder Paketproblem",
+      "Weil er nur nach dem Kauf eingesetzt wird",
+      "Weil dort nie Datenschutz relevant ist",
+      "Weil lange Erklärungen besser funktionieren"
     ],
     "answer": 0,
-    "explanation": "Live Chat hilft vor allem bei Unsicherheit, Produktfragen und Checkout-Hürden."
+    "explanation": "Live Chat hilft im Moment, in dem ein Problem den nächsten Schritt blockiert."
   },
   {
-    "q": "Was bedeutet Handoff im Support-Kontext?",
+    "q": "Welche Schreibregel passt zum professionellen Chat-Stil?",
     "options": [
-      "Die automatische Löschung eines Chats",
-      "Die Übergabe vom Bot an einen menschlichen Support",
-      "Das Erstellen eines Rabattcodes",
-      "Das Sperren eines Social-Media-Kommentars"
+      "Viele Fachwörter nutzen",
+      "1 Message = 1 Zweck",
+      "Möglichst lange Absätze schreiben",
+      "Keine nächsten Schritte nennen"
     ],
     "answer": 1,
-    "explanation": "Handoff bedeutet, dass ein Bot oder System einen Fall an einen Menschen übergibt."
+    "explanation": "Im Chat müssen Nachrichten kurz, scanbar und zweckklar sein."
   },
   {
-    "q": "Welche Anfrage sollte eher an einen Menschen übergeben werden?",
+    "q": "Was bedeutet Chunking im Chat?",
     "options": [
-      "Eine einfache Frage zu Öffnungszeiten",
-      "Eine emotionale Beschwerde mit Eskalationspotenzial",
-      "Eine Standardfrage zum Versanddienst",
-      "Eine neutrale Produktgrößenfrage"
+      "Alle Informationen in einen langen Text schreiben",
+      "Informationen in kleine, gut lesbare Blöcke teilen",
+      "Kundendaten öffentlich abfragen",
+      "KI ohne Prüfung antworten lassen"
     ],
     "answer": 1,
-    "explanation": "Emotionale oder kritische Fälle brauchen menschliche Einschätzung und Empathie."
+    "explanation": "Chunking reduziert Missverständnisse und macht Antworten schnell erfassbar."
   },
   {
-    "q": "Warum ist Public/Private im Social Support wichtig?",
+    "q": "Welche Reihenfolge passt zum 5-Phasen-Flow im Live Chat?",
     "options": [
-      "Weil Datenschutz und Konfliktlösung oft private Kanäle benötigen",
-      "Weil alle Beschwerden öffentlich diskutiert werden müssen",
-      "Weil private Nachrichten nie beantwortet werden sollten",
-      "Weil öffentliche Antworten automatisch rechtssicher sind"
+      "Start & Rahmen → Anliegen klären → Wartezeit managen → Lösung führen → Abschluss",
+      "Abschluss → Zahlung → Anzeige → Retargeting → Newsletter",
+      "Spam → Block → Löschen → Melden → Ignorieren",
+      "Affiliate-Link → Cookie → Netzwerk → Sale → Auszahlung"
     ],
     "answer": 0,
-    "explanation": "Öffentlich kann man reagieren, aber personenbezogene Details gehören in private Kanäle."
+    "explanation": "Der Chat-Flow führt vom Start bis zum sicheren Abschluss."
   },
   {
-    "q": "Welche KPI passt gut zu Live Chat?",
+    "q": "Was ist bei Wartezeit im Chat wichtig?",
     "options": [
-      "Antwortzeit",
-      "Core Web Vital LCP",
-      "Domain Authority",
-      "Keyword-Dichte"
-    ],
-    "answer": 0,
-    "explanation": "Antwortzeit ist eine zentrale Support-Kennzahl."
-  },
-  {
-    "q": "Was misst CSAT im Kundensupport?",
-    "options": [
-      "Servergeschwindigkeit",
-      "Kundenzufriedenheit",
-      "Affiliate-Provision",
-      "Anzeigenauslieferung"
+      "Stille wirkt professionell",
+      "Immer Zeit + nächster Schritt nennen",
+      "Keine Rückmeldung geben",
+      "Sofort etwas versprechen"
     ],
     "answer": 1,
-    "explanation": "CSAT steht für Customer Satisfaction und misst Zufriedenheit nach einem Kontakt."
+    "explanation": "Stille wirkt im Chat schnell wie Ignorieren."
   },
   {
-    "q": "Was ist ein typischer Vorteil von KI im Support?",
+    "q": "Was ist KI-Triage im Service?",
     "options": [
-      "Vorsortierung und Beantwortung einfacher Standardfragen",
-      "Garantie für perfekte Lösung jedes Konflikts",
-      "Ersatz aller menschlichen Kommunikation",
-      "Automatisches Löschen negativer Bewertungen"
+      "Sortieren, priorisieren und vorbereiten von Anfragen",
+      "Automatisches Löschen aller Kommentare",
+      "Auszahlung von Affiliate-Provision",
+      "Ersetzen aller Mitarbeitenden"
     ],
     "answer": 0,
-    "explanation": "KI ist nützlich für Triage und Standardfälle, aber nicht für jeden Sonderfall."
+    "explanation": "KI-Triage hilft bei Intent, Dringlichkeit, Sprache und Routing."
   },
   {
-    "q": "Was ist bei Shitstorm- oder Krisenfällen besonders wichtig?",
+    "q": "Was bedeutet Human-in-the-Loop im Support?",
     "options": [
-      "Nicht reagieren",
-      "Schnelle, klare Eskalationslogik und konsistente Kommunikation",
-      "Alle Kommentare automatisch blockieren",
-      "Nur Rabattcodes posten"
+      "Der Mensch prüft Fakten und Verantwortung bleibt beim Menschen",
+      "KI darf alles blind senden",
+      "Der Kunde löst alles allein",
+      "Nur öffentliche Kommentare sind erlaubt"
     ],
-    "answer": 1,
-    "explanation": "Krisen brauchen definierte Zuständigkeiten, Tonalität und schnelle Eskalation."
+    "answer": 0,
+    "explanation": "KI zeigt Richtung, aber der Mensch prüft und entscheidet."
+  },
+  {
+    "q": "Was ist die Grundregel im Social Media Support?",
+    "options": [
+      "Public stabilisieren, privat lösen",
+      "Alle Kundendaten öffentlich klären",
+      "Nie antworten",
+      "Nur mit Emojis reagieren"
+    ],
+    "answer": 0,
+    "explanation": "Öffentlich wird anerkannt und der nächste Schritt gesetzt; Daten gehören in DM."
+  },
+  {
+    "q": "Welche Kommentarart gehört zur Kategorie E?",
+    "options": [
+      "Normale Servicefrage",
+      "Respektvolle Beschwerde",
+      "Hass, Drohung oder illegale Inhalte",
+      "Produktfrage"
+    ],
+    "answer": 2,
+    "explanation": "Kategorie E wird gelöscht, gemeldet oder blockiert."
+  },
+  {
+    "q": "Was ist der Nutzen von Auto-Replies im Social Support?",
+    "options": [
+      "Sie bereiten vor und setzen Erwartungen, lösen aber nicht alles endgültig",
+      "Sie ersetzen jede Fallprüfung",
+      "Sie dürfen konkrete Zusagen ohne Fakten machen",
+      "Sie machen Datenschutz überflüssig"
+    ],
+    "answer": 0,
+    "explanation": "Auto-Replies sorgen für schnelle Orientierung, aber keine ungeprüften Zusagen."
   },
   {
     "q": "Was ist Affiliate Marketing?",
     "options": [
-      "Ein provisionsbasiertes Partnersystem für messbare Empfehlungen",
-      "Ein reines Designsystem",
-      "Eine Form von Kundenservice ohne Tracking",
-      "Eine interne Lagerlogistik"
+      "Erfolgsbasierte Werbung mit Provision bei messbarer Aktion",
+      "Eine reine Support-Methode",
+      "Ein Designsystem für Landingpages",
+      "Ein kostenloser Newsletter ohne Tracking"
     ],
     "answer": 0,
-    "explanation": "Affiliate Marketing vergütet Partner für messbare Ergebnisse wie Leads oder Sales."
+    "explanation": "Provision entsteht nur bei Erfolg, etwa Verkauf oder Anmeldung."
   },
   {
-    "q": "Wer ist im Affiliate Marketing der Advertiser?",
+    "q": "Wer ist der Merchant bzw. Advertiser?",
     "options": [
-      "Der Kunde im Checkout",
-      "Das werbende Unternehmen oder der Shop",
-      "Der Browser des Nutzers",
-      "Die Zahlungsart"
+      "Der Kunde im Shop",
+      "Das Unternehmen, das Produkte verkauft und Provision zahlt",
+      "Der Cookie im Browser",
+      "Die Kommentarmoderation"
     ],
     "answer": 1,
-    "explanation": "Der Advertiser stellt Produkt, Angebot und Vergütung bereit."
+    "explanation": "Der Merchant betreibt das Partnerprogramm und zahlt Provision bei Erfolg."
   },
   {
-    "q": "Was macht ein Publisher im Affiliate-System?",
+    "q": "Was macht ein Affiliate bzw. Publisher?",
     "options": [
-      "Er bringt Traffic oder Empfehlungen und erhält Provision",
-      "Er betreibt den Checkout technisch",
-      "Er entscheidet über alle Shop-Preise",
-      "Er ist immer das Affiliate-Netzwerk"
+      "Er bewirbt Produkte und nutzt Affiliate-Links",
+      "Er löscht öffentliche Beschwerden",
+      "Er setzt immer die Cookie-Laufzeit fest",
+      "Er ist automatisch das Netzwerk"
     ],
     "answer": 0,
-    "explanation": "Publisher sind Partner wie Blogs, Creator oder Vergleichsportale."
+    "explanation": "Affiliates bringen Traffic über Inhalte, Social Media, Blogs oder Videos."
   },
   {
-    "q": "Wofür steht CPO häufig im Affiliate/E-Commerce-Kontext?",
+    "q": "Was ist ein Affiliate-Netzwerk?",
     "options": [
-      "Cost per Order",
-      "Content Performance Outline",
-      "Customer Page Optimization",
-      "Click Privacy Option"
+      "Eine Plattform, die Merchant und Affiliate verbindet und Tracking/Abrechnung unterstützt",
+      "Ein öffentlicher Kommentarbereich",
+      "Ein Chatbot-Training",
+      "Eine reine Bilddatenbank"
     ],
     "answer": 0,
-    "explanation": "CPO beschreibt Kosten beziehungsweise Provision pro Bestellung."
+    "explanation": "Netzwerke bündeln Programme, Tracking, Reporting und Auszahlungen."
   },
   {
-    "q": "Was ist CPL?",
+    "q": "Was ist ein Affiliate-Link?",
     "options": [
-      "Cost per Lead",
-      "Click per Landingpage",
-      "Customer Privacy Level",
-      "Content Publishing List"
+      "Ein spezieller Link mit Kennung zur Zuordnung der Vermittlung",
+      "Ein normaler Link ohne Tracking",
+      "Ein Chat-Protokoll",
+      "Ein Social-Media-Filter"
     ],
     "answer": 0,
-    "explanation": "CPL ist eine Vergütung pro qualifiziertem Lead."
+    "explanation": "Ohne Affiliate-Link gibt es keine saubere Zuordnung."
   },
   {
-    "q": "Warum ist Tracking im Affiliate Marketing zentral?",
+    "q": "Was ist beim Affiliate-Tracking wichtig?",
     "options": [
-      "Damit Sales oder Leads korrekt Partnern zugeordnet werden",
-      "Damit Produktbilder größer werden",
-      "Damit der Kundenservice langsamer arbeitet",
-      "Damit Impressumspflichten entfallen"
+      "Klick setzt bei Consent ein Cookie und speichert die Affiliate-ID",
+      "Tracking ist für Provision egal",
+      "Bestellnummern werden öffentlich gepostet",
+      "Nur Likes werden gemessen"
     ],
     "answer": 0,
-    "explanation": "Ohne Tracking ist keine saubere Zuordnung und Abrechnung möglich."
+    "explanation": "Ohne Tracking keine Vergütung."
   },
   {
-    "q": "Was ist ein Risiko im Affiliate Marketing?",
+    "q": "Was bedeutet Cookie-Laufzeit?",
     "options": [
-      "Fraud, falsche Werbeversprechen oder schlechte Partnerqualität",
-      "Zu viele eindeutige Ziele",
+      "Zeitraum, in dem ein Verkauf dem Affiliate zugeordnet werden kann",
+      "Zeit bis ein Chatbot antwortet",
+      "Dauer einer Social-Media-Kampagne",
+      "Anzahl der Kommentare"
+    ],
+    "answer": 0,
+    "explanation": "Die Cookie-Laufzeit bestimmt den Zeitraum des Affiliate-Anspruchs."
+  },
+  {
+    "q": "Welches Provisionsmodell vergütet einen abgeschlossenen Verkauf?",
+    "options": [
+      "Pay per Lead",
+      "Pay per Sale",
+      "Pay per Click",
+      "Auto-Reply"
+    ],
+    "answer": 1,
+    "explanation": "Pay per Sale bedeutet Provision pro Verkauf."
+  },
+  {
+    "q": "Welche vier Säulen nennt das Affiliate-Playbook für Erfolg?",
+    "options": [
+      "Content, Traffic, Conversion, Optimierung",
+      "Design, Farbe, Logo, Schrift",
+      "Likes, Shares, Hashtags, Emojis",
+      "Chat, DM, Troll, Block"
+    ],
+    "answer": 0,
+    "explanation": "Erfolgreiche Affiliates brauchen hilfreichen Content, Besucher, Conversion und datenbasierte Optimierung."
+  },
+  {
+    "q": "Was ist ein typisches Affiliate-Risiko?",
+    "options": [
+      "Irreführende Empfehlungen, Click-Fraud oder schlechte Partnerqualität",
       "Zu klare Kennzeichnung",
-      "Zu gute Landingpage-Ladezeit"
+      "Zu gute Nische",
+      "Zu sauberes Tracking"
     ],
     "answer": 0,
-    "explanation": "Partnerqualität und saubere Regeln sind wichtig, um Marken- und Abrechnungsrisiken zu senken."
-  },
-  {
-    "q": "Welche Kennzahl ist für Affiliate-Qualität wichtig?",
-    "options": [
-      "Stornoquote",
-      "Haarfarbe des Creators",
-      "Schriftgröße im Footer",
-      "Anzahl interner Meetings"
-    ],
-    "answer": 0,
-    "explanation": "Eine hohe Stornoquote kann auf schlechte Traffic-Qualität oder falsche Erwartungen hinweisen."
-  },
-  {
-    "q": "Was bedeutet Revenue Share?",
-    "options": [
-      "Umsatzbeteiligung",
-      "Eine einmalige Fixmiete",
-      "Ein Support-Ticket",
-      "Ein UX-Test"
-    ],
-    "answer": 0,
-    "explanation": "Revenue Share beteiligt Partner prozentual am Umsatz."
-  },
-  {
-    "q": "Warum sollte man Affiliate-Partner prüfen?",
-    "options": [
-      "Damit Zielgruppe, Werbeumfeld und Aussagen zur Marke passen",
-      "Damit alle dieselben Passwörter nutzen",
-      "Damit keine Landingpage nötig ist",
-      "Damit Tracking abgeschaltet werden kann"
-    ],
-    "answer": 0,
-    "explanation": "Brand Fit und Zielgruppenqualität entscheiden über nachhaltigen Erfolg."
-  },
-  {
-    "q": "Was verbindet Support und Affiliate im Conversion-Prozess?",
-    "options": [
-      "Beide können Vertrauen und Abschlusswahrscheinlichkeit beeinflussen",
-      "Beide ersetzen Datenschutz",
-      "Beide funktionieren ohne Daten",
-      "Beide sind nur Designfragen"
-    ],
-    "answer": 0,
-    "explanation": "Support reduziert Reibung, Affiliate bringt Partner-Traffic – beides kann Conversions beeinflussen."
-  },
-  {
-    "q": "Was ist bei Support- und Affiliate-Maßnahmen gemeinsam wichtig?",
-    "options": [
-      "Klare Prozesse, sauberes Tracking und verständliche Verantwortlichkeiten",
-      "Nur möglichst viele Emojis",
-      "Keine Kennzahlen",
-      "Möglichst keine Regeln"
-    ],
-    "answer": 0,
-    "explanation": "Beide Bereiche brauchen klare Steuerung und messbare Qualitätskriterien."
+    "explanation": "Affiliate Marketing braucht klare Regeln, Transparenz und Qualitätssicherung."
   }
 ];
+
 let currentQuestion=0, score=0, answered=false;
 const progressEl=document.getElementById('progress');
 const questionEl=document.getElementById('question');
@@ -297,6 +425,7 @@ const quizEl=document.getElementById('quiz');
 const resultEl=document.getElementById('result');
 const scoreTextEl=document.getElementById('scoreText');
 const scoreCircleEl=document.getElementById('scoreCircle');
+
 function loadQuestion(){
   answered=false;
   const q=questions[currentQuestion];
@@ -314,6 +443,7 @@ function loadQuestion(){
     optionsEl.appendChild(button);
   });
 }
+
 function selectOption(index,button){
   if(answered)return;
   answered=true;
@@ -334,16 +464,19 @@ function selectOption(index,button){
   nextBtn.textContent=currentQuestion<questions.length-1?'Weiter':'Ergebnis anzeigen';
   nextBtn.style.display='inline-block';
 }
+
 nextBtn.addEventListener('click',()=>{
   currentQuestion++;
   if(currentQuestion<questions.length){loadQuestion();}else{showResult();}
 });
+
 function showResult(){
   quizEl.style.display='none';
   resultEl.style.display='block';
   scoreCircleEl.textContent=score;
   scoreTextEl.textContent=`Du hast ${score} von ${questions.length} Fragen richtig beantwortet.`;
 }
+
 function restartQuiz(){
   currentQuestion=0;
   score=0;
@@ -351,6 +484,7 @@ function restartQuiz(){
   resultEl.style.display='none';
   loadQuestion();
 }
+
 loadQuestion();
 </script>
 </body>

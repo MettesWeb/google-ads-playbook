@@ -3,39 +3,44 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>LinkedIn &amp; Nischen-Plattformen Playbook</title>
+<title>LinkedIn & Nischen-Plattformen Playbook</title>
 <style>
 :root{
-  --primary:#0f5132;
-  --secondary:#16834f;
-  --accent:#1f9d60;
+  --primary-blue:#0f5132;
+  --secondary-blue:#16834f;
+  --accent-blue:#1f9d60;
   --gold:#c8a84e;
-  --bg:#f4fbf7;
-  --card:#ffffff;
-  --border:#dbeee2;
-  --text:#123326;
-  --muted:#5f7569;
-  --soft:#e8f8ee;
-  --ok:#10b981;
-  --bad:#ef4444;
+  --light-bg:#f4fbf7;
+  --card-bg:#ffffff;
+  --border-color:#dbeee2;
+  --text-dark:#123326;
+  --text-muted:#5f7569;
+  --green:#065f46;
+  --green-bg:#d1fae5;
+  --yellow:#92400e;
+  --yellow-bg:#fef3c7;
+  --red:#991b1b;
+  --red-bg:#fee2e2;
+  --blue-bg:#e8f8ee;
   --shadow-sm:0 1px 3px rgba(0,0,0,.10);
   --shadow-md:0 8px 24px rgba(15,81,50,.13);
   --radius:14px;
+  --transition:all .2s ease;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{
   min-height:100vh;
-  background:var(--bg);
-  color:var(--text);
+  background:var(--light-bg);
+  color:var(--text-dark);
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   line-height:1.55;
 }
-header.playbook-header{
+header{
   position:sticky;
   top:0;
   z-index:20;
-  background:var(--primary);
+  background:var(--primary-blue);
   color:white;
   padding:1.15rem 1.5rem;
   border-bottom:4px solid var(--gold);
@@ -54,20 +59,41 @@ h1{
   margin:0;
   letter-spacing:-.025em;
 }
-header p{color:#d7f5e4;margin-top:.35rem;font-size:1rem;line-height:1.45;max-width:760px}
-.header-actions{display:flex;align-items:center;justify-content:flex-end;gap:.8rem}
+header p{
+  color:#d7f5e4;
+  margin-top:.35rem;
+  font-size:1rem;
+  line-height:1.45;
+  max-width:760px;
+}
+.header-actions{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:.8rem;
+}
 .search{
   width:100%;
   border:1px solid #cbd5e1;
   border-radius:10px;
   padding:.85rem 1rem;
   font-size:1rem;
-  color:var(--text);
+  color:var(--text-dark);
   background:white;
   box-shadow:var(--shadow-sm);
+  transition:var(--transition);
 }
-.search:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(31,157,96,.12)}
-.header-search{flex:1 1 auto;max-width:560px;min-width:260px;background:rgba(255,255,255,.96)}
+.search:focus{
+  outline:none;
+  border-color:var(--accent-blue);
+  box-shadow:0 0 0 3px rgba(31,157,96,.12);
+}
+.header-search{
+  flex:1 1 auto;
+  max-width:560px;
+  min-width:260px;
+  background:rgba(255,255,255,.96);
+}
 .back-link-header{
   display:inline-flex;
   align-items:center;
@@ -80,39 +106,70 @@ header p{color:#d7f5e4;margin-top:.35rem;font-size:1rem;line-height:1.45;max-wid
   border-radius:9px;
   font-weight:800;
   white-space:nowrap;
+  transition:var(--transition);
 }
 .back-link-header:hover{background:rgba(255,255,255,.18)}
 main{padding:1.7rem 0 4rem}
-.tabs{display:flex;flex-wrap:wrap;gap:.55rem;margin:0 0 1rem}
+.tabs{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.55rem;
+  margin:0 0 1rem;
+}
 .tab-btn{
   border:1px solid #cbd5e1;
   background:white;
-  color:var(--primary);
+  color:var(--primary-blue);
   border-radius:999px;
   padding:.68rem .95rem;
   font-weight:800;
   cursor:pointer;
+  transition:var(--transition);
   box-shadow:var(--shadow-sm);
   font-size:.92rem;
 }
-.tab-btn:hover{border-color:var(--secondary);transform:translateY(-1px);background:#f8fffb}
-.tab-btn.active{background:var(--primary);border-color:var(--primary);color:white;box-shadow:var(--shadow-md)}
+.tab-btn:hover{
+  border-color:var(--secondary-blue);
+  transform:translateY(-1px);
+  background:#f8fffb;
+}
+.tab-btn.active{
+  background:var(--primary-blue);
+  border-color:var(--primary-blue);
+  color:white;
+  box-shadow:var(--shadow-md);
+}
 .tab-content{display:none}
 .tab-content.active{display:block}
 .section-header{margin:1.25rem 0 1rem}
-.section-header h2{color:var(--primary);font-size:clamp(1.45rem,3vw,2.1rem);line-height:1.15}
-.section-header p{color:var(--muted);margin-top:.3rem;max-width:980px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:1rem;margin-bottom:1rem}
-.two-col{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1rem;margin-bottom:1rem}
+.section-header h2{
+  color:var(--primary-blue);
+  font-size:clamp(1.45rem,3vw,2.1rem);
+  line-height:1.15;
+}
+.section-header p{color:var(--text-muted);margin-top:.3rem;max-width:980px}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(245px,1fr));
+  gap:1rem;
+  margin-bottom:1rem;
+}
+.two-col{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:1rem;
+  margin-bottom:1rem;
+}
 .card,.table-card,.note,.workflow{
-  background:var(--card);
-  border:1px solid var(--border);
+  background:var(--card-bg);
+  border:1px solid var(--border-color);
   border-radius:var(--radius);
   box-shadow:var(--shadow-sm);
 }
 .card{padding:1.2rem}
-.card h3{color:var(--primary);margin-bottom:.45rem}
-.card p,.card li{color:var(--muted)}
+.card h3{color:var(--primary-blue);margin-bottom:.45rem}
+.card p,.card li{color:var(--text-muted)}
+.card ul{padding-left:1.1rem;margin-top:.4rem}
 .tag,.badge{
   display:inline-flex;
   align-items:center;
@@ -122,35 +179,86 @@ main{padding:1.7rem 0 4rem}
   font-weight:800;
   margin-bottom:.75rem;
 }
-.tag{background:var(--soft);color:var(--primary)}
-.tag.green{background:#d1fae5;color:#065f46}
-.tag.yellow{background:#fef3c7;color:#92400e}
-.tag.red{background:#fee2e2;color:#991b1b}
+.tag.blue,.badge.blue{background:var(--blue-bg);color:var(--primary-blue)}
+.tag.green,.badge.green{background:var(--green-bg);color:var(--green)}
+.tag.yellow,.badge.yellow{background:var(--yellow-bg);color:var(--yellow)}
+.tag.red,.badge.red{background:var(--red-bg);color:var(--red)}
 .table-card{overflow:hidden;margin-bottom:1rem}
 .table-responsive{overflow-x:auto}
 table{width:100%;border-collapse:collapse;background:white}
-th,td{padding:.9rem 1rem;text-align:left;border-bottom:1px solid var(--border);vertical-align:top}
-th{background:#f8fffb;color:var(--primary);font-size:.85rem;text-transform:uppercase;letter-spacing:.04em}
+th,td{
+  padding:.9rem 1rem;
+  text-align:left;
+  border-bottom:1px solid var(--border-color);
+  vertical-align:top;
+}
+th{
+  background:#f8fffb;
+  color:var(--primary-blue);
+  font-size:.85rem;
+  text-transform:uppercase;
+  letter-spacing:.04em;
+}
 tr:last-child td{border-bottom:none}
-td strong{color:var(--primary)}
-.note{border-left:5px solid var(--gold);padding:1rem 1.1rem;margin:1rem 0;color:var(--muted)}
-.note strong{color:var(--primary)}
-.workflow{padding:1.2rem;margin:1rem 0}
-.workflow h3{color:var(--primary);margin-bottom:.4rem}
-.workflow p{color:var(--muted)}
-.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.75rem;margin-top:.8rem}
-.step{background:#f8fffb;border:1px solid var(--border);border-radius:12px;padding:.9rem;color:var(--muted)}
-.step-num{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--primary);color:white;font-weight:800;margin-bottom:.5rem}
-.step strong{display:block;color:var(--primary);margin-bottom:.2rem}
-.diagnose-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(285px,1fr));gap:1rem;margin-bottom:1rem}
-.diagnose-card{background:white;border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow-sm);overflow:hidden}
+td strong{color:var(--primary-blue)}
+.note{
+  border-left:5px solid var(--gold);
+  padding:1rem 1.1rem;
+  margin:1rem 0;
+  color:var(--text-muted);
+}
+.note strong{color:var(--primary-blue)}
+.workflow{
+  padding:1.2rem;
+  margin:1rem 0;
+}
+.workflow h3{color:var(--primary-blue);margin-bottom:.4rem}
+.workflow p{color:var(--text-muted)}
+.steps{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:.75rem;
+  margin-top:.8rem;
+}
+.step{
+  background:#f8fffb;
+  border:1px solid var(--border-color);
+  border-radius:12px;
+  padding:.9rem;
+  color:var(--text-muted);
+}
+.step-num{
+  display:inline-grid;
+  place-items:center;
+  width:30px;
+  height:30px;
+  border-radius:50%;
+  background:var(--primary-blue);
+  color:white;
+  font-weight:800;
+  margin-bottom:.5rem;
+}
+.step strong{display:block;color:var(--primary-blue);margin-bottom:.2rem}
+.diagnose-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(285px,1fr));
+  gap:1rem;
+  margin-bottom:1rem;
+}
+.diagnose-card{
+  background:white;
+  border:1px solid var(--border-color);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow-sm);
+  overflow:hidden;
+}
 .diagnose-card button{
   width:100%;
   border:0;
   background:white;
   padding:1rem;
   text-align:left;
-  color:var(--primary);
+  color:var(--primary-blue);
   font-weight:850;
   display:flex;
   justify-content:space-between;
@@ -158,12 +266,19 @@ td strong{color:var(--primary)}
   cursor:pointer;
 }
 .diagnose-card button:hover{background:#f8fffb}
-.diagnose-body{display:none;padding:0 1rem 1rem;color:var(--muted)}
+.diagnose-body{display:none;padding:0 1rem 1rem;color:var(--text-muted)}
 .diagnose-card.open .diagnose-body{display:block}
 .hidden-search{display:none!important}
-.no-results{display:none;background:white;border:1px solid var(--border);border-radius:var(--radius);padding:2rem;text-align:center;color:var(--muted)}
-footer{text-align:center;color:var(--muted);font-size:.84rem;padding:1.5rem}
-ul.clean{padding-left:1.1rem}
+.no-results{
+  display:none;
+  background:white;
+  border:1px solid var(--border-color);
+  border-radius:var(--radius);
+  padding:2rem;
+  text-align:center;
+  color:var(--text-muted);
+}
+footer{text-align:center;color:var(--text-muted);font-size:.84rem;padding:1.5rem}
 @media(max-width:900px){
   .header-grid{grid-template-columns:1fr}
   .header-actions{width:100%;flex-direction:column;align-items:stretch}
@@ -177,46 +292,413 @@ ul.clean{padding-left:1.1rem}
 </style>
 </head>
 <body>
-<header class="playbook-header">
+<header>
   <div class="header-inner header-grid">
     <div>
-      <h1>LinkedIn &amp; Nischen-Plattformen Playbook</h1>
-      <p>Von Employer Branding bis Advertising</p>
+      <h1>LinkedIn & Nischen-Plattformen Playbook</h1>
+      <p>Von Employer Branding bis Advertising: LinkedIn, Company Pages, Personal Branding, HR-Marketing, Recruiting Ads und Nischenplattformen.</p>
     </div>
     <div class="header-actions">
-      <input id="searchInput" class="search header-search" type="search" placeholder="Im Playbook suchen ...">
+      <input id="searchInput" class="search header-search" type="search" placeholder="Im LinkedIn Playbook suchen ...">
       <a class="back-link-header" href="spezi1.html">← Zur grünen Übersicht</a>
     </div>
   </div>
 </header>
+
 <main>
   <nav class="tabs" aria-label="Playbook-Reiter">
-    <button class="tab-btn active" data-tab="ueberblick">Überblick</button>
+    <button class="tab-btn active" data-tab="grundlagen">1. Grundlagen</button>
+    <button class="tab-btn" data-tab="company">2. Company Pages</button>
+    <button class="tab-btn" data-tab="branding">3. Branding & Thought Leadership</button>
+    <button class="tab-btn" data-tab="ads">4. LinkedIn Ads</button>
+    <button class="tab-btn" data-tab="hr">5. HR & Employer Branding</button>
+    <button class="tab-btn" data-tab="recruiting">6. Recruiting Ads</button>
+    <button class="tab-btn" data-tab="nischen">7. Nischenplattformen</button>
+    <button class="tab-btn" data-tab="kpis">8. KPIs & Diagnose</button>
   </nav>
-  <div id="noResults" class="no-results">Keine passenden Inhalte gefunden.</div>
-  <section id="ueberblick" class="tab-content active">
-<div class="section-header searchable-item"><h2>LinkedIn &amp; Nischen-Plattformen</h2><p>LinkedIn, Employer Branding, Recruiting Ads und Nischenplattformen als zusätzlicher Performance- und HR-Marketing-Bereich.</p></div>
-<section id="linkedin" class="card searchable-item s12"><h2>1. LinkedIn im Marketing-Mix</h2><p>LinkedIn ist eine Plattform für Business-, Karriere- und Fachkommunikation. Im Kurs wird LinkedIn als Kanal für B2B-Kommunikation, HR/Recruiting, Employer Branding und Corporate Networking eingeordnet.</p><span class="tag">B2B</span><span class="tag">Recruiting</span><span class="tag">Employer Branding</span><span class="tag">Thought Leadership</span></section>
-<section class="card searchable-item s6"><h2>Unternehmenssicht</h2><ul><li>Vertrauenswürdige Unternehmensmarke aufbauen.</li><li>Zugang zu Entscheider*innen und Fachkräften.</li><li>Datenbasiertes Targeting für Kampagnen.</li><li>Company Page als offizieller Markenauftritt.</li></ul></section>
-<section class="card searchable-item s6"><h2>User-Sicht</h2><ul><li>Berufliche Sichtbarkeit und Networking.</li><li>Zugang zum verdeckten Stellenmarkt.</li><li>Personal Branding und Thought Leadership.</li><li>Direkte Interaktion mit Unternehmen.</li></ul></section>
-<section class="card searchable-item s12"><h2>Company Page vs. persönliches Profil</h2><table class="table"><thead><tr><th>Bereich</th><th>Persönliches Profil</th><th>Company Page</th></tr></thead><tbody><tr><td>Rolle</td><td>Repräsentiert eine Person.</td><td>Offizieller Markenauftritt eines Unternehmens.</td></tr><tr><td>Content</td><td>Networking, Fachartikel, Meinungsbeiträge.</td><td>Offizielle Posts, Branding, HR-Kommunikation, Jobs.</td></tr><tr><td>Reichweite</td><td>Algorithmisch oft bevorzugt.</td><td>Organisch begrenzter, durch Mitarbeitende steigerbar.</td></tr><tr><td>Strategie</td><td>Personal Branding und Expert*innenstatus.</td><td>Markenautorität, Lead-Gen, Recruiting, Employer Branding.</td></tr></tbody></table></section>
-<section class="card searchable-item s6"><h2>Company Page: Ziele</h2><ul><li><strong>Brand Awareness:</strong> Sichtbarkeit und Branchenautorität.</li><li><strong>Lead-Generierung:</strong> Whitepaper, Webinare, Lead Gen Forms, Retargeting.</li><li><strong>Recruiting & Employer Branding:</strong> Fachkräfte anziehen.</li><li><strong>Investor & Partner Relations:</strong> offizielle Updates, Meilensteine, ESG.</li></ul></section>
-<section class="card searchable-item s6"><h2>Herausforderungen 2026</h2><ul><li>Organische Reichweite von Company Pages ist begrenzt.</li><li>Persönliche Profile und direkte Interaktion werden stärker priorisiert.</li><li>Werbliche/oberflächliche Inhalte funktionieren schlechter.</li><li>Mitarbeitende als Markenbotschafter*innen werden wichtiger.</li></ul></section>
-<section class="card searchable-item s12"><h2>LinkedIn Content & Anzeigenformate</h2><table class="table"><thead><tr><th>Format</th><th>Wofür gut?</th><th>Prüfungs-Merker</th></tr></thead><tbody><tr><td>Dokument-Posts / Carousels</td><td>How-tos, Checklisten, Case Studies.</td><td>Hält Nutzer*innen auf LinkedIn.</td></tr><tr><td>Native Videos / Live</td><td>Produktvorstellungen, Recruiting-Events, Einblicke.</td><td>Bewegtbild und Mitarbeiterstorys erhöhen Engagement.</td></tr><tr><td>Thought Leader Ads</td><td>Beiträge von Expert*innen/CEO/Mitarbeitenden bewerben.</td><td>Persönliche Stimme + Paid-Reichweite.</td></tr><tr><td>Conversation Ads</td><td>Interaktive Nachrichten im Postfach.</td><td>Persönliche Ansprache mit CTA-Auswahl.</td></tr><tr><td>Sponsored Content</td><td>Feed-Anzeigen als Bild, Video oder Carousel.</td><td>Awareness, Employer Branding, Recruiting.</td></tr></tbody></table></section>
-<section id="hr" class="card searchable-item s12"><h2>2. HR-Marketing & Employer Branding</h2><p><strong>HR-Marketing</strong> zeigt ein Unternehmen als attraktiven Arbeitgeber und umfasst Maßnahmen für Bewerber*innen und Mitarbeitende. <strong>Employer Branding</strong> ist die Entwicklung der Arbeitgebermarke: Werte, Kultur und Vorteile der Arbeit im Unternehmen.</p></section>
-<section class="card searchable-item s4"><h3>Warum wichtig?</h3><ul><li>Fachkräftemangel</li><li>Arbeitnehmermarkt</li><li>Bewertungsportale wie Kununu/Glassdoor</li><li>Erwartungen: Flexibilität, Remote, Nachhaltigkeit, Purpose</li></ul></section><section class="card searchable-item s4"><h3>Zielgruppen</h3><ul><li>Potenzielle Bewerber*innen</li><li>Aktuelle Mitarbeitende</li><li>Ehemalige Mitarbeitende / Alumni</li></ul></section><section class="card searchable-item s4"><h3>EVP</h3><p><strong>Employer Value Proposition</strong> = zentrales Arbeitgeberversprechen: Warum sollte jemand genau hier arbeiten?</p></section>
-<section class="card searchable-item s12"><h2>Employer Branding: Ziele & Nutzen</h2><table class="table"><thead><tr><th>Ziel</th><th>Bedeutung</th></tr></thead><tbody><tr><td>Passende Mitarbeitende gewinnen</td><td>Qualifizierte Bewerbungen von Personen, die fachlich und kulturell passen.</td></tr><tr><td>Mitarbeitende binden</td><td>Fluktuation verringern, Know-how halten.</td></tr><tr><td>Attraktivität steigern</td><td>Als Top-Arbeitgeber wahrgenommen werden.</td></tr><tr><td>Differenzierung</td><td>USP als Arbeitgeber sichtbar machen.</td></tr><tr><td>Konsistentes Image</td><td>Einheitliche Botschaften vom Karriereportal bis LinkedIn.</td></tr></tbody></table></section>
-<section id="ads" class="card searchable-item s12"><h2>3. Recruiting Ads & HR-Kampagnen</h2><p>Recruiting-Ads nutzen LinkedIn, XING, Jobbörsen, Social Media und Nischenplattformen, um aktive und passive Kandidat*innen zu erreichen.</p></section>
-<section class="card searchable-item s6"><h2>Plattformen</h2><ul><li><strong>LinkedIn:</strong> Fach- und Führungskräfte, B2B, präzises Targeting.</li><li><strong>XING:</strong> DACH-Fokus, stärker Jobvermittlung.</li><li><strong>Indeed / Stepstone / Glassdoor:</strong> aktive Jobsuchende, direkte Bewerbungen.</li><li><strong>Google for Jobs:</strong> SEO/SEA-Integration.</li><li><strong>Instagram / TikTok / YouTube:</strong> visuelles Storytelling, Young Talents.</li><li><strong>GitHub / Behance / ResearchGate:</strong> spezialisierte Talente.</li></ul></section>
-<section class="card searchable-item s6"><h2>Kennzahlen</h2><table class="table"><tbody><tr><td><strong>CPC</strong></td><td>Kosten pro Anzeigenklick.</td></tr><tr><td><strong>CPA</strong></td><td>Cost per Application: Kosten pro Bewerbung.</td></tr><tr><td><strong>CPH</strong></td><td>Cost per Hire: Kosten pro Einstellung.</td></tr><tr><td><strong>Time-to-Hire</strong></td><td>Zeit von Freigabe bis Einstellung.</td></tr><tr><td><strong>Click-to-Apply-Rate</strong></td><td>Anteil der Klicks, die zu Bewerbungen werden.</td></tr><tr><td><strong>eNPS</strong></td><td>Weiterempfehlungsbereitschaft als Arbeitgeber.</td></tr></tbody></table></section>
-<section class="card searchable-item s12"><h2>Recruiting-Creatives</h2><ul><li>Authentizität statt Hochglanz.</li><li>Stockfotos verlieren Wirkung.</li><li>Video Ads und Kurzvideos werden wichtiger.</li><li>Klare Benefits und konkrete Jobbotschaften.</li><li>Mobile First: Ads müssen mobil funktionieren.</li></ul></section>
-<section id="nischen" class="card searchable-item s12"><h2>4. Nischenplattformen</h2><p>Nischenplattformen ersetzen Meta oder TikTok nicht, sondern ergänzen sie strategisch. Hauptnutzen: präzisere Zielgruppenansprache, Community-Nähe, innovative Formate und hohe Relevanz pro Kontakt.</p></section>
-<section class="card searchable-item s12"><table class="table"><thead><tr><th>Plattform</th><th>Rolle</th><th>Merker</th></tr></thead><tbody><tr><td>Pinterest</td><td>Visuelle Such- und Inspirationsplattform mit hoher Kaufabsicht.</td><td>Ideenmaschine, Product Pins, Shoppable Pins, Pinterest Lens, Shopping Ads.</td></tr><tr><td>Snapchat</td><td>Kurzlebigkeit, junge Zielgruppen, AR-Formate.</td><td>AR Lenses / virtuelle Anprobe.</td></tr><tr><td>Reddit</td><td>Community-Vertrauen, Subreddits, Peer-Empfehlungen.</td><td>Kritisch gegenüber klassischer Werbung.</td></tr><tr><td>Twitch</td><td>Live-Events, Creator-Kooperationen.</td><td>Twitch Drops steigern Verweildauer.</td></tr><tr><td>X</td><td>Echtzeit-Kommunikation, Trend Commerce, Social Proof.</td><td>Trends, Diskussionen, schnelle Reaktionen.</td></tr></tbody></table></section>
-<section class="card searchable-item s6"><h2>Risiken</h2><ul><li>Kleinere Reichweite.</li><li>Mehr plattformspezifischer Content-Aufwand.</li><li>Schwierigere Messung und Attribution.</li><li>Skepsis gegenüber Werbung, besonders auf Reddit.</li></ul></section><section class="card searchable-item s6"><h2>Prüfungs-Merksatz</h2><div class="note">LinkedIn = Business, HR, Recruiting, B2B, Thought Leadership.<br>Employer Branding = Arbeitgebermarke.<br>HR-Marketing = operative Maßnahmen.<br>Nischenplattformen = weniger Masse, mehr Relevanz.</div></section>
 
-</section>
+  <div id="noResults" class="no-results">Keine passenden Inhalte gefunden.</div>
+
+  <section id="grundlagen" class="tab-content active">
+    <div class="section-header searchable-item">
+      <h2>1. Grundlagen: LinkedIn als Branding- und Performance-Tool</h2>
+      <p>LinkedIn ist eine Business-, Karriere- und Fachkommunikationsplattform. Im Kurs wird LinkedIn sowohl aus Unternehmenssicht als auch aus User-Sicht betrachtet: Marke, B2B-Leads, Recruiting, Personal Branding und Thought Leadership.</p>
+    </div>
+
+    <div class="grid">
+      <article class="card searchable-item">
+        <span class="tag green">Rolle</span>
+        <h3>LinkedIn im Social-Media-Mix</h3>
+        <p>LinkedIn ist besonders stark bei B2B-Kommunikation, erklärungsbedürftigen Produkten, Fach- und Führungskräfte-Recruiting, Employer Branding und Corporate Networking.</p>
+      </article>
+      <article class="card searchable-item">
+        <span class="tag blue">Unternehmen</span>
+        <h3>Unternehmenssicht</h3>
+        <p>Unternehmen nutzen LinkedIn für vertrauenswürdige Markenbildung, direkten Zugang zu Entscheider*innen, datenbasiertes Targeting und den Aufbau einer Company Page.</p>
+      </article>
+      <article class="card searchable-item">
+        <span class="tag yellow">User</span>
+        <h3>User-Sicht</h3>
+        <p>Einzelpersonen nutzen LinkedIn für berufliche Sichtbarkeit, Zugang zum verdeckten Stellenmarkt, Thought Leadership und direkte Interaktion mit Unternehmen.</p>
+      </article>
+    </div>
+
+    <div class="table-card searchable-item">
+      <div class="table-responsive">
+        <table>
+          <thead><tr><th>Perspektive</th><th>Ziel</th><th>Typische Inhalte / Funktionen</th><th>Prüfungs-Merker</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Unternehmen</strong></td><td>Branding, B2B-Leads, Recruiting.</td><td>Company Page, Branchen-Insights, Case Studies, Ads, Events, Jobs.</td><td>LinkedIn verbindet Marke, Vertrieb und HR.</td></tr>
+            <tr><td><strong>Mitarbeitende</strong></td><td>Glaubwürdige Reichweite und fachliche Stimme.</td><td>Corporate Influencer, Kommentare, persönliche Posts, Projekt-Einblicke.</td><td>Mitarbeitende erhöhen Vertrauen stärker als reine Unternehmensposts.</td></tr>
+            <tr><td><strong>User / Bewerber*innen</strong></td><td>Karriere, Netzwerk, Sichtbarkeit.</td><td>Profil, Skills, Open-to-Work, Jobsuche, Networking.</td><td>Personal Branding ist Teil der Plattformlogik.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="note searchable-item">
+      <strong>Merksatz:</strong> LinkedIn ist nicht nur Social Media. Es ist gleichzeitig B2B-Marketing-Kanal, Recruiting-Kanal, Content-Plattform und berufliches Netzwerk.
+    </div>
+  </section>
+
+  <section id="company" class="tab-content">
+    <div class="section-header searchable-item">
+      <h2>2. Company Pages: Ziele, Herausforderungen & Best Practices</h2>
+      <p>Die Company Page ist der offizielle Markenauftritt eines Unternehmens. Sie bündelt Informationen, Jobs, offizielle Posts, Branding-Kampagnen und HR-Kommunikation.</p>
+    </div>
+
+    <div class="table-card searchable-item">
+      <div class="table-responsive">
+        <table>
+          <thead><tr><th>Bereich</th><th>Persönliches Profil</th><th>Company Page</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Rolle</strong></td><td>Repräsentiert eine einzelne Person.</td><td>Offizieller Unternehmensauftritt.</td></tr>
+            <tr><td><strong>Content</strong></td><td>Meinung, Fachartikel, Networking, persönliche Perspektive.</td><td>Offizielle Posts, Branding, Jobs, HR, Unternehmensnews.</td></tr>
+            <tr><td><strong>Reichweite</strong></td><td>Wird algorithmisch häufig stärker priorisiert.</td><td>Organisch begrenzter, aber durch Mitarbeitende und Paid Ads skalierbar.</td></tr>
+            <tr><td><strong>Strategie</strong></td><td>Personal Branding und Thought Leadership.</td><td>Markenautorität, Lead-Gen, Recruiting und Stakeholder-Kommunikation.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="grid">
+      <article class="card searchable-item"><span class="tag green">Brand Awareness</span><h3>Marke sichtbar machen</h3><p>Regelmäßige Branchen-Insights, Erfolgsgeschichten, einheitliche Gestaltung und klare Positionierung. KPIs: Impressionen, Follower-Wachstum, Erwähnungen.</p></article>
+      <article class="card searchable-item"><span class="tag blue">Lead-Gen</span><h3>B2B-Leads gewinnen</h3><p>Whitepaper, Studien, Webinare, Lead Gen Forms, Document Ads und Retargeting über den LinkedIn Insight Tag. KPIs: Leads, CPL, Conversion Rate.</p></article>
+      <article class="card searchable-item"><span class="tag yellow">Recruiting</span><h3>Fachkräfte anziehen</h3><p>Job-Posts, Karriereseiten-Integration, Behind-the-Scenes, Mitarbeitenden-Interviews, Benefits und Kultur. KPIs: Bewerbungen, CPA, Job-Klicks.</p></article>
+      <article class="card searchable-item"><span class="tag green">Community</span><h3>Dialog statt Monolog</h3><p>Umfragen, Q&A-Posts, Live Events, Kommentare beantworten und Partner oder Kund*innen einbinden. KPIs: Engagement Rate, Kommentare, Shares.</p></article>
+    </div>
+
+    <div class="table-card searchable-item">
+      <div class="table-responsive">
+        <table>
+          <thead><tr><th>Herausforderung 2026</th><th>Problem</th><th>Gute Anpassung</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Algorithmus</strong></td><td>Persönliche Profile dominieren oft die organische Reichweite.</td><td>Employee Advocacy, Corporate Influencer und diskussionsstarker Content.</td></tr>
+            <tr><td><strong>Content-Overload</strong></td><td>Generische Inhalte gehen unter.</td><td>Fachlicher Mehrwert, klare visuelle Wiedererkennung, konkrete Beispiele.</td></tr>
+            <tr><td><strong>Engagement-Gap</strong></td><td>Unternehmensposts wirken oft unpersönlich.</td><td>Storytelling, Team-Einblicke, Mitarbeitende einbinden.</td></tr>
+            <tr><td><strong>Paid vs. Organic</strong></td><td>Organische Reichweite ist limitiert, Ads sind teurer.</td><td>Organische Top-Posts gezielt mit Paid pushen und Retargeting nutzen.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="note searchable-item">
+      <strong>Company-Page-Regel:</strong> Vollständiges Profil, klarer About-Text mit Keywords, passende CTA, Content-Mix, Mitarbeitenden-Aktivierung und laufende KPI-Auswertung.
+    </div>
+  </section>
+
+  <section id="branding" class="tab-content">
+    <div class="section-header searchable-item">
+      <h2>3. Branding, Personal Branding & Thought Leadership</h2>
+      <p>LinkedIn funktioniert am stärksten, wenn Unternehmensmarke und persönliche Stimmen zusammenspielen. Menschen vertrauen Menschen – deshalb sind Mitarbeiter*innen, Expert*innen und Führungskräfte wichtige Reichweiten- und Vertrauenshebel.</p>
+    </div>
+
+    <div class="two-col">
+      <article class="card searchable-item">
+        <span class="tag green">Corporate Branding</span>
+        <h3>Content-Mix für Unternehmen</h3>
+        <ul>
+          <li>Corporate News: Produkt-Updates, Partnerschaften, Entwicklungen.</li>
+          <li>Branchen-Insights: Markttrends, Studien, Whitepaper.</li>
+          <li>Storytelling: Kundenstorys, Erfolgsgeschichten, Projektberichte.</li>
+          <li>Employee Advocacy: Mitarbeitende teilen, kommentieren und ergänzen Inhalte.</li>
+        </ul>
+      </article>
+
+      <article class="card searchable-item">
+        <span class="tag blue">Personal Branding</span>
+        <h3>Profiloptimierung 2026</h3>
+        <ul>
+          <li>Headline: Berufsbezeichnung + Spezialisierung + Nutzenversprechen.</li>
+          <li>Info-Text: Storytelling, Positionierung, gelöste Probleme.</li>
+          <li>Featured-Bereich: Projekte, Beiträge, Medien, Portfolio.</li>
+          <li>Skills, Keywords und ggf. Creator-Modus strategisch nutzen.</li>
+        </ul>
+      </article>
+    </div>
+
+    <div class="table-card searchable-item">
+      <div class="table-responsive">
+        <table>
+          <thead><tr><th>LinkedIn-Sichtbarkeit</th><th>Was zählt?</th><th>Was vermeiden?</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Semantische Relevanz</strong></td><td>Inhaltliche Tiefe, Fachklarheit und passende Kernthemen.</td><td>Hashtag-Tricks, Engagement-Bait, thematisches Springen.</td></tr>
+            <tr><td><strong>Saves & Kommentartiefe</strong></td><td>Gespeicherte Beiträge und substanzielle Diskussionen.</td><td>Nur Likes jagen.</td></tr>
+            <tr><td><strong>2–3 Kernthemen</strong></td><td>Klare fachliche Einordnung durch Profil und Posts.</td><td>Heute HR, morgen Finanzen, übermorgen Comedy ohne Bezug.</td></tr>
+            <tr><td><strong>Qualität vor Frequenz</strong></td><td>Regelmäßige, wertstiftende Inhalte.</td><td>Tägliche Posts ohne Substanz.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="workflow searchable-item">
+      <h3>Corporate Influencer: Schnittstelle zwischen Unternehmen und Menschen</h3>
+      <p>Mitarbeitende können Unternehmensbotschaften glaubwürdiger transportieren als reine Company-Posts. Dafür brauchen sie Leitplanken, Schulung und Freiraum für persönliche Sprache.</p>
+      <div class="steps">
+        <div class="step"><span class="step-num">1</span><strong>Themen</strong>2–3 Kernthemen definieren.</div>
+        <div class="step"><span class="step-num">2</span><strong>Leitplanken</strong>Compliance, Tonalität, No-Gos.</div>
+        <div class="step"><span class="step-num">3</span><strong>Content</strong>Erfahrungen, Projekte, Learnings.</div>
+        <div class="step"><span class="step-num">4</span><strong>Synergie</strong>Company Page + persönliche Perspektive verbinden.</div>
+      </div>
+    </div>
+
+    <div class="note searchable-item">
+      <strong>Prüfungs-Merker:</strong> Thought Leadership bedeutet nicht Selbstvermarktung allein, sondern fachlich relevante Beiträge, klare Haltung und kontinuierliche Community-Interaktion.
+    </div>
+  </section>
+
+  <section id="ads" class="tab-content">
+    <div class="section-header searchable-item">
+      <h2>4. LinkedIn Advertising & Performance-Marketing</h2>
+      <p>LinkedIn Ads laufen über den Campaign Manager. Dort werden Kampagnenziele, Zielgruppen, Creatives, Budgets und Tracking gesteuert.</p>
+    </div>
+
+    <div class="table-card searchable-item">
+      <div class="table-responsive">
+        <table>
+          <thead><tr><th>Objective</th><th>Ziel</th><th>Beispiele</th><th>KPIs</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Awareness</strong></td><td>Marke sichtbar machen.</td><td>Markenbekanntheit, Reichweite.</td><td>Impressionen, Reichweite, CPM.</td></tr>
+            <tr><td><strong>Consideration</strong></td><td>Interesse und Interaktion erzeugen.</td><td>Website-Besuche, Engagement, Video Views.</td><td>CTR, CPC, Engagement Rate, View Rate.</td></tr>
+            <tr><td><strong>Conversion</strong></td><td>Konkrete Zielhandlung auslösen.</td><td>Leads, Bewerbungen, Website-Conversions, Event-Registrierungen.</td><td>Conversion Rate, CPL, CPA.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="grid">
+      <article class="card searchable-item"><span class="tag green">B2B-Targeting</span><h3>Branche, Größe, Funktion</h3><p>LinkedIn kann nach Branche, Unternehmensgröße, Funktion, Seniorität, Jobtitel und Standort ausrichten.</p></article>
+      <article class="card searchable-item"><span class="tag blue">HR-Targeting</span><h3>Skills & Karriere</h3><p>Skills, Berufserfahrung, Ausbildungsgrad, Karrierestufe und Standort helfen bei Recruiting-Kampagnen.</p></article>
+      <article class="card searchable-item"><span class="tag yellow">First-Party-Daten</span><h3>CRM, Retargeting, Lookalike</h3><p>CRM-Listen, Website-Besucher*innen und Lookalike Audiences können genutzt werden – Datenschutz beachten.</p></article>
+      <article class="card searchable-item"><span class="tag green">Signalbasiert</span><h3>KI & Intent</h3><p>LinkedIn nutzt stärker KI- und Interessenssignale, um relevante Zielgruppen zu finden.</p></article>
+    </div>
+
+    <div class="table-card searchable-item">
+      <div class="table-responsive">
+        <table>
+          <thead><tr><th>Format</th><th>Wofür gut?</th><th>Prüfungs-Merker</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Sponsored Content</strong></td><td>Feed-Anzeigen als Bild, Video, Carousel oder Document Ad.</td><td>Gut für Storytelling, Produktvorstellungen, Employer Branding.</td></tr>
+            <tr><td><strong>Thought Leader Ads</strong></td><td>Beiträge einzelner Personen gezielt bewerben.</td><td>Verbindet persönliche Stimme mit Paid-Reichweite.</td></tr>
+            <tr><td><strong>Lead Gen Forms</strong></td><td>Lead-Erfassung direkt in LinkedIn.</td><td>Reduziert Reibung, wichtig für B2B-Leads.</td></tr>
+            <tr><td><strong>Conversation Ads</strong></td><td>Interaktive Nachrichten mit CTA-Auswahl.</td><td>Persönlicher, aber sensibel bei Tonalität.</td></tr>
+            <tr><td><strong>Dynamic Ads</strong></td><td>Automatisierte Personalisierung mit Profilmerkmalen.</td><td>Direkte Ansprache, z. B. Recruiting oder Job-Promotion.</td></tr>
+            <tr><td><strong>Event Ads</strong></td><td>LinkedIn-Events bewerben.</td><td>Gut für Webinare, Q&A, Produktdemos und HR-Events.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="note searchable-item">
+      <strong>Tracking-Merker:</strong> Wichtige Metriken sind Impressionen, Klicks, CTR, Engagement Rate, Conversion Rate, CPC, CPL und CPA. Für Retargeting und Conversion-Tracking ist der LinkedIn Insight Tag relevant.
+    </div>
+  </section>
+
+  <section id="hr" class="tab-content">
+    <div class="section-header searchable-item">
+      <h2>5. HR-Marketing & Employer Branding</h2>
+      <p>HR-Marketing zeigt ein Unternehmen als attraktiven Arbeitgeber. Employer Branding ist die Entwicklung der Arbeitgebermarke: Werte, Kultur und Vorteile der Arbeit im Unternehmen.</p>
+    </div>
+
+    <div class="table-card searchable-item">
+      <div class="table-responsive">
+        <table>
+          <thead><tr><th>Begriff</th><th>Definition</th><th>Einfach gemerkt</th></tr></thead>
+          <tbody>
+            <tr><td><strong>HR-Marketing</strong></td><td>Strategischer Ansatz, der Unternehmen für Bewerber*innen attraktiv macht und Mitarbeitende bindet.</td><td>Maßnahmen zur Gewinnung und Bindung.</td></tr>
+            <tr><td><strong>Employer Branding</strong></td><td>Teilbereich des HR-Marketings: Entwicklung einer starken Arbeitgebermarke.</td><td>Wofür steht der Arbeitgeber?</td></tr>
+            <tr><td><strong>EVP</strong></td><td>Employer Value Proposition: zentrales Arbeitgeberversprechen.</td><td>Warum sollte jemand genau hier arbeiten?</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="grid">
+      <article class="card searchable-item"><span class="tag green">Warum wichtig?</span><h3>Arbeitsmarkt verändert sich</h3><p>Fachkräftemangel, Arbeitnehmermarkt, Social-Media-Transparenz und neue Erwartungen wie Flexibilität, Remote, Nachhaltigkeit und Purpose machen HR-Marketing wichtiger.</p></article>
+      <article class="card searchable-item"><span class="tag blue">Zielgruppen</span><h3>3 Gruppen</h3><p>Potenzielle Bewerber*innen, aktuelle Mitarbeitende und ehemalige Mitarbeitende bzw. Alumni.</p></article>
+      <article class="card searchable-item"><span class="tag yellow">Maßnahmen</span><h3>Innen und außen</h3><p>Karriereseite, Stellenanzeigen, Social Recruiting, Mitarbeitenden-Stories, Werte definieren, Führungskultur und interne Kommunikation.</p></article>
+    </div>
+
+    <div class="table-card searchable-item">
+      <div class="table-responsive">
+        <table>
+          <thead><tr><th>Ziel von Employer Branding</th><th>Bedeutung</th><th>Nutzen</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Passende Mitarbeitende gewinnen</strong></td><td>Menschen anziehen, die fachlich und kulturell passen.</td><td>Höhere Bewerbungsqualität.</td></tr>
+            <tr><td><strong>Mitarbeitende binden</strong></td><td>Fluktuation senken und Know-how halten.</td><td>Stabilität und geringere Kosten.</td></tr>
+            <tr><td><strong>Attraktivität steigern</strong></td><td>Als Arbeitgeber wahrgenommen werden.</td><td>Mehr proaktive Bewerbungen.</td></tr>
+            <tr><td><strong>Differenzierung</strong></td><td>USP im Arbeitsmarkt sichtbar machen.</td><td>Abgrenzung vom Wettbewerb.</td></tr>
+            <tr><td><strong>Konsistentes Image</strong></td><td>Einheitliche Botschaften auf allen Kanälen.</td><td>Glaubwürdigkeit und Wiedererkennung.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="note searchable-item">
+      <strong>Trend-Merker:</strong> Video-first im Recruiting, authentische Einblicke, Q&A-Events und virtuelle Office-Touren werden wichtiger als reine Hochglanz-Werbung.
+    </div>
+  </section>
+
+  <section id="recruiting" class="tab-content">
+    <div class="section-header searchable-item">
+      <h2>6. Recruiting Ads & HR-Kampagnen</h2>
+      <p>Recruiting Ads erreichen aktive und passive Kandidat*innen. LinkedIn ist stark für Fach- und Führungskräfte, aber auch Jobbörsen, Social Media und Nischenplattformen spielen eine Rolle.</p>
+    </div>
+
+    <div class="table-card searchable-item">
+      <div class="table-responsive">
+        <table>
+          <thead><tr><th>Plattform</th><th>Stärke</th><th>Prüfungs-Merker</th></tr></thead>
+          <tbody>
+            <tr><td><strong>LinkedIn</strong></td><td>Internationale Fach- und Führungskräfte, B2B, präzises Targeting.</td><td>Auch passive Talente erreichbar.</td></tr>
+            <tr><td><strong>XING</strong></td><td>DACH-Fokus, stärker in Richtung Jobvermittlung.</td><td>Rückläufiger als LinkedIn, aber regional relevant.</td></tr>
+            <tr><td><strong>Indeed / Stepstone / Glassdoor</strong></td><td>Aktive Jobsuchende und direkte Bewerbungen.</td><td>Mehr Performance, weniger Branding.</td></tr>
+            <tr><td><strong>Instagram / TikTok / YouTube</strong></td><td>Visuelles Storytelling, Young Talents, Employer Branding.</td><td>Snackable Video-Content und mobile Formate.</td></tr>
+            <tr><td><strong>GitHub / Behance / ResearchGate</strong></td><td>Spezifische Fach-Communities.</td><td>Gut für Tech, Design und Wissenschaft.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="workflow searchable-item">
+      <h3>Kampagnen-Setup in 6 Schritten</h3>
+      <div class="steps">
+        <div class="step"><span class="step-num">1</span><strong>Ziel</strong>Awareness, Bewerbungen oder Talent Pool?</div>
+        <div class="step"><span class="step-num">2</span><strong>Zielgruppe</strong>Skills, Jobtitel, Standort, Seniorität.</div>
+        <div class="step"><span class="step-num">3</span><strong>Plattform</strong>LinkedIn, Jobbörse, Social, Nische.</div>
+        <div class="step"><span class="step-num">4</span><strong>Format</strong>Video, Sponsored Content, Job Ad, Dynamic Ad.</div>
+        <div class="step"><span class="step-num">5</span><strong>Creative</strong>Authentisch, mobil, klarer Jobnutzen.</div>
+        <div class="step"><span class="step-num">6</span><strong>Messung</strong>CPA, Bewerbungsqualität, Time-to-Hire.</div>
+      </div>
+    </div>
+
+    <div class="table-card searchable-item">
+      <div class="table-responsive">
+        <table>
+          <thead><tr><th>KPI</th><th>Bedeutung</th><th>Wofür nutzen?</th></tr></thead>
+          <tbody>
+            <tr><td><strong>CPC</strong></td><td>Kosten pro Klick.</td><td>Effizienz des Traffics.</td></tr>
+            <tr><td><strong>CPA / Cost per Application</strong></td><td>Kosten pro Bewerbung.</td><td>Recruiting-Performance.</td></tr>
+            <tr><td><strong>CPH / Cost per Hire</strong></td><td>Kosten pro Einstellung.</td><td>Gesamter Recruiting-Erfolg.</td></tr>
+            <tr><td><strong>Time-to-Hire</strong></td><td>Zeit bis zur Einstellung.</td><td>Prozessgeschwindigkeit.</td></tr>
+            <tr><td><strong>Click-to-Apply-Rate</strong></td><td>Wie viele Klicks werden Bewerbungen?</td><td>Qualität von Anzeige, Jobseite und Bewerbungsprozess.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="note searchable-item">
+      <strong>Creative-Regel:</strong> Authentische Mitarbeitenden-Einblicke, kurze Videos und konkrete Benefits schlagen generische Stockfotos und leere Arbeitgeberversprechen.
+    </div>
+  </section>
+
+  <section id="nischen" class="tab-content">
+    <div class="section-header searchable-item">
+      <h2>7. Nischenplattformen im Social-Media-Marketing</h2>
+      <p>Nischenplattformen ersetzen Meta oder TikTok nicht. Sie ergänzen den Marketing-Mix, wenn Zielgruppe, Plattformlogik und Content-Format passen.</p>
+    </div>
+
+    <div class="grid">
+      <article class="card searchable-item"><span class="tag green">Definition</span><h3>Spezifische Nutzerbasis</h3><p>Nischenplattformen sind stärker themen- oder funktionsgetrieben als Mainstream-Netzwerke.</p></article>
+      <article class="card searchable-item"><span class="tag blue">Chance</span><h3>Relevanz statt Masse</h3><p>Marketingchancen liegen weniger in Reichweite, sondern in Community-Trust, Relevanz und Kaufbereitschaft.</p></article>
+      <article class="card searchable-item"><span class="tag yellow">Risiko</span><h3>Nicht einfach crossposten</h3><p>Nischenplattformen brauchen eigene Formate, Tonalität und Community-Verständnis.</p></article>
+    </div>
+
+    <div class="table-card searchable-item">
+      <div class="table-responsive">
+        <table>
+          <thead><tr><th>Plattform</th><th>Rolle im E-Commerce</th><th>Geeignet für</th><th>Prüfungs-Merker</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Pinterest</strong></td><td>Visuelle Such- und Inspirationsplattform.</td><td>Mode, Einrichtung, DIY, Rezepte, Lifestyle, Shopping.</td><td>Ideenmaschine mit hoher Kaufabsicht; Product Pins, Shoppable Pins, Shopping Ads.</td></tr>
+            <tr><td><strong>Snapchat</strong></td><td>Kurzlebigkeit und AR-Formate.</td><td>Junge Zielgruppen, AR Try-ons, interaktive Produkt-Erlebnisse.</td><td>Augmented Reality als Werbe- und Shopping-Erlebnis.</td></tr>
+            <tr><td><strong>Reddit</strong></td><td>Community-Vertrauen und Diskussionen.</td><td>Nischen, Reviews, ehrliche Empfehlungen.</td><td>Sehr werbekritisch: Mehrwert vor Werbung.</td></tr>
+            <tr><td><strong>Twitch</strong></td><td>Live-Events, Creator-Kooperationen, Gaming-Communitys.</td><td>Live-Shopping, Launches, Drops, Creator-Formate.</td><td>Interaktion und Verweildauer sind stark.</td></tr>
+            <tr><td><strong>X</strong></td><td>Echtzeit-Kommunikation und Trend-Commerce.</td><td>News, Trends, Social Proof, schnelle Reaktionen.</td><td>Gut für Echtzeit, weniger für langfristige Erklärung.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="note searchable-item">
+      <strong>Nischen-Merksatz:</strong> Kleine Reichweite ist nicht automatisch schlecht. Entscheidend ist, ob die Plattform eine relevante Zielgruppe mit passendem Nutzungskontext erreicht.
+    </div>
+  </section>
+
+  <section id="kpis" class="tab-content">
+    <div class="section-header searchable-item">
+      <h2>8. KPI-Landkarte & Diagnose</h2>
+      <p>LinkedIn kann Branding, Performance, HR, Recruiting und Nischenplattformen verbinden. Deshalb müssen KPIs immer zum Ziel passen.</p>
+    </div>
+
+    <div class="table-card searchable-item">
+      <div class="table-responsive">
+        <table>
+          <thead><tr><th>Zielbereich</th><th>Wichtige KPIs</th><th>Interpretation</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Branding</strong></td><td>Impressionen, Reichweite, Follower-Wachstum, Erwähnungen.</td><td>Sichtbarkeit und Wiedererkennung.</td></tr>
+            <tr><td><strong>Engagement</strong></td><td>Engagement Rate, Kommentare, Shares, Saves, Klicks.</td><td>Interesse und Resonanz.</td></tr>
+            <tr><td><strong>B2B Performance</strong></td><td>CTR, CPC, Conversion Rate, Leads, CPL.</td><td>Effizienz von Ads und Lead-Gewinnung.</td></tr>
+            <tr><td><strong>Recruiting</strong></td><td>Bewerbungen, CPA, Click-to-Apply-Rate, Bewerbungsqualität, Time-to-Hire.</td><td>Recruiting-Erfolg und Prozessqualität.</td></tr>
+            <tr><td><strong>Employer Branding</strong></td><td>Karriereseiten-Traffic, Job-Klicks, Bewerbungsqualität, eNPS, Mitarbeiterbindung.</td><td>Arbeitgeberattraktivität und Vertrauen.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="diagnose-grid">
+      <article class="diagnose-card searchable-item">
+        <button type="button">Company Page hat wenig Reichweite <span>+</span></button>
+        <div class="diagnose-body"><p><strong>Ursache:</strong> Reine Unternehmensposts werden organisch niedriger priorisiert, Inhalte sind zu werblich oder Mitarbeitende werden nicht eingebunden.</p><p><strong>Maßnahme:</strong> Employee Advocacy, persönliche Perspektiven, Dokument-Posts, Video und relevante Diskussionen nutzen.</p></div>
+      </article>
+      <article class="diagnose-card searchable-item">
+        <button type="button">Viele Impressionen, aber wenig Leads <span>+</span></button>
+        <div class="diagnose-body"><p><strong>Ursache:</strong> Ziel ist Awareness, aber Erwartung ist Conversion – oder Angebot/CTA passt nicht.</p><p><strong>Maßnahme:</strong> Objective, Lead Gen Form, Zielgruppe, CTA und Landingpage prüfen.</p></div>
+      </article>
+      <article class="diagnose-card searchable-item">
+        <button type="button">Recruiting Ads bringen Klicks, aber kaum Bewerbungen <span>+</span></button>
+        <div class="diagnose-body"><p><strong>Ursache:</strong> Jobseite, Bewerbungsprozess oder Creative erzeugen Reibung.</p><p><strong>Maßnahme:</strong> Click-to-Apply-Rate, Formularlänge, Jobnutzen und mobile Bewerbung prüfen.</p></div>
+      </article>
+      <article class="diagnose-card searchable-item">
+        <button type="button">Employer Branding wirkt unglaubwürdig <span>+</span></button>
+        <div class="diagnose-body"><p><strong>Ursache:</strong> Zu viel Hochglanz, zu wenig echte Einblicke.</p><p><strong>Maßnahme:</strong> Mitarbeitenden-Stories, echte Alltagsszenen, Q&A und Behind-the-Scenes einsetzen.</p></div>
+      </article>
+      <article class="diagnose-card searchable-item">
+        <button type="button">Nischenplattform bringt keine Wirkung <span>+</span></button>
+        <div class="diagnose-body"><p><strong>Ursache:</strong> Plattformlogik wurde nicht verstanden oder Content wurde einfach von Meta/TikTok kopiert.</p><p><strong>Maßnahme:</strong> Zielgruppe, Nutzungskontext, Community-Regeln und Format neu prüfen.</p></div>
+      </article>
+      <article class="diagnose-card searchable-item">
+        <button type="button">Viele Likes, aber keine Bewerbungen <span>+</span></button>
+        <div class="diagnose-body"><p><strong>Ursache:</strong> Engagement ist nicht automatisch Recruiting-Erfolg.</p><p><strong>Maßnahme:</strong> Bewerbungs-CTA, Jobzielgruppe, Bewerbungsqualität und Cost per Application messen.</p></div>
+      </article>
+    </div>
+
+    <div class="note searchable-item">
+      <strong>Finaler Prüfungs-Merker:</strong> LinkedIn-Fragen drehen sich oft um Zuordnung: Ziel → passende Seite/Profilrolle → Format → Zielgruppe → KPI → Diagnose.
+    </div>
+  </section>
 </main>
-<footer>LinkedIn &amp; Nischen-Plattformen Playbook · Spezialisierung 1</footer>
+
+<footer>LinkedIn & Nischen-Plattformen Playbook · Datei: linkedin-playbook.html</footer>
 
 <script>
 const tabButtons = document.querySelectorAll('.tab-btn');
@@ -258,6 +740,5 @@ searchInput.addEventListener('input', () => {
   noResults.style.display = hits ? 'none' : 'block';
 });
 </script>
-
 </body>
 </html>

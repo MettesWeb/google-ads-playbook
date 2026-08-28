@@ -1,43 +1,167 @@
 <!doctype html>
 <html lang="de">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Landing Pages Quiz</title>
-<style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Landing Pages Quiz</title>
+  <style>
 :root{
-  --primary:#0f5132;--secondary:#16834f;--gold:#c8a84e;--bg:#f4fbf7;--card:#fff;--border:#dbeee2;--text:#123326;--muted:#5f7569;--ok:#10b981;--bad:#ef4444;--shadow:0 12px 30px rgba(15,81,50,.12)
+  --primary-blue:#0f5132;
+  --secondary-blue:#16834f;
+  --gold:#c8a84e;
+  --light-bg:#f4fbf7;
+  --card-bg:#ffffff;
+  --border-color:#dbeee2;
+  --text-dark:#123326;
+  --text-muted:#5f7569;
+  --correct-bg:#d1fae5;
+  --correct-border:#10b981;
+  --incorrect-bg:#fee2e2;
+  --incorrect-border:#ef4444;
+  --shadow-md:0 12px 30px rgba(15,81,50,.12);
 }
 *{box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;margin:0}
-.quiz-header{background:var(--primary);color:#fff;border-bottom:4px solid var(--gold);padding:1.15rem 1.5rem;box-shadow:0 8px 24px rgba(15,81,50,.13)}
-.quiz-header-inner{width:min(1200px,calc(100% - 2rem));margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:1rem}
-.quiz-header h1{font-size:clamp(2rem,3.8vw,2.8rem);line-height:1.08;margin:0;font-weight:850;letter-spacing:-.02em;color:#fff;text-align:left}
-.back-link-header{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;color:#fff;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.28);padding:.82rem 1rem;border-radius:9px;font-weight:800;white-space:nowrap}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  background:var(--light-bg);
+  color:var(--text-dark);
+  min-height:100vh;
+  margin:0;
+}
+.quiz-header{
+  background:var(--primary-blue);
+  color:#fff;
+  border-bottom:4px solid var(--gold);
+  padding:1.15rem 1.5rem;
+  box-shadow:0 8px 24px rgba(15,81,50,.13);
+}
+.quiz-header-inner{
+  width:min(1200px,calc(100% - 2rem));
+  margin:0 auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:1rem;
+}
+.quiz-header h1{
+  font-size:clamp(2rem,3.8vw,2.8rem);
+  line-height:1.08;
+  margin:0;
+  font-weight:850;
+  letter-spacing:-.02em;
+  color:#fff;
+  text-align:left;
+}
+.back-link-header{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  text-decoration:none;
+  color:#fff;
+  background:rgba(255,255,255,.10);
+  border:1px solid rgba(255,255,255,.28);
+  padding:.82rem 1rem;
+  border-radius:9px;
+  font-weight:800;
+  white-space:nowrap;
+}
 .back-link-header:hover{background:rgba(255,255,255,.18)}
-.quiz-main{min-height:calc(100vh - 98px);display:flex;justify-content:center;align-items:flex-start;padding:3rem 1.25rem}
-.quiz-container{background-color:#fff;border-radius:12px;box-shadow:var(--shadow);width:100%;max-width:850px;padding:40px}
-.progress{text-align:center;color:var(--muted);font-size:15px;margin-bottom:30px;font-weight:700}
-.question{font-size:20px;font-weight:750;margin-bottom:25px;line-height:1.5;color:var(--text)}
+.quiz-main{
+  min-height:calc(100vh - 98px);
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  padding:3rem 1.25rem;
+}
+.quiz-container{
+  background-color:#fff;
+  border-radius:12px;
+  box-shadow:var(--shadow-md);
+  width:100%;
+  max-width:850px;
+  padding:40px;
+}
+.progress{
+  text-align:center;
+  color:var(--text-muted);
+  font-size:15px;
+  margin-bottom:30px;
+  font-weight:700;
+}
+.question{
+  font-size:20px;
+  font-weight:750;
+  margin-bottom:25px;
+  line-height:1.5;
+  color:var(--text-dark);
+}
 .options{display:flex;flex-direction:column;gap:12px}
-.option{background-color:#f8fffb;border:2px solid var(--border);border-radius:8px;padding:16px;font-size:16px;cursor:pointer;transition:all .2s ease;text-align:left;font-weight:500;color:#416552;line-height:1.45}
+.option{
+  background-color:#f8fffb;
+  border:2px solid var(--border-color);
+  border-radius:8px;
+  padding:16px;
+  font-size:16px;
+  cursor:pointer;
+  transition:all .2s ease;
+  text-align:left;
+  font-weight:500;
+  color:#416552;
+  line-height:1.45;
+}
 .option:hover:not(:disabled){background-color:#e8f8ee;border-color:#bfe4ca}
-.option.correct{background-color:#d1fae5!important;border-color:var(--ok)!important;color:#065f46!important;font-weight:700}
-.option.incorrect{background-color:#fee2e2!important;border-color:var(--bad)!important;color:#991b1b!important}
+.option.correct{background-color:var(--correct-bg)!important;border-color:var(--correct-border)!important;color:#065f46!important;font-weight:700}
+.option.incorrect{background-color:var(--incorrect-bg)!important;border-color:var(--incorrect-border)!important;color:#991b1b!important}
 .option:disabled{cursor:default}
-.feedback{margin-top:25px;font-size:16px;text-align:left;min-height:24px;padding:15px;border-radius:8px;display:none;line-height:1.5}
-.feedback.success{background-color:#d1fae5;color:#065f46;border-left:5px solid var(--ok)}
-.feedback.error{background-color:#fee2e2;color:#991b1b;border-left:5px solid var(--bad)}
+.feedback{
+  margin-top:25px;
+  font-size:16px;
+  text-align:left;
+  min-height:24px;
+  padding:15px;
+  border-radius:8px;
+  display:none;
+  line-height:1.5;
+}
+.feedback.success{background-color:var(--correct-bg);color:#065f46;border-left:5px solid var(--correct-border)}
+.feedback.error{background-color:var(--incorrect-bg);color:#991b1b;border-left:5px solid var(--incorrect-border)}
 .btn-container{display:flex;justify-content:flex-end;margin-top:30px}
-.next-btn{background-color:var(--secondary);color:#fff;border:none;border-radius:8px;padding:14px 28px;font-size:16px;font-weight:800;cursor:pointer;display:none}
-.next-btn:hover{background-color:var(--primary)}
+.next-btn{
+  background-color:var(--secondary-blue);
+  color:#fff;
+  border:none;
+  border-radius:8px;
+  padding:14px 28px;
+  font-size:16px;
+  font-weight:800;
+  cursor:pointer;
+  transition:background-color .2s;
+  display:none;
+}
+.next-btn:hover{background-color:var(--primary-blue)}
 .result-container{text-align:center;display:none}
-.result-container h2{color:var(--primary);font-size:30px;margin-bottom:20px}
+.result-container h2{color:var(--primary-blue);font-size:30px;margin-bottom:20px}
 .result-container p{font-size:20px;color:#4a5568;margin-bottom:30px}
-.score-circle{width:150px;height:150px;border-radius:50%;background:var(--primary);color:white;display:flex;align-items:center;justify-content:center;font-size:46px;font-weight:850;margin:0 auto 24px auto}
-.restart-btn{background-color:var(--secondary);color:white;border:none;border-radius:8px;padding:14px 28px;font-size:16px;font-weight:800;cursor:pointer}
-.restart-btn:hover{background-color:var(--primary)}
-@media(max-width:760px){.quiz-header-inner{width:100%;flex-direction:column;align-items:stretch}.back-link-header{width:100%}.quiz-container{padding:28px 20px}}
+.score-circle{
+  width:150px;
+  height:150px;
+  border-radius:50%;
+  background:var(--primary-blue);
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:46px;
+  font-weight:850;
+  margin:0 auto 24px auto;
+}
+.restart-btn{background-color:var(--secondary-blue);color:white;border:none;border-radius:8px;padding:14px 28px;font-size:16px;font-weight:800;cursor:pointer}
+.restart-btn:hover{background-color:var(--primary-blue)}
+@media(max-width:760px){
+  .quiz-header-inner{width:100%;flex-direction:column;align-items:stretch}
+  .back-link-header{width:100%}
+  .quiz-container{padding:28px 20px}
+}
 </style>
 </head>
 <body>
@@ -47,6 +171,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Ar
     <a class="back-link-header" href="spezi1.html">← Zur grünen Übersicht</a>
   </div>
 </header>
+
 <main class="quiz-main">
   <div class="quiz-container">
     <div id="quiz">
@@ -56,6 +181,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Ar
       <div class="feedback" id="feedback"></div>
       <div class="btn-container"><button class="next-btn" id="nextBtn">Weiter</button></div>
     </div>
+
     <div class="result-container" id="result">
       <div class="score-circle" id="scoreCircle">0</div>
       <h2>Quiz abgeschlossen</h2>
@@ -64,6 +190,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Ar
     </div>
   </div>
 </main>
+
 <script>
 const questions = [
   {
@@ -75,218 +202,219 @@ const questions = [
       "Alle Blogartikel sammeln"
     ],
     "answer": 0,
-    "explanation": "Landingpages sind auf eine konkrete Handlung wie Kauf, Anmeldung, Download oder Terminbuchung ausgerichtet."
+    "explanation": "Eine Landingpage ist auf eine konkrete Zielhandlung wie Kauf, Anmeldung, Download oder Terminbuchung ausgerichtet."
   },
   {
     "q": "Wie unterscheidet sich eine Landingpage von einer Startseite?",
     "options": [
-      "Sie ist breiter und hat mehr Menüs",
+      "Sie ist breiter und hat mehr Wege",
       "Sie ist fokussierter und führt zu einer klaren Entscheidung",
-      "Sie darf keine CTA enthalten",
+      "Sie darf keinen CTA enthalten",
       "Sie ist nur für Desktop gedacht"
     ],
     "answer": 1,
-    "explanation": "Eine Landingpage ist stärker reduziert und kampagnenbezogen."
+    "explanation": "Eine Landingpage ist maximal reduziert und auf ein Kampagnenziel ausgerichtet."
+  },
+  {
+    "q": "Welche Funnel-Stufe steht für Awareness?",
+    "options": [
+      "TOFU",
+      "MOFU",
+      "BOFU",
+      "Footer"
+    ],
+    "answer": 0,
+    "explanation": "TOFU ist der obere Funnel-Bereich und dient eher Awareness und erster Orientierung."
   },
   {
     "q": "Was bedeutet Above the Fold?",
     "options": [
-      "Der Bereich, den man erst nach dem Scrollen sieht",
       "Der sofort sichtbare Bereich ohne Scrollen",
-      "Der Footer einer Seite",
-      "Eine technische Tracking-Methode"
+      "Der Footer der Seite",
+      "Der Bereich nach der Datenschutzseite",
+      "Ein technisches Tracking-Skript"
     ],
-    "answer": 1,
-    "explanation": "Above the Fold ist der direkt sichtbare Bereich beim Laden der Seite."
+    "answer": 0,
+    "explanation": "Above the Fold ist der Bereich, den Nutzer*innen ohne Scrollen zuerst sehen."
   },
   {
     "q": "Was gehört besonders in den Above-the-Fold-Bereich?",
     "options": [
-      "Value Proposition, CTA und Trust-Signale",
-      "Nur lange AGB",
-      "Alle Footer-Links",
-      "Eine komplette Unternehmenshistorie"
+      "Value Proposition, Hero-Element, CTA und Vertrauen",
+      "Nur AGB und Impressum",
+      "Alle Bloglinks",
+      "Eine lange Unternehmensgeschichte"
     ],
     "answer": 0,
-    "explanation": "Oben muss sofort klar sein, warum die Seite relevant ist und was man tun soll."
+    "explanation": "Oben muss sofort klar sein: Warum bleiben, was tun, warum vertrauen?"
   },
   {
     "q": "Was ist eine Value Proposition?",
     "options": [
-      "Das zentrale Wertversprechen für Nutzer*innen",
-      "Eine technische Cookie-Kategorie",
-      "Ein Affiliate-Provisionsmodell",
-      "Ein Serverprotokoll"
+      "Das zentrale Nutzen- und Wertversprechen",
+      "Eine Cookie-Laufzeit",
+      "Ein PageSpeed-Tool",
+      "Ein Kommentarfilter"
     ],
     "answer": 0,
-    "explanation": "Sie beantwortet schnell, welchen Nutzen das Angebot bietet."
+    "explanation": "Sie beantwortet, warum das Angebot relevant ist und welches Problem gelöst wird."
   },
   {
-    "q": "Was ist ein typischer Fehler bei Formularen?",
+    "q": "Welche Aufgabe hat Below the Fold?",
     "options": [
-      "Zu wenige Pflichtfelder",
-      "Zu viele Pflichtfelder und unnötige Reibung",
-      "Autofill zu nutzen",
-      "Klare Fehlermeldungen zu schreiben"
-    ],
-    "answer": 1,
-    "explanation": "Zu lange Formulare erhöhen kognitive Belastung und Abbruchrisiko."
-  },
-  {
-    "q": "Was bedeutet Mobile First?",
-    "options": [
-      "Desktop wird ignoriert",
-      "Die mobile Ansicht wird als zentrale Nutzungssituation zuerst gedacht",
-      "Die Seite funktioniert nur mit App",
-      "Bilder werden nie verwendet"
-    ],
-    "answer": 1,
-    "explanation": "Viele Nutzer kommen mobil, daher muss die Smartphone-Ansicht besonders gut funktionieren."
-  },
-  {
-    "q": "Was sind Micro-Moments?",
-    "options": [
-      "Kurze mobile Entscheidungssituationen mit konkretem Bedürfnis",
-      "Sehr lange Desktop-Sessions",
-      "Interne Meetings",
-      "Newsletter-Templates"
+      "Argumente vertiefen, Vertrauen stärken und Einwände abbauen",
+      "Nur den Header wiederholen",
+      "Den CTA verstecken",
+      "Alle Social-Media-Links zeigen"
     ],
     "answer": 0,
-    "explanation": "Micro-Moments sind kurze Momente wie I want to know/go/do/buy."
+    "explanation": "Below the Fold stützt die Entscheidung durch Argumentation, Social Proof, FAQs und Pflichtangaben."
+  },
+  {
+    "q": "Was ist ein typischer Aufbaufehler bei Landingpages?",
+    "options": [
+      "Zu viele Ablenkungen und mehrere konkurrierende CTAs",
+      "Klares Wertversprechen",
+      "Kurzes Formular",
+      "Sichtbare Trust-Elemente"
+    ],
+    "answer": 0,
+    "explanation": "Zu viele Menüs, Links oder CTAs stören den Fokus der Landingpage."
+  },
+  {
+    "q": "Warum ist Scanbarkeit wichtig?",
+    "options": [
+      "Nutzer*innen überfliegen Landingpages oft statt sie komplett zu lesen",
+      "Niemand klickt auf Landingpages",
+      "Landingpages dürfen keine Texte haben",
+      "Suchmaschinen lesen nur Bilder"
+    ],
+    "answer": 0,
+    "explanation": "Layout, Headlines, Bulletpoints und Chunking helfen beim schnellen Erfassen."
+  },
+  {
+    "q": "Was ist Visual Storytelling auf Landingpages?",
+    "options": [
+      "Bilder und Videos machen den Nutzen erlebbar",
+      "Bilder schmücken nur die Seite",
+      "Nur Stockfotos verwenden",
+      "Texte komplett ersetzen"
+    ],
+    "answer": 0,
+    "explanation": "Visuals sollen den Nutzen unterstützen und nicht nur dekorativ sein."
+  },
+  {
+    "q": "Was ist bei CTA-Texten besser als „Absenden“?",
+    "options": [
+      "„Jetzt kostenlos testen“",
+      "„Button“",
+      "„Weiter eventuell“",
+      "„Formular senden“"
+    ],
+    "answer": 0,
+    "explanation": "Gute CTA-Texte sind aktiv, nutzenorientiert und konkret."
+  },
+  {
+    "q": "Warum ist Mobile First wichtig?",
+    "options": [
+      "Viele Nutzer*innen kommen mobil, oft über Social Media oder Paid Ads",
+      "Desktop ist rechtlich verboten",
+      "Mobile Seiten brauchen keine CTAs",
+      "Google ignoriert mobile Seiten"
+    ],
+    "answer": 0,
+    "explanation": "Mobile Nutzung dominiert viele E-Commerce-, Social- und Paid-Ad-Situationen."
+  },
+  {
+    "q": "Welche mobile Formularregel ist richtig?",
+    "options": [
+      "Weniger Pflichtfelder, Autofill und Inline-Fehler nutzen",
+      "Möglichst viele Pflichtfelder verlangen",
+      "Fehler erst nach Absenden anzeigen",
+      "Nur Freitextfelder verwenden"
+    ],
+    "answer": 0,
+    "explanation": "Mobile Formulare müssen Reibung reduzieren."
+  },
+  {
+    "q": "Was bedeutet Thumb-Zone?",
+    "options": [
+      "Der Bereich, den der Daumen bequem erreicht",
+      "Der Footer einer Seite",
+      "Ein Bildformat",
+      "Ein Tracking-Cookie"
+    ],
+    "answer": 0,
+    "explanation": "Haupt-CTAs sollten mobil ergonomisch erreichbar sein."
   },
   {
     "q": "Was ist Social Proof?",
     "options": [
-      "Menschen orientieren sich am Verhalten anderer",
-      "Ein reines Tracking-Skript",
-      "Eine Serverantwort",
-      "Ein rechtlicher Footer"
+      "Menschen orientieren sich an dem Verhalten und den Erfahrungen anderer",
+      "Eine JavaScript-Datei",
+      "Ein reines Zahlungsmodell",
+      "Ein Serverstatus"
     ],
     "answer": 0,
-    "explanation": "Bewertungen, Testimonials oder Nutzerzahlen können Vertrauen schaffen."
+    "explanation": "Bewertungen, Testimonials und Zahlenbelege können Vertrauen stärken."
   },
   {
-    "q": "Was ist ein Trust-Element?",
+    "q": "Was ist FOMO?",
     "options": [
-      "Gütesiegel, sichere Zahlung oder Kundenbewertung",
-      "Ein versteckter Button",
-      "Ein unklarer Preis",
-      "Ein blockierendes Skript"
+      "Fear of Missing Out – Angst, etwas zu verpassen",
+      "Eine Core-Web-Vital-Metrik",
+      "Ein Formularfeld",
+      "Ein SEO-Plugin"
     ],
     "answer": 0,
-    "explanation": "Trust-Elemente reduzieren Unsicherheit und stärken Sicherheit."
+    "explanation": "FOMO kann durch echte Knappheit oder zeitliche Begrenzung Handlungsdruck erzeugen."
   },
   {
-    "q": "Was bedeutet Scarcity/FOMO auf Landingpages?",
+    "q": "Was ist Microcopy?",
     "options": [
-      "Knappheit oder Angst, etwas zu verpassen",
-      "Eine Ladezeit-Kennzahl",
-      "Eine Formulartechnik",
-      "Ein Social-Media-Kommentar"
+      "Kurze Texte, die Nutzer*innen durch Entscheidungen führen",
+      "Ein langer Blogartikel",
+      "Ein großes Hero-Bild",
+      "Ein Affiliate-Link"
     ],
     "answer": 0,
-    "explanation": "Knappheit kann Handlungsdruck erhöhen, sollte aber seriös eingesetzt werden."
+    "explanation": "Microcopy steht an Buttons, Formularen, Fehlermeldungen oder Checkout-Schritten."
   },
   {
-    "q": "Was ist Cognitive Load?",
-    "options": [
-      "Mentale Belastung durch zu viele Informationen oder Optionen",
-      "Die Ladezeit des Servers",
-      "Die Farbe eines Buttons",
-      "Eine Affiliate-Provision"
-    ],
-    "answer": 0,
-    "explanation": "Zu viele Reize oder Pflichtfelder können Nutzer überfordern."
-  },
-  {
-    "q": "Welche Kennzahl gehört zu Core Web Vitals?",
+    "q": "Welcher Core Web Vital misst, wie schnell der Hauptinhalt sichtbar wird?",
     "options": [
       "LCP",
-      "CPO",
-      "CSAT",
-      "eNPS"
+      "INP",
+      "CLS",
+      "CPL"
     ],
     "answer": 0,
-    "explanation": "LCP misst, wann der Hauptinhalt sichtbar wird."
+    "explanation": "LCP steht für Largest Contentful Paint."
   },
   {
     "q": "Was beschreibt CLS?",
     "options": [
-      "Ob Inhalte beim Laden springen",
+      "Ob Layout-Elemente beim Laden springen",
       "Wie viele Leads entstehen",
       "Wie schnell ein Support antwortet",
-      "Wie hoch die Provision ist"
+      "Wie hoch der Warenkorb ist"
     ],
     "answer": 0,
     "explanation": "Cumulative Layout Shift misst visuelle Stabilität."
   },
   {
-    "q": "Warum ist Ladezeit für Conversion wichtig?",
+    "q": "Welche Aussage zu KI-Feedback für Landingpages ist richtig?",
     "options": [
-      "Langsame Seiten können Absprünge und Misstrauen erhöhen",
-      "Sie beeinflusst nie Nutzerverhalten",
-      "Sie ersetzt Trust-Elemente",
-      "Sie macht Formulare länger"
+      "KI kann Muster erkennen, ersetzt aber keine echten Nutzertests und keine eigene Einschätzung",
+      "KI entscheidet immer allein",
+      "KI kennt die Zielgruppe automatisch besser",
+      "KI macht rechtliche Prüfung überflüssig"
     ],
     "answer": 0,
-    "explanation": "Ladezeit wirkt auf Geduld, Vertrauen und Abschlussbereitschaft."
-  },
-  {
-    "q": "Was ist ein A/B-Test?",
-    "options": [
-      "Zwei Varianten werden gegeneinander getestet",
-      "Eine Umfrage ohne Varianten",
-      "Ein einmaliges Bauchgefühl",
-      "Ein reiner Design-Export"
-    ],
-    "answer": 0,
-    "explanation": "A/B-Tests messen, welche Variante besser wirkt."
-  },
-  {
-    "q": "Wie lautet eine gute Hypothesenstruktur?",
-    "options": [
-      "Wenn X geändert wird, dann Y passiert, weil Z",
-      "Design ist schön",
-      "Wir ändern alles",
-      "Mehr Text ist immer besser"
-    ],
-    "answer": 0,
-    "explanation": "Eine gute Hypothese ist überprüfbar und begründet."
-  },
-  {
-    "q": "Was bedeutet ICE bei der Priorisierung?",
-    "options": [
-      "Impact, Confidence, Ease",
-      "Image, Color, Emotion",
-      "Index, Click, Exit",
-      "Influencer, Creator, Engagement"
-    ],
-    "answer": 0,
-    "explanation": "ICE hilft, Testideen nach Wirkung, Zuversicht und Umsetzbarkeit zu priorisieren."
-  },
-  {
-    "q": "Was kann KI bei Landingpages leisten?",
-    "options": [
-      "Screenshot-Feedback und Hinweise auf Muster geben",
-      "Echte Nutzer vollständig ersetzen",
-      "Ohne Kontext perfekte Wahrheiten liefern",
-      "Rechtliche Prüfung garantieren"
-    ],
-    "answer": 0,
-    "explanation": "KI kann Hinweise liefern, muss aber kritisch geprüft werden."
-  },
-  {
-    "q": "Was ist bei Landingpage-Optimierung der bessere Ansatz?",
-    "options": [
-      "Daten, Hypothesen und Tests statt Bauchgefühl",
-      "Nur persönliche Lieblingsfarbe",
-      "Jede Woche komplettes Redesign",
-      "Keine Messung"
-    ],
-    "answer": 0,
-    "explanation": "Conversion-Optimierung sollte datenbasiert und hypothesengeleitet sein."
+    "explanation": "KI-Feedback ist hilfreich als Anregung, muss aber kritisch geprüft werden."
   }
 ];
+
 let currentQuestion=0, score=0, answered=false;
 const progressEl=document.getElementById('progress');
 const questionEl=document.getElementById('question');
@@ -297,6 +425,7 @@ const quizEl=document.getElementById('quiz');
 const resultEl=document.getElementById('result');
 const scoreTextEl=document.getElementById('scoreText');
 const scoreCircleEl=document.getElementById('scoreCircle');
+
 function loadQuestion(){
   answered=false;
   const q=questions[currentQuestion];
@@ -314,6 +443,7 @@ function loadQuestion(){
     optionsEl.appendChild(button);
   });
 }
+
 function selectOption(index,button){
   if(answered)return;
   answered=true;
@@ -334,16 +464,19 @@ function selectOption(index,button){
   nextBtn.textContent=currentQuestion<questions.length-1?'Weiter':'Ergebnis anzeigen';
   nextBtn.style.display='inline-block';
 }
+
 nextBtn.addEventListener('click',()=>{
   currentQuestion++;
   if(currentQuestion<questions.length){loadQuestion();}else{showResult();}
 });
+
 function showResult(){
   quizEl.style.display='none';
   resultEl.style.display='block';
   scoreCircleEl.textContent=score;
   scoreTextEl.textContent=`Du hast ${score} von ${questions.length} Fragen richtig beantwortet.`;
 }
+
 function restartQuiz(){
   currentQuestion=0;
   score=0;
@@ -351,6 +484,7 @@ function restartQuiz(){
   resultEl.style.display='none';
   loadQuestion();
 }
+
 loadQuestion();
 </script>
 </body>

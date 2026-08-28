@@ -6,36 +6,41 @@
 <title>Conversion-Prozess Playbook</title>
 <style>
 :root{
-  --primary:#0f5132;
-  --secondary:#16834f;
-  --accent:#1f9d60;
+  --primary-blue:#0f5132;
+  --secondary-blue:#16834f;
+  --accent-blue:#1f9d60;
   --gold:#c8a84e;
-  --bg:#f4fbf7;
-  --card:#ffffff;
-  --border:#dbeee2;
-  --text:#123326;
-  --muted:#5f7569;
-  --soft:#e8f8ee;
-  --ok:#10b981;
-  --bad:#ef4444;
+  --light-bg:#f4fbf7;
+  --card-bg:#ffffff;
+  --border-color:#dbeee2;
+  --text-dark:#123326;
+  --text-muted:#5f7569;
+  --green:#065f46;
+  --green-bg:#d1fae5;
+  --yellow:#92400e;
+  --yellow-bg:#fef3c7;
+  --red:#991b1b;
+  --red-bg:#fee2e2;
+  --blue-bg:#e8f8ee;
   --shadow-sm:0 1px 3px rgba(0,0,0,.10);
   --shadow-md:0 8px 24px rgba(15,81,50,.13);
   --radius:14px;
+  --transition:all .2s ease;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{
   min-height:100vh;
-  background:var(--bg);
-  color:var(--text);
+  background:var(--light-bg);
+  color:var(--text-dark);
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   line-height:1.55;
 }
-header.playbook-header{
+header{
   position:sticky;
   top:0;
   z-index:20;
-  background:var(--primary);
+  background:var(--primary-blue);
   color:white;
   padding:1.15rem 1.5rem;
   border-bottom:4px solid var(--gold);
@@ -54,20 +59,41 @@ h1{
   margin:0;
   letter-spacing:-.025em;
 }
-header p{color:#d7f5e4;margin-top:.35rem;font-size:1rem;line-height:1.45;max-width:760px}
-.header-actions{display:flex;align-items:center;justify-content:flex-end;gap:.8rem}
+header p{
+  color:#d7f5e4;
+  margin-top:.35rem;
+  font-size:1rem;
+  line-height:1.45;
+  max-width:760px;
+}
+.header-actions{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:.8rem;
+}
 .search{
   width:100%;
   border:1px solid #cbd5e1;
   border-radius:10px;
   padding:.85rem 1rem;
   font-size:1rem;
-  color:var(--text);
+  color:var(--text-dark);
   background:white;
   box-shadow:var(--shadow-sm);
+  transition:var(--transition);
 }
-.search:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(31,157,96,.12)}
-.header-search{flex:1 1 auto;max-width:560px;min-width:260px;background:rgba(255,255,255,.96)}
+.search:focus{
+  outline:none;
+  border-color:var(--accent-blue);
+  box-shadow:0 0 0 3px rgba(31,157,96,.12);
+}
+.header-search{
+  flex:1 1 auto;
+  max-width:560px;
+  min-width:260px;
+  background:rgba(255,255,255,.96);
+}
 .back-link-header{
   display:inline-flex;
   align-items:center;
@@ -80,39 +106,70 @@ header p{color:#d7f5e4;margin-top:.35rem;font-size:1rem;line-height:1.45;max-wid
   border-radius:9px;
   font-weight:800;
   white-space:nowrap;
+  transition:var(--transition)
 }
 .back-link-header:hover{background:rgba(255,255,255,.18)}
 main{padding:1.7rem 0 4rem}
-.tabs{display:flex;flex-wrap:wrap;gap:.55rem;margin:0 0 1rem}
+.tabs{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.55rem;
+  margin:0 0 1rem;
+}
 .tab-btn{
   border:1px solid #cbd5e1;
   background:white;
-  color:var(--primary);
+  color:var(--primary-blue);
   border-radius:999px;
   padding:.68rem .95rem;
   font-weight:800;
   cursor:pointer;
+  transition:var(--transition);
   box-shadow:var(--shadow-sm);
   font-size:.92rem;
 }
-.tab-btn:hover{border-color:var(--secondary);transform:translateY(-1px);background:#f8fffb}
-.tab-btn.active{background:var(--primary);border-color:var(--primary);color:white;box-shadow:var(--shadow-md)}
+.tab-btn:hover{
+  border-color:var(--secondary-blue);
+  transform:translateY(-1px);
+  background:#f8fffb;
+}
+.tab-btn.active{
+  background:var(--primary-blue);
+  border-color:var(--primary-blue);
+  color:white;
+  box-shadow:var(--shadow-md);
+}
 .tab-content{display:none}
 .tab-content.active{display:block}
 .section-header{margin:1.25rem 0 1rem}
-.section-header h2{color:var(--primary);font-size:clamp(1.45rem,3vw,2.1rem);line-height:1.15}
-.section-header p{color:var(--muted);margin-top:.3rem;max-width:980px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:1rem;margin-bottom:1rem}
-.two-col{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1rem;margin-bottom:1rem}
+.section-header h2{
+  color:var(--primary-blue);
+  font-size:clamp(1.45rem,3vw,2.1rem);
+  line-height:1.15;
+}
+.section-header p{color:var(--text-muted);margin-top:.3rem;max-width:980px}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(245px,1fr));
+  gap:1rem;
+  margin-bottom:1rem;
+}
+.two-col{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:1rem;
+  margin-bottom:1rem;
+}
 .card,.table-card,.note,.workflow{
-  background:var(--card);
-  border:1px solid var(--border);
+  background:var(--card-bg);
+  border:1px solid var(--border-color);
   border-radius:var(--radius);
   box-shadow:var(--shadow-sm);
 }
 .card{padding:1.2rem}
-.card h3{color:var(--primary);margin-bottom:.45rem}
-.card p,.card li{color:var(--muted)}
+.card h3{color:var(--primary-blue);margin-bottom:.45rem}
+.card p,.card li{color:var(--text-muted)}
+.card ul{padding-left:1.1rem;margin-top:.4rem}
 .tag,.badge{
   display:inline-flex;
   align-items:center;
@@ -122,35 +179,86 @@ main{padding:1.7rem 0 4rem}
   font-weight:800;
   margin-bottom:.75rem;
 }
-.tag{background:var(--soft);color:var(--primary)}
-.tag.green{background:#d1fae5;color:#065f46}
-.tag.yellow{background:#fef3c7;color:#92400e}
-.tag.red{background:#fee2e2;color:#991b1b}
+.tag.blue,.badge.blue{background:var(--blue-bg);color:var(--primary-blue)}
+.tag.green,.badge.green{background:var(--green-bg);color:var(--green)}
+.tag.yellow,.badge.yellow{background:var(--yellow-bg);color:var(--yellow)}
+.tag.red,.badge.red{background:var(--red-bg);color:var(--red)}
 .table-card{overflow:hidden;margin-bottom:1rem}
 .table-responsive{overflow-x:auto}
 table{width:100%;border-collapse:collapse;background:white}
-th,td{padding:.9rem 1rem;text-align:left;border-bottom:1px solid var(--border);vertical-align:top}
-th{background:#f8fffb;color:var(--primary);font-size:.85rem;text-transform:uppercase;letter-spacing:.04em}
+th,td{
+  padding:.9rem 1rem;
+  text-align:left;
+  border-bottom:1px solid var(--border-color);
+  vertical-align:top;
+}
+th{
+  background:#f8fffb;
+  color:var(--primary-blue);
+  font-size:.85rem;
+  text-transform:uppercase;
+  letter-spacing:.04em;
+}
 tr:last-child td{border-bottom:none}
-td strong{color:var(--primary)}
-.note{border-left:5px solid var(--gold);padding:1rem 1.1rem;margin:1rem 0;color:var(--muted)}
-.note strong{color:var(--primary)}
-.workflow{padding:1.2rem;margin:1rem 0}
-.workflow h3{color:var(--primary);margin-bottom:.4rem}
-.workflow p{color:var(--muted)}
-.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.75rem;margin-top:.8rem}
-.step{background:#f8fffb;border:1px solid var(--border);border-radius:12px;padding:.9rem;color:var(--muted)}
-.step-num{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--primary);color:white;font-weight:800;margin-bottom:.5rem}
-.step strong{display:block;color:var(--primary);margin-bottom:.2rem}
-.diagnose-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(285px,1fr));gap:1rem;margin-bottom:1rem}
-.diagnose-card{background:white;border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow-sm);overflow:hidden}
+td strong{color:var(--primary-blue)}
+.note{
+  border-left:5px solid var(--gold);
+  padding:1rem 1.1rem;
+  margin:1rem 0;
+  color:var(--text-muted);
+}
+.note strong{color:var(--primary-blue)}
+.workflow{
+  padding:1.2rem;
+  margin:1rem 0;
+}
+.workflow h3{color:var(--primary-blue);margin-bottom:.4rem}
+.workflow p{color:var(--text-muted)}
+.steps{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:.75rem;
+  margin-top:.8rem;
+}
+.step{
+  background:#f8fffb;
+  border:1px solid var(--border-color);
+  border-radius:12px;
+  padding:.9rem;
+  color:var(--text-muted);
+}
+.step-num{
+  display:inline-grid;
+  place-items:center;
+  width:30px;
+  height:30px;
+  border-radius:50%;
+  background:var(--primary-blue);
+  color:white;
+  font-weight:800;
+  margin-bottom:.5rem
+}
+.step strong{display:block;color:var(--primary-blue);margin-bottom:.2rem}
+.diagnose-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(285px,1fr));
+  gap:1rem;
+  margin-bottom:1rem;
+}
+.diagnose-card{
+  background:white;
+  border:1px solid var(--border-color);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow-sm);
+  overflow:hidden;
+}
 .diagnose-card button{
   width:100%;
   border:0;
   background:white;
   padding:1rem;
   text-align:left;
-  color:var(--primary);
+  color:var(--primary-blue);
   font-weight:850;
   display:flex;
   justify-content:space-between;
@@ -158,12 +266,19 @@ td strong{color:var(--primary)}
   cursor:pointer;
 }
 .diagnose-card button:hover{background:#f8fffb}
-.diagnose-body{display:none;padding:0 1rem 1rem;color:var(--muted)}
+.diagnose-body{display:none;padding:0 1rem 1rem;color:var(--text-muted)}
 .diagnose-card.open .diagnose-body{display:block}
 .hidden-search{display:none!important}
-.no-results{display:none;background:white;border:1px solid var(--border);border-radius:var(--radius);padding:2rem;text-align:center;color:var(--muted)}
-footer{text-align:center;color:var(--muted);font-size:.84rem;padding:1.5rem}
-ul.clean{padding-left:1.1rem}
+.no-results{
+  display:none;
+  background:white;
+  border:1px solid var(--border-color);
+  border-radius:var(--radius);
+  padding:2rem;
+  text-align:center;
+  color:var(--text-muted);
+}
+footer{text-align:center;color:var(--text-muted);font-size:.84rem;padding:1.5rem}
 @media(max-width:900px){
   .header-grid{grid-template-columns:1fr}
   .header-actions{width:100%;flex-direction:column;align-items:stretch}
@@ -177,48 +292,392 @@ ul.clean{padding-left:1.1rem}
 </style>
 </head>
 <body>
-<header class="playbook-header">
+<header>
   <div class="header-inner header-grid">
     <div>
       <h1>Conversion-Prozess Playbook</h1>
-      <p>Conversion-Cycle, Analyse, KPIs, Reporting und Monitoring</p>
+      <p>Der Conversion-Cycle, Mikro- und Makro-Conversions, quantitative und qualitative Analyse, Psychologie, Testing, Reporting und Monitoring.</p>
     </div>
     <div class="header-actions">
-      <input id="searchInput" class="search header-search" type="search" placeholder="Im Playbook suchen ...">
+      <input id="searchInput" class="search header-search" type="search" placeholder="Im Conversion Playbook suchen ...">
       <a class="back-link-header" href="spezi1.html">← Zur grünen Übersicht</a>
     </div>
   </div>
 </header>
+
 <main>
   <nav class="tabs" aria-label="Playbook-Reiter">
-    <button class="tab-btn active" data-tab="cycle">1. Conversion-Cycle</button>
-<button class="tab-btn " data-tab="quant">2. Quantitative Analyse</button>
-<button class="tab-btn " data-tab="qual">3. Qualitative Analyse</button>
-<button class="tab-btn " data-tab="psych">4. Psychologie</button>
-<button class="tab-btn " data-tab="reporting">5. Reporting &amp; Monitoring</button>
-<button class="tab-btn " data-tab="diagnose">6. Diagnose</button>
+    <button class="tab-btn active" data-tab="grundlagen">1. Grundlagen</button>
+    <button class="tab-btn" data-tab="cycle">2. Conversion-Cycle</button>
+    <button class="tab-btn" data-tab="journey">3. Mikro/Makro & Journey</button>
+    <button class="tab-btn" data-tab="quant">4. Quantitative Analyse</button>
+    <button class="tab-btn" data-tab="qual">5. Qualitative Analyse</button>
+    <button class="tab-btn" data-tab="psych">6. Psychologie</button>
+    <button class="tab-btn" data-tab="testing">7. Testing</button>
+    <button class="tab-btn" data-tab="reporting">8. Reporting & Diagnose</button>
   </nav>
+
   <div id="noResults" class="no-results">Keine passenden Inhalte gefunden.</div>
-  <section id="cycle" class="tab-content active">
-<div class="section-header searchable-item"><h2>Conversion-Prozess &amp; Conversion-Cycle</h2><p>Der Conversion-Prozess beschreibt, wie aus Besucher*innen Handlungen werden. Der Cycle verbindet Analyse, Hypothese, Umsetzung, Messung und Optimierung.</p></div><div class="table-card searchable-item"><div class="table-responsive"><table><thead><tr><th>Begriff</th><th>Bedeutung</th><th>Beispiel</th></tr></thead><tbody><tr><td><strong>Conversion</strong></td><td>Eine gewünschte Zielhandlung.</td><td>Kauf, Lead, Anmeldung, Download.</td></tr><tr><td><strong>Mikro-Conversion</strong></td><td>Kleiner Zwischenschritt.</td><td>Klick, Scroll, Newsletter-Anmeldung, Warenkorb.</td></tr><tr><td><strong>Makro-Conversion</strong></td><td>Hauptziel der Seite.</td><td>Kaufabschluss, Buchung, qualifizierter Lead.</td></tr><tr><td><strong>Conversion Rate</strong></td><td>Anteil der Besucher*innen, die konvertieren.</td><td>Conversions / Besucher*innen.</td></tr></tbody></table></div></div><div class="workflow searchable-item"><h3>Cycle</h3><div class="steps"><div class="step"><span class="step-num">1</span><strong>Messen</strong>Daten sammeln.</div><div class="step"><span class="step-num">2</span><strong>Verstehen</strong>Was und warum?</div><div class="step"><span class="step-num">3</span><strong>Hypothese</strong>Änderung begründen.</div><div class="step"><span class="step-num">4</span><strong>Optimieren</strong>Testen und verbessern.</div></div></div>
-</section>
-<section id="quant" class="tab-content ">
-<div class="section-header searchable-item"><h2>Quantitative Analyse</h2><p>Quantitative Daten beantworten: Was ist passiert? Sie zeigen Zahlen, Muster, Einbrüche und Potenziale.</p></div><div class="table-card searchable-item"><div class="table-responsive"><table><thead><tr><th>Quelle</th><th>Daten</th><th>Nutzen</th></tr></thead><tbody><tr><td><strong>GA4 / Web Analytics</strong></td><td>Sessions, Events, Conversion Rate, Kanäle.</td><td>Kanal- und Funnel-Leistung verstehen.</td></tr><tr><td><strong>Ad-Plattformen</strong></td><td>Impressions, Klicks, Kosten, Conversions.</td><td>Kampagnenleistung bewerten.</td></tr><tr><td><strong>Shop-Systeme</strong></td><td>Umsatz, Warenkörbe, Abbrüche.</td><td>E-Commerce-Ergebnis analysieren.</td></tr><tr><td><strong>Heatmaps</strong></td><td>Klicks, Scrolltiefe, Aufmerksamkeit.</td><td>Nutzerverhalten visuell verstehen.</td></tr></tbody></table></div></div><div class="note searchable-item"><strong>Merker:</strong> Quantitativ sagt dir, wo ein Problem sichtbar wird – aber nicht immer, warum es entsteht.</div>
-</section>
-<section id="qual" class="tab-content ">
-<div class="section-header searchable-item"><h2>Qualitative Analyse</h2><p>Qualitative Daten beantworten: Warum passiert es? Sie zeigen Emotionen, Motive, Barrieren und Wahrnehmung.</p></div><div class="table-card searchable-item"><div class="table-responsive"><table><thead><tr><th>Methode</th><th>Ziel</th><th>Beispiel</th></tr></thead><tbody><tr><td><strong>User-Interviews</strong></td><td>Bedürfnisse, Motive und Barrieren verstehen.</td><td>Wie haben Sie den Checkout erlebt?</td></tr><tr><td><strong>Usability-Test</strong></td><td>Beobachten, wie Nutzer mit Seite/App umgehen.</td><td>Think-Aloud während der Nutzung.</td></tr><tr><td><strong>Surveys</strong></td><td>Feedback in größerem Umfang sammeln.</td><td>Warum haben Sie nicht gekauft?</td></tr><tr><td><strong>Session Recordings</strong></td><td>Nutzungsverhalten nachvollziehen.</td><td>Hindernisse und Missverständnisse erkennen.</td></tr></tbody></table></div></div><div class="note searchable-item"><strong>Merker:</strong> Gute Optimierung kombiniert quantitative und qualitative Daten.</div>
-</section>
-<section id="psych" class="tab-content ">
-<div class="section-header searchable-item"><h2>Psychologie hinter Kaufentscheidungen</h2><p>Kaufentscheidungen sind nicht rein rational. Emotionen, Heuristiken, Social Proof, Autorität und Knappheit prägen Verhalten.</p></div><div class="table-card searchable-item"><div class="table-responsive"><table><thead><tr><th>Prinzip</th><th>Bedeutung</th><th>Beispiel</th></tr></thead><tbody><tr><td><strong>Social Proof</strong></td><td>Menschen orientieren sich an anderen.</td><td>Bewertungen und Bestseller-Hinweise.</td></tr><tr><td><strong>Autorität</strong></td><td>Expertise erhöht Vertrauen.</td><td>Siegel, Zertifikate, Expertenmeinungen.</td></tr><tr><td><strong>Knappheit</strong></td><td>Begrenzung erhöht Dringlichkeit.</td><td>Nur noch wenige Plätze.</td></tr><tr><td><strong>Commitment</strong></td><td>Frühere kleine Zusagen erleichtern nächste Schritte.</td><td>Newsletter → späterer Kauf.</td></tr></tbody></table></div></div>
-</section>
-<section id="reporting" class="tab-content ">
-<div class="section-header searchable-item"><h2>Reporting, Monitoring und KPIs</h2><p>Reporting blickt regelmäßig zurück. Monitoring überwacht laufend und erkennt Probleme schnell.</p></div><div class="table-card searchable-item"><div class="table-responsive"><table><thead><tr><th>Begriff</th><th>Bedeutung</th><th>Beispiel</th></tr></thead><tbody><tr><td><strong>Messwert</strong></td><td>Ein einzelner Wert ohne Kontext.</td><td>1.200 Klicks.</td></tr><tr><td><strong>Kennzahl</strong></td><td>Berechneter oder bezogener Wert.</td><td>CTR = Klicks / Impressionen.</td></tr><tr><td><strong>KPI</strong></td><td>Kennzahl mit strategischem Ziel.</td><td>Conversion Rate als Zielkennzahl.</td></tr><tr><td><strong>Dashboard</strong></td><td>Verdichtete Übersicht relevanter KPIs.</td><td>Conversion-Cockpit für Marketing/Sales.</td></tr></tbody></table></div></div><div class="note searchable-item"><strong>Wichtig:</strong> Nicht jede Kennzahl ist automatisch eine KPI. KPI wird sie erst durch Zielbezug.</div>
-</section>
-<section id="diagnose" class="tab-content ">
-<div class="section-header searchable-item"><h2>Typische Conversion-Probleme</h2><p>Die Prüfung fragt oft nach der passenden Interpretation: Zahl sehen, Ursache ableiten, Maßnahme nennen.</p></div><div class="diagnose-grid"><article class="diagnose-card searchable-item"><button type="button">Viele Besucher, wenig Conversion <span>+</span></button><div class="diagnose-body"><p><strong>Ursache:</strong> Angebot, Zielseite, Vertrauen oder CTA passen nicht.</p><p><strong>Maßnahme:</strong> Funnel, Landingpage, Zielgruppenfit und qualitative Barrieren prüfen.</p></div></article><article class="diagnose-card searchable-item"><button type="button">Quantitative Daten zeigen Abbruch, aber Ursache unklar <span>+</span></button><div class="diagnose-body"><p><strong>Ursache:</strong> Zahlen zeigen nur das Was.</p><p><strong>Maßnahme:</strong> Interviews, Usability-Tests oder Surveys ergänzen.</p></div></article><article class="diagnose-card searchable-item"><button type="button">Dashboard wird nicht verstanden <span>+</span></button><div class="diagnose-body"><p><strong>Ursache:</strong> Zu viele Kennzahlen ohne Story oder Zielbezug.</p><p><strong>Maßnahme:</strong> KPI-Hierarchie, klare Visualisierung und Handlungsempfehlung.</p></div></article><article class="diagnose-card searchable-item"><button type="button">Monitoring zeigt plötzlichen Conversion-Einbruch <span>+</span></button><div class="diagnose-body"><p><strong>Ursache:</strong> Tracking-Ausfall, Landingpage-Fehler, Checkout-Problem oder Kampagnenänderung.</p><p><strong>Maßnahme:</strong> Technischen Status, Datenquellen und Funnel-Schritte prüfen.</p></div></article></div>
-</section>
+
+  <section id="grundlagen" class="tab-content active">
+    <div class="section-header searchable-item">
+      <h2>1. Grundlagen: Warum Conversion-Optimierung entscheidend ist</h2>
+      <p>Conversion-Optimierung bedeutet: mehr aus bestehenden Besucher*innen machen. Gerade wenn CPC und CPM steigen oder weniger Website-Klicks durch Zero-Click-Suchergebnisse entstehen, muss vorhandener Traffic besser genutzt werden.</p>
+    </div>
+
+    <div class="grid">
+      <article class="card searchable-item">
+        <span class="tag green">Kosten</span>
+        <h3>Steigende Werbekosten</h3>
+        <p>SEA und Social Ads werden teurer. Wer nur mehr Traffic einkauft, ohne Conversion Rate zu verbessern, verbrennt Budget.</p>
+      </article>
+      <article class="card searchable-item">
+        <span class="tag blue">Sichtbarkeit</span>
+        <h3>Weniger Klicks durch KI-Suche</h3>
+        <p>Wenn Suchmaschinen oder KI-Antworten Informationen direkt liefern, kommen weniger Besucher*innen auf Websites. Jeder Klick wird wertvoller.</p>
+      </article>
+      <article class="card searchable-item">
+        <span class="tag yellow">KI</span>
+        <h3>Optimierung mit KI</h3>
+        <p>KI kann Hypothesen finden, A/B-Test-Ideen vorschlagen und offenes User-Feedback auswerten. Entscheiden und prüfen muss trotzdem der Mensch.</p>
+      </article>
+    </div>
+
+    <div class="table-card searchable-item">
+      <div class="table-responsive">
+        <table>
+          <thead><tr><th>Begriff</th><th>Bedeutung</th><th>Einfach gemerkt</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Conversion</strong></td><td>Gewünschte Handlung von Nutzer*innen.</td><td>Kauf, Lead, Anmeldung, Download, Terminbuchung.</td></tr>
+            <tr><td><strong>CRO</strong></td><td>Conversion-Rate-Optimierung.</td><td>Mehr relevante Handlungen aus vorhandenem Traffic holen.</td></tr>
+            <tr><td><strong>Datenbasiert</strong></td><td>Entscheidungen aus Daten, Tests und User-Feedback ableiten.</td><td>Nicht Bauchgefühl, sondern Analyse + Hypothese + Test.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="note searchable-item">
+      <strong>Merksatz:</strong> Conversion-Optimierung heißt nicht „mehr Besucher“. Es heißt: mehr passende Handlungen aus vorhandenen Besucher*innen.
+    </div>
+  </section>
+
+  <section id="cycle" class="tab-content">
+    <div class="section-header searchable-item">
+      <h2>2. Der Conversion-Cycle als Grundgerüst</h2>
+      <p>Der Conversion-Cycle ist ein wiederholender Prozess. Er beginnt mit Analyse, führt zu Hypothesen, wird getestet und startet danach erneut. CRO ist kein Einmalprojekt.</p>
+    </div>
+
+    <div class="workflow searchable-item">
+      <h3>Conversion-Cycle in 4 Schritten</h3>
+      <div class="steps">
+        <div class="step"><span class="step-num">1</span><strong>Analyse</strong>Daten sammeln, Nutzerverhalten verstehen, Probleme identifizieren.</div>
+        <div class="step"><span class="step-num">2</span><strong>Hypothese</strong>Aus Daten überprüfbare Annahmen ableiten.</div>
+        <div class="step"><span class="step-num">3</span><strong>Test</strong>A/B-Test, UX-Test oder qualitative Prüfung durchführen.</div>
+        <div class="step"><span class="step-num">4</span><strong>Lernen</strong>Ergebnis auswerten und nächste Optimierung ableiten.</div>
+      </div>
+    </div>
+
+    <div class="table-card searchable-item">
+      <div class="table-responsive">
+        <table>
+          <thead><tr><th>Phase</th><th>Ziel</th><th>Beispiel</th><th>Prüfungs-Merker</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Analyse</strong></td><td>Verstehen, wo Nutzer*innen abspringen.</td><td>GA4 zeigt Formularabbruch, Heatmap zeigt CTA wird nicht gesehen.</td><td>Erst verstehen, dann ändern.</td></tr>
+            <tr><td><strong>Hypothese</strong></td><td>Aus Problem eine überprüfbare Vermutung machen.</td><td>Wenn das Telefon-Pflichtfeld entfernt wird, steigt die Conversion Rate.</td><td>Wenn X, dann Y, weil Z.</td></tr>
+            <tr><td><strong>Test</strong></td><td>Wirkung messbar prüfen.</td><td>A/B-Test mit Variante A und B.</td><td>Eine klare Änderung testen.</td></tr>
+            <tr><td><strong>Iteration</strong></td><td>Regelmäßig verbessern.</td><td>Nach dem Test neue Erkenntnisse in nächste Hypothese übertragen.</td><td>CRO ist ein Kreislauf.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="note searchable-item">
+      <strong>Hypothesen-Formel:</strong> Wenn [Änderung X], dann [Verhalten Y], weil [Begründung Z].
+    </div>
+  </section>
+
+  <section id="journey" class="tab-content">
+    <div class="section-header searchable-item">
+      <h2>3. Mikro- & Makro-Conversions und Customer Journey</h2>
+      <p>Nicht jede Handlung hat denselben Wert. Makro-Conversions sind Hauptziele. Mikro-Conversions sind Zwischenschritte, die Interesse zeigen und Optimierungspotenzial sichtbar machen.</p>
+    </div>
+
+    <div class="table-card searchable-item">
+      <div class="table-responsive">
+        <table>
+          <thead><tr><th>Typ</th><th>Definition</th><th>Beispiele</th><th>Warum wichtig?</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Makro-Conversion</strong></td><td>Direkter Geschäftserfolg / Hauptziel.</td><td>Kaufabschluss, Lead-Formular, Event-Anmeldung, Konto-Erstellung.</td><td>Zeigt, ob das Hauptziel erreicht wird.</td></tr>
+            <tr><td><strong>Mikro-Conversion</strong></td><td>Zwischenschritt auf dem Weg zum Hauptziel.</td><td>Produkt in Warenkorb, Formularseite besuchen, Video ansehen, Download starten.</td><td>Liefert mehr Datenpunkte und Frühindikatoren.</td></tr>
+            <tr><td><strong>Post-Makro-Conversion</strong></td><td>Handlung nach dem Hauptziel.</td><td>Bewertung schreiben, Weiterempfehlung, Social Sharing.</td><td>Trägt Erfolg weiter.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="workflow searchable-item">
+      <h3>5A-Modell der Customer Journey</h3>
+      <div class="steps">
+        <div class="step"><span class="step-num">1</span><strong>Aware</strong>Person wird aufmerksam.</div>
+        <div class="step"><span class="step-num">2</span><strong>Appeal</strong>Marke wirkt attraktiv.</div>
+        <div class="step"><span class="step-num">3</span><strong>Ask</strong>Person sucht Infos, Bewertungen oder fragt KI.</div>
+        <div class="step"><span class="step-num">4</span><strong>Act</strong>Person handelt: Kauf, Lead, Anmeldung.</div>
+        <div class="step"><span class="step-num">5</span><strong>Advocate</strong>Person empfiehlt weiter.</div>
+      </div>
+    </div>
+
+    <div class="table-card searchable-item">
+      <div class="table-responsive">
+        <table>
+          <thead><tr><th>5A-Phase</th><th>Typische Conversion</th><th>Beispiel</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Aware → Appeal</strong></td><td>Mikro-Conversion.</td><td>Klick auf Anzeige, Website-Besuch.</td></tr>
+            <tr><td><strong>Appeal → Ask</strong></td><td>Mikro-Conversion.</td><td>Newsletter-Anmeldung, Warenkorb, Produktvideo ansehen.</td></tr>
+            <tr><td><strong>Ask → Act</strong></td><td>Makro-Conversion.</td><td>Kauf, Vertrag, Lead-Abschluss, Anmeldung.</td></tr>
+            <tr><td><strong>Act → Advocate</strong></td><td>Post-Makro-Conversion.</td><td>Bewertung, Empfehlung, Social Sharing.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="note searchable-item">
+      <strong>Prüfungs-Merker:</strong> Nur Makro-Conversions zu messen ist ein Fehler. Mikro-Conversions zeigen, wo der Weg zur Haupt-Conversion hängt.
+    </div>
+  </section>
+
+  <section id="quant" class="tab-content">
+    <div class="section-header searchable-item">
+      <h2>4. Quantitative Analyse: Funnel, Kennzahlen & Tools</h2>
+      <p>Quantitative Analyse untersucht Nutzerverhalten mit Zahlen. Sie beantwortet die Frage: Was ist passiert? Ihre Grenze: Zahlen zeigen nicht automatisch, warum es passiert.</p>
+    </div>
+
+    <div class="table-card searchable-item">
+      <div class="table-responsive">
+        <table>
+          <thead><tr><th>Funnel-Stufe</th><th>Frage</th><th>Beispiel-Kennzahlen</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Awareness</strong></td><td>Wer sieht uns?</td><td>Impressions, CTR.</td></tr>
+            <tr><td><strong>Consideration</strong></td><td>Wer zeigt Interesse?</td><td>Produktseiten-Aufrufe, Add-to-Cart-Rate, Scrolltiefe.</td></tr>
+            <tr><td><strong>Action</strong></td><td>Wer handelt?</td><td>Checkout-Completion-Rate, Conversion Rate, Kaufabschluss.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="table-card searchable-item">
+      <div class="table-responsive">
+        <table>
+          <thead><tr><th>Begriff</th><th>Definition</th><th>Beispiel</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Metrik / Messwert</strong></td><td>Rohwert.</td><td>Anzahl Klicks.</td></tr>
+            <tr><td><strong>Kennzahl</strong></td><td>Verhältnis oder berechneter Wert.</td><td>CTR = Klicks / Impressionen.</td></tr>
+            <tr><td><strong>KPI</strong></td><td>Strategisch relevante Kennzahl mit Zielbezug.</td><td>Conversion Rate für Umsatzsteigerung.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="grid">
+      <article class="card searchable-item"><span class="tag green">GA4</span><h3>Event-basiert</h3><p>GA4 erfasst Klicks, Scrolls, Käufe, Downloads oder Custom Events und zeigt Funnel-Abbrüche in einzelnen Schritten.</p></article>
+      <article class="card searchable-item"><span class="tag blue">Matomo</span><h3>Datenschutzfokus</h3><p>Open-Source-Alternative mit Datenhoheit und ähnlichem Funktionsumfang wie GA4.</p></article>
+      <article class="card searchable-item"><span class="tag yellow">Microsoft Clarity</span><h3>Verhaltensanalyse</h3><p>Heatmaps und Session Recordings zeigen, wo Nutzer klicken, scrollen und aussteigen.</p></article>
+    </div>
+
+    <div class="note searchable-item">
+      <strong>Quant-Merksatz:</strong> Quantitative Daten zeigen, wo ein Problem sichtbar wird. Für das Warum brauchst du qualitative Analyse.
+    </div>
+  </section>
+
+  <section id="qual" class="tab-content">
+    <div class="section-header searchable-item">
+      <h2>5. Qualitative Analyse: Nutzer*innen wirklich verstehen</h2>
+      <p>Qualitative Methoden arbeiten mit Beobachtungen, Meinungen, Eindrücken und offenen Antworten. Sie beantworten die Frage: Warum passiert es?</p>
+    </div>
+
+    <div class="grid">
+      <article class="card searchable-item"><span class="tag green">Emotionen</span><h3>Frust, Begeisterung, Misstrauen</h3><p>Qualitative Insights zeigen, wie sich Nutzer*innen auf einer Seite fühlen.</p></article>
+      <article class="card searchable-item"><span class="tag blue">Motivationen</span><h3>Kaufabsicht, Bequemlichkeit, Neugier</h3><p>Sie erklären, warum Menschen überhaupt handeln oder abbrechen.</p></article>
+      <article class="card searchable-item"><span class="tag yellow">Barrieren</span><h3>Navigation, Formular, Vertrauen</h3><p>Sie machen sichtbar, welche Hindernisse Nutzer*innen erleben.</p></article>
+    </div>
+
+    <div class="table-card searchable-item">
+      <div class="table-responsive">
+        <table>
+          <thead><tr><th>Methode</th><th>Ziel</th><th>Beispiel</th></tr></thead>
+          <tbody>
+            <tr><td><strong>User-Interview</strong></td><td>Bedürfnisse, Motive und Barrieren verstehen.</td><td>„Wie haben Sie den Checkout empfunden?“</td></tr>
+            <tr><td><strong>Usability-Test</strong></td><td>Beobachten, wie Nutzer*innen mit Website/App umgehen.</td><td>Think-Aloud, Remote-Test, Labor-Test.</td></tr>
+            <tr><td><strong>Survey / On-Site-Befragung</strong></td><td>Feedback in größerem Umfang sammeln.</td><td>Skalenfragen + offene Textfelder.</td></tr>
+            <tr><td><strong>KI-Textanalyse</strong></td><td>Offene Antworten clustern und zusammenfassen.</td><td>Gemini fasst Probleme aus Beobachtungsnotizen zusammen.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="workflow searchable-item">
+      <h3>Quantitativ + qualitativ kombinieren</h3>
+      <div class="steps">
+        <div class="step"><span class="step-num">1</span><strong>Was?</strong>GA4 zeigt: 60 % brechen im Checkout ab.</div>
+        <div class="step"><span class="step-num">2</span><strong>Warum?</strong>Interview zeigt: Zahlung nicht gefunden oder Misstrauen.</div>
+        <div class="step"><span class="step-num">3</span><strong>Hypothese</strong>Zahlungsoption und Trust sichtbarer machen.</div>
+        <div class="step"><span class="step-num">4</span><strong>Test</strong>Variante prüfen und Ergebnis messen.</div>
+      </div>
+    </div>
+
+    <div class="note searchable-item">
+      <strong>Qual-Merksatz:</strong> Zahlen zeigen Muster. Menschen erklären die Barrieren dahinter.
+    </div>
+  </section>
+
+  <section id="psych" class="tab-content">
+    <div class="section-header searchable-item">
+      <h2>6. Psychologie hinter Kaufentscheidungen</h2>
+      <p>Kund*innen entscheiden nicht rein rational. Emotionen, Gewohnheiten, Heuristiken, Wahrnehmung, Motivation und Vertrauen beeinflussen, ob Menschen klicken, kaufen oder abbrechen.</p>
+    </div>
+
+    <div class="table-card searchable-item">
+      <div class="table-responsive">
+        <table>
+          <thead><tr><th>Prinzip nach Cialdini</th><th>Bedeutung</th><th>Beispiel im Conversion-Kontext</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Reziprozität</strong></td><td>Menschen fühlen sich nach einem Geschenk eher verpflichtet.</td><td>Kostenloser Guide oder Rabattcode.</td></tr>
+            <tr><td><strong>Commitment & Konsistenz</strong></td><td>Menschen handeln gern im Einklang mit früheren Entscheidungen.</td><td>Newsletter-Anmeldung kann späteren Kauf erleichtern.</td></tr>
+            <tr><td><strong>Social Proof</strong></td><td>Menschen orientieren sich am Verhalten anderer.</td><td>Bewertungen, Bestseller, Testimonials.</td></tr>
+            <tr><td><strong>Sympathie</strong></td><td>Menschen kaufen eher bei Marken, die sie mögen.</td><td>Authentische Kommunikation und Testimonials.</td></tr>
+            <tr><td><strong>Autorität</strong></td><td>Menschen vertrauen Expert*innen und Institutionen.</td><td>Gütesiegel, Zertifikate, Expert*innen-Empfehlung.</td></tr>
+            <tr><td><strong>Knappheit</strong></td><td>Seltene oder zeitlich begrenzte Dinge wirken wertvoller.</td><td>„Nur noch 3 Stück verfügbar“.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="grid">
+      <article class="card searchable-item"><span class="tag green">Heuristik</span><h3>Gedankliche Abkürzung</h3><p>Menschen treffen Entscheidungen schnell nach Faustregeln statt jede Information rational auszuwerten.</p></article>
+      <article class="card searchable-item"><span class="tag blue">Wahrnehmung</span><h3>Selektive Aufmerksamkeit</h3><p>Nutzer*innen nehmen nicht alles wahr. Relevanz, Neuheit und emotionale Trigger stechen hervor.</p></article>
+      <article class="card searchable-item"><span class="tag yellow">Motivation</span><h3>Ohne Motivation kein Klick</h3><p>Motivation kann über Autonomie, Kompetenz, Zugehörigkeit oder emotionale Kaufmotive wie Balance, Dominanz, Stimulanz entstehen.</p></article>
+    </div>
+
+    <div class="note searchable-item">
+      <strong>Psychologie-Merker:</strong> Gutes Design macht Entscheidungen leichter: klare Struktur, kognitive Entlastung, sichtbarer Nutzen und Vertrauen.
+    </div>
+  </section>
+
+  <section id="testing" class="tab-content">
+    <div class="section-header searchable-item">
+      <h2>7. A/B-Testing, multivariate Tests & Signifikanz</h2>
+      <p>Testing übersetzt Hypothesen in messbare Vergleiche. Statt zu raten, entscheidet das Verhalten der Nutzer*innen.</p>
+    </div>
+
+    <div class="workflow searchable-item">
+      <h3>Conversion-Testprozess in 4 Schritten</h3>
+      <div class="steps">
+        <div class="step"><span class="step-num">1</span><strong>Analyse</strong>Ausgangssituation verstehen.</div>
+        <div class="step"><span class="step-num">2</span><strong>Hypothese</strong>Wenn X, dann Y, weil Z.</div>
+        <div class="step"><span class="step-num">3</span><strong>Priorisierung</strong>ICE: Impact, Confidence, Ease.</div>
+        <div class="step"><span class="step-num">4</span><strong>Test</strong>Variante prüfen und Ergebnis auswerten.</div>
+      </div>
+    </div>
+
+    <div class="table-card searchable-item">
+      <div class="table-responsive">
+        <table>
+          <thead><tr><th>Testart</th><th>Bedeutung</th><th>Wann sinnvoll?</th></tr></thead>
+          <tbody>
+            <tr><td><strong>A/B-Test</strong></td><td>Variante A gegen Variante B; eine klare Änderung.</td><td>Headline, CTA, Formularlänge, Trust-Siegel testen.</td></tr>
+            <tr><td><strong>Multivariater Test</strong></td><td>Mehrere Variablen und Kombinationen gleichzeitig.</td><td>Viel Traffic, klares Conversion-Ziel, Wechselwirkungen prüfen.</td></tr>
+            <tr><td><strong>Qualitativer UX-Test</strong></td><td>Nutzer*innen beobachten statt statistisch vergleichen.</td><td>Wenn Traffic für A/B-Test nicht reicht.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="table-card searchable-item">
+      <div class="table-responsive">
+        <table>
+          <thead><tr><th>Testing-Begriff</th><th>Einfach erklärt</th><th>Prüfungs-Merker</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Kontrolle</strong></td><td>Variante A: aktueller Zustand.</td><td>Referenzwert.</td></tr>
+            <tr><td><strong>Testvariante</strong></td><td>Variante B: geändertes Element.</td><td>Nur eine Änderung bei A/B-Test.</td></tr>
+            <tr><td><strong>Signifikanz</strong></td><td>Ergebnis ist wahrscheinlich echt und nicht Zufall.</td><td>Bei zu wenig Daten unsicher.</td></tr>
+            <tr><td><strong>ICE</strong></td><td>Impact, Confidence, Ease.</td><td>Priorisiert Testideen nach Wirkung, Sicherheit und Umsetzbarkeit.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="note searchable-item">
+      <strong>Testing-Falle:</strong> Zu kurze oder falsch angelegte Tests können falsche Ergebnisse liefern. Kleine Stichproben sind besonders unsicher.
+    </div>
+  </section>
+
+  <section id="reporting" class="tab-content">
+    <div class="section-header searchable-item">
+      <h2>8. Reporting, Monitoring & Diagnose</h2>
+      <p>Reporting macht Conversion-Ergebnisse sichtbar. Monitoring erkennt Probleme laufend. Dashboards müssen verständlich sein und aus Zahlen eine handlungsfähige Story machen.</p>
+    </div>
+
+    <div class="table-card searchable-item">
+      <div class="table-responsive">
+        <table>
+          <thead><tr><th>Begriff</th><th>Bedeutung</th><th>Beispiel</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Reporting</strong></td><td>Rückblickende Darstellung von Daten in regelmäßigen Abständen.</td><td>Monatsreport mit Conversion-Raten.</td></tr>
+            <tr><td><strong>Monitoring</strong></td><td>Stetige Echtzeit-Überwachung von Kennzahlen.</td><td>Live-Dashboard mit Checkout-Abbruchraten.</td></tr>
+            <tr><td><strong>Dashboard</strong></td><td>Strukturierte Visualisierung relevanter Werte.</td><td>Overview → Details → Drill-Down.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="table-card searchable-item">
+      <div class="table-responsive">
+        <table>
+          <thead><tr><th>Datenquelle</th><th>Was liefert sie?</th><th>Nutzen</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Web- & App-Tracking</strong></td><td>GA4, Server-Side-Tracking.</td><td>Kanalübergreifende Conversion-Daten.</td></tr>
+            <tr><td><strong>Ad-Plattformen</strong></td><td>Google Ads, Meta, TikTok, LinkedIn.</td><td>Impressions, Klicks, Plattform-Conversions.</td></tr>
+            <tr><td><strong>E-Commerce-Systeme</strong></td><td>Shopify, Shopware, WooCommerce, Magento.</td><td>Umsatz, Warenkörbe, Abbrüche.</td></tr>
+            <tr><td><strong>CRM & Marketing Automation</strong></td><td>HubSpot, Salesforce, ActiveCampaign, Brevo.</td><td>Lead-Qualität, SQL/MQL, Lifetime Value.</td></tr>
+            <tr><td><strong>Heatmaps & Feedback</strong></td><td>Clarity, Hotjar, Surveys.</td><td>Klick-Hotspots, Scrolltiefe, Warum-Kontext.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="diagnose-grid">
+      <article class="diagnose-card searchable-item">
+        <button type="button">Viele Besucher, wenig Conversions <span>+</span></button>
+        <div class="diagnose-body"><p><strong>Ursache:</strong> Reichweite wird mit Erfolg verwechselt.</p><p><strong>Maßnahme:</strong> Makro- und Mikro-Conversions definieren, Funnel-Abbrüche analysieren.</p></div>
+      </article>
+      <article class="diagnose-card searchable-item">
+        <button type="button">GA4 zeigt Abbruch, Ursache unklar <span>+</span></button>
+        <div class="diagnose-body"><p><strong>Ursache:</strong> Quantitative Daten zeigen nur das Was.</p><p><strong>Maßnahme:</strong> Qualitative Methoden ergänzen: Interviews, Usability-Test, Session Recording.</p></div>
+      </article>
+      <article class="diagnose-card searchable-item">
+        <button type="button">Dashboard ist überladen <span>+</span></button>
+        <div class="diagnose-body"><p><strong>Ursache:</strong> Datenfriedhof ohne Zielgruppenbezug.</p><p><strong>Maßnahme:</strong> Wenige zentrale KPIs, Kontextwerte und klare Storyline.</p></div>
+      </article>
+      <article class="diagnose-card searchable-item">
+        <button type="button">Reporting zeigt nur gute Zahlen <span>+</span></button>
+        <div class="diagnose-body"><p><strong>Ursache:</strong> Selektionsverzerrung oder geschönte Interpretation.</p><p><strong>Maßnahme:</strong> Klare Standards, Transparenz über Methoden und Vergleichswerte.</p></div>
+      </article>
+      <article class="diagnose-card searchable-item">
+        <button type="button">A/B-Test wirkt „erfolgreich“, aber Datenbasis klein <span>+</span></button>
+        <div class="diagnose-body"><p><strong>Ursache:</strong> Ergebnis kann Zufall sein.</p><p><strong>Maßnahme:</strong> Signifikanz, Testdauer und Traffic-Anforderungen prüfen.</p></div>
+      </article>
+      <article class="diagnose-card searchable-item">
+        <button type="button">Conversion Rate fällt plötzlich auf 0 % <span>+</span></button>
+        <div class="diagnose-body"><p><strong>Ursache:</strong> Tracking-Ausfall, technischer Fehler oder Landingpage lädt nicht.</p><p><strong>Maßnahme:</strong> Monitoring nutzen, Datenquellen und technische Funktion sofort prüfen.</p></div>
+      </article>
+    </div>
+
+    <div class="note searchable-item">
+      <strong>Reporting-Merksatz:</strong> Gute Datenkommunikation geht vom Überblick zur Ursache zur Handlungsempfehlung.
+    </div>
+  </section>
 </main>
-<footer>Conversion-Prozess Playbook · Spezialisierung 1</footer>
+
+<footer>Conversion-Prozess Playbook · Datei: conversion-playbook.html</footer>
 
 <script>
 const tabButtons = document.querySelectorAll('.tab-btn');
@@ -260,6 +719,5 @@ searchInput.addEventListener('input', () => {
   noResults.style.display = hits ? 'none' : 'block';
 });
 </script>
-
 </body>
 </html>
