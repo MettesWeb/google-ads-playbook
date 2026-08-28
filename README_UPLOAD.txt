@@ -1,21 +1,24 @@
-SPEZI 1 NAVIGATION / HEADER UPDATE
+SPEZI 1 – FINALES PLAYBOOK/QUIZ UPDATE
 
-Dieses Paket ändert nur die Navigation/Header-Struktur:
+Direkt in den GitHub-Root hochladen/ersetzen:
 
-1. index.html
-   - grüner Button zur Spezi-1-Seite sitzt jetzt oben im blauen Header
+- index.html
+- spezi1.html
 
-2. spezi1.html
-   - blauer Button zurück zur Hauptseite sitzt jetzt oben im grünen Header
+Fertige grüne Playbooks:
+- influencer-playbook.html
+- linkedin-playbook.html
+- support-affiliate-playbook.html
+- landingpage-playbook.html
+- conversion-playbook.html
 
-3. Grüne Playbook-Seiten
-   - oben mit Suchfeld
-   - Button zurück zur grünen Übersicht
-   - Header als feste/sticky Struktur
-   - Influencer bleibt fertiges Playbook
-   - LinkedIn wird mit fertigem Inhalt + Suchfeld geliefert
-   - Support/Affiliate, Landingpage und Conversion bleiben Platzhalter mit korrekt eingerichtetem Header
+Fertige grüne Quizze:
+- quiz-influencer.html
+- quiz-linkedin.html
+- quiz-support-affiliate.html
+- quiz-landingpage.html
+- quiz-conversion.html
 
-Upload:
-Alle Dateien direkt in den GitHub-Root hochladen/ersetzen.
-Quiz-Dateien müssen dafür nicht geändert werden.
+Hinweis:
+Alte Dateien wie affiliate-playbook.html, quiz-affiliate.html, support-playbook.html oder quiz-support.html werden nicht mehr gebraucht.
+Sie können liegen bleiben, werden aber von spezi1.html nicht verlinkt.

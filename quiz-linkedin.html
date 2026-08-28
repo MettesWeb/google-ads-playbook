@@ -1,64 +1,128 @@
-<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>LinkedIn & HR Quiz</title><style>
-:root{--ink:#102033;--muted:#60728a;--green:#9FD8AE;--soft:#EAF8EF;--line:#d9eadf;--ok:#10b981;--bad:#ef4444;--shadow:0 14px 34px rgba(16,32,51,.12)}*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:linear-gradient(135deg,#FFFDFB,#F0FFF6);color:var(--ink)}.header{background:rgba(255,253,251,.9);border-bottom:1px solid var(--line);backdrop-filter:blur(18px)}.header-inner{max-width:960px;margin:0 auto;padding:18px 20px;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}.logo{font-weight:900}.nav a{display:inline-flex;padding:10px 14px;border-radius:999px;background:var(--soft);border:1px solid var(--line);font-weight:800;color:var(--ink);text-decoration:none}.quiz-main{max-width:960px;margin:0 auto;padding:44px 20px}.quiz-card{background:white;border:1px solid var(--line);border-radius:26px;box-shadow:var(--shadow);padding:34px}h1{font-size:clamp(32px,5vw,54px);line-height:1;margin:0 0 12px;letter-spacing:-.05em}.sub{color:var(--muted);font-size:18px;line-height:1.5;margin:0 0 28px}.progress{font-weight:850;color:#17613a;background:var(--soft);border:1px solid var(--line);display:inline-flex;padding:8px 12px;border-radius:999px;margin-bottom:20px}.question{font-size:21px;font-weight:850;line-height:1.45;margin-bottom:22px}.options{display:flex;flex-direction:column;gap:12px}.option{border:2px solid var(--line);background:#fff;border-radius:16px;padding:16px 18px;text-align:left;cursor:pointer;color:#36506b;font-size:16px;font-weight:650;line-height:1.45}.option:hover:not(:disabled){background:var(--soft)}.option.correct{background:#d1fae5!important;border-color:var(--ok)!important;color:#065f46!important}.option.incorrect{background:#fee2e2!important;border-color:var(--bad)!important;color:#991b1b!important}.feedback{display:none;margin-top:22px;padding:16px;border-radius:16px;line-height:1.5}.feedback.success{background:#d1fae5;border-left:5px solid var(--ok);color:#065f46}.feedback.error{background:#fee2e2;border-left:5px solid var(--bad);color:#991b1b}.btn-row{display:flex;justify-content:flex-end;margin-top:24px}.next-btn,.restart-btn{border:0;border-radius:14px;background:linear-gradient(135deg,#1f7a45,#44c37b);color:white;padding:14px 22px;font-weight:900;font-size:16px;cursor:pointer;display:none}.result{text-align:center;display:none}.score{width:150px;height:150px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1f7a45,#44c37b);color:white;font-size:48px;font-weight:900;margin:0 auto 24px}@media(max-width:700px){.quiz-card{padding:24px 18px}.question{font-size:19px}}
-</style></head><body><header class="header"><div class="header-inner"><div class="logo">🌿 LinkedIn & HR Quiz</div><nav class="nav"><a href="linkedin-playbook.html">← Playbook</a><a href="spezialisierung1.html">Themenübersicht</a></nav></div></header><main class="quiz-main"><section class="quiz-card"><div id="quiz-ui"><h1>LinkedIn & HR-Marketing</h1><p class="sub">20 Fragen im Prüfungsstil zu LinkedIn, Company Pages, HR-Marketing, Employer Branding, Recruiting Ads und Nischenplattformen.</p><div class="progress" id="progress"></div><div class="question" id="question"></div><div class="options" id="options"></div><div class="feedback" id="feedback"></div><div class="btn-row"><button class="next-btn" id="next-btn">Weiter</button></div></div><div class="result" id="result-ui"><div class="score"><span id="score">0</span></div><h1>Quiz abgeschlossen</h1><p class="sub">Du hast <strong id="score-text">0 von 20</strong> Fragen richtig beantwortet.</p><button class="restart-btn" id="restart-btn" style="display:inline-flex">Nochmal starten</button></div></section></main><script>
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LinkedIn &amp; HR Quiz</title>
+<style>
+:root{
+  --primary:#0f5132;--secondary:#16834f;--gold:#c8a84e;--bg:#f4fbf7;--card:#fff;--border:#dbeee2;--text:#123326;--muted:#5f7569;--ok:#10b981;--bad:#ef4444;--shadow:0 12px 30px rgba(15,81,50,.12)
+}
+*{box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;margin:0}
+.quiz-header{background:var(--primary);color:#fff;border-bottom:4px solid var(--gold);padding:1.15rem 1.5rem;box-shadow:0 8px 24px rgba(15,81,50,.13)}
+.quiz-header-inner{width:min(1200px,calc(100% - 2rem));margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.quiz-header h1{font-size:clamp(2rem,3.8vw,2.8rem);line-height:1.08;margin:0;font-weight:850;letter-spacing:-.02em;color:#fff;text-align:left}
+.back-link-header{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;color:#fff;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.28);padding:.82rem 1rem;border-radius:9px;font-weight:800;white-space:nowrap}
+.back-link-header:hover{background:rgba(255,255,255,.18)}
+.quiz-main{min-height:calc(100vh - 98px);display:flex;justify-content:center;align-items:flex-start;padding:3rem 1.25rem}
+.quiz-container{background-color:#fff;border-radius:12px;box-shadow:var(--shadow);width:100%;max-width:850px;padding:40px}
+.progress{text-align:center;color:var(--muted);font-size:15px;margin-bottom:30px;font-weight:700}
+.question{font-size:20px;font-weight:750;margin-bottom:25px;line-height:1.5;color:var(--text)}
+.options{display:flex;flex-direction:column;gap:12px}
+.option{background-color:#f8fffb;border:2px solid var(--border);border-radius:8px;padding:16px;font-size:16px;cursor:pointer;transition:all .2s ease;text-align:left;font-weight:500;color:#416552;line-height:1.45}
+.option:hover:not(:disabled){background-color:#e8f8ee;border-color:#bfe4ca}
+.option.correct{background-color:#d1fae5!important;border-color:var(--ok)!important;color:#065f46!important;font-weight:700}
+.option.incorrect{background-color:#fee2e2!important;border-color:var(--bad)!important;color:#991b1b!important}
+.option:disabled{cursor:default}
+.feedback{margin-top:25px;font-size:16px;text-align:left;min-height:24px;padding:15px;border-radius:8px;display:none;line-height:1.5}
+.feedback.success{background-color:#d1fae5;color:#065f46;border-left:5px solid var(--ok)}
+.feedback.error{background-color:#fee2e2;color:#991b1b;border-left:5px solid var(--bad)}
+.btn-container{display:flex;justify-content:flex-end;margin-top:30px}
+.next-btn{background-color:var(--secondary);color:#fff;border:none;border-radius:8px;padding:14px 28px;font-size:16px;font-weight:800;cursor:pointer;display:none}
+.next-btn:hover{background-color:var(--primary)}
+.result-container{text-align:center;display:none}
+.result-container h2{color:var(--primary);font-size:30px;margin-bottom:20px}
+.result-container p{font-size:20px;color:#4a5568;margin-bottom:30px}
+.score-circle{width:150px;height:150px;border-radius:50%;background:var(--primary);color:white;display:flex;align-items:center;justify-content:center;font-size:46px;font-weight:850;margin:0 auto 24px auto}
+.restart-btn{background-color:var(--secondary);color:white;border:none;border-radius:8px;padding:14px 28px;font-size:16px;font-weight:800;cursor:pointer}
+.restart-btn:hover{background-color:var(--primary)}
+@media(max-width:760px){.quiz-header-inner{width:100%;flex-direction:column;align-items:stretch}.back-link-header{width:100%}.quiz-container{padding:28px 20px}}
+</style>
+</head>
+<body>
+<header class="quiz-header">
+  <div class="quiz-header-inner">
+    <h1>LinkedIn &amp; HR Quiz</h1>
+    <a class="back-link-header" href="spezi1.html">← Zur grünen Übersicht</a>
+  </div>
+</header>
+<main class="quiz-main">
+  <div class="quiz-container">
+    <div id="quiz">
+      <div class="progress" id="progress"></div>
+      <div class="question" id="question"></div>
+      <div class="options" id="options"></div>
+      <div class="feedback" id="feedback"></div>
+      <div class="btn-container"><button class="next-btn" id="nextBtn">Weiter</button></div>
+    </div>
+    <div class="result-container" id="result">
+      <div class="score-circle" id="scoreCircle">0</div>
+      <h2>Quiz abgeschlossen</h2>
+      <p id="scoreText"></p>
+      <button class="restart-btn" onclick="restartQuiz()">Nochmal starten</button>
+    </div>
+  </div>
+</main>
+<script>
 const questions = [
   {
-    "q": "Was ist laut dem 360Brew Update 2026 auf LinkedIn entscheidender für die Reichweite als einfache Likes?",
+    "q": "Was ist laut dem '360Brew Update' 2026 auf LinkedIn entscheidender für die Reichweite als einfache Likes?",
     "options": [
-      "Eine extrem hohe Posting-Frequenz",
-      "Externe Links in jedem Post",
-      "Saves und Kommentartiefe",
-      "Mindestens 15 Hashtags"
+      "Eine extrem hohe Posting-Frequenz (mindestens 2x täglich).",
+      "Externe Links zu anderen Plattformen in jedem Post.",
+      "Saves (Speichern) & Kommentartiefe – ein Save hat ca. 5x mehr Reichweitenwirkung als ein Like.",
+      "Die Nutzung von möglichst vielen Hashtags (mindestens 15)."
     ],
     "answer": 2,
-    "explanation": "Saves und substanzielle Kommentare gelten als stärkere Qualitätssignale als einfache Likes."
+    "explanation": "Ein Speichern (Save) hat ca. 5x mehr Reichweitenwirkung als ein Like, und substanzielle Diskussionen (Kommentartiefe) schlagen Massenreaktionen"
   },
   {
-    "q": "Wie unterscheidet sich die organische Reichweite einer Company Page von der eines persönlichen Profils?",
+    "q": "Wie unterscheidet sich die organische Reichweite einer Company Page von der eines persönlichen Profils auf LinkedIn?",
     "options": [
-      "Company Pages haben immer höhere Reichweite",
-      "Es gibt keinen Unterschied",
-      "Persönliche Profile werden eher bevorzugt",
-      "Company Pages erreichen immer 100 % der Follower"
+      "Company Pages haben grundsätzlich eine viel höhere organische Reichweite als persönliche Profile.",
+      "Es gibt keinen Unterschied, der Algorithmus behandelt beide gleich.",
+      "Persönliche Profile werden vom Algorithmus bevorzugt, wodurch die organische Reichweite von Company Pages deutlich gesunken ist.",
+      "Company Pages erreichen immer 100% ihrer Follower."
     ],
     "answer": 2,
-    "explanation": "Persönliche Profile werden häufiger bevorzugt; Company Pages brauchen oft Mitarbeitenden-Engagement und/oder Paid Ads."
+    "explanation": "Persönliche Profile werden vom Algorithmus bevorzugt, wodurch die organische Reichweite von Company Pages deutlich gesunken ist und Paid Ads oder Mitarbeiter-Engagement nötig macht"
   },
   {
-    "q": "Was versteht man unter Employee Advocacy?",
+    "q": "Was versteht man unter dem Begriff 'Employee Advocacy' auf LinkedIn?",
     "options": [
-      "Automatisiertes Löschen von Profilen",
-      "Mitarbeitende als authentische Markenbotschafter*innen",
-      "Ein Premium-Abo für Jobsuchende",
-      "Ein Beschwerdetool"
+      "Das automatisierte Löschen von Mitarbeiterprofilen bei Kündigung.",
+      "Die strategische Einbindung von Mitarbeitenden als authentische Markenbotschafter (Corporate Influencer).",
+      "Ein Premium-Abo für Arbeitssuchende.",
+      "Ein Beschwerdemanagement-Tool für Angestellte."
     ],
     "answer": 1,
-    "explanation": "Employee Advocacy bindet Mitarbeitende als glaubwürdige Stimmen und Corporate Influencer ein."
+    "explanation": "Mitarbeitende fungieren strategisch als authentische Markenbotschafter (Corporate Influencer), was die Reichweite oft um das 5-8-fache erhöht und das Vertrauen stärkt"
   },
   {
-    "q": "Was ist der Unterschied zwischen HR-Marketing und Employer Branding?",
+    "q": "Was ist der Hauptunterschied zwischen HR-Marketing und Employer Branding?",
     "options": [
-      "Employer Branding entwickelt die Arbeitgebermarke, HR-Marketing vermarktet sie operativ",
-      "HR-Marketing ist nur Kündigung",
-      "Employer Branding ist nur extern",
-      "Es gibt keinen Unterschied"
+      "Employer Branding ist die Entwicklung der Arbeitgebermarke (Werte, Kultur), HR-Marketing umfasst die operativen Maßnahmen zu deren Vermarktung.",
+      "HR-Marketing kümmert sich um Kündigungen, Employer Branding um Einstellungen.",
+      "Employer Branding ist nur für externe Bewerber, HR-Marketing nur für bestehende Mitarbeiter.",
+      "Es gibt keinen Unterschied, die Begriffe sind absolute Synonyme."
     ],
     "answer": 0,
-    "explanation": "Employer Branding definiert Marke, Werte und Kultur; HR-Marketing setzt Maßnahmen wie Ads, Karrierepage und Social Media um."
+    "explanation": "Employer Branding ist die Entwicklung der Arbeitgebermarke (Werte, Kultur), während HR-Marketing die operativen Maßnahmen (z.B. Ads, Karriereseite) umfasst, um das Unternehmen attraktiv zu machen"
   },
   {
-    "q": "Welche Kennzahl misst die Zeit von Stellenfreigabe bis Vertragsunterschrift?",
+    "q": "Welche Kennzahl im HR-Marketing misst die Zeit von der Ausschreibung/Stellenfreigabe bis zur Vertragsunterschrift?",
     "options": [
-      "Cost-per-Hire",
+      "Cost-per-Hire (CPH)",
       "Time-to-Hire",
-      "eNPS",
+      "Employee Net Promoter Score (eNPS)",
       "Click-to-Apply-Rate"
     ],
     "answer": 1,
-    "explanation": "Time-to-Hire misst die Dauer bis zur finalen Einstellung."
+    "explanation": "Die Kennzahl 'Time-to-Hire' misst die Dauer von der Stellenfreigabe bis zur finalen Einstellung eines Kandidaten"
   },
   {
-    "q": "Wofür steht eNPS?",
+    "q": "Wofür steht die Abkürzung 'eNPS' im Kontext der Mitarbeiterbindung?",
     "options": [
       "Employee Net Profit Share",
       "Engagement Number Per Staff",
@@ -66,21 +130,22 @@ const questions = [
       "Employer New Placement System"
     ],
     "answer": 2,
-    "explanation": "eNPS misst, wie wahrscheinlich Mitarbeitende den Arbeitgeber weiterempfehlen würden."
+    "explanation": "eNPS steht für Employee Net Promoter Score und misst die Zufriedenheit und Weiterempfehlungsbereitschaft der Mitarbeitenden ('Würden Sie uns als Arbeitgeber empfehlen?')"
   },
   {
-    "q": "Zu welcher Medien-Kategorie gehören Kununu- oder Glassdoor-Bewertungen?",
+    "q": "Zu welcher Medien-Kategorie (Kanal-Art) im HR-Marketing gehören positive Arbeitgeberbewertungen auf Kununu oder Glassdoor?",
     "options": [
-      "Paid Media",
-      "Owned Media",
-      "Earned Media",
+      "Paid Media (Bezahlte Reichweite)",
+      "Owned Media (Eigene Kanäle)",
+      "Earned Media (",
+      "Reichweite)",
       "B2B Media"
     ],
     "answer": 2,
-    "explanation": "Bewertungen durch Dritte sind verdiente Reichweite, also Earned Media."
+    "explanation": "Sie gehören zur 'Verdienten' Reichweite (Earned Media), also zu kostenloser Aufmerksamkeit durch Dritte (wie Empfehlungen und Bewertungen)"
   },
   {
-    "q": "Welches LinkedIn-Anzeigenformat verschickt interaktive Nachrichten ins Postfach?",
+    "q": "Welches LinkedIn-Anzeigenformat verschickt interaktive Nachrichten direkt in das InMail-Postfach der Nutzer?",
     "options": [
       "Dynamic Ads",
       "Conversation Ads",
@@ -88,54 +153,55 @@ const questions = [
       "Job Ads"
     ],
     "answer": 1,
-    "explanation": "Conversation Ads sind interaktive InMail-/Nachrichtenkampagnen mit CTA-Auswahl."
+    "explanation": "Conversation Ads sind interaktive Nachrichten-Kampagnen im InMail-Postfach mit Call-to-Action-Auswahl (Vorteil: persönliche Ansprache)"
   },
   {
-    "q": "Welches Format eignet sich besonders für How-tos, Checklisten und Case Studies?",
+    "q": "Welches Content-Format auf LinkedIn eignet sich laut Vorlesung besonders gut für How-tos, Checklisten und Case Studies?",
     "options": [
       "Dokument-Posts / Carousels",
       "Live-Streams",
-      "Reine Text-Posts",
+      "Kurze reine Text-Posts",
       "Job Ads"
     ],
     "answer": 0,
-    "explanation": "Dokument-Posts und Carousels performen gut bei edukativen Inhalten."
+    "explanation": "Dokument-Posts bzw. Carousels sind für diese Art von edukativen Inhalten (How-tos, Checklisten, Case Studies) das Format mit hoher Performance auf LinkedIn"
   },
   {
-    "q": "Wie wird Pinterest im Marketing-Mix positioniert?",
+    "q": "Wie wird Pinterest im Marketing-Mix primär positioniert?",
     "options": [
-      "B2B-Plattform für Steuerberater",
-      "Echtzeit-Nachrichtenplattform",
-      "Visuelle Such- und Inspirationsplattform mit Kaufabsicht",
-      "Live-Streaming-Plattform"
+      "Als B2B-Plattform für Steuerberater.",
+      "Als reine Echtzeit-Nachrichtenplattform.",
+      "Als visuelle Such- und Inspirationsplattform (",
+      ") mit hoher Kaufabsicht.",
+      "Als Live-Streaming-Plattform für Gamer."
     ],
     "answer": 2,
-    "explanation": "Pinterest ist eine Ideenmaschine für Inspiration, Suche und visuelles Shopping."
+    "explanation": "Pinterest ist eine visuelle Such- und Inspirationsplattform ('Ideenmaschine'), die Inspiration für z. B. Lifestyle, DIY und Mode mit einer hohen Kaufabsicht verbindet"
   },
   {
-    "q": "Welches Feature ist zentral für E-Commerce-Erfolge auf Snapchat?",
+    "q": "Welches Feature ist ein zentraler Treiber für E-Commerce-Erfolge (z.B. virtuelle Anprobe) auf Snapchat?",
     "options": [
       "Subreddits",
-      "Augmented Reality Lenses",
+      "Augmented Reality (AR) Lenses",
       "Twitch Drops",
       "Document Ads"
     ],
     "answer": 1,
-    "explanation": "AR Lenses ermöglichen z. B. virtuelle Anprobe und interaktive Produkterlebnisse."
+    "explanation": "Augmented Reality (AR) Lenses ermöglichen es Nutzern, Produkte virtuell anzuprobieren ('Try before you buy'), was die Kaufbereitschaft steigert und Retouren senkt"
   },
   {
-    "q": "Was ist eine zentrale Herausforderung auf Reddit?",
+    "q": "Was ist eine zentrale Herausforderung und ein Risiko beim Marketing auf der Plattform Reddit?",
     "options": [
-      "Maximale Videolänge 6 Sekunden",
-      "Keine Werbeformate",
-      "Hohe Skepsis gegenüber klassischer Werbung",
-      "Nur Zielgruppe 18-24 weiblich"
+      "Die maximale Videolänge beträgt nur 6 Sekunden.",
+      "Es gibt dort überhaupt keine Werbeformate.",
+      "Eine hohe Skepsis der Community gegenüber klassischer Werbung; pushy Content wird oft mit Downvotes oder Shitstorms abgestraft.",
+      "Es ist nur für Frauen zwischen 18 und 24 Jahren relevant."
     ],
     "answer": 2,
-    "explanation": "Reddit-Communities reagieren empfindlich auf pushy Werbung; Mehrwert und Authentizität sind wichtig."
+    "explanation": "Es herrscht eine hohe Skepsis der Community gegenüber klassischer Werbung; aufdringlicher Content wird oft mit Downvotes oder Shitstorms abgestraft. Authentizität und Mehrwert sind extrem wichtig"
   },
   {
-    "q": "Wie heißen Belohnungen auf Twitch, die Verweildauer steigern können?",
+    "q": "Wie nennt man Belohnungen (z. B. In-Game-Items), die Nutzer auf Twitch für das Ansehen von Streams erhalten und die die Verweildauer steigern?",
     "options": [
       "Twitch Drops",
       "Snap Lenses",
@@ -143,91 +209,152 @@ const questions = [
       "Pinterest Collections"
     ],
     "answer": 0,
-    "explanation": "Twitch Drops belohnen das Zuschauen, z. B. mit In-Game-Items."
+    "explanation": "Twitch Drops sind Belohnungen (z. B. In-Game-Items), die das Ansehen von Streams belohnen, die Verweildauer stark fördern und zu Shop-Besuchen führen können"
   },
   {
-    "q": "Wofür eignet sich X im E-Commerce besonders?",
+    "q": "Wofür eignet sich die Plattform X (ehemals Twitter) im E-Commerce besonders?",
     "options": [
-      "3-stündige Dokumentationen",
-      "Trend Commerce und Echtzeit-Social-Proof",
-      "B2B-Recruiting mit Lebensläufen",
-      "AR-Filter"
+      "Für das Hochladen von 3-stündigen Dokumentarfilmen.",
+      "Für",
+      "(Trend Hijacking) und Echtzeit-Social-Proof durch die Diskussionen von Nutzern und Meinungsführern.",
+      "Für B2B-Recruiting über ausführliche Lebensläufe.",
+      "Für Augmented Reality Filter."
     ],
     "answer": 1,
-    "explanation": "X ist stark bei Echtzeitkommunikation, Trends und Social Proof."
+    "explanation": "X (Twitter) ist eine Echtzeit-Plattform, die sich exzellent für 'Trend Commerce' (Trend Hijacking) und Echtzeit-Social-Proof durch Diskussionen und Empfehlungen eignet"
   },
   {
-    "q": "Was bedeutet CPA im Recruiting-Advertising?",
+    "q": "Was versteht man unter der Kennzahl 'CPA' im Recruiting-Advertising?",
     "options": [
-      "Cost per Click",
-      "Clicks per Ad",
-      "Cost per Application",
-      "Content per Audience"
+      "Cost per Click (Kosten pro Klick auf das Bild)",
+      "Clicks per Ad (Anzahl der Klicks pro Anzeige)",
+      "Cost per Application (Kosten pro generierter Bewerbung)",
+      "Content per Audience (Inhalte pro Zielgruppe)"
     ],
     "answer": 2,
-    "explanation": "CPA steht hier für Kosten pro Bewerbung beziehungsweise Cost per Application."
+    "explanation": "CPA steht für Cost per Application (oder Cost per Action) und misst die Kosten pro generierter Bewerbung (Conversion-orientierte Kennzahl)"
   },
   {
-    "q": "Welches Abrechnungsmodell zahlt pro Anzeigenklick?",
+    "q": "Welches Abrechnungsmodell ist der Standard bei Recruiting-Kampagnen auf Jobbörsen und Social Media, bei dem nur für den Klick auf die Anzeige gezahlt wird?",
     "options": [
-      "CPM",
-      "CPC",
+      "CPM (Cost per Mille)",
+      "CPC (Cost per Click)",
       "eNPS",
       "Flatrate pro Follower"
     ],
     "answer": 1,
-    "explanation": "CPC bedeutet Cost per Click."
+    "explanation": "CPC (Cost per Click) ist das gängige Standardmodell bei Recruiting-Kampagnen, bei dem erst abgerechnet wird, wenn ein Nutzer auf die Anzeige klickt"
   },
   {
-    "q": "Welche Posting-Logik wird für LinkedIn empfohlen?",
+    "q": "Wie oft sollte laut Vorlesung auf LinkedIn idealerweise gepostet werden, um vom Algorithmus (360Brew) belohnt zu werden?",
     "options": [
       "5x täglich",
-      "Qualität schlägt Frequenz: konstant posten",
-      "Genau 1x im Monat",
-      "Nur Wochenende"
+      "Qualität schlägt Frequenz: 3x pro Woche konstant statt sporadischer Peaks.",
+      "Genau 1x im Monat.",
+      "Nur an Wochenenden."
     ],
     "answer": 1,
-    "explanation": "Konstanz und Qualität sind wichtiger als sporadische Peaks oder Masse."
+    "explanation": "Die Strategie lautet 'Qualität schlägt Frequenz', idealerweise 3x pro Woche konstant posten, da dies besser abschneidet als sporadische Peaks mit langen Pausen"
   },
   {
-    "q": "Was ist die EVP im Employer Branding?",
+    "q": "Was ist die 'EVP' im Employer Branding?",
     "options": [
       "Employee Video Platform",
       "External Vendor Partnership",
-      "Employer Value Proposition",
+      "Employer Value Proposition (Das zentrale Arbeitgeberversprechen / die Arbeitgeberbotschaft)",
       "Electronic Verification Process"
     ],
     "answer": 2,
-    "explanation": "EVP ist das zentrale Arbeitgeberversprechen."
+    "explanation": "EVP steht für Employer Value Proposition, also das zentrale Arbeitgeberversprechen (Werte, Kultur, Benefits), das durch den Content gestützt wird"
   },
   {
-    "q": "Was ist eine Thought Leader Ad auf LinkedIn?",
+    "q": "Was ist eine 'Thought Leader Ad' auf LinkedIn?",
     "options": [
-      "Anzeige auf Wikipedia",
-      "Beworbener Beitrag einer Person aus dem Unternehmen",
-      "Automatische E-Mail an Universitäten",
-      "Bildanzeige ohne Text"
+      "Eine Anzeige, die nur auf Wikipedia erscheint.",
+      "Ein Werbeformat, bei dem Beiträge einzelner Mitarbeiter (z. B. Experten oder Geschäftsführer) gezielt als Anzeige beworben werden.",
+      "Eine automatische E-Mail an alle Universitäten.",
+      "Ein Format, das nur Bilder ohne Text erlaubt."
     ],
     "answer": 1,
-    "explanation": "Thought Leader Ads verstärken Beiträge einzelner Mitarbeitender, Expert*innen oder Führungskräfte."
+    "explanation": "Thought Leader Ads sind ein Format zur Verstärkung von Beiträgen einzelner Mitarbeiter (z. B. Fachexperten oder CEO) für gezielte Positionierung und Employer Branding"
   },
   {
-    "q": "Warum sind Stockfotos in Recruiting Ads problematisch?",
+    "q": "Warum sind klassische Stockfotos in modernen Recruiting-Ads laut Vorlesung problematisch?",
     "options": [
-      "Authentische Gesichter und echte Storys wirken besser",
-      "Sie verbrauchen zu viel Datenvolumen",
-      "Sie sind in der EU verboten",
-      "LinkedIn blockiert sie"
+      "Sie verlieren an Wirkung, da Authentizität besser funktioniert als Hochglanz. Bewerber*innen reagieren stärker auf echte Gesichter und reale Storys.",
+      "Sie verbrauchen zu viel Datenvolumen auf Mobilgeräten.",
+      "Sie dürfen aus Datenschutzgründen nicht mehr in der EU verwendet werden.",
+      "Der LinkedIn-Algorithmus blockiert Bilder, die professionell beleuchtet sind."
     ],
     "answer": 0,
-    "explanation": "Authentizität funktioniert besser als Hochglanz; reale Einblicke erhöhen Glaubwürdigkeit."
+    "explanation": "Stockfotos und Hochglanz verlieren an Wirkung, da Authentizität besser funktioniert. Reale Mitarbeitende und echte Situationen ('raw' statt 'glossy') ziehen mehr passende Bewerber an"
   }
 ];
-let current=0, score=0, answered=false;
-const progress=document.getElementById('progress'), question=document.getElementById('question'), options=document.getElementById('options'), feedback=document.getElementById('feedback'), next=document.getElementById('next-btn'), quizUi=document.getElementById('quiz-ui'), resultUi=document.getElementById('result-ui'), scoreEl=document.getElementById('score'), scoreText=document.getElementById('score-text'), restart=document.getElementById('restart-btn');
-function loadQuestion(){answered=false;let q=questions[current];progress.textContent=`Frage ${current+1} von ${questions.length}`;question.textContent=`${current+1}. ${q.q}`;options.innerHTML='';feedback.style.display='none';feedback.className='feedback';next.style.display='none';q.options.forEach((opt,i)=>{let btn=document.createElement('button');btn.className='option';btn.textContent=`${String.fromCharCode(65+i)}) ${opt}`;btn.onclick=()=>selectOption(i,btn);options.appendChild(btn);});}
-function selectOption(i,btn){if(answered)return;answered=true;let q=questions[current];document.querySelectorAll('.option').forEach((b,idx)=>{b.disabled=true;if(idx===q.answer)b.classList.add('correct');});if(i===q.answer){score++;feedback.innerHTML='<strong>Richtig.</strong><br>'+q.explanation;feedback.classList.add('success');}else{btn.classList.add('incorrect');feedback.innerHTML='<strong>Nicht ganz.</strong><br>'+q.explanation;feedback.classList.add('error');}feedback.style.display='block';next.textContent=current<questions.length-1?'Weiter':'Ergebnis anzeigen';next.style.display='inline-flex';}
-next.onclick=()=>{current++; if(current<questions.length)loadQuestion(); else showResult();};
-function showResult(){quizUi.style.display='none';resultUi.style.display='block';scoreEl.textContent=score;scoreText.textContent=`${score} von ${questions.length}`;}
-restart.onclick=()=>{current=0;score=0;quizUi.style.display='block';resultUi.style.display='none';loadQuestion();};loadQuestion();
-</script></body></html>
+let currentQuestion=0, score=0, answered=false;
+const progressEl=document.getElementById('progress');
+const questionEl=document.getElementById('question');
+const optionsEl=document.getElementById('options');
+const feedbackEl=document.getElementById('feedback');
+const nextBtn=document.getElementById('nextBtn');
+const quizEl=document.getElementById('quiz');
+const resultEl=document.getElementById('result');
+const scoreTextEl=document.getElementById('scoreText');
+const scoreCircleEl=document.getElementById('scoreCircle');
+function loadQuestion(){
+  answered=false;
+  const q=questions[currentQuestion];
+  progressEl.textContent=`Frage ${currentQuestion+1} von ${questions.length}`;
+  questionEl.textContent=`${currentQuestion+1}. ${q.q}`;
+  optionsEl.innerHTML='';
+  feedbackEl.style.display='none';
+  feedbackEl.className='feedback';
+  nextBtn.style.display='none';
+  q.options.forEach((option,index)=>{
+    const button=document.createElement('button');
+    button.className='option';
+    button.textContent=`${String.fromCharCode(65+index)}) ${option}`;
+    button.addEventListener('click',()=>selectOption(index,button));
+    optionsEl.appendChild(button);
+  });
+}
+function selectOption(index,button){
+  if(answered)return;
+  answered=true;
+  const q=questions[currentQuestion];
+  const optionButtons=document.querySelectorAll('.option');
+  optionButtons.forEach(btn=>btn.disabled=true);
+  optionButtons[q.answer].classList.add('correct');
+  if(index===q.answer){
+    score++;
+    feedbackEl.textContent='Richtig. '+q.explanation;
+    feedbackEl.classList.add('success');
+  }else{
+    button.classList.add('incorrect');
+    feedbackEl.textContent='Nicht ganz. '+q.explanation;
+    feedbackEl.classList.add('error');
+  }
+  feedbackEl.style.display='block';
+  nextBtn.textContent=currentQuestion<questions.length-1?'Weiter':'Ergebnis anzeigen';
+  nextBtn.style.display='inline-block';
+}
+nextBtn.addEventListener('click',()=>{
+  currentQuestion++;
+  if(currentQuestion<questions.length){loadQuestion();}else{showResult();}
+});
+function showResult(){
+  quizEl.style.display='none';
+  resultEl.style.display='block';
+  scoreCircleEl.textContent=score;
+  scoreTextEl.textContent=`Du hast ${score} von ${questions.length} Fragen richtig beantwortet.`;
+}
+function restartQuiz(){
+  currentQuestion=0;
+  score=0;
+  quizEl.style.display='block';
+  resultEl.style.display='none';
+  loadQuestion();
+}
+loadQuestion();
+</script>
+</body>
+</html>

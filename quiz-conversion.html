@@ -5,40 +5,353 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Conversion-Prozess Quiz</title>
 <style>
-:root{--primary:#0f5132;--secondary:#16834f;--gold:#c8a84e;--bg:#f4fbf7;--card:#fff;--border:#dbeee2;--text:#123326;--muted:#5f7569;--shadow:0 8px 24px rgba(15,81,50,.12)}
-*{box-sizing:border-box;margin:0;padding:0}
-body{min-height:100vh;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.55}
-header{background:var(--primary);color:white;padding:1.35rem 1.5rem;border-bottom:4px solid var(--gold)}
-.header-inner,main{width:min(1000px,calc(100% - 2rem));margin:0 auto}
-h1{font-size:clamp(1.8rem,4vw,2.6rem);line-height:1.1}
-header p{color:#d7f5e4;margin-top:.45rem}
-main{padding:2rem 0 4rem}
-.box{background:var(--card);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow);padding:2rem}
-.status{display:inline-flex;padding:.25rem .65rem;border-radius:999px;background:#fef3c7;color:#92400e;font-weight:800;font-size:.78rem;margin-bottom:1rem}
-p{color:var(--muted);margin:.7rem 0}
-.actions{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.2rem}
-a{display:inline-flex;text-decoration:none;border-radius:9px;padding:.72rem 1rem;font-weight:750}
-.primary{background:var(--secondary);color:#fff}.secondary{background:#fff;color:var(--primary);border:1px solid var(--border)}
+:root{
+  --primary:#0f5132;--secondary:#16834f;--gold:#c8a84e;--bg:#f4fbf7;--card:#fff;--border:#dbeee2;--text:#123326;--muted:#5f7569;--ok:#10b981;--bad:#ef4444;--shadow:0 12px 30px rgba(15,81,50,.12)
+}
+*{box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;margin:0}
+.quiz-header{background:var(--primary);color:#fff;border-bottom:4px solid var(--gold);padding:1.15rem 1.5rem;box-shadow:0 8px 24px rgba(15,81,50,.13)}
+.quiz-header-inner{width:min(1200px,calc(100% - 2rem));margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.quiz-header h1{font-size:clamp(2rem,3.8vw,2.8rem);line-height:1.08;margin:0;font-weight:850;letter-spacing:-.02em;color:#fff;text-align:left}
+.back-link-header{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;color:#fff;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.28);padding:.82rem 1rem;border-radius:9px;font-weight:800;white-space:nowrap}
+.back-link-header:hover{background:rgba(255,255,255,.18)}
+.quiz-main{min-height:calc(100vh - 98px);display:flex;justify-content:center;align-items:flex-start;padding:3rem 1.25rem}
+.quiz-container{background-color:#fff;border-radius:12px;box-shadow:var(--shadow);width:100%;max-width:850px;padding:40px}
+.progress{text-align:center;color:var(--muted);font-size:15px;margin-bottom:30px;font-weight:700}
+.question{font-size:20px;font-weight:750;margin-bottom:25px;line-height:1.5;color:var(--text)}
+.options{display:flex;flex-direction:column;gap:12px}
+.option{background-color:#f8fffb;border:2px solid var(--border);border-radius:8px;padding:16px;font-size:16px;cursor:pointer;transition:all .2s ease;text-align:left;font-weight:500;color:#416552;line-height:1.45}
+.option:hover:not(:disabled){background-color:#e8f8ee;border-color:#bfe4ca}
+.option.correct{background-color:#d1fae5!important;border-color:var(--ok)!important;color:#065f46!important;font-weight:700}
+.option.incorrect{background-color:#fee2e2!important;border-color:var(--bad)!important;color:#991b1b!important}
+.option:disabled{cursor:default}
+.feedback{margin-top:25px;font-size:16px;text-align:left;min-height:24px;padding:15px;border-radius:8px;display:none;line-height:1.5}
+.feedback.success{background-color:#d1fae5;color:#065f46;border-left:5px solid var(--ok)}
+.feedback.error{background-color:#fee2e2;color:#991b1b;border-left:5px solid var(--bad)}
+.btn-container{display:flex;justify-content:flex-end;margin-top:30px}
+.next-btn{background-color:var(--secondary);color:#fff;border:none;border-radius:8px;padding:14px 28px;font-size:16px;font-weight:800;cursor:pointer;display:none}
+.next-btn:hover{background-color:var(--primary)}
+.result-container{text-align:center;display:none}
+.result-container h2{color:var(--primary);font-size:30px;margin-bottom:20px}
+.result-container p{font-size:20px;color:#4a5568;margin-bottom:30px}
+.score-circle{width:150px;height:150px;border-radius:50%;background:var(--primary);color:white;display:flex;align-items:center;justify-content:center;font-size:46px;font-weight:850;margin:0 auto 24px auto}
+.restart-btn{background-color:var(--secondary);color:white;border:none;border-radius:8px;padding:14px 28px;font-size:16px;font-weight:800;cursor:pointer}
+.restart-btn:hover{background-color:var(--primary)}
+@media(max-width:760px){.quiz-header-inner{width:100%;flex-direction:column;align-items:stretch}.back-link-header{width:100%}.quiz-container{padding:28px 20px}}
 </style>
 </head>
 <body>
-<header>
-  <div class="header-inner">
+<header class="quiz-header">
+  <div class="quiz-header-inner">
     <h1>Conversion-Prozess Quiz</h1>
-    <p>Prüfungstraining zum Conversion-Prozess</p>
+    <a class="back-link-header" href="spezi1.html">← Zur grünen Übersicht</a>
   </div>
 </header>
-<main>
-  <section class="box">
-    <span class="status">Im Aufbau</span>
-    <h2>Quiz ist angelegt.</h2>
-    <p>Diese Datei ist als Platzhalter vorbereitet, damit die Verlinkung auf der grünen Übersichtsseite schon funktioniert.</p>
-    <p>Später ersetzen wir diese Datei einfach durch die fertige Lernplattform oder das fertige Quiz mit exakt demselben Dateinamen.</p>
-    <div class="actions">
-      <a class="primary" href="spezi1.html">← Zur grünen Übersicht</a>
-      <a class="secondary" href="index.html">Zur blauen Hauptseite</a>
+<main class="quiz-main">
+  <div class="quiz-container">
+    <div id="quiz">
+      <div class="progress" id="progress"></div>
+      <div class="question" id="question"></div>
+      <div class="options" id="options"></div>
+      <div class="feedback" id="feedback"></div>
+      <div class="btn-container"><button class="next-btn" id="nextBtn">Weiter</button></div>
     </div>
-  </section>
+    <div class="result-container" id="result">
+      <div class="score-circle" id="scoreCircle">0</div>
+      <h2>Quiz abgeschlossen</h2>
+      <p id="scoreText"></p>
+      <button class="restart-btn" onclick="restartQuiz()">Nochmal starten</button>
+    </div>
+  </div>
 </main>
+<script>
+const questions = [
+  {
+    "q": "Was ist eine Conversion?",
+    "options": [
+      "Eine gewünschte Zielhandlung",
+      "Ein reines Design-Element",
+      "Ein Serverfehler",
+      "Ein interner Dateiname"
+    ],
+    "answer": 0,
+    "explanation": "Conversion bedeutet, dass Nutzer*innen eine definierte Zielhandlung ausführen."
+  },
+  {
+    "q": "Was ist eine Makro-Conversion?",
+    "options": [
+      "Ein Hauptziel wie Kauf oder qualifizierter Lead",
+      "Ein kleiner Scroll-Vorgang",
+      "Ein einzelner Seitenaufruf",
+      "Ein Farbwechsel"
+    ],
+    "answer": 0,
+    "explanation": "Makro-Conversions sind zentrale Geschäftsziele."
+  },
+  {
+    "q": "Was ist eine Mikro-Conversion?",
+    "options": [
+      "Ein Zwischenschritt auf dem Weg zum Hauptziel",
+      "Ein komplett abgeschlossener Kauf",
+      "Ein monatlicher Report",
+      "Ein technischer Fehler"
+    ],
+    "answer": 0,
+    "explanation": "Mikro-Conversions zeigen Fortschritt im Funnel."
+  },
+  {
+    "q": "Was beantwortet quantitative Analyse vor allem?",
+    "options": [
+      "Was ist passiert?",
+      "Warum fühlt sich jemand unsicher?",
+      "Welche Farbe mag die Zielgruppe emotional?",
+      "Wie klingt eine Marke menschlich?"
+    ],
+    "answer": 0,
+    "explanation": "Quantitative Analyse arbeitet mit Messwerten und Kennzahlen."
+  },
+  {
+    "q": "Was beantwortet qualitative Analyse vor allem?",
+    "options": [
+      "Warum passiert es?",
+      "Wie viele Klicks gab es exakt?",
+      "Wie hoch ist der CPM?",
+      "Wie viele Impressionen wurden ausgeliefert?"
+    ],
+    "answer": 0,
+    "explanation": "Qualitative Analyse liefert Kontext, Motive und Barrieren."
+  },
+  {
+    "q": "Welche Methode ist qualitativ?",
+    "options": [
+      "User-Interview",
+      "Conversion Rate",
+      "CTR",
+      "ROAS"
+    ],
+    "answer": 0,
+    "explanation": "Interviews liefern offene Antworten und tiefere Einsichten."
+  },
+  {
+    "q": "Was ist Think-Aloud?",
+    "options": [
+      "Nutzer*innen sprechen ihre Gedanken während der Nutzung laut aus",
+      "Ein automatisches Dashboard",
+      "Ein Affiliate-Provisionsmodell",
+      "Ein Ladezeit-Test"
+    ],
+    "answer": 0,
+    "explanation": "Think-Aloud wird in Usability-Tests genutzt."
+  },
+  {
+    "q": "Welche Datenquelle zeigt Klick-Hotspots und Scrolltiefe?",
+    "options": [
+      "Heatmaps",
+      "Rechnungsarchiv",
+      "Impressum",
+      "Domain-Kauf"
+    ],
+    "answer": 0,
+    "explanation": "Heatmaps zeigen, wo Nutzer klicken und wie weit sie scrollen."
+  },
+  {
+    "q": "Was ist eine Heuristik?",
+    "options": [
+      "Eine gedankliche Abkürzung",
+      "Eine Serververbindung",
+      "Ein Payment-Anbieter",
+      "Eine Anzeigenplatzierung"
+    ],
+    "answer": 0,
+    "explanation": "Heuristiken helfen Menschen, schnell zu entscheiden."
+  },
+  {
+    "q": "Was ist Social Proof?",
+    "options": [
+      "Orientierung am Verhalten anderer",
+      "Ein reiner Rabattcode",
+      "Eine technische Ladezeit",
+      "Ein CRM-Feld"
+    ],
+    "answer": 0,
+    "explanation": "Bewertungen und Testimonials sind typische Social-Proof-Signale."
+  },
+  {
+    "q": "Was beschreibt Reporting?",
+    "options": [
+      "Rückblickende Darstellung von Daten in regelmäßigen Abständen",
+      "Stetige Echtzeit-Überwachung",
+      "Automatische Bildkomprimierung",
+      "Manuelle Chat-Antwort"
+    ],
+    "answer": 0,
+    "explanation": "Reporting ist meist periodisch und rückblickend."
+  },
+  {
+    "q": "Was beschreibt Monitoring?",
+    "options": [
+      "Stetige Überwachung wichtiger Kennzahlen",
+      "Nur ein Jahresabschluss",
+      "Ein statisches PDF ohne Aktualisierung",
+      "Ein Influencer-Briefing"
+    ],
+    "answer": 0,
+    "explanation": "Monitoring erkennt Probleme laufend und schneller."
+  },
+  {
+    "q": "Was ist ein Messwert?",
+    "options": [
+      "Ein einzelner Wert ohne Kontext",
+      "Immer direkt ein strategisches Ziel",
+      "Eine fertige Handlungsempfehlung",
+      "Ein rechtlicher Hinweis"
+    ],
+    "answer": 0,
+    "explanation": "Messwerte sind Rohdaten, zum Beispiel 1.200 Klicks."
+  },
+  {
+    "q": "Was ist eine Kennzahl?",
+    "options": [
+      "Ein aufbereiteter oder berechneter Wert mit Bezug",
+      "Immer automatisch ein KPI",
+      "Nur ein Kommentar",
+      "Ein Bildformat"
+    ],
+    "answer": 0,
+    "explanation": "Kennzahlen setzen Messwerte in Beziehung, etwa CTR."
+  },
+  {
+    "q": "Wann wird eine Kennzahl zur KPI?",
+    "options": [
+      "Wenn sie mit einem strategischen Ziel verknüpft ist",
+      "Wenn sie blau eingefärbt ist",
+      "Wenn sie in einem Footer steht",
+      "Wenn sie keine Handlung erlaubt"
+    ],
+    "answer": 0,
+    "explanation": "KPI bedeutet Key Performance Indicator mit Zielbezug."
+  },
+  {
+    "q": "Was ist ein gutes Dashboard?",
+    "options": [
+      "Zielorientiert, verständlich und handlungsnah",
+      "Voll mit allen verfügbaren Zahlen",
+      "Ohne Kontext",
+      "Nur schön gestaltet"
+    ],
+    "answer": 0,
+    "explanation": "Dashboards sollen Entscheidungen erleichtern, nicht verwirren."
+  },
+  {
+    "q": "Warum kombiniert man qualitative und quantitative Daten?",
+    "options": [
+      "Zahlen zeigen das Was, qualitative Daten erklären oft das Warum",
+      "Weil eine Methode immer reicht",
+      "Damit Tracking unnötig wird",
+      "Damit keine Hypothesen nötig sind"
+    ],
+    "answer": 0,
+    "explanation": "Die Kombination macht Optimierung fundierter."
+  },
+  {
+    "q": "Was ist eine Conversion-Hypothese?",
+    "options": [
+      "Eine überprüfbare Annahme über Wirkung einer Änderung",
+      "Ein Gefühl ohne Begründung",
+      "Ein fertiges Tracking-Skript",
+      "Ein gesetzlicher Hinweis"
+    ],
+    "answer": 0,
+    "explanation": "Hypothesen verbinden Beobachtung, Änderung und erwartete Wirkung."
+  },
+  {
+    "q": "Welche Formel passt zu einer Hypothese?",
+    "options": [
+      "Wenn X geändert wird, dann Y passiert, weil Z",
+      "Mehr ist immer besser",
+      "Design ist schöner",
+      "Alle Nutzer sind gleich"
+    ],
+    "answer": 0,
+    "explanation": "Diese Struktur macht eine Annahme prüfbar."
+  },
+  {
+    "q": "Was sollte man tun, wenn Conversion-Zahlen ein Problem zeigen, aber die Ursache unklar ist?",
+    "options": [
+      "Qualitative Analyse ergänzen",
+      "Sofort alles löschen",
+      "Nur mehr Budget ausgeben",
+      "Kennzahlen ignorieren"
+    ],
+    "answer": 0,
+    "explanation": "Qualitative Methoden helfen, Ursachen und Barrieren zu verstehen."
+  }
+];
+let currentQuestion=0, score=0, answered=false;
+const progressEl=document.getElementById('progress');
+const questionEl=document.getElementById('question');
+const optionsEl=document.getElementById('options');
+const feedbackEl=document.getElementById('feedback');
+const nextBtn=document.getElementById('nextBtn');
+const quizEl=document.getElementById('quiz');
+const resultEl=document.getElementById('result');
+const scoreTextEl=document.getElementById('scoreText');
+const scoreCircleEl=document.getElementById('scoreCircle');
+function loadQuestion(){
+  answered=false;
+  const q=questions[currentQuestion];
+  progressEl.textContent=`Frage ${currentQuestion+1} von ${questions.length}`;
+  questionEl.textContent=`${currentQuestion+1}. ${q.q}`;
+  optionsEl.innerHTML='';
+  feedbackEl.style.display='none';
+  feedbackEl.className='feedback';
+  nextBtn.style.display='none';
+  q.options.forEach((option,index)=>{
+    const button=document.createElement('button');
+    button.className='option';
+    button.textContent=`${String.fromCharCode(65+index)}) ${option}`;
+    button.addEventListener('click',()=>selectOption(index,button));
+    optionsEl.appendChild(button);
+  });
+}
+function selectOption(index,button){
+  if(answered)return;
+  answered=true;
+  const q=questions[currentQuestion];
+  const optionButtons=document.querySelectorAll('.option');
+  optionButtons.forEach(btn=>btn.disabled=true);
+  optionButtons[q.answer].classList.add('correct');
+  if(index===q.answer){
+    score++;
+    feedbackEl.textContent='Richtig. '+q.explanation;
+    feedbackEl.classList.add('success');
+  }else{
+    button.classList.add('incorrect');
+    feedbackEl.textContent='Nicht ganz. '+q.explanation;
+    feedbackEl.classList.add('error');
+  }
+  feedbackEl.style.display='block';
+  nextBtn.textContent=currentQuestion<questions.length-1?'Weiter':'Ergebnis anzeigen';
+  nextBtn.style.display='inline-block';
+}
+nextBtn.addEventListener('click',()=>{
+  currentQuestion++;
+  if(currentQuestion<questions.length){loadQuestion();}else{showResult();}
+});
+function showResult(){
+  quizEl.style.display='none';
+  resultEl.style.display='block';
+  scoreCircleEl.textContent=score;
+  scoreTextEl.textContent=`Du hast ${score} von ${questions.length} Fragen richtig beantwortet.`;
+}
+function restartQuiz(){
+  currentQuestion=0;
+  score=0;
+  quizEl.style.display='block';
+  resultEl.style.display='none';
+  loadQuestion();
+}
+loadQuestion();
+</script>
 </body>
 </html>

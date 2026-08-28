@@ -5,40 +5,353 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Landing Pages Quiz</title>
 <style>
-:root{--primary:#0f5132;--secondary:#16834f;--gold:#c8a84e;--bg:#f4fbf7;--card:#fff;--border:#dbeee2;--text:#123326;--muted:#5f7569;--shadow:0 8px 24px rgba(15,81,50,.12)}
-*{box-sizing:border-box;margin:0;padding:0}
-body{min-height:100vh;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.55}
-header{background:var(--primary);color:white;padding:1.35rem 1.5rem;border-bottom:4px solid var(--gold)}
-.header-inner,main{width:min(1000px,calc(100% - 2rem));margin:0 auto}
-h1{font-size:clamp(1.8rem,4vw,2.6rem);line-height:1.1}
-header p{color:#d7f5e4;margin-top:.45rem}
-main{padding:2rem 0 4rem}
-.box{background:var(--card);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow);padding:2rem}
-.status{display:inline-flex;padding:.25rem .65rem;border-radius:999px;background:#fef3c7;color:#92400e;font-weight:800;font-size:.78rem;margin-bottom:1rem}
-p{color:var(--muted);margin:.7rem 0}
-.actions{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.2rem}
-a{display:inline-flex;text-decoration:none;border-radius:9px;padding:.72rem 1rem;font-weight:750}
-.primary{background:var(--secondary);color:#fff}.secondary{background:#fff;color:var(--primary);border:1px solid var(--border)}
+:root{
+  --primary:#0f5132;--secondary:#16834f;--gold:#c8a84e;--bg:#f4fbf7;--card:#fff;--border:#dbeee2;--text:#123326;--muted:#5f7569;--ok:#10b981;--bad:#ef4444;--shadow:0 12px 30px rgba(15,81,50,.12)
+}
+*{box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;margin:0}
+.quiz-header{background:var(--primary);color:#fff;border-bottom:4px solid var(--gold);padding:1.15rem 1.5rem;box-shadow:0 8px 24px rgba(15,81,50,.13)}
+.quiz-header-inner{width:min(1200px,calc(100% - 2rem));margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.quiz-header h1{font-size:clamp(2rem,3.8vw,2.8rem);line-height:1.08;margin:0;font-weight:850;letter-spacing:-.02em;color:#fff;text-align:left}
+.back-link-header{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;color:#fff;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.28);padding:.82rem 1rem;border-radius:9px;font-weight:800;white-space:nowrap}
+.back-link-header:hover{background:rgba(255,255,255,.18)}
+.quiz-main{min-height:calc(100vh - 98px);display:flex;justify-content:center;align-items:flex-start;padding:3rem 1.25rem}
+.quiz-container{background-color:#fff;border-radius:12px;box-shadow:var(--shadow);width:100%;max-width:850px;padding:40px}
+.progress{text-align:center;color:var(--muted);font-size:15px;margin-bottom:30px;font-weight:700}
+.question{font-size:20px;font-weight:750;margin-bottom:25px;line-height:1.5;color:var(--text)}
+.options{display:flex;flex-direction:column;gap:12px}
+.option{background-color:#f8fffb;border:2px solid var(--border);border-radius:8px;padding:16px;font-size:16px;cursor:pointer;transition:all .2s ease;text-align:left;font-weight:500;color:#416552;line-height:1.45}
+.option:hover:not(:disabled){background-color:#e8f8ee;border-color:#bfe4ca}
+.option.correct{background-color:#d1fae5!important;border-color:var(--ok)!important;color:#065f46!important;font-weight:700}
+.option.incorrect{background-color:#fee2e2!important;border-color:var(--bad)!important;color:#991b1b!important}
+.option:disabled{cursor:default}
+.feedback{margin-top:25px;font-size:16px;text-align:left;min-height:24px;padding:15px;border-radius:8px;display:none;line-height:1.5}
+.feedback.success{background-color:#d1fae5;color:#065f46;border-left:5px solid var(--ok)}
+.feedback.error{background-color:#fee2e2;color:#991b1b;border-left:5px solid var(--bad)}
+.btn-container{display:flex;justify-content:flex-end;margin-top:30px}
+.next-btn{background-color:var(--secondary);color:#fff;border:none;border-radius:8px;padding:14px 28px;font-size:16px;font-weight:800;cursor:pointer;display:none}
+.next-btn:hover{background-color:var(--primary)}
+.result-container{text-align:center;display:none}
+.result-container h2{color:var(--primary);font-size:30px;margin-bottom:20px}
+.result-container p{font-size:20px;color:#4a5568;margin-bottom:30px}
+.score-circle{width:150px;height:150px;border-radius:50%;background:var(--primary);color:white;display:flex;align-items:center;justify-content:center;font-size:46px;font-weight:850;margin:0 auto 24px auto}
+.restart-btn{background-color:var(--secondary);color:white;border:none;border-radius:8px;padding:14px 28px;font-size:16px;font-weight:800;cursor:pointer}
+.restart-btn:hover{background-color:var(--primary)}
+@media(max-width:760px){.quiz-header-inner{width:100%;flex-direction:column;align-items:stretch}.back-link-header{width:100%}.quiz-container{padding:28px 20px}}
 </style>
 </head>
 <body>
-<header>
-  <div class="header-inner">
+<header class="quiz-header">
+  <div class="quiz-header-inner">
     <h1>Landing Pages Quiz</h1>
-    <p>Prüfungstraining zu Landingpages</p>
+    <a class="back-link-header" href="spezi1.html">← Zur grünen Übersicht</a>
   </div>
 </header>
-<main>
-  <section class="box">
-    <span class="status">Im Aufbau</span>
-    <h2>Quiz ist angelegt.</h2>
-    <p>Diese Datei ist als Platzhalter vorbereitet, damit die Verlinkung auf der grünen Übersichtsseite schon funktioniert.</p>
-    <p>Später ersetzen wir diese Datei einfach durch die fertige Lernplattform oder das fertige Quiz mit exakt demselben Dateinamen.</p>
-    <div class="actions">
-      <a class="primary" href="spezi1.html">← Zur grünen Übersicht</a>
-      <a class="secondary" href="index.html">Zur blauen Hauptseite</a>
+<main class="quiz-main">
+  <div class="quiz-container">
+    <div id="quiz">
+      <div class="progress" id="progress"></div>
+      <div class="question" id="question"></div>
+      <div class="options" id="options"></div>
+      <div class="feedback" id="feedback"></div>
+      <div class="btn-container"><button class="next-btn" id="nextBtn">Weiter</button></div>
     </div>
-  </section>
+    <div class="result-container" id="result">
+      <div class="score-circle" id="scoreCircle">0</div>
+      <h2>Quiz abgeschlossen</h2>
+      <p id="scoreText"></p>
+      <button class="restart-btn" onclick="restartQuiz()">Nochmal starten</button>
+    </div>
+  </div>
 </main>
+<script>
+const questions = [
+  {
+    "q": "Was ist das Hauptziel einer Landingpage?",
+    "options": [
+      "Eine konkrete Conversion auslösen",
+      "Möglichst viele Themen gleichzeitig zeigen",
+      "Nur das Firmenlogo präsentieren",
+      "Alle Blogartikel sammeln"
+    ],
+    "answer": 0,
+    "explanation": "Landingpages sind auf eine konkrete Handlung wie Kauf, Anmeldung, Download oder Terminbuchung ausgerichtet."
+  },
+  {
+    "q": "Wie unterscheidet sich eine Landingpage von einer Startseite?",
+    "options": [
+      "Sie ist breiter und hat mehr Menüs",
+      "Sie ist fokussierter und führt zu einer klaren Entscheidung",
+      "Sie darf keine CTA enthalten",
+      "Sie ist nur für Desktop gedacht"
+    ],
+    "answer": 1,
+    "explanation": "Eine Landingpage ist stärker reduziert und kampagnenbezogen."
+  },
+  {
+    "q": "Was bedeutet Above the Fold?",
+    "options": [
+      "Der Bereich, den man erst nach dem Scrollen sieht",
+      "Der sofort sichtbare Bereich ohne Scrollen",
+      "Der Footer einer Seite",
+      "Eine technische Tracking-Methode"
+    ],
+    "answer": 1,
+    "explanation": "Above the Fold ist der direkt sichtbare Bereich beim Laden der Seite."
+  },
+  {
+    "q": "Was gehört besonders in den Above-the-Fold-Bereich?",
+    "options": [
+      "Value Proposition, CTA und Trust-Signale",
+      "Nur lange AGB",
+      "Alle Footer-Links",
+      "Eine komplette Unternehmenshistorie"
+    ],
+    "answer": 0,
+    "explanation": "Oben muss sofort klar sein, warum die Seite relevant ist und was man tun soll."
+  },
+  {
+    "q": "Was ist eine Value Proposition?",
+    "options": [
+      "Das zentrale Wertversprechen für Nutzer*innen",
+      "Eine technische Cookie-Kategorie",
+      "Ein Affiliate-Provisionsmodell",
+      "Ein Serverprotokoll"
+    ],
+    "answer": 0,
+    "explanation": "Sie beantwortet schnell, welchen Nutzen das Angebot bietet."
+  },
+  {
+    "q": "Was ist ein typischer Fehler bei Formularen?",
+    "options": [
+      "Zu wenige Pflichtfelder",
+      "Zu viele Pflichtfelder und unnötige Reibung",
+      "Autofill zu nutzen",
+      "Klare Fehlermeldungen zu schreiben"
+    ],
+    "answer": 1,
+    "explanation": "Zu lange Formulare erhöhen kognitive Belastung und Abbruchrisiko."
+  },
+  {
+    "q": "Was bedeutet Mobile First?",
+    "options": [
+      "Desktop wird ignoriert",
+      "Die mobile Ansicht wird als zentrale Nutzungssituation zuerst gedacht",
+      "Die Seite funktioniert nur mit App",
+      "Bilder werden nie verwendet"
+    ],
+    "answer": 1,
+    "explanation": "Viele Nutzer kommen mobil, daher muss die Smartphone-Ansicht besonders gut funktionieren."
+  },
+  {
+    "q": "Was sind Micro-Moments?",
+    "options": [
+      "Kurze mobile Entscheidungssituationen mit konkretem Bedürfnis",
+      "Sehr lange Desktop-Sessions",
+      "Interne Meetings",
+      "Newsletter-Templates"
+    ],
+    "answer": 0,
+    "explanation": "Micro-Moments sind kurze Momente wie I want to know/go/do/buy."
+  },
+  {
+    "q": "Was ist Social Proof?",
+    "options": [
+      "Menschen orientieren sich am Verhalten anderer",
+      "Ein reines Tracking-Skript",
+      "Eine Serverantwort",
+      "Ein rechtlicher Footer"
+    ],
+    "answer": 0,
+    "explanation": "Bewertungen, Testimonials oder Nutzerzahlen können Vertrauen schaffen."
+  },
+  {
+    "q": "Was ist ein Trust-Element?",
+    "options": [
+      "Gütesiegel, sichere Zahlung oder Kundenbewertung",
+      "Ein versteckter Button",
+      "Ein unklarer Preis",
+      "Ein blockierendes Skript"
+    ],
+    "answer": 0,
+    "explanation": "Trust-Elemente reduzieren Unsicherheit und stärken Sicherheit."
+  },
+  {
+    "q": "Was bedeutet Scarcity/FOMO auf Landingpages?",
+    "options": [
+      "Knappheit oder Angst, etwas zu verpassen",
+      "Eine Ladezeit-Kennzahl",
+      "Eine Formulartechnik",
+      "Ein Social-Media-Kommentar"
+    ],
+    "answer": 0,
+    "explanation": "Knappheit kann Handlungsdruck erhöhen, sollte aber seriös eingesetzt werden."
+  },
+  {
+    "q": "Was ist Cognitive Load?",
+    "options": [
+      "Mentale Belastung durch zu viele Informationen oder Optionen",
+      "Die Ladezeit des Servers",
+      "Die Farbe eines Buttons",
+      "Eine Affiliate-Provision"
+    ],
+    "answer": 0,
+    "explanation": "Zu viele Reize oder Pflichtfelder können Nutzer überfordern."
+  },
+  {
+    "q": "Welche Kennzahl gehört zu Core Web Vitals?",
+    "options": [
+      "LCP",
+      "CPO",
+      "CSAT",
+      "eNPS"
+    ],
+    "answer": 0,
+    "explanation": "LCP misst, wann der Hauptinhalt sichtbar wird."
+  },
+  {
+    "q": "Was beschreibt CLS?",
+    "options": [
+      "Ob Inhalte beim Laden springen",
+      "Wie viele Leads entstehen",
+      "Wie schnell ein Support antwortet",
+      "Wie hoch die Provision ist"
+    ],
+    "answer": 0,
+    "explanation": "Cumulative Layout Shift misst visuelle Stabilität."
+  },
+  {
+    "q": "Warum ist Ladezeit für Conversion wichtig?",
+    "options": [
+      "Langsame Seiten können Absprünge und Misstrauen erhöhen",
+      "Sie beeinflusst nie Nutzerverhalten",
+      "Sie ersetzt Trust-Elemente",
+      "Sie macht Formulare länger"
+    ],
+    "answer": 0,
+    "explanation": "Ladezeit wirkt auf Geduld, Vertrauen und Abschlussbereitschaft."
+  },
+  {
+    "q": "Was ist ein A/B-Test?",
+    "options": [
+      "Zwei Varianten werden gegeneinander getestet",
+      "Eine Umfrage ohne Varianten",
+      "Ein einmaliges Bauchgefühl",
+      "Ein reiner Design-Export"
+    ],
+    "answer": 0,
+    "explanation": "A/B-Tests messen, welche Variante besser wirkt."
+  },
+  {
+    "q": "Wie lautet eine gute Hypothesenstruktur?",
+    "options": [
+      "Wenn X geändert wird, dann Y passiert, weil Z",
+      "Design ist schön",
+      "Wir ändern alles",
+      "Mehr Text ist immer besser"
+    ],
+    "answer": 0,
+    "explanation": "Eine gute Hypothese ist überprüfbar und begründet."
+  },
+  {
+    "q": "Was bedeutet ICE bei der Priorisierung?",
+    "options": [
+      "Impact, Confidence, Ease",
+      "Image, Color, Emotion",
+      "Index, Click, Exit",
+      "Influencer, Creator, Engagement"
+    ],
+    "answer": 0,
+    "explanation": "ICE hilft, Testideen nach Wirkung, Zuversicht und Umsetzbarkeit zu priorisieren."
+  },
+  {
+    "q": "Was kann KI bei Landingpages leisten?",
+    "options": [
+      "Screenshot-Feedback und Hinweise auf Muster geben",
+      "Echte Nutzer vollständig ersetzen",
+      "Ohne Kontext perfekte Wahrheiten liefern",
+      "Rechtliche Prüfung garantieren"
+    ],
+    "answer": 0,
+    "explanation": "KI kann Hinweise liefern, muss aber kritisch geprüft werden."
+  },
+  {
+    "q": "Was ist bei Landingpage-Optimierung der bessere Ansatz?",
+    "options": [
+      "Daten, Hypothesen und Tests statt Bauchgefühl",
+      "Nur persönliche Lieblingsfarbe",
+      "Jede Woche komplettes Redesign",
+      "Keine Messung"
+    ],
+    "answer": 0,
+    "explanation": "Conversion-Optimierung sollte datenbasiert und hypothesengeleitet sein."
+  }
+];
+let currentQuestion=0, score=0, answered=false;
+const progressEl=document.getElementById('progress');
+const questionEl=document.getElementById('question');
+const optionsEl=document.getElementById('options');
+const feedbackEl=document.getElementById('feedback');
+const nextBtn=document.getElementById('nextBtn');
+const quizEl=document.getElementById('quiz');
+const resultEl=document.getElementById('result');
+const scoreTextEl=document.getElementById('scoreText');
+const scoreCircleEl=document.getElementById('scoreCircle');
+function loadQuestion(){
+  answered=false;
+  const q=questions[currentQuestion];
+  progressEl.textContent=`Frage ${currentQuestion+1} von ${questions.length}`;
+  questionEl.textContent=`${currentQuestion+1}. ${q.q}`;
+  optionsEl.innerHTML='';
+  feedbackEl.style.display='none';
+  feedbackEl.className='feedback';
+  nextBtn.style.display='none';
+  q.options.forEach((option,index)=>{
+    const button=document.createElement('button');
+    button.className='option';
+    button.textContent=`${String.fromCharCode(65+index)}) ${option}`;
+    button.addEventListener('click',()=>selectOption(index,button));
+    optionsEl.appendChild(button);
+  });
+}
+function selectOption(index,button){
+  if(answered)return;
+  answered=true;
+  const q=questions[currentQuestion];
+  const optionButtons=document.querySelectorAll('.option');
+  optionButtons.forEach(btn=>btn.disabled=true);
+  optionButtons[q.answer].classList.add('correct');
+  if(index===q.answer){
+    score++;
+    feedbackEl.textContent='Richtig. '+q.explanation;
+    feedbackEl.classList.add('success');
+  }else{
+    button.classList.add('incorrect');
+    feedbackEl.textContent='Nicht ganz. '+q.explanation;
+    feedbackEl.classList.add('error');
+  }
+  feedbackEl.style.display='block';
+  nextBtn.textContent=currentQuestion<questions.length-1?'Weiter':'Ergebnis anzeigen';
+  nextBtn.style.display='inline-block';
+}
+nextBtn.addEventListener('click',()=>{
+  currentQuestion++;
+  if(currentQuestion<questions.length){loadQuestion();}else{showResult();}
+});
+function showResult(){
+  quizEl.style.display='none';
+  resultEl.style.display='block';
+  scoreCircleEl.textContent=score;
+  scoreTextEl.textContent=`Du hast ${score} von ${questions.length} Fragen richtig beantwortet.`;
+}
+function restartQuiz(){
+  currentQuestion=0;
+  score=0;
+  quizEl.style.display='block';
+  resultEl.style.display='none';
+  loadQuestion();
+}
+loadQuestion();
+</script>
 </body>
 </html>

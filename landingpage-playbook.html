@@ -6,15 +6,18 @@
 <title>Landing Pages Playbook</title>
 <style>
 :root{
-  --primary-blue:#0f5132;
-  --secondary-blue:#16834f;
-  --accent-blue:#1f9d60;
+  --primary:#0f5132;
+  --secondary:#16834f;
+  --accent:#1f9d60;
   --gold:#c8a84e;
-  --light-bg:#f4fbf7;
-  --card-bg:#ffffff;
-  --border-color:#dbeee2;
-  --text-dark:#123326;
-  --text-muted:#5f7569;
+  --bg:#f4fbf7;
+  --card:#ffffff;
+  --border:#dbeee2;
+  --text:#123326;
+  --muted:#5f7569;
+  --soft:#e8f8ee;
+  --ok:#10b981;
+  --bad:#ef4444;
   --shadow-sm:0 1px 3px rgba(0,0,0,.10);
   --shadow-md:0 8px 24px rgba(15,81,50,.13);
   --radius:14px;
@@ -23,16 +26,16 @@
 html{scroll-behavior:smooth}
 body{
   min-height:100vh;
-  background:var(--light-bg);
-  color:var(--text-dark);
+  background:var(--bg);
+  color:var(--text);
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   line-height:1.55;
 }
-header{
+header.playbook-header{
   position:sticky;
   top:0;
   z-index:20;
-  background:var(--primary-blue);
+  background:var(--primary);
   color:white;
   padding:1.15rem 1.5rem;
   border-bottom:4px solid var(--gold);
@@ -59,11 +62,11 @@ header p{color:#d7f5e4;margin-top:.35rem;font-size:1rem;line-height:1.45;max-wid
   border-radius:10px;
   padding:.85rem 1rem;
   font-size:1rem;
-  color:var(--text-dark);
+  color:var(--text);
   background:white;
   box-shadow:var(--shadow-sm);
 }
-.search:focus{outline:none;border-color:var(--accent-blue);box-shadow:0 0 0 3px rgba(31,157,96,.12)}
+.search:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(31,157,96,.12)}
 .header-search{flex:1 1 auto;max-width:560px;min-width:260px;background:rgba(255,255,255,.96)}
 .back-link-header{
   display:inline-flex;
@@ -80,58 +83,101 @@ header p{color:#d7f5e4;margin-top:.35rem;font-size:1rem;line-height:1.45;max-wid
 }
 .back-link-header:hover{background:rgba(255,255,255,.18)}
 main{padding:1.7rem 0 4rem}
-.card{
-  background:var(--card-bg);
-  border:1px solid var(--border-color);
+.tabs{display:flex;flex-wrap:wrap;gap:.55rem;margin:0 0 1rem}
+.tab-btn{
+  border:1px solid #cbd5e1;
+  background:white;
+  color:var(--primary);
+  border-radius:999px;
+  padding:.68rem .95rem;
+  font-weight:800;
+  cursor:pointer;
+  box-shadow:var(--shadow-sm);
+  font-size:.92rem;
+}
+.tab-btn:hover{border-color:var(--secondary);transform:translateY(-1px);background:#f8fffb}
+.tab-btn.active{background:var(--primary);border-color:var(--primary);color:white;box-shadow:var(--shadow-md)}
+.tab-content{display:none}
+.tab-content.active{display:block}
+.section-header{margin:1.25rem 0 1rem}
+.section-header h2{color:var(--primary);font-size:clamp(1.45rem,3vw,2.1rem);line-height:1.15}
+.section-header p{color:var(--muted);margin-top:.3rem;max-width:980px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:1rem;margin-bottom:1rem}
+.two-col{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1rem;margin-bottom:1rem}
+.card,.table-card,.note,.workflow{
+  background:var(--card);
+  border:1px solid var(--border);
   border-radius:var(--radius);
   box-shadow:var(--shadow-sm);
-  padding:2rem;
-  margin-top:1rem;
 }
-.card h2{color:var(--primary-blue);font-size:1.55rem;margin-bottom:.6rem}
-.card p,.card li{color:var(--text-muted);margin:.5rem 0}
-.status{
+.card{padding:1.2rem}
+.card h3{color:var(--primary);margin-bottom:.45rem}
+.card p,.card li{color:var(--muted)}
+.tag,.badge{
   display:inline-flex;
-  padding:.28rem .7rem;
+  align-items:center;
+  padding:.25rem .6rem;
   border-radius:999px;
-  background:#fef3c7;
-  color:#92400e;
+  font-size:.76rem;
   font-weight:800;
-  font-size:.78rem;
-  margin-bottom:1rem;
+  margin-bottom:.75rem;
 }
-.tag{
-  display:inline-flex;
-  padding:.28rem .7rem;
-  border-radius:999px;
-  background:#e8f8ee;
-  color:var(--primary-blue);
-  font-weight:800;
-  font-size:.78rem;
-  margin:.35rem .35rem 0 0;
+.tag{background:var(--soft);color:var(--primary)}
+.tag.green{background:#d1fae5;color:#065f46}
+.tag.yellow{background:#fef3c7;color:#92400e}
+.tag.red{background:#fee2e2;color:#991b1b}
+.table-card{overflow:hidden;margin-bottom:1rem}
+.table-responsive{overflow-x:auto}
+table{width:100%;border-collapse:collapse;background:white}
+th,td{padding:.9rem 1rem;text-align:left;border-bottom:1px solid var(--border);vertical-align:top}
+th{background:#f8fffb;color:var(--primary);font-size:.85rem;text-transform:uppercase;letter-spacing:.04em}
+tr:last-child td{border-bottom:none}
+td strong{color:var(--primary)}
+.note{border-left:5px solid var(--gold);padding:1rem 1.1rem;margin:1rem 0;color:var(--muted)}
+.note strong{color:var(--primary)}
+.workflow{padding:1.2rem;margin:1rem 0}
+.workflow h3{color:var(--primary);margin-bottom:.4rem}
+.workflow p{color:var(--muted)}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.75rem;margin-top:.8rem}
+.step{background:#f8fffb;border:1px solid var(--border);border-radius:12px;padding:.9rem;color:var(--muted)}
+.step-num{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--primary);color:white;font-weight:800;margin-bottom:.5rem}
+.step strong{display:block;color:var(--primary);margin-bottom:.2rem}
+.diagnose-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(285px,1fr));gap:1rem;margin-bottom:1rem}
+.diagnose-card{background:white;border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow-sm);overflow:hidden}
+.diagnose-card button{
+  width:100%;
+  border:0;
+  background:white;
+  padding:1rem;
+  text-align:left;
+  color:var(--primary);
+  font-weight:850;
+  display:flex;
+  justify-content:space-between;
+  gap:.8rem;
+  cursor:pointer;
 }
-.actions{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.2rem}
-.btn{
-  display:inline-flex;
-  text-decoration:none;
-  border-radius:9px;
-  padding:.72rem 1rem;
-  font-weight:800;
-}
-.btn.primary{background:var(--secondary-blue);color:#fff}
-.btn.secondary{background:#fff;color:var(--primary-blue);border:1px solid var(--border-color)}
-.no-results{display:none;margin-top:1rem;background:white;border:1px solid var(--border-color);border-radius:var(--radius);padding:1rem;color:var(--text-muted)}
+.diagnose-card button:hover{background:#f8fffb}
+.diagnose-body{display:none;padding:0 1rem 1rem;color:var(--muted)}
+.diagnose-card.open .diagnose-body{display:block}
 .hidden-search{display:none!important}
+.no-results{display:none;background:white;border:1px solid var(--border);border-radius:var(--radius);padding:2rem;text-align:center;color:var(--muted)}
+footer{text-align:center;color:var(--muted);font-size:.84rem;padding:1.5rem}
+ul.clean{padding-left:1.1rem}
 @media(max-width:900px){
   .header-grid{grid-template-columns:1fr}
   .header-actions{width:100%;flex-direction:column;align-items:stretch}
   .header-search{max-width:none;width:100%;min-width:0}
   .back-link-header{width:100%}
 }
+@media(max-width:760px){
+  th,td{padding:.75rem .8rem}
+  .tab-btn{width:100%}
+}
 </style>
 </head>
 <body>
-<header>
+<header class="playbook-header">
   <div class="header-inner header-grid">
     <div>
       <h1>Landing Pages Playbook</h1>
@@ -144,33 +190,76 @@ main{padding:1.7rem 0 4rem}
   </div>
 </header>
 <main>
-  <section class="card searchable-item">
-    <span class="status">Im Aufbau</span>
-    <h2>Playbook ist angelegt.</h2>
-    <p>Eigenes großes Thema für Landingpage-Aufbau, Above the Fold, Mobile First, Trust-Elemente, Social Proof, FOMO, Microcopy, Ladezeit und A/B-Testing.</p>
-    <p>Diese Datei ist vorbereitet, damit die Verlinkung auf der grünen Hauptseite funktioniert. Später ersetzen wir sie mit dem fertigen Inhalt und behalten denselben Dateinamen.</p>
-    <div><span class="tag">Landingpage</span><span class="tag">UX</span><span class="tag">Mobile First</span><span class="tag">Trust</span><span class="tag">A/B-Testing</span></div>
-    <div class="actions">
-      <a class="btn primary" href="spezi1.html">← Zur grünen Übersicht</a>
-      <a class="btn secondary" href="index.html">Zur blauen Hauptseite</a>
-    </div>
-  </section>
-  <div id="noResults" class="no-results">Kein Treffer im aktuellen Platzhalter-Playbook.</div>
+  <nav class="tabs" aria-label="Playbook-Reiter">
+    <button class="tab-btn active" data-tab="grundlagen">1. Grundlagen</button>
+<button class="tab-btn " data-tab="aufbau">2. Aufbau &amp; UX</button>
+<button class="tab-btn " data-tab="psychologie">3. Psychologie</button>
+<button class="tab-btn " data-tab="performance">4. Performance &amp; Mobile</button>
+<button class="tab-btn " data-tab="testing">5. Testing &amp; KI</button>
+<button class="tab-btn " data-tab="diagnose">6. Diagnose</button>
+  </nav>
+  <div id="noResults" class="no-results">Keine passenden Inhalte gefunden.</div>
+  <section id="grundlagen" class="tab-content active">
+<div class="section-header searchable-item"><h2>Was ist eine Landingpage?</h2><p>Eine Landingpage ist eine extra erstellte Seite, auf der Nutzer*innen nach einem Klick landen. Sie ist auf eine konkrete Conversion ausgerichtet.</p></div><div class="table-card searchable-item"><div class="table-responsive"><table><thead><tr><th>Seite</th><th>Ziel</th><th>Unterschied</th></tr></thead><tbody><tr><td><strong>Startseite</strong></td><td>Orientierung über viele Themen.</td><td>Breit angelegt, viele Wege.</td></tr><tr><td><strong>Produktseite</strong></td><td>Produkt erklären und Kauf ermöglichen.</td><td>Produktfokus, aber nicht immer kampagnenspezifisch.</td></tr><tr><td><strong>Landingpage</strong></td><td>Eine konkrete Handlung auslösen.</td><td>Maximal reduziert, klare Botschaft, klarer CTA.</td></tr></tbody></table></div></div><div class="note searchable-item"><strong>Merksatz:</strong> Eine gute Landingpage führt Nutzer*innen nicht irgendwohin, sondern zu einer klaren Entscheidung.</div>
+</section>
+<section id="aufbau" class="tab-content ">
+<div class="section-header searchable-item"><h2>High-Conversion-Aufbau</h2><p>Above the Fold muss sofort Orientierung geben: Wertversprechen, Hero-Element, CTA und Vertrauen.</p></div><div class="grid"><article class="card searchable-item"><span class="tag">Above the Fold</span><h3>Value Proposition</h3><p>Die zentrale Nutzen-Aussage: Warum sollte ich hier bleiben und was löst mein Problem?</p></article><article class="card searchable-item"><span class="tag">Visual</span><h3>Hero-Element</h3><p>Bild oder Video unterstützt die Botschaft, darf aber Ladezeit und Klarheit nicht zerstören.</p></article><article class="card searchable-item"><span class="tag">Conversion</span><h3>CTA</h3><p>Der Call-to-Action muss sichtbar, verständlich und handlungsnah sein.</p></article></div><div class="table-card searchable-item"><div class="table-responsive"><table><thead><tr><th>Element</th><th>Aufgabe</th><th>Fehler</th></tr></thead><tbody><tr><td><strong>Headline</strong></td><td>Nutzen schnell verständlich machen.</td><td>Zu allgemein oder nur werblich.</td></tr><tr><td><strong>Trust</strong></td><td>Sicherheit zeigen.</td><td>Siegel, Bewertungen oder Garantien fehlen.</td></tr><tr><td><strong>Formular</strong></td><td>Lead oder Kauf ermöglichen.</td><td>Zu viele Pflichtfelder.</td></tr><tr><td><strong>Mobile UX</strong></td><td>Daumenfreundlich und klar bleiben.</td><td>CTA nicht sichtbar, Seite überladen.</td></tr></tbody></table></div></div>
+</section>
+<section id="psychologie" class="tab-content ">
+<div class="section-header searchable-item"><h2>Psychologische Trigger</h2><p>Landingpages wirken in Sekunden. Vertrauen, Social Proof, Knappheit, Sympathie und kognitive Leichtigkeit beeinflussen Entscheidungen.</p></div><div class="table-card searchable-item"><div class="table-responsive"><table><thead><tr><th>Trigger</th><th>Bedeutung</th><th>Beispiel</th></tr></thead><tbody><tr><td><strong>Trust</strong></td><td>Sicherheit als Conversion-Faktor.</td><td>SSL, Zahlungsarten, Gütesiegel, klare Rückgabe.</td></tr><tr><td><strong>Social Proof</strong></td><td>Menschen orientieren sich an anderen.</td><td>Bewertungen, Testimonials, Nutzerzahlen.</td></tr><tr><td><strong>Scarcity / FOMO</strong></td><td>Knappheit erhöht Handlungsdruck.</td><td>Nur noch wenige Plätze – aber nicht künstlich manipulativ.</td></tr><tr><td><strong>Microcopy</strong></td><td>Kleine Texte reduzieren Unsicherheit.</td><td>Hinweise im Formular, klare Fehlermeldungen.</td></tr></tbody></table></div></div><div class="note searchable-item"><strong>Wichtig:</strong> Psychologische Trigger dürfen nicht täuschen. Sie sollen Orientierung und Vertrauen schaffen.</div>
+</section>
+<section id="performance" class="tab-content ">
+<div class="section-header searchable-item"><h2>Ladezeit, Mobile First und Core Web Vitals</h2><p>Ladezeit ist ein direkter Conversion-Faktor. Mobil zählen Geschwindigkeit, Klarheit und einfache Bedienung besonders stark.</p></div><div class="table-card searchable-item"><div class="table-responsive"><table><thead><tr><th>Faktor</th><th>Was Nutzer wahrnehmen</th><th>Folge</th></tr></thead><tbody><tr><td><strong>LCP</strong></td><td>Wann sehe ich den Hauptinhalt?</td><td>Geduld oder Absprung.</td></tr><tr><td><strong>INP</strong></td><td>Wann reagiert die Seite auf Eingaben?</td><td>Vertrauen oder Frustration.</td></tr><tr><td><strong>CLS</strong></td><td>Springt der Inhalt?</td><td>Sicherheit oder Unsicherheit.</td></tr><tr><td><strong>Mobile First</strong></td><td>Ist das Wichtigste sofort sichtbar?</td><td>Kaufimpulse oder Abbruch.</td></tr></tbody></table></div></div><div class="grid"><article class="card searchable-item"><span class="tag">Speed</span><h3>Bilder optimieren</h3><p>Komprimieren, passende Größen, moderne Formate.</p></article><article class="card searchable-item"><span class="tag">Technik</span><h3>Skripte reduzieren</h3><p>Blockierende Skripte vermeiden und nur nötige Tools laden.</p></article><article class="card searchable-item"><span class="tag">Mobile UX</span><h3>Formulare mobil kürzen</h3><p>Autofill, passende Tastatur, weniger Pflichtfelder.</p></article></div>
+</section>
+<section id="testing" class="tab-content ">
+<div class="section-header searchable-item"><h2>A/B-Testing und KI-Optimierung</h2><p>Optimierung sollte datenbasiert erfolgen: Analyse, Hypothese, Priorisierung, Test und Auswertung.</p></div><div class="workflow searchable-item"><h3>Conversion-Testprozess in 4 Schritten</h3><div class="steps"><div class="step"><span class="step-num">1</span><strong>Analyse</strong>Wo brechen Nutzer*innen ab?</div><div class="step"><span class="step-num">2</span><strong>Hypothese</strong>Wenn X, dann Y, weil Z.</div><div class="step"><span class="step-num">3</span><strong>Priorisierung</strong>Impact, Confidence, Ease.</div><div class="step"><span class="step-num">4</span><strong>Test</strong>A/B-Test oder qualitative Prüfung.</div></div></div><div class="note searchable-item"><strong>KI-Merker:</strong> KI kann Screenshots prüfen und Hinweise geben, ersetzt aber keine echte Zielgruppenkenntnis und keine echten Nutzerdaten.</div>
+</section>
+<section id="diagnose" class="tab-content ">
+<div class="section-header searchable-item"><h2>Typische Landingpage-Probleme</h2><p>Symptome richtig deuten und die passende Optimierung ableiten.</p></div><div class="diagnose-grid"><article class="diagnose-card searchable-item"><button type="button">Hohe Klicks, aber kaum Leads <span>+</span></button><div class="diagnose-body"><p><strong>Ursache:</strong> Unklare Botschaft, schwaches Angebot oder zu langes Formular.</p><p><strong>Maßnahme:</strong> Value Proposition, Formularlänge und CTA prüfen.</p></div></article><article class="diagnose-card searchable-item"><button type="button">Hohe Absprungrate mobil <span>+</span></button><div class="diagnose-body"><p><strong>Ursache:</strong> Ladezeit, schlechter Above-the-Fold-Bereich oder CTA nicht sichtbar.</p><p><strong>Maßnahme:</strong> Mobile First, Bilder, Core Web Vitals und CTA-Position prüfen.</p></div></article><article class="diagnose-card searchable-item"><button type="button">Nutzer vertrauen der Seite nicht <span>+</span></button><div class="diagnose-body"><p><strong>Ursache:</strong> Fehlende Trust-Signale oder unklare Zahlungs-/Rückgabebedingungen.</p><p><strong>Maßnahme:</strong> Bewertungen, Garantien, Zahlungsarten und klare Microcopy ergänzen.</p></div></article><article class="diagnose-card searchable-item"><button type="button">A/B-Test bringt kein klares Ergebnis <span>+</span></button><div class="diagnose-body"><p><strong>Ursache:</strong> Zu wenig Traffic, zu kleine Änderung oder zu kurze Laufzeit.</p><p><strong>Maßnahme:</strong> Größere Hypothesen testen oder qualitative Methoden nutzen.</p></div></article></div>
+</section>
 </main>
+<footer>Landing Pages Playbook · Spezialisierung 1</footer>
+
 <script>
+const tabButtons = document.querySelectorAll('.tab-btn');
+const tabContents = document.querySelectorAll('.tab-content');
+tabButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    tabButtons.forEach(b => b.classList.remove('active'));
+    tabContents.forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.tab).classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+});
+document.querySelectorAll('.diagnose-card button').forEach(btn => {
+  btn.addEventListener('click', () => btn.closest('.diagnose-card').classList.toggle('open'));
+});
 const searchInput = document.getElementById('searchInput');
+const searchableItems = document.querySelectorAll('.searchable-item');
 const noResults = document.getElementById('noResults');
-const items = document.querySelectorAll('.searchable-item');
 searchInput.addEventListener('input', () => {
-  const query = searchInput.value.trim().toLowerCase();
+  const q = searchInput.value.trim().toLowerCase();
   let hits = 0;
-  items.forEach(item => {
-    const match = !query || item.textContent.toLowerCase().includes(query);
+  if(!q){
+    searchableItems.forEach(item => item.classList.remove('hidden-search'));
+    tabContents.forEach(c => c.classList.remove('active'));
+    tabButtons.forEach(b => b.classList.remove('active'));
+    tabContents[0].classList.add('active');
+    tabButtons[0].classList.add('active');
+    noResults.style.display = 'none';
+    return;
+  }
+  tabContents.forEach(c => c.classList.add('active'));
+  tabButtons.forEach(b => b.classList.remove('active'));
+  searchableItems.forEach(item => {
+    const match = item.textContent.toLowerCase().includes(q);
     item.classList.toggle('hidden-search', !match);
     if(match) hits++;
   });
   noResults.style.display = hits ? 'none' : 'block';
 });
 </script>
+
 </body>
 </html>
