@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Zusatztest Prüfungslücken</title>
+<style>
+:root{
+  --navy:#102033;
+  --orange:#f28c28;
+  --orange2:#ffb347;
+  --paper:#fffdfb;
+  --muted:#687586;
+  --green:#1f8f61;
+  --red:#b73737;
+  --line:#e8e8e8;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:linear-gradient(135deg,#fff7ef,#fffdfb 52%,#fff1df);
+  color:var(--navy);
+  min-height:100vh;
+}
+header{
+  background:var(--navy);
+  color:#fff;
+  padding:28px 18px 24px;
+}
+.header-inner{max-width:850px;margin:auto}
+h1{margin:0 0 8px;font-size:clamp(1.8rem,4vw,2.7rem)}
+header p{margin:0;color:#dfe7ef}
+main{max-width:850px;margin:auto;padding:24px 16px 48px}
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  margin-bottom:10px;
+  color:var(--muted);
+  font-size:.92rem;
+}
+.progress{
+  height:10px;
+  border-radius:999px;
+  overflow:hidden;
+  background:#eceff3;
+  margin-bottom:20px;
+}
+.progress > div{
+  height:100%;
+  width:0;
+  background:linear-gradient(90deg,var(--orange),var(--orange2));
+  transition:width .25s ease;
+}
+.card{
+  background:#fff;
+  border:1px solid #ece7e2;
+  border-radius:22px;
+  padding:24px;
+  box-shadow:0 14px 36px rgba(16,32,51,.07);
+}
+.badge{
+  display:inline-block;
+  margin-bottom:12px;
+  padding:6px 10px;
+  border-radius:999px;
+  background:#fff0df;
+  color:#9a4f0b;
+  font-size:.77rem;
+  font-weight:800;
+}
+.question{
+  margin:0 0 18px;
+  font-size:clamp(1.18rem,2.4vw,1.55rem);
+  line-height:1.35;
+}
+.options{display:grid;gap:10px}
+.option{
+  width:100%;
+  text-align:left;
+  border:1px solid #dfe5ec;
+  background:#fff;
+  color:var(--navy);
+  padding:13px 14px;
+  border-radius:14px;
+  cursor:pointer;
+  font:inherit;
+  line-height:1.4;
+  transition:.15s ease;
+}
+.option:hover:not(:disabled){
+  border-color:var(--orange);
+  transform:translateY(-1px);
+}
+.option:disabled{cursor:default}
+.option.correct-choice{
+  border-color:#88c8ab;
+  background:#edf9f3;
+}
+.option.wrong-choice{
+  border-color:#e2a4a4;
+  background:#fff1f1;
+}
+.feedback{
+  display:none;
+  margin-top:18px;
+  padding:15px 16px;
+  border-radius:14px;
+  line-height:1.5;
+}
+.feedback.correct{
+  display:block;
+  background:#edf9f3;
+  border:1px solid #a9d8c2;
+  color:#176345;
+}
+.feedback.wrong{
+  display:block;
+  background:#fff2f2;
+  border:1px solid #e7b4b4;
+  color:#8c2d2d;
+}
+.feedback strong{display:block;margin-bottom:4px}
+.actions{
+  display:flex;
+  justify-content:flex-end;
+  margin-top:18px;
+}
+.next{
+  display:none;
+  border:0;
+  border-radius:999px;
+  background:var(--navy);
+  color:#fff;
+  font-weight:800;
+  padding:12px 20px;
+  cursor:pointer;
+}
+.result{
+  background:#fff;
+  border:2px solid var(--orange);
+  border-radius:22px;
+  padding:24px;
+  box-shadow:0 14px 36px rgba(16,32,51,.07);
+}
+.score{
+  font-size:2.3rem;
+  font-weight:900;
+  margin:8px 0;
+}
+.pass{color:var(--green)}
+.fail{color:var(--red)}
+.breakdown{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+  gap:10px;
+  margin:18px 0;
+}
+.topicbox{
+  background:#fff7ef;
+  border:1px solid #f4d4b2;
+  border-radius:14px;
+  padding:12px;
+}
+.restart{
+  border:0;
+  border-radius:999px;
+  background:var(--orange);
+  color:#fff;
+  font-weight:800;
+  padding:12px 18px;
+  cursor:pointer;
+}
+footer{
+  text-align:center;
+  color:var(--muted);
+  font-size:.82rem;
+  padding:18px 16px 28px;
+}
+@media(max-width:600px){
+  .card{padding:18px}
+  .topbar{font-size:.84rem}
+  .option{padding:12px}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <h1>Zusatztest Prüfungslücken</h1>
+    <p>32 Single-Choice-Fragen zu den bisher fehlenden Prüfungsthemen.</p>
+  </div>
+</header>
+
+<main>
+  <div id="quizView">
+    <div class="topbar">
+      <span id="counter">Frage 1 von 32</span>
+      <span id="scoreMini">0 richtig</span>
+    </div>
+    <div class="progress"><div id="bar"></div></div>
+
+    <section class="card">
+      <span class="badge" id="topicBadge"></span>
+      <h2 class="question" id="questionText"></h2>
+      <div class="options" id="options"></div>
+
+      <div class="feedback" id="feedback"></div>
+
+      <div class="actions">
+        <button class="next" id="nextBtn">Weiter →</button>
+      </div>
+    </section>
+  </div>
+
+  <section class="result" id="resultView" style="display:none"></section>
+</main>
+
+<footer>Performance Marketing Lernplattform · Zusatztest Prüfungslücken</footer>
+
+<script>
+const questions = [{"topic": "LinkedIn & Nischenplattformen", "q": "Worauf basiert das LinkedIn-Targeting laut deinen Unterlagen besonders stark?", "options": ["Nur auf bereits getätigten Käufen", "Vor allem auf Wetterdaten und Gerätefarbe", "Auf beruflichen Daten wie Jobtitel, Funktion, Branche, Seniorität und Unternehmensgröße", "Nur auf Alter und Geschlecht"], "answer": 2, "explanation": "LinkedIn nutzt besonders berufliche Merkmale wie Jobtitel, Funktion, Branche, Seniorität und Unternehmensgröße."}, {"topic": "LinkedIn & Nischenplattformen", "q": "Wozu dienen LinkedIn Lead Gen Forms?", "options": ["Zur direkten Lead-Erfassung innerhalb von LinkedIn", "Nur zur Video-Bearbeitung", "Zur automatischen Erstellung von Stellenanzeigen", "Zur Messung der Ladezeit einer Website"], "answer": 0, "explanation": "Lead Gen Forms erfassen Leads direkt innerhalb von LinkedIn."}, {"topic": "LinkedIn & Nischenplattformen", "q": "Welche Kennzahlen sind im B2B häufig wichtiger als möglichst günstige Klicks?", "options": ["Nur Seitenaufrufe", "Nur Likes und Follower", "Nur Impressionen", "Leadqualität, Pipeline und Umsatz"], "answer": 3, "explanation": "Im B2B zählen vor allem hochwertige Leads, Pipeline und Umsatz."}, {"topic": "LinkedIn & Nischenplattformen", "q": "Was ist ein wichtiger Unterschied zwischen LinkedIn/Social Media und klassischen Jobbörsen?", "options": ["LinkedIn erreicht ausschließlich Menschen ohne Berufserfahrung", "LinkedIn erreicht auch passive Talente; Jobbörsen eher aktiv Suchende", "Es gibt keinen Unterschied", "Jobbörsen erreichen nur passive Talente"], "answer": 1, "explanation": "LinkedIn und Social Media können auch passive Kandidat*innen erreichen, Jobbörsen eher aktiv Suchende."}, {"topic": "LinkedIn & Nischenplattformen", "q": "Was kennzeichnet eine Nischenplattform im Marketingkontext?", "options": ["Eine Plattform mit nur wenigen Beiträgen", "Eine Plattform mit möglichst unspezifischer Zielgruppe", "Ausschließlich eine Plattform ohne Werbung", "Eine Plattform mit spezifischer Nutzerbasis und stärkerem Themen- oder Funktionsfokus"], "answer": 3, "explanation": "Nischenplattformen haben eine spezifische Nutzerbasis und sind stärker themen- oder funktionsgetrieben."}, {"topic": "LinkedIn & Nischenplattformen", "q": "Wo liegt laut Unterlagen häufig die Stärke von Nischenplattformen?", "options": ["Nur in maximaler Massenreichweite", "In Relevanz, Community-Trust und Kaufbereitschaft", "Nur in möglichst vielen Werbeformaten", "Nur in niedrigen CPMs"], "answer": 1, "explanation": "Ihr Vorteil liegt weniger in Reichweite, sondern in Relevanz, Community-Trust und Kaufbereitschaft."}, {"topic": "LinkedIn & Nischenplattformen", "q": "Welche Aussage beschreibt die Rolle von Nischenplattformen im Social-Media-Marketing am besten?", "options": ["Sie sind strategische Ergänzungen mit oft höherer Relevanz pro Kontakt.", "Sie haben im Marketing keine Bedeutung.", "Sie ersetzen Meta und TikTok vollständig.", "Sie eignen sich nur für große Massenreichweite."], "answer": 0, "explanation": "Nischenplattformen sind keine Ersatzkanäle für Meta oder TikTok, sondern strategische Ergänzungen. Ihr Vorteil liegt oft in präziserer Zielgruppenansprache, Community-Nähe und höherer Relevanz pro Kontakt."}, {"topic": "LinkedIn & Nischenplattformen", "q": "Welche Plattformgruppe wird in deinen Unterlagen ausdrücklich als Nischenplattformen behandelt?", "options": ["Nur LinkedIn und Xing", "Nur Facebook und Instagram", "Pinterest, Snapchat, Reddit, Twitch und X", "Nur Google und YouTube"], "answer": 2, "explanation": "In der Vorlesung werden Pinterest, Snapchat, Reddit, Twitch und X als Nischenplattformen behandelt."}, {"topic": "Live Chat & Social Media Support", "q": "Wie soll Live-Chat unter Druck grundsätzlich geführt werden?", "options": ["Lang, ausführlich und möglichst technisch", "Schnell, klar und lösungsorientiert", "Nur mit Standardtexten", "Möglichst ohne Rückfragen"], "answer": 1, "explanation": "Der Grundsatz lautet: schnell, klar, lösungsorientiert."}, {"topic": "Live Chat & Social Media Support", "q": "Was bedeutet KI-Triage im Kundenservice?", "options": ["Nur Rechtschreibfehler korrigieren", "Kund*innen automatisch sperren", "KI entscheidet endgültig über Beschwerden", "Chats nach Intent, Dringlichkeit und passendem Team einordnen"], "answer": 3, "explanation": "KI-Triage bedeutet sortieren, priorisieren und vorbereiten: Intent, Dringlichkeit und Routing."}, {"topic": "Live Chat & Social Media Support", "q": "Welcher Merksatz gilt bei KI-Triage?", "options": ["KI macht alle Zusagen selbst", "KI ersetzt die Faktenprüfung", "KI gibt Hinweise – Zusagen macht der Mensch", "KI darf keine Chatverläufe strukturieren"], "answer": 2, "explanation": "Die Unterlagen betonen: KI gibt Hinweise, aber der Mensch prüft Fakten und macht Zusagen."}, {"topic": "Live Chat & Social Media Support", "q": "Welche drei Bausteine gehören zur Async-Logik im Social Support?", "options": ["Bestätigen – Zeitfenster – Next Step", "Verkaufen – Upselling – Cross-Selling", "Screenshot – Export – Archiv", "Löschen – Blocken – Melden"], "answer": 0, "explanation": "Wenn nicht sofort gelöst werden kann: Empfang bestätigen, realistisches Zeitfenster nennen, nächsten Schritt erklären."}, {"topic": "Live Chat & Social Media Support", "q": "Welche Rolle haben Auto-Replies laut Unterlagen?", "options": ["Sie sollen komplexe Fälle vollständig lösen", "Sie ersetzen jedes menschliche Support-Team", "Sie reagieren sofort, geben konsistente Infos und managen Erwartungen", "Sie werden nur für Werbung genutzt"], "answer": 2, "explanation": "Auto-Replies sollen vorbereiten, nicht lösen: schnelle Reaktion, konsistente Infos, Entlastung und Erwartungsmanagement."}, {"topic": "Live Chat & Social Media Support", "q": "Was bedeutet der Merksatz „Moderation beginnt vor der Antwort“?", "options": ["Plattform-Filter können Spam, Beleidigungen oder problematische Wörter vorher filtern", "Kommentare grundsätzlich deaktivieren", "Nur private Nachrichten zulassen", "Antworten immer erst nach 24 Stunden"], "answer": 0, "explanation": "Keyword-, Hidden-Words- und Profanity-Filter können problematische Inhalte vor der Antwort filtern."}, {"topic": "Live Chat & Social Media Support", "q": "Wie sieht die empfohlene Chunking-Struktur für drei kurze Chat-Nachrichten aus?", "options": ["Drei lange Erklärungen", "Nur drei Emojis", "Begrüßung – Werbung – Abschied", "Aktion ankündigen – eine konkrete Frage – Zeitangabe plus nächster Schritt"], "answer": 3, "explanation": "Kurz und scanbar: freundlich starten + Aktion, eine konkrete Frage, dann Zeitangabe + Next Step."}, {"topic": "Live Chat & Social Media Support", "q": "Was gehört zu einem guten Eskalations-Handoff?", "options": ["Kund*in alle Daten erneut nennen lassen", "Grund der Eskalation, nächster Ablauf und konkretes Update-Zeitfenster nennen", "Den Chat ohne Hinweis beenden", "Nur sagen: „Das ist nicht mein Problem“"], "answer": 1, "explanation": "Beim Handoff soll klar sein, warum eskaliert wird, was jetzt passiert und wann ein Update kommt; Wiederholungen sollen vermieden werden."}, {"topic": "Affiliate Marketing", "q": "Was ist Affiliate Marketing grundsätzlich?", "options": ["Ein performancebasierter Kanal mit Vergütung für messbare Ergebnisse", "Ein rein organischer Kanal ohne Messung", "Nur klassische Bannerwerbung ohne Tracking", "Eine Form des Kundenservice"], "answer": 0, "explanation": "Affiliate Marketing ist performancebasiert: Publisher werden für messbare Ergebnisse vergütet."}, {"topic": "Affiliate Marketing", "q": "Welche Rollen gehören zum klassischen Affiliate-System?", "options": ["Nur Influencer und Agentur", "Nur Publisher und Suchmaschine", "Advertiser, Affiliate/Publisher, Netzwerk/Plattform und Kunde", "Nur Advertiser und Kunde"], "answer": 2, "explanation": "Zu den Kernrollen gehören Advertiser, Affiliate/Publisher, Netzwerk/Plattform und Kunde."}, {"topic": "Affiliate Marketing", "q": "Welche Zuordnung der Vergütungsmodelle ist korrekt?", "options": ["PPS = Klick, PPL = Verkauf, PPC = Lead", "PPS/CPS = Verkauf, PPL/CPL = Lead, PPC/CPC = Klick", "PPS = Impression, PPL = Videoaufruf, PPC = Kauf", "Alle Modelle bedeuten dasselbe"], "answer": 1, "explanation": "PPS/CPS vergütet Sales, PPL/CPL Leads und PPC/CPC Klicks."}, {"topic": "Affiliate Marketing", "q": "Welche Aussage zu PPC im Affiliate Marketing stimmt?", "options": ["PPC ist gesetzlich verboten", "PPC bedeutet Provision pro Verkauf", "PPC ist der häufigste Standard", "PPC ist eher selten; PPS oder PPL sind verbreiteter"], "answer": 3, "explanation": "PPC ist im klassischen Affiliate Marketing eher die Ausnahme; häufiger sind PPS oder PPL."}, {"topic": "Affiliate Marketing", "q": "Was bedeutet Cookie-Laufzeit?", "options": ["Die Zeit bis zur Auszahlung eines Gehalts", "Wie lange eine Website lädt", "Die Dauer einer Werbekampagne", "Der Zeitraum nach einem Klick, in dem eine spätere Conversion noch zugeordnet werden kann"], "answer": 3, "explanation": "Die Cookie-Laufzeit bestimmt, wie lange ein Klick einer späteren Conversion zugeordnet werden kann."}, {"topic": "Affiliate Marketing", "q": "Was ist eine typische Aufgabe eines Affiliate-Netzwerks?", "options": ["Nur Preise festlegen", "Tracking, Reporting, Zahlungsabwicklung, Partnerverwaltung und Compliance unterstützen", "Nur Bilder komprimieren", "Nur Social-Media-Posts schreiben"], "answer": 1, "explanation": "Affiliate-Netzwerke übernehmen technische und organisatorische Vermittlungsfunktionen."}, {"topic": "Affiliate Marketing", "q": "Welche Kennzahl ist ausdrücklich eine Affiliate-KPI aus Sicht des Publishers?", "options": ["EPC – Earnings per Click", "NPS – Net Promoter Score", "LCP – Largest Contentful Paint", "DAU – Daily Active Users"], "answer": 0, "explanation": "EPC bedeutet Earnings per Click und ist eine wichtige Affiliate-KPI aus Publisher-Sicht."}, {"topic": "Affiliate Marketing", "q": "Welche Aussage ist für Affiliate-Programme besonders wichtig?", "options": ["Nur die Klickzahl entscheidet über Erfolg", "Partner müssen nicht betreut werden", "Sauberes Tracking und klare Werbekennzeichnung sind unverzichtbar", "Tracking und Werbekennzeichnung sind nebensächlich"], "answer": 2, "explanation": "Tracking ist Grundlage für Zuordnung, Reporting und Provisionen; kommerzielle Inhalte müssen transparent gekennzeichnet werden."}, {"topic": "Conversion, Landingpage & A/B-Testing", "q": "Was ist eine Conversion?", "options": ["Nur ein Kauf", "Nur ein Seitenaufruf", "Eine gewünschte Handlung wie Kauf, Anfrage, Anmeldung oder Download", "Nur ein Kommentar"], "answer": 2, "explanation": "Eine Conversion ist jede vorher definierte gewünschte Handlung."}, {"topic": "Conversion, Landingpage & A/B-Testing", "q": "Was ist der Unterschied zwischen Micro- und Macro-Conversion?", "options": ["Micro = Zwischenhandlung, Macro = Hauptziel", "Es gibt keinen Unterschied", "Micro = mobile Nutzung, Macro = Desktop", "Micro = Kauf, Macro = Seitenaufruf"], "answer": 0, "explanation": "Micro-Conversions sind Zwischenhandlungen; Macro-Conversions sind Hauptziele wie Kauf, Anfrage oder Terminbuchung."}, {"topic": "Conversion, Landingpage & A/B-Testing", "q": "Was bedeutet „Message Match“?", "options": ["Identische Bilder in allen Kampagnen", "Gleiche Schriftart auf allen Seiten", "Einheitliche Farbe aller Buttons", "Übereinstimmung von Anzeige, Suchintention, Headline und Angebot"], "answer": 3, "explanation": "Anzeige, Suchintention, Headline und Angebot müssen zusammenpassen; sonst steigt die Absprungrate."}, {"topic": "Conversion, Landingpage & A/B-Testing", "q": "Was unterscheidet eine gute Landingpage häufig von einer normalen Startseite?", "options": ["Sie muss besonders lang sein", "Sie hat ein klares Hauptziel und weniger Ablenkung", "Sie hat möglichst viele unterschiedliche Ziele", "Sie verzichtet immer auf einen CTA"], "answer": 1, "explanation": "Eine Landingpage ist zielgerichtet und konzentriert sich meist auf ein klares Hauptziel."}, {"topic": "Conversion, Landingpage & A/B-Testing", "q": "Wie wird die Conversion Rate berechnet?", "options": ["Klicks ÷ Werbekosten × 100", "Conversions ÷ Besucher/Sitzungen × 100", "Umsatz ÷ Impressionen", "Besucher ÷ Conversions × 1.000"], "answer": 1, "explanation": "Conversion Rate = Conversions geteilt durch Besucher oder Sitzungen mal 100."}, {"topic": "Conversion, Landingpage & A/B-Testing", "q": "Wie funktioniert ein klassischer A/B-Test?", "options": ["Nur Variante B wird gezeigt", "Zwei völlig verschiedene Zielgruppen werden ohne Vergleich getestet", "Es wird ausschließlich die Farbe gemessen", "Variante A und B werden zufällig verteilt und hinsichtlich der Conversion verglichen"], "answer": 3, "explanation": "A ist die Kontrolle, B enthält eine Änderung; Traffic wird verteilt und die Conversion-Leistung verglichen."}, {"topic": "Conversion, Landingpage & A/B-Testing", "q": "Warum ist eine zu frühe Auswertung eines A/B-Tests problematisch?", "options": ["Weil die Conversion Rate dann nicht berechnet werden darf", "Weil A/B-Tests immer exakt ein Jahr dauern müssen", "Weil zu frühe Ergebnisse durch Zufallsschwankungen einen falschen Gewinner zeigen können", "Weil nur Desktop-Nutzer zählen"], "answer": 2, "explanation": "Für belastbare Ergebnisse braucht es genügend Laufzeit, Traffic und Signifikanz."}, {"topic": "Conversion, Landingpage & A/B-Testing", "q": "Welche Kombination gehört zu typischen CRO-Hebeln einer Landingpage?", "options": ["Headline, CTA, Formular, Trust, Ladezeit und Mobile UX", "Nur Anzahl der Menüeinträge", "Nur Hintergrundfarbe und Logo", "Nur Social-Media-Follower"], "answer": 0, "explanation": "CRO betrachtet u. a. Headline, CTA, Formulare, Vertrauen, Ladezeit, Mobile UX und Nutzerführung."}];
+
+let current = 0;
+let score = 0;
+let locked = false;
+const topicStats = {};
+
+const counter = document.getElementById('counter');
+const scoreMini = document.getElementById('scoreMini');
+const bar = document.getElementById('bar');
+const topicBadge = document.getElementById('topicBadge');
+const questionText = document.getElementById('questionText');
+const options = document.getElementById('options');
+const feedback = document.getElementById('feedback');
+const nextBtn = document.getElementById('nextBtn');
+const quizView = document.getElementById('quizView');
+const resultView = document.getElementById('resultView');
+
+function ensureTopic(topic) {
+  if (!topicStats[topic]) topicStats[topic] = {correct:0,total:0};
+}
+
+function renderQuestion() {
+  locked = false;
+  const q = questions[current];
+  ensureTopic(q.topic);
+
+  counter.textContent = `Frage ${current + 1} von ${questions.length}`;
+  scoreMini.textContent = `${score} richtig`;
+  bar.style.width = `${(current / questions.length) * 100}%`;
+  topicBadge.textContent = q.topic;
+  questionText.textContent = q.q;
+
+  options.innerHTML = '';
+  feedback.className = 'feedback';
+  feedback.innerHTML = '';
+  nextBtn.style.display = 'none';
+
+  q.options.forEach((text, index) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'option';
+    btn.textContent = `${String.fromCharCode(65 + index)}) ${text}`;
+    btn.addEventListener('click', () => chooseAnswer(index, btn));
+    options.appendChild(btn);
+  });
+
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function chooseAnswer(index, clickedBtn) {
+  if (locked) return;
+  locked = true;
+
+  const q = questions[current];
+  topicStats[q.topic].total++;
+  const buttons = [...options.querySelectorAll('.option')];
+  buttons.forEach(b => b.disabled = true);
+
+  const correct = index === q.answer;
+
+  if (correct) {
+    score++;
+    topicStats[q.topic].correct++;
+    clickedBtn.classList.add('correct-choice');
+    feedback.className = 'feedback correct';
+    feedback.innerHTML = `<strong>Richtig ✅</strong>${q.explanation}`;
+  } else {
+    clickedBtn.classList.add('wrong-choice');
+    buttons[q.answer].classList.add('correct-choice');
+    feedback.className = 'feedback wrong';
+    feedback.innerHTML = `<strong>Falsch ❌</strong>Richtig ist: <b>${q.options[q.answer]}</b><br>${q.explanation}`;
+  }
+
+  scoreMini.textContent = `${score} richtig`;
+  nextBtn.style.display = 'inline-block';
+  nextBtn.textContent = current === questions.length - 1 ? 'Auswertung anzeigen →' : 'Weiter →';
+}
+
+nextBtn.addEventListener('click', () => {
+  if (!locked) return;
+
+  if (current < questions.length - 1) {
+    current++;
+    renderQuestion();
+  } else {
+    showResult();
+  }
+});
+
+function showResult() {
+  bar.style.width = '100%';
+  const pct = Math.round(score / questions.length * 100);
+  const passed = pct >= 60;
+
+  quizView.style.display = 'none';
+  resultView.style.display = 'block';
+
+  resultView.innerHTML = `
+    <h2>${passed ? 'Bestanden ✅' : 'Noch nicht bestanden'}</h2>
+    <div class="score ${passed ? 'pass' : 'fail'}">${score} / ${questions.length} · ${pct} %</div>
+
+    <div class="breakdown">
+      ${Object.entries(topicStats).map(([topic,s]) => `
+        <div class="topicbox">
+          <strong>${topic}</strong><br>
+          ${s.correct} / ${s.total} richtig
+        </div>
+      `).join('')}
+    </div>
+
+    <button class="restart" id="restartBtn">Test neu starten</button>
+  `;
+
+  document.getElementById('restartBtn').addEventListener('click', () => {
+    current = 0;
+    score = 0;
+    for (const key of Object.keys(topicStats)) delete topicStats[key];
+    resultView.style.display = 'none';
+    quizView.style.display = 'block';
+    renderQuestion();
+  });
+
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+renderQuestion();
+</script>
+</body>
+</html>
